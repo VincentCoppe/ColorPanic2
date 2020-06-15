@@ -67,7 +67,13 @@ public class GridManager : MonoBehaviour
         (int, int)[] result = new(int, int)[8];
         for(int i = 0; i < 8; i++)
         {
-            result[i] = (x + d[i].Item1, y + d[i].Item2);
+            int xx = x + d[i].Item1;
+            int yy = y + d[i].Item2;
+            if (xx < 0 || yy < 0 || xx > Grid.GetLength(0)-1 || yy > Grid.GetLength(1)-1 ){
+                xx = x;
+                yy = y;
+            }
+            result[i] = (xx, yy);
         }
         return result;
     }
