@@ -37,9 +37,9 @@ public class BlockBase
 
     public (int, int)[] Get4Neighbours(int x, int y)
     {
-        Dictionary<int, (int, int)> d = new Dictionary<int, (int, int)>()
+        (int, int)[] d = new (int, int)[]
         {
-            {0, (0,1)},{1,(-1,0)},{2,(1,0)},{3,(0,-1)}
+            (0,1), (-1,0), (1,0), (0,-1)
         };
         (int, int)[] result = new(int, int)[4];
         for (int i = 0; i < 4; i++)

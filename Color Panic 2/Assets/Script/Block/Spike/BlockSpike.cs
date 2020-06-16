@@ -36,7 +36,7 @@ public class BlockSpike : BlockBase
     {
         List<Vector3> Orientation = new List<Vector3>()
         {
-            new Vector3(0,0,180),new Vector3(0,0,270),new Vector3(0,0,0),new Vector3(0,0,90)
+            new Vector3(0,0,180),new Vector3(0,0,-90),new Vector3(0,0,90),new Vector3(0,0,0)
         };
 
 
@@ -48,11 +48,11 @@ public class BlockSpike : BlockBase
             if(Manager.Grid[Neighbours[i].Item1,Neighbours[i].Item2] == (BlockEnum)1)
             {
                 data.SpikeTransform.localEulerAngles = Orientation[i];
-            } if(Manager.Grid[Neighbours[i].Item1, Neighbours[i].Item2] == (BlockEnum)2)
+            }/* else if(Manager.Grid[Neighbours[i].Item1, Neighbours[i].Item2] == (BlockEnum)2)
             {
-                data.SpikeTransform.localEulerAngles = Orientation[i] + new Vector3(0, 0, 90);
+                data.SpikeTransform.localEulerAngles = Manager.GridObject[Neighbours[i].Item1, Neighbours[i].Item2].GameObject.transform.localEulerAngles;
                 break;
-            }
+            }*/
 
         }
         
