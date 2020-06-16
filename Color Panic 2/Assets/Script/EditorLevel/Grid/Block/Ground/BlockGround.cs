@@ -81,7 +81,9 @@ public class BlockGround : BlockBase
         BlockGround block;
         if (Manager.Grid[x, y] == (BlockEnum)1)
         {
-            block = (BlockGround)Manager.GridObject[x, y].GetComponent<TileGameObject>().Block;
+            TileGameObject a = Manager.GridObject[x, y].GetComponent<TileGameObject>();
+            a.SetBlock();
+            block = (BlockGround)a.Block;
             block.CalculateEdge(BeNeighbours);
         }
 

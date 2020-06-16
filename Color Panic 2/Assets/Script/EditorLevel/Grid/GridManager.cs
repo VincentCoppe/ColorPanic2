@@ -68,7 +68,7 @@ public class GridManager : MonoBehaviour
             try
             {
 
-                
+                tile.SetBlock();
                 tile.Block.SpawnTiles(this, test.Item1, test.Item2,tile.gameObject);
                 
             } catch (IndexOutOfRangeException e){
@@ -82,7 +82,9 @@ public class GridManager : MonoBehaviour
                 GameObject blockToDestroy = GridObject[test.Item1, test.Item2];
                 if (blockToDestroy)
                 {
-                    BlockBase block = blockToDestroy.GetComponent<TileGameObject>().Block;
+                    TileGameObject a = blockToDestroy.GetComponent<TileGameObject>();
+                    a.SetBlock();
+                    BlockBase block = a.Block;
                     block.DestroyTiles(test.Item1, test.Item2, this);
                 }
                 

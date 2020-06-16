@@ -69,7 +69,8 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
-    <Compile Include="Assets\Script\EditorLevel\Grid\Block\BlockGround.cs" />
+    <Compile Include="Assets\Script\EditorLevel\Grid\Block\Ground\BlockGround.cs" />
+    <Compile Include="Assets\Script\EditorLevel\Grid\Block\Ground\GroundTile.cs" />
     <Compile Include="Assets\Script\EditorLevel\Grid\BlockBase.cs" />
     <Compile Include="Assets\Script\EditorLevel\Grid\BlockEnum.cs" />
     <Compile Include="Assets\Script\EditorLevel\Grid\GridManager.cs" />

@@ -7,9 +7,10 @@ using UnityEngine;
 public class TileGameObject : MonoBehaviour
 {
 
-    public BlockGround Block => block;
+    public BlockBase Block;
 
-    [SerializeField] private BlockGround block;
+    public virtual void SetBlock() { }
+    
 
 
 }
