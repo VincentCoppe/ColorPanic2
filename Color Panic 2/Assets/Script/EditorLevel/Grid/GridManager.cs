@@ -6,7 +6,9 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
 
-    [SerializeField] private TileGameObject tile = null;
+    [SerializeField] private TileGameObject Ground = null;
+    [SerializeField] private TileGameObject Spike = null;
+
 
     BlockEnum[,] _grid = null;
     TileGameObject[,] _gridObject = null;
@@ -68,13 +70,30 @@ public class GridManager : MonoBehaviour
             try
             {
 
-                tile.SetBlock();
-                tile.Block.SpawnTiles(this, test.Item1, test.Item2,tile.gameObject);
+                Ground.SetBlock();
+                Ground.Block.SpawnTiles(this, test.Item1, test.Item2,Ground.gameObject);
                 
             } catch (IndexOutOfRangeException e){
 
             }
-        } if(Input.GetMouseButton(1))
+        }
+        if (Input.GetMouseButton(2))
+        {
+            (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            try
+            {
+
+                Spike.SetBlock();
+             
+                Spike.Block.SpawnTiles(this, test.Item1, test.Item2, Spike.gameObject);
+
+            }
+            catch (IndexOutOfRangeException e)
+            {
+
+            }
+        }
+        if (Input.GetMouseButton(1))
         {
             (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             try

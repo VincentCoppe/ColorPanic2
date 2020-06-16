@@ -9,6 +9,6 @@ public class GroundTile : TileGameObject
    
     public override void SetBlock()
     {
-        Block = block;
+        Block = (BlockBase)block;
     }
 }

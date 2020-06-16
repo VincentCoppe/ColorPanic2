@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class BlockSpike : BlockBase
 {
 
+    [SerializeField] private Transform SpikeTransform = null;
     GridManager Manager = null;
-    [SerializeField] private Transform SpikeTransform;
 
 
     public override void Deserialize()
@@ -34,6 +35,7 @@ public class BlockSpike : BlockBase
             GameObject spike = Manager.Instantiate(toSpawn);
             Manager.GridObject[x, y] = spike.GetComponent<TileGameObject>();
             CalculateOrientation(x,y);
+            spike.transform.localPosition = Manager.GridToPosition(x, y) + new Vector3(0.5f, 0.5f, 0);
         }
     }
 
