@@ -6,45 +6,28 @@ using UnityEngine;
 [System.Serializable]
 public class BlockSpike : BlockBase
 {
+    public BlockSpike(TileGameObject prefab) : base(prefab) { }
 
-    [SerializeField] private Transform SpikeTransform = null;
-    GridManager Manager = null;
-
-
-    public override void Deserialize()
+    public override void DestroyTiles(int x, int y)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void DestroyTiles(int x, int y, GridManager manager)
+    protected override bool Spawn(int x, int y)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Serialize()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void SpawnTiles(GridManager manager, int x, int y, GameObject toSpawn)
-    {
-        Manager = manager;
-        if(Manager.Grid[x,y] == 0 && CheckGroundNeighbours(x, y))
-        {
-            Manager.Grid[x, y] = BlockEnum.Spike;
-            GameObject spike = Manager.Instantiate(toSpawn);
-            Manager.GridObject[x, y] = spike.GetComponent<TileGameObject>();
+        if (CheckGroundNeighbours(x, y) && base.Spawn(x, y)) {
             CalculateOrientation(x,y);
-            spike.transform.localPosition = Manager.GridToPosition(x, y) + new Vector3(0.5f, 0.5f, 0);
+            return true;
         }
+        return false;
     }
 
     private bool CheckGroundNeighbours(int x, int y)
     {
-        (int, int)[] Neighbours = Get4Neighbours(x, y, Manager);
+        (int, int)[] Neighbours = Get4Neighbours(x, y);
         foreach((int,int) Neighbour in Neighbours)
         {
-            if (Manager.Grid[Neighbour.Item1, Neighbour.Item2] == (BlockEnum)1) return true;
+            if (Manager.Grid[Neighbour.Item1, Neighbour.Item2] == BlockEnum.Ground) return true;
         }
         return false;
     }
@@ -57,15 +40,17 @@ public class BlockSpike : BlockBase
         };
 
 
-        (int, int)[] Neighbours = Get4Neighbours(x, y, Manager);
+        var data = Data<CBD_Spike>();
+
+        (int, int)[] Neighbours = Get4Neighbours(x, y);
         for(int i = 0; i < Neighbours.Length; i++)
         {
             if(Manager.Grid[Neighbours[i].Item1,Neighbours[i].Item2] == (BlockEnum)1)
             {
-                SpikeTransform.localEulerAngles = Orientation[i];
+                data.SpikeTransform.localEulerAngles = Orientation[i];
             } if(Manager.Grid[Neighbours[i].Item1, Neighbours[i].Item2] == (BlockEnum)2)
             {
-                SpikeTransform.localEulerAngles = Orientation[i] + new Vector3(0, 0, 90);
+                data.SpikeTransform.localEulerAngles = Orientation[i] + new Vector3(0, 0, 90);
                 break;
             }
 

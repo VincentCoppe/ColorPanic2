@@ -6,60 +6,51 @@ using UnityEngine;
 [System.Serializable]
 public class BlockGround : BlockBase
 {
+    private CBD_Ground _data;
 
-
-    [SerializeField] private SpriteRenderer[] Corner = new SpriteRenderer[8];
-    GridManager Manager = null;
-    private Dictionary<int, int[]> Placement = new Dictionary<int, int[]>(){
-        {0,new int[]{0,1,3}},
-        {1,new int[]{1}},
-        {2,new int[]{1,2,4}},
-        {3,new int[]{3}},
-        {4,new int[]{4}},
-        {5,new int[]{3,5,6}},
-        {6,new int[]{6}},
-        {7,new int[]{4,6,7}},
+    private int[][] Placement = new int[][] {
+        new int[]{0,1,3},
+        new int[]{1},
+        new int[]{1,2,4},
+        new int[]{3},
+        new int[]{4},
+        new int[]{3,5,6},
+        new int[]{6},
+        new int[]{4,6,7},
     };
 
+    public BlockGround(TileGameObject prefab) : base(prefab) {}
 
-    public override void Deserialize()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void Init(long data) { }
 
-    public override void DestroyTiles(int x, int y, GridManager manager)
+    public override void DestroyTiles(int x, int y)
     {
 
-        Manager = manager;
         if (Manager.Grid[x, y] == (BlockEnum)1)
         {
             Manager.Grid[x, y] = BlockEnum.Air;
             CalculateNeighbours(x, y, true);
-            Manager.Destroy(x, y);
+            Object.Destroy(GameObject);
         }
     }
 
-    public override void Serialize()
+    public override long Save()
     {
-        throw new System.NotImplementedException();
+        return base.Save();
     }
 
-    public override void SpawnTiles(GridManager manager, int x, int y,GameObject toSpawn)
+    protected override bool Spawn(int x, int y)
     {
-        Manager = manager;
-        if (Manager.Grid[x, y] == 0)
-        {
-            Manager.Grid[x, y] = BlockEnum.Ground;
-            GameObject ground = Manager.Instantiate(toSpawn);
-            Manager.GridObject[x, y] = ground.GetComponent<TileGameObject>();
+        if (base.Spawn(x, y)) {
             CalculateNeighbours(x, y, true);
-            ground.transform.localPosition = Manager.GridToPosition(x, y) + new Vector3(0.5f, 0.5f, 0);
+            return true;
         }
+        return false;
     }
 
     public void CalculateNeighbours(int x, int y, bool first)
     {
-        (int, int)[] Neighbours = Get8Neighbours(x, y, Manager);
+        (int, int)[] Neighbours = Get8Neighbours(x, y);
 
         List<BlockEnum> BeNeighbours = new List<BlockEnum>();
         foreach ((int, int) Neighbour in Neighbours)
@@ -72,17 +63,16 @@ public class BlockGround : BlockBase
         BlockGround block;
         if (Manager.Grid[x, y] == (BlockEnum)1)
         {
-            TileGameObject a = Manager.GridObject[x, y].GetComponent<TileGameObject>();
-            a.SetBlock();
-            block = (BlockGround)a.Block;
-            block.CalculateEdge(BeNeighbours);
+            block = (BlockGround) Manager.GridObject[x, y];
+            block?.CalculateEdge(BeNeighbours);
         }
 
     }
 
     public void CalculateEdge(List<BlockEnum> Neighbours)
     {
-        for (int i = 0; i < Corner.Length; i++)
+        var data = Data<CBD_Ground>();
+        for (int i = 0; i < data.Corners.Length; i++)
         {
             bool a = false;
 
@@ -90,7 +80,7 @@ public class BlockGround : BlockBase
             {
                 if (Neighbours[n] != (BlockEnum)1) a = true;
             }
-            Corner[i].gameObject.SetActive(a);
+            data.Corners[i].gameObject.SetActive(a);
         }
     }
 

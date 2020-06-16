@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class TileGameObject : MonoBehaviour
 {
-
-    public BlockBase Block;
-
-    public virtual void SetBlock() { }
+    public BlockEnum Block;
     
-
-
+    [SerializeField] private CustomBlockData data;
+    public CustomBlockData Data { get { return data; } }
 }

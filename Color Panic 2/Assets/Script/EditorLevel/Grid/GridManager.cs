@@ -11,11 +11,11 @@ public class GridManager : MonoBehaviour
 
 
     BlockEnum[,] _grid = null;
-    TileGameObject[,] _gridObject = null;
+    BlockBase[,] _gridObject = null;
     LineRenderer LineRenderer = null;
     
     public BlockEnum[,] Grid { get { return _grid; } }
-    public TileGameObject[,] GridObject { get { return _gridObject; } }
+    public BlockBase[,] GridObject { get { return _gridObject; } }
     private float cellSize = 1f;
 
 
@@ -35,7 +35,7 @@ public class GridManager : MonoBehaviour
     {
 
         _grid = new BlockEnum[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
-        _gridObject = new TileGameObject[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
+        _gridObject = new BlockBase[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
         LineRenderer = GetComponent<LineRenderer>();
 
         LineRenderer.SetPosition(0, GridToPosition(0, 0));
@@ -57,11 +57,6 @@ public class GridManager : MonoBehaviour
         return Instantiate(toSpawn, transform);
     }
 
-    public void Destroy(int x,int y)
-    {
-        Destroy(GridObject[x, y]);
-    }
-
     public void Update()
     {
         if(Input.GetMouseButton(0))
@@ -69,9 +64,7 @@ public class GridManager : MonoBehaviour
             (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             try
             {
-
-                Ground.SetBlock();
-                Ground.Block.SpawnTiles(this, test.Item1, test.Item2,Ground.gameObject);
+                Ground.Block.NewBlock(Ground).SpawnTiles(test.Item1, test.Item2, this);
                 
             } catch (IndexOutOfRangeException e){
 
@@ -83,9 +76,7 @@ public class GridManager : MonoBehaviour
             try
             {
 
-                Spike.SetBlock();
-             
-                Spike.Block.SpawnTiles(this, test.Item1, test.Item2, Spike.gameObject);
+                Spike.Block.NewBlock(Spike).SpawnTiles(test.Item1, test.Item2, this);
 
             }
             catch (IndexOutOfRangeException e)
@@ -98,13 +89,8 @@ public class GridManager : MonoBehaviour
             (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             try
             {
-                TileGameObject blockToDestroy = GridObject[test.Item1, test.Item2];
-                if (blockToDestroy)
-                {                  
-                    blockToDestroy.SetBlock();
-                    BlockBase block = blockToDestroy.Block;
-                    block.DestroyTiles(test.Item1, test.Item2, this);
-                }
+                BlockBase block = GridObject[test.Item1, test.Item2];
+                block?.DestroyTiles(test.Item1, test.Item2);
                 
             }
             catch (IndexOutOfRangeException){ }

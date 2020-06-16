@@ -2,10 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BlockBase
+[System.Serializable]
+public class BlockBase
 {
+    
+    protected GridManager Manager = null;
+    protected BlockEnum _block = BlockEnum.Air;
 
-    public (int, int)[] Get8Neighbours(int x, int y, GridManager Manager)
+    protected TileGameObject _prefab;
+    protected TileGameObject _instance;
+
+    public GameObject GameObject { get; protected set; }
+
+    public (int, int)[] Get8Neighbours(int x, int y)
     {
         Dictionary<int, (int, int)> d = new Dictionary<int, (int, int)>()
         {
@@ -26,7 +35,7 @@ public abstract class BlockBase
         return result;
     }
 
-    public (int, int)[] Get4Neighbours(int x, int y, GridManager Manager)
+    public (int, int)[] Get4Neighbours(int x, int y)
     {
         Dictionary<int, (int, int)> d = new Dictionary<int, (int, int)>()
         {
@@ -47,11 +56,41 @@ public abstract class BlockBase
         return result;
     }
 
-    public abstract void Serialize();
+    public BlockBase(TileGameObject prefab) {
+        _prefab = prefab;
+        _block = prefab.Block;
+    }
 
-    public abstract void Deserialize();
+    public virtual long Save() {
+        return (int) _block << 28;
+    }
 
-    public abstract void SpawnTiles(GridManager manager,int x, int y,GameObject toSpawn);
+    public virtual void Init(long data) { }
 
-    public abstract void DestroyTiles(int x, int y, GridManager manager);
+
+    public void SpawnTiles(int x, int y, GridManager manager) {
+        Manager = manager;
+        Spawn(x, y);
+    }
+ 
+    protected virtual bool Spawn(int x, int y) {
+        if (Manager.Grid[x, y] != BlockEnum.Air) return false;
+        
+        Manager.Grid[x, y] = _block;
+        GameObject = Manager.Instantiate(_prefab.gameObject);
+        _instance = GameObject.GetComponent<TileGameObject>();
+        Manager.GridObject[x, y] = this;
+        GameObject.transform.localPosition = Manager.GridToPosition(x, y) + new Vector3(0.5f, 0.5f, 0);
+
+        return true;
+    }
+
+
+    public virtual void DestroyTiles(int x, int y) { }
+
+
+    protected T Data<T>() where T : CustomBlockData {
+        return (T) _instance.Data;
+    }
+
 }

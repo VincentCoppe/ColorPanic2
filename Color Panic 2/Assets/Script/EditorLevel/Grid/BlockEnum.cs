@@ -4,13 +4,23 @@ using UnityEngine;
 
 public enum BlockEnum
 {
-    Air = 0,
-    Ground = 1,
-    Spike = 2,
-    Player = 4,
-    Trinket = 8,
-    PowerupEnum = 16,
-    Object = 32,
-    Warp = 64,
-    End = 128
+    Air,
+    Ground,
+    Spike,
+    Player,
+    Trinket,
+    PowerupEnum,
+    Object,
+    Warp,
+    End
+}
+
+public static class BlockEnumExt {
+    public static BlockBase NewBlock(this BlockEnum block, TileGameObject prefab) {
+        switch(block) {
+            case BlockEnum.Ground: return new BlockGround(prefab);
+            case BlockEnum.Spike: return new BlockSpike(prefab);
+            default: return null;
+        }
+    }
 }
