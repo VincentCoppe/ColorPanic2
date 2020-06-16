@@ -9,11 +9,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private TileGameObject tile = null;
 
     BlockEnum[,] _grid = null;
-    GameObject[,] _gridObject = null;
+    TileGameObject[,] _gridObject = null;
     LineRenderer LineRenderer = null;
     
     public BlockEnum[,] Grid { get { return _grid; } }
-    public GameObject[,] GridObject { get { return _gridObject; } }
+    public TileGameObject[,] GridObject { get { return _gridObject; } }
     private float cellSize = 1f;
 
 
@@ -33,7 +33,7 @@ public class GridManager : MonoBehaviour
     {
 
         _grid = new BlockEnum[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
-        _gridObject = new GameObject[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
+        _gridObject = new TileGameObject[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
         LineRenderer = GetComponent<LineRenderer>();
 
         LineRenderer.SetPosition(0, GridToPosition(0, 0));
@@ -79,12 +79,11 @@ public class GridManager : MonoBehaviour
             (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             try
             {
-                GameObject blockToDestroy = GridObject[test.Item1, test.Item2];
+                TileGameObject blockToDestroy = GridObject[test.Item1, test.Item2];
                 if (blockToDestroy)
-                {
-                    TileGameObject a = blockToDestroy.GetComponent<TileGameObject>();
-                    a.SetBlock();
-                    BlockBase block = a.Block;
+                {                  
+                    blockToDestroy.SetBlock();
+                    BlockBase block = blockToDestroy.Block;
                     block.DestroyTiles(test.Item1, test.Item2, this);
                 }
                 

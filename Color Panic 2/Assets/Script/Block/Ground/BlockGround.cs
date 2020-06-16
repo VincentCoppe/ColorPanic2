@@ -7,15 +7,6 @@ using UnityEngine;
 public class BlockGround : BlockBase
 {
 
-    [System.Serializable]
-    public struct Setup
-    {
-        public Vector2Int boardSize;
-        public Vector3 noiseOffset;
-        public float noiseScale;
-       // public GameModes gameMode;
-    }
-
 
     [SerializeField] private SpriteRenderer[] Corner = new SpriteRenderer[8];
     GridManager Manager = null;
@@ -60,7 +51,7 @@ public class BlockGround : BlockBase
         {
             Manager.Grid[x, y] = BlockEnum.Ground;
             GameObject ground = Manager.Instantiate(toSpawn);
-            Manager.GridObject[x, y] = ground;
+            Manager.GridObject[x, y] = ground.GetComponent<TileGameObject>();
             CalculateNeighbours(x, y, true);
             ground.transform.localPosition = Manager.GridToPosition(x, y) + new Vector3(0.5f, 0.5f, 0);
         }
@@ -68,7 +59,7 @@ public class BlockGround : BlockBase
 
     public void CalculateNeighbours(int x, int y, bool first)
     {
-        (int, int)[] Neighbours = GetNeighbours(x, y);
+        (int, int)[] Neighbours = Get8Neighbours(x, y, Manager);
 
         List<BlockEnum> BeNeighbours = new List<BlockEnum>();
         foreach ((int, int) Neighbour in Neighbours)
@@ -103,24 +94,5 @@ public class BlockGround : BlockBase
         }
     }
 
-    private (int, int)[] GetNeighbours(int x, int y)
-    {
-        Dictionary<int, (int, int)> d = new Dictionary<int, (int, int)>()
-        {
-            {0, (-1,1)},{1, (0,1)},{2,(1,1)},{3,(-1,0)},{4,(1,0)},{5,(-1,-1)},{6,(0,-1)},{7,(1,-1)}
-        };
-        (int, int)[] result = new(int, int)[8];
-        for (int i = 0; i < 8; i++)
-        {
-            int xx = x + d[i].Item1;
-            int yy = y + d[i].Item2;
-            if (xx < 0 || yy < 0 || xx > Manager.Grid.GetLength(0) - 1 || yy > Manager.Grid.GetLength(1) - 1)
-            {
-                xx = x;
-                yy = y;
-            }
-            result[i] = (xx, yy);
-        }
-        return result;
-    }
+   
 }
