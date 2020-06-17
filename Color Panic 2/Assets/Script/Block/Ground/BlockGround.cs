@@ -30,6 +30,7 @@ public class BlockGround : BlockBase
         if (Manager.Grid[x, y] == (BlockEnum)1)
         {
             Manager.Grid[x, y] = BlockEnum.Air;
+            Manager.GridObject[x, y] = null;
             CalculateNeighbours(x, y, true);
             DestroySpikes(x, y);
             UnityEngine.Object.Destroy(GameObject);

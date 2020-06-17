@@ -17,6 +17,7 @@ public class BlockPowerup : BlockBase
         if (Manager.Grid[x, y] == BlockEnum.Powerup)
         {
             Manager.Grid[x, y] = BlockEnum.Air;
+            Manager.GridObject[x, y] = null;
             UnityEngine.Object.Destroy(GameObject);
         }
     }

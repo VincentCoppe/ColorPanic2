@@ -13,6 +13,7 @@ public class BlockSpike : BlockBase
         if (Manager.Grid[x, y] == BlockEnum.Spike)
         {
             Manager.Grid[x, y] = BlockEnum.Air;
+            Manager.GridObject[x, y] = null;
             UnityEngine.Object.Destroy(GameObject);
         }
     }
@@ -52,11 +53,7 @@ public class BlockSpike : BlockBase
             if(Manager.Grid[Neighbours[i].Item1,Neighbours[i].Item2] == (BlockEnum)1)
             {
                 data.SpikeTransform.localEulerAngles = Orientation[i];
-            }/* else if(Manager.Grid[Neighbours[i].Item1, Neighbours[i].Item2] == (BlockEnum)2)
-            {
-                data.SpikeTransform.localEulerAngles = Manager.GridObject[Neighbours[i].Item1, Neighbours[i].Item2].GameObject.transform.localEulerAngles;
-                break;
-            }*/
+            }
 
         }
         

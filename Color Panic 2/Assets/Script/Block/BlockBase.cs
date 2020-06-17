@@ -62,7 +62,7 @@ public class BlockBase
     }
 
     public virtual long Save() {
-        return (long) _block << 24;
+        return (long) _block << 24 | 255<<0;
     }
 
     public virtual void Init(long data) { }
