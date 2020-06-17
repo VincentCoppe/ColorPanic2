@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,8 +31,36 @@ public class BlockGround : BlockBase
         {
             Manager.Grid[x, y] = BlockEnum.Air;
             CalculateNeighbours(x, y, true);
-            Object.Destroy(GameObject);
+            DestroySpikes(x, y);
+            UnityEngine.Object.Destroy(GameObject);
         }
+    }
+
+    private void DestroySpikes(int x, int y)
+    {
+        (int, int)[] neighbours = Get4Neighbours(x, y);
+        
+        foreach((int, int) neighbour in neighbours)
+        {
+            if (Manager.Grid[neighbour.Item1, neighbour.Item2] == BlockEnum.Spike)
+            {
+                bool Destroy = true;
+                foreach ((int, int) n in Get4Neighbours(neighbour.Item1, neighbour.Item2))
+                {
+                    if (n != (x, y) && Manager.Grid[n.Item1, n.Item2] == BlockEnum.Ground)
+                    {
+                        Destroy = false;
+                    }
+                }
+                if (Destroy) Manager.GridObject[neighbour.Item1, neighbour.Item2].DestroyTiles(neighbour.Item1, neighbour.Item2);
+                else
+                {
+                    BlockSpike a = (BlockSpike)Manager.GridObject[neighbour.Item1, neighbour.Item2];
+                    a.CalculateOrientation(neighbour.Item1, neighbour.Item2);
+                }
+            }
+        }
+
     }
 
     public override long Save()

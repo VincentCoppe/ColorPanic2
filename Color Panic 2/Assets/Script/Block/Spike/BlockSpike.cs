@@ -10,7 +10,11 @@ public class BlockSpike : BlockBase
 
     public override void DestroyTiles(int x, int y)
     {
-        throw new System.NotImplementedException();
+        if (Manager.Grid[x, y] == BlockEnum.Spike)
+        {
+            Manager.Grid[x, y] = BlockEnum.Air;
+            UnityEngine.Object.Destroy(GameObject);
+        }
     }
 
     protected override bool Spawn(int x, int y)
@@ -32,7 +36,7 @@ public class BlockSpike : BlockBase
         return false;
     }
 
-    private void CalculateOrientation(int x, int y)
+    public void CalculateOrientation(int x, int y)
     {
         List<Vector3> Orientation = new List<Vector3>()
         {
