@@ -62,5 +62,10 @@ public class BlockSpike : BlockBase
         
     }
 
+    public override long Save()
+    {
+        return base.Save();
+    }
+
 
 }

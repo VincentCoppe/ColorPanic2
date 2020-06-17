@@ -9,7 +9,7 @@ public enum BlockEnum
     Spike,
     Player,
     Trinket,
-    PowerupEnum,
+    Powerup,
     Object,
     Warp,
     End
@@ -20,6 +20,7 @@ public static class BlockEnumExt {
         switch(block) {
             case BlockEnum.Ground: return new BlockGround(prefab);
             case BlockEnum.Spike: return new BlockSpike(prefab);
+            case BlockEnum.Powerup: return new BlockPowerup(prefab);
             default: return null;
         }
     }
