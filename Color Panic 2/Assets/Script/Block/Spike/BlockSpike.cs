@@ -18,9 +18,9 @@ public class BlockSpike : BlockBase
         }
     }
 
-    protected override bool Spawn(int x, int y)
+    protected override bool Spawn(int x, int y, Color[] Colors)
     {
-        if (CheckGroundNeighbours(x, y) && base.Spawn(x, y)) {
+        if (CheckGroundNeighbours(x, y) && base.Spawn(x, y,Colors)) {
             CalculateOrientation(x,y);
             return true;
         }

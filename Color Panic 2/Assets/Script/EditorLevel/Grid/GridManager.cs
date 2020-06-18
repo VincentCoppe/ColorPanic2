@@ -14,12 +14,12 @@ public class GridManager : MonoBehaviour
 
 
 
-
     BlockEnum[,] _grid = null;
     BlockBase[,] _gridObject = null;
     LineRenderer LineRenderer = null;
 
     
+    public ColorPicker Colors = null;
     public BlockEnum[,] Grid { get { return _grid; } }
     public BlockBase[,] GridObject { get { return _gridObject; } }
     private float cellSize = 1f;
@@ -36,6 +36,8 @@ public class GridManager : MonoBehaviour
     {
         BackgroundImage.size = new Vector2(Camera.main.orthographicSize * 2 * 1.4f, Camera.main.orthographicSize * 2);
         BackgroundImage.transform.localPosition = new Vector3(- Camera.main.orthographicSize*2/5 + 1, 0, 0);
+        BackgroundImage.color = Colors.neutral[0];
+        
     }
 
     public Vector3 GridToPosition(int x, int y)
@@ -75,7 +77,23 @@ public class GridManager : MonoBehaviour
     {
         return Instantiate(toSpawn, transform);
     }
-
+    
+    public void ChangeColor()
+    {
+        for(int x=0; x<Grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < Grid.GetLength(1); y++)
+            {
+                if(Grid[x,y] == BlockEnum.Ground)
+                {
+                    BlockGround block = (BlockGround)GridObject[x, y];
+                    block.UpdateColors(Colors.Red);
+                }
+            }
+        }
+        BackgroundImage.color = Colors.Red[0];
+    }
+    
     public void Update()
     {
         if(Input.GetMouseButton(0))
@@ -84,7 +102,7 @@ public class GridManager : MonoBehaviour
             (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             try
             {
-                Ground.Block.NewBlock(Ground).SpawnTiles(test.Item1, test.Item2, this);
+                Ground.Block.NewBlock(Ground).SpawnTiles(test.Item1, test.Item2, this, Colors.neutral);
                 
             } catch (IndexOutOfRangeException e){
 
@@ -96,7 +114,7 @@ public class GridManager : MonoBehaviour
             try
             {
 
-                Spike.Block.NewBlock(Spike).SpawnTiles(test.Item1, test.Item2, this);
+                Spike.Block.NewBlock(Spike).SpawnTiles(test.Item1, test.Item2, this, Colors.neutral);
 
             }
             catch (IndexOutOfRangeException e)

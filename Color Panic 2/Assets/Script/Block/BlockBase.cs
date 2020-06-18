@@ -68,17 +68,21 @@ public class BlockBase
     public virtual void Init(long data) { }
 
 
-    public void SpawnTiles(int x, int y, GridManager manager) {
+    public void SpawnTiles(int x, int y, GridManager manager, Color[] Colors) {
         Manager = manager;
-        Spawn(x, y);
+        Spawn(x, y, Colors);
     }
- 
-    protected virtual bool Spawn(int x, int y) {
+
+    public virtual void UpdateColors(Color[] Colors) { }
+    
+
+    protected virtual bool Spawn(int x, int y, Color[] Colors) {
         if (Manager.Grid[x, y] != BlockEnum.Air) return false;
         
         Manager.Grid[x, y] = _block;
         GameObject = Manager.Instantiate(_prefab.gameObject);
         _instance = GameObject.GetComponent<TileGameObject>();
+        UpdateColors(Colors);
         Manager.GridObject[x, y] = this;
         GameObject.transform.localPosition = Manager.GridToPosition(x, y) + new Vector3(0.5f, 0.5f, 0);
 

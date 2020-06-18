@@ -69,9 +69,9 @@ public class BlockGround : BlockBase
         return base.Save();
     }
 
-    protected override bool Spawn(int x, int y)
+    protected override bool Spawn(int x, int y, Color[] Colors)
     {
-        if (base.Spawn(x, y)) {
+        if (base.Spawn(x, y,Colors)) {
             CalculateNeighbours(x, y, true);
             return true;
         }
@@ -102,6 +102,7 @@ public class BlockGround : BlockBase
     public void CalculateEdge(List<BlockEnum> Neighbours)
     {
         var data = Data<CBD_Ground>();
+        double AllFalse = 0;
         for (int i = 0; i < data.Corners.Length; i++)
         {
             bool a = false;
@@ -110,9 +111,28 @@ public class BlockGround : BlockBase
             {
                 if (Neighbours[n] != (BlockEnum)1) a = true;
             }
+            AllFalse = (!a) ? AllFalse + Math.Pow(2, i) : AllFalse;
             data.Corners[i].gameObject.SetActive(a);
         }
+        int brick = 0;
+        if (AllFalse == 255)
+        {
+            brick = UnityEngine.Random.Range(0, 16);
+            if (brick >= 4) brick = 4;
+        }
+        else
+        {
+            brick = UnityEngine.Random.Range(0, 4);
+        }
+        data.Center[0].sprite = data.Brick1[brick];
+        data.Center[1].sprite = data.Brick2[brick];
     }
 
-   
+    public override void UpdateColors(Color[] Colors)
+    {
+        var data = Data<CBD_Ground>();
+        data.Center[0].color = Colors[1];
+        data.Center[1].color = Colors[2];
+        data.Center[2].color = Colors[0];
+    }
 }
