@@ -34,6 +34,14 @@ namespace UnityStandardAssets._2D
             this.gameObject.transform.localPosition = new Vector3(-15,-8,0);
         } 
 
+        public void MoveX(float move/*, bool horizontal = true*/){
+            //if(horizontal){
+                Vector3 vector = transform.localPosition;
+                vector.x -= move;
+                transform.localPosition = vector;
+            //} else {}
+
+        }
 
         private void FixedUpdate()
         {
