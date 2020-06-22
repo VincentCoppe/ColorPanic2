@@ -948,6 +948,7 @@ GameObject:
   - component: {fileID: 8904262535096694647}
   - component: {fileID: 9184231245416354790}
   - component: {fileID: -8737647659931429012}
+  - component: {fileID: 2394031041921686550}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -1029,35 +1030,29 @@ MonoBehaviour:
   - {fileID: -5023450803235592949, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
   - {fileID: 1000642046939345181, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
   - {fileID: 857709965726879624, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  Viridian:
-  - {r: 0.09411765, g: 0.1882353, b: 0.1882353, a: 1}
-  - {r: 0.3137255, g: 0.47058824, b: 0.40784314, a: 1}
-  - {r: 0.65882355, g: 0.7529412, b: 0.6901961, a: 1}
-  Blue:
-  - {r: 0.043137256, g: 0.28235295, b: 0.41960785, a: 1}
-  - {r: 0.4117647, g: 0.8235294, b: 0.90588236, a: 1}
-  - {r: 0.8784314, g: 0.9411765, b: 0.9098039, a: 1}
-  Red:
-  - {r: 0.32941177, g: 0.14117648, b: 0.21568628, a: 1}
-  - {r: 0.76862746, g: 0.3019608, b: 0.34509805, a: 1}
-  - {r: 0.9882353, g: 0.6156863, b: 0.6039216, a: 1}
-  Yellow:
-  - {r: 0.78039217, g: 0.63529414, b: 0, a: 1}
-  - {r: 1, g: 0.7529412, b: 0, a: 1}
-  - {r: 1, g: 0.92156863, b: 0.3019608, a: 1}
-  Green:
-  - {r: 0.3019608, g: 0.6039216, b: 0.015686275, a: 1}
-  - {r: 0.44313726, g: 0.827451, b: 0.078431375, a: 1}
-  - {r: 0.8784314, g: 0.9411765, b: 0.9098039, a: 1}
-  Purple:
-  - {r: 0.3647059, g: 0.20392157, b: 0.39607844, a: 1}
-  - {r: 0.45882353, g: 0.31764707, b: 0.4745098, a: 1}
-  - {r: 0.68235296, g: 0.49019608, b: 0.6666667, a: 1}
-  Pink:
-  - {r: 0.99607843, g: 0.2627451, b: 0.39607844, a: 1}
-  - {r: 0.9882353, g: 0.6156863, b: 0.6039216, a: 1}
-  - {r: 0.9764706, g: 0.6784314, b: 0.7687274, a: 1}
-  neutral:
-  - {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 1}
-  - {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+--- !u!61 &2394031041921686550
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

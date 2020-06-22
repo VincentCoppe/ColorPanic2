@@ -949,10 +949,10 @@ GameObject:
   - component: {fileID: -1348770984273340132}
   - component: {fileID: 9184231245416354790}
   - component: {fileID: -8737647659931429012}
-  - component: {fileID: -3926521354543770144}
-  - component: {fileID: -5910430629897566949}
+  - component: {fileID: -5962031797307303518}
+  - component: {fileID: -5502512996940151318}
   m_Layer: 0
-  m_Name: End
+  m_Name: Jumper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,12 +1021,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 827c9cd4a3943534f909ac6473e17288, type: 3}
-  m_Color: {r: 0.15649535, g: 0.764151, b: 0.075694196, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f588d850485d0ae479d73cf3bd0b7b00, type: 3}
+  m_Color: {r: 0.4532307, g: 0.5228664, b: 0.990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Block: 8
+  Block: 1
   data: {fileID: -8737647659931429012}
 --- !u!114 &-8737647659931429012
 MonoBehaviour:
@@ -1083,19 +1083,7 @@ MonoBehaviour:
   - {fileID: -5023450803235592949, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
   - {fileID: 1000642046939345181, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
   - {fileID: 857709965726879624, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
---- !u!114 &-3926521354543770144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904262535096694649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145f6dfa15d72024d8778ee1df736736, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!61 &-5910430629897566949
+--- !u!61 &-5962031797307303518
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1105,7 +1093,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1113,7 +1101,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1121,3 +1109,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-5502512996940151318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d456553662e71746bb46a2cc9b64e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpForce: 1500

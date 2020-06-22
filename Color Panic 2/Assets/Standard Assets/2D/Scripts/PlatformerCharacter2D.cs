@@ -21,6 +21,8 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
+        private Vector3 respawn = new Vector3(0,0,0);
+
         private void Awake()
         {
             // Setting up references.
@@ -31,16 +33,13 @@ namespace UnityStandardAssets._2D
         }
 
         public void Death(){
-            this.gameObject.transform.localPosition = new Vector3(-15,-8,0);
+            this.gameObject.transform.localPosition = respawn;
         } 
 
-        public void MoveX(float move/*, bool horizontal = true*/){
-            //if(horizontal){
-                Vector3 vector = transform.localPosition;
-                vector.x -= move;
-                transform.localPosition = vector;
-            //} else {}
-
+        public void MoveX(float move){
+            Vector3 vector = transform.localPosition;
+            vector.x -= move;
+            transform.localPosition = vector;
         }
 
         private void FixedUpdate()
@@ -106,10 +105,22 @@ namespace UnityStandardAssets._2D
             if (m_Grounded && jump && m_Anim.GetBool("Ground"))
             {
                 // Add a vertical force to the player.
-                m_Grounded = false;
-                m_Anim.SetBool("Ground", false);
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                Jump(m_JumpForce);
             }
+        }
+
+        private void Jump(float force){
+            m_Grounded = false;
+            m_Anim.SetBool("Ground", false);
+            m_Rigidbody2D.AddForce(new Vector2(0f, force));
+        }
+
+        private void Push((float,float)xy){
+            m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
+        }
+
+        private void SetRespawn(Vector3 spawn){
+            respawn = spawn;
         }
 
 
