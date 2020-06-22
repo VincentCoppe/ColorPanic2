@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
     public bool OnLeftWall { get; private set; }
     public bool OnRightWall { get; private set; }
     private bool FacingRight = true; // For determining which way the player is currently facing.
-
-    private Vector3 respawn = new Vector3(0, 0, 0);
+    private Vector3 respawn = new Vector3(0,0,0);
+    private GameObject CurrentCheckpoint = null;
 
     private void Awake()
     {
@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(float force)
     {
-        
         m_Anim.SetBool("Grounded", false);
         Grounded = false;
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
@@ -118,9 +117,12 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
     }
 
-    private void SetRespawn(Vector3 spawn)
-    {
-        respawn = spawn;
+    private void SetRespawn(GameObject checkpoint){
+        if (CurrentCheckpoint != null){
+            CurrentCheckpoint.gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+        }
+        CurrentCheckpoint = checkpoint;
+        respawn = checkpoint.gameObject.transform.localPosition;
     }
 
 
