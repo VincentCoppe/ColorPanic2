@@ -8,8 +8,6 @@ public class JumpPlayer : MonoBehaviour
             float rota = transform.localEulerAngles.z;
             float sin = Mathf.Sin((rota*Mathf.PI)/180); 
             float cos = Mathf.Cos((rota*Mathf.PI)/180);
-            Debug.Log(sin);
-            Debug.Log(cos);
             other.gameObject.SendMessage("Push",(sin*JumpForce, cos*JumpForce));
         }
     }

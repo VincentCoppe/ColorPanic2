@@ -948,9 +948,9 @@ GameObject:
   - component: {fileID: 8904262535096694647}
   - component: {fileID: -1348770984273340132}
   - component: {fileID: 9184231245416354790}
-  - component: {fileID: -8737647659931429012}
   - component: {fileID: -5962031797307303518}
   - component: {fileID: -5502512996940151318}
+  - component: {fileID: -9090305845500523186}
   m_Layer: 0
   m_Name: Jumper
   m_TagString: Untagged
@@ -1044,45 +1044,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Block: 1
-  data: {fileID: -8737647659931429012}
---- !u!114 &-8737647659931429012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904262535096694649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae3f4a79b51ce763aa81bfeabfb232c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _corners:
-  - {fileID: 3835291032142883948}
-  - {fileID: 5093142307056994346}
-  - {fileID: 8058035065815187970}
-  - {fileID: 8529883372362867327}
-  - {fileID: 4146590941698830192}
-  - {fileID: 952803181634312288}
-  - {fileID: 7194512339635027792}
-  - {fileID: 4729807167663880019}
-  _center:
-  - {fileID: 3448957988763572484}
-  - {fileID: 1169310101321310441}
-  - {fileID: 6716473913588868684}
-  Brick1:
-  - {fileID: -6543115298110254398, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: 786120345139451123, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: -7299223561001373809, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: 4315506772229277542, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: 15628478120440057, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  Brick2:
-  - {fileID: -4234864425317168096, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: 669257781040034446, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: -5023450803235592949, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: 1000642046939345181, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
-  - {fileID: 857709965726879624, guid: 9725c70ca5fe73e44b19083ae8cb48fa, type: 3}
+  Block: 6
+  data: {fileID: 0}
 --- !u!61 &-5962031797307303518
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1122,3 +1085,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 1500
+--- !u!114 &-9090305845500523186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad280df48beac44387b88181ba1ee4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 0
+  _jumperTransform: {fileID: 8904262535096694647}
