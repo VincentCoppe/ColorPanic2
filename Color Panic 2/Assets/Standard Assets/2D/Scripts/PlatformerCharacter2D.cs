@@ -22,6 +22,7 @@ namespace UnityStandardAssets._2D
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
         private Vector3 respawn = new Vector3(0,0,0);
+        private GameObject CurrentCheckpoint = null;
 
         private void Awake()
         {
@@ -119,8 +120,12 @@ namespace UnityStandardAssets._2D
             m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
         }
 
-        private void SetRespawn(Vector3 spawn){
-            respawn = spawn;
+        private void SetRespawn(GameObject checkpoint){
+            if (CurrentCheckpoint != null){
+                CurrentCheckpoint.gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+            }
+            CurrentCheckpoint = checkpoint;
+            respawn = checkpoint.gameObject.transform.localPosition;
         }
 
 
