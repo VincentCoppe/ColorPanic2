@@ -41,7 +41,7 @@ public class BlockSpike : BlockBase
     {
         List<Vector3> Orientation = new List<Vector3>()
         {
-            new Vector3(0,0,180),new Vector3(0,0,-90),new Vector3(0,0,90),new Vector3(0,0,0)
+            new Vector3(0,0,180),new Vector3(0,0,270),new Vector3(0,0,90),new Vector3(0,0,0)
         };
 
 
@@ -61,7 +61,10 @@ public class BlockSpike : BlockBase
 
     public override long Save()
     {
-        return base.Save();
+        var data = Data<CBD_Spike>();
+        return base.Save() | ((long) (data.SpikeTransform.localEulerAngles.z/2)<<16);
+        
+       
     }
 
 

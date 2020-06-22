@@ -1317,8 +1317,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1366,5 +1366,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackgroundImage: {fileID: 347859960}
   Ground: {fileID: 9184231245416354790, guid: ec20e37c5b39a524798da05fff14a4ad, type: 3}
-  Spike: {fileID: 5916927667884610282, guid: 537076a5f76aefe499a4ad1b0dd468f2, type: 3}
+  Spike: {fileID: -5844036777933558395, guid: f3364fc8c053ae245ade4675b2920eca, type: 3}
   Colors: {fileID: 809847136}
