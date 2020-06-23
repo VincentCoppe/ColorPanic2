@@ -20,11 +20,27 @@ public class Pen : ToolManager, Tool
         image.color = color;
     }
 
-    public void Action(GridManager gridManager, TileGameObject block) {
+    public void Action(GridManager gridManager, TileGameObject block, int size) {
+        HashSet<(int, int)> blocksToPrint = new HashSet<(int, int)>();
         (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         try
         {
-            block.Block.NewBlock(block).SpawnTiles(mouse.Item1, mouse.Item2, gridManager, gridManager.Colors.neutral);
+            blocksToPrint.Add(mouse);
+            size--;
+            while(size > 0) {
+                HashSet<(int, int)> tmp = new HashSet<(int, int)>(blocksToPrint);
+                foreach ((int, int) blockToPrint in tmp) {
+                    foreach ((int, int) neighbor in gridManager.Get8Neighbours(blockToPrint.Item1, blockToPrint.Item2)) {
+                        blocksToPrint.Add(neighbor);
+                    }
+                }
+                size--;
+            }
+
+            foreach ((int, int) blockToPrint in blocksToPrint) {
+                block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral);
+            }
+            
             
         } catch (IndexOutOfRangeException e){}
     }

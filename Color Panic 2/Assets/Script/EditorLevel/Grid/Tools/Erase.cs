@@ -16,14 +16,29 @@ public class Erase : ToolManager, Tool
         image.color = color;
     }
 
-    public void Action(GridManager gridManager, TileGameObject block) {
+    public void Action(GridManager gridManager, TileGameObject block, int size) {
+        HashSet<(int, int)> blocksToErase = new HashSet<(int, int)>();
         (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         try
         {
-            BlockBase mouseBlock = gridManager.GridObject[mouse.Item1, mouse.Item2];
-            mouseBlock?.DestroyTiles(mouse.Item1, mouse.Item2);
+            blocksToErase.Add(mouse);
+            size--;
+            while(size > 0) {
+                HashSet<(int, int)> tmp = new HashSet<(int, int)>(blocksToErase);
+                foreach ((int, int) blockToErase in tmp) {
+                    foreach ((int, int) neighbor in gridManager.Get8Neighbours(blockToErase.Item1, blockToErase.Item2)) {
+                        blocksToErase.Add(neighbor);
+                    }
+                }
+                size--;
+            }
+
+            foreach ((int, int) blockToErase in blocksToErase) {
+                BlockBase blockErase = gridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
+                blockErase?.DestroyTiles(blockToErase.Item1, blockToErase.Item2);
+            }
             
-        }
-        catch (IndexOutOfRangeException){ }
+            
+        } catch (IndexOutOfRangeException e){}
     }
 }

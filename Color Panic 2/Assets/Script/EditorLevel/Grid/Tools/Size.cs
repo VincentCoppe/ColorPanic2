@@ -8,7 +8,7 @@ public class Size : MonoBehaviour
     [SerializeField] private Image little = null;
     [SerializeField] private Image medium = null;
     [SerializeField] private Image large = null;
-    public static int size;
+    public int size;
 
     // Petite taille par défault
     private void Start() {

@@ -16,7 +16,7 @@ public class Bucket : ToolManager, Tool
         image.color = color;
     }
 
-    public void Action(GridManager gridManager, TileGameObject block) {
+    public void Action(GridManager gridManager, TileGameObject block, int size) {
         Stack<(int, int)> stack = new Stack<(int, int)>();
         HashSet<(int, int)> reachable = new HashSet<(int, int)>();
 

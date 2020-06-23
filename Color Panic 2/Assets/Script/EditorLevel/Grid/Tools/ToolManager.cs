@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToolManager : MonoBehaviour
 {
     [SerializeField] private TileGameObject ground = null;
+    [SerializeField] private Size size = null;
     public static Tool Tool;
 
     protected void SetTool(Tool tool) {
@@ -14,7 +15,7 @@ public class ToolManager : MonoBehaviour
     }
 
     public void Action(GridManager gridManager) {
-        Tool?.Action(gridManager, ground);
+        Tool?.Action(gridManager, ground, size.size);
     }
 
 }
