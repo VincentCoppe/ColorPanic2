@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 0}
+  size: {fileID: 0}
   image: {fileID: 385722984}
 --- !u!114 &385722983
 MonoBehaviour:
@@ -972,6 +973,7 @@ MonoBehaviour:
   little: {fileID: 498017847}
   medium: {fileID: 1748894664}
   large: {fileID: 754923801}
+  size: 0
 --- !u!1 &754923798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 0}
+  size: {fileID: 0}
   image: {fileID: 911834898}
 --- !u!1 &1029405100
 GameObject:
@@ -1478,6 +1481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 9184231245416354790, guid: ec20e37c5b39a524798da05fff14a4ad, type: 3}
+  size: {fileID: 717787081}
 --- !u!114 &1029405102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2813,6 +2817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 0}
+  size: {fileID: 0}
   image: {fileID: 2085639236}
 --- !u!114 &2085639235
 MonoBehaviour:
