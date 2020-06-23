@@ -204,7 +204,7 @@ MonoBehaviour:
   m_JumpForce: 1000
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 512
 --- !u!114 &1032025416664888387
 MonoBehaviour:
   m_ObjectHideFlags: 0
