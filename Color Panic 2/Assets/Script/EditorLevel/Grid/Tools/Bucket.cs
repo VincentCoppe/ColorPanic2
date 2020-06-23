@@ -32,7 +32,7 @@ public class Bucket : ToolManager, Tool
                 while(stack.Count > 0) {
                     (int, int) currentCoords = stack.Pop();
                     BlockBase currentBlock = gridManager.GridObject[currentCoords.Item1, currentCoords.Item2];
-                    foreach ((int, int) neighbor in currentBlock.Get4Neighbours(currentCoords.Item1, currentCoords.Item2).Where(c => gridManager.Grid[c.Item1, c.Item2] == mouseTypeBlock && !reachable.Contains(c))) {
+                    foreach ((int, int) neighbor in gridManager.Get4Neighbours(currentCoords.Item1, currentCoords.Item2).Where(c => gridManager.Grid[c.Item1, c.Item2] == mouseTypeBlock && !reachable.Contains(c))) {
                         reachable.Add(neighbor);
                         stack.Push(neighbor);
                     }

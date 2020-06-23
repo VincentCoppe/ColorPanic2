@@ -39,14 +39,14 @@ public class BlockGround : BlockBase
 
     private void DestroySpikes(int x, int y)
     {
-        (int, int)[] neighbours = Get4Neighbours(x, y);
+        (int, int)[] neighbours = Manager.Get4Neighbours(x, y);
         
         foreach((int, int) neighbour in neighbours)
         {
             if (Manager.Grid[neighbour.Item1, neighbour.Item2] == BlockEnum.Spike)
             {
                 bool Destroy = true;
-                foreach ((int, int) n in Get4Neighbours(neighbour.Item1, neighbour.Item2))
+                foreach ((int, int) n in Manager.Get4Neighbours(neighbour.Item1, neighbour.Item2))
                 {
                     if (n != (x, y) && Manager.Grid[n.Item1, n.Item2] == BlockEnum.Ground)
                     {
@@ -80,7 +80,7 @@ public class BlockGround : BlockBase
 
     public void CalculateNeighbours(int x, int y, bool first)
     {
-        (int, int)[] Neighbours = Get8Neighbours(x, y);
+        (int, int)[] Neighbours = Manager.Get8Neighbours(x, y);
 
         List<BlockEnum> BeNeighbours = new List<BlockEnum>();
         foreach ((int, int) Neighbour in Neighbours)
