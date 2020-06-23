@@ -10,6 +10,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private SpriteRenderer BackgroundImage = null;
     [SerializeField] private TileGameObject Ground = null;
     [SerializeField] private TileGameObject Spike = null;
+    [SerializeField] private ToolManager toolManager = null;
 
 
 
@@ -98,15 +99,8 @@ public class GridManager : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
+            toolManager.Action();
             
-            (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            try
-            {
-                Ground.Block.NewBlock(Ground).SpawnTiles(test.Item1, test.Item2, this, Colors.neutral);
-                
-            } catch (IndexOutOfRangeException e){
-
-            }
         }
         if (Input.GetMouseButton(2))
         {
@@ -121,18 +115,6 @@ public class GridManager : MonoBehaviour
             {
 
             }
-        }
-        if (Input.GetMouseButton(1))
-        {
-            (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            try
-            {
-                BlockBase block = GridObject[test.Item1, test.Item2];
-                block?.DestroyTiles(test.Item1, test.Item2);
-                
-            }
-            catch (IndexOutOfRangeException){ }
-            
         }
     }
 
