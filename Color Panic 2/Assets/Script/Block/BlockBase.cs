@@ -13,7 +13,8 @@ public class BlockBase
     protected TileGameObject _instance;
 
     public GameObject GameObject { get; protected set; }
-    public BlockEnum Block => _block;
+    public TileGameObject Prefab { get { return _prefab; } }
+    public BlockEnum Block { get { return _block; } }
 
    
 
