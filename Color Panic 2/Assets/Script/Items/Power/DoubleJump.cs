@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoubleJump : Power
 {
-    public override void ApplyEffect(){
-        Debug.Log("You can now double jump !");
+    public override void ApplyEffect(Collider2D other){
+        other.gameObject.SendMessage("AddPower", this);
     }
 }

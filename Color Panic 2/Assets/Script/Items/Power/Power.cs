@@ -6,10 +6,10 @@ public abstract class Power : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
-            ApplyEffect();
+            ApplyEffect(other);
             gameObject.SetActive(false);
         }
     }
 
-    public abstract void ApplyEffect();
+    public abstract void ApplyEffect(Collider2D other);
 }

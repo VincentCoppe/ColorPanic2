@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawn = new Vector3(0,0,0);
     private GameObject CurrentCheckpoint = null;
 
+    private MyPower power;
+    private bool Djump;
+
     private void Awake()
     {
         // Setting up references.
@@ -32,11 +35,13 @@ public class PlayerController : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        power = new MyPower();
     }
 
     public void Death()
     {
         this.gameObject.transform.localPosition = respawn;
+        power.ResetPowers();
     }
 
     public void MoveX(float move)
@@ -44,7 +49,10 @@ public class PlayerController : MonoBehaviour
         Vector3 vector = transform.localPosition;
         vector.x -= move;
         transform.localPosition = vector;
-        
+    }
+
+    public void AddPower(Power newpower){
+        power.AddPower(newpower);
     }
 
     private void FixedUpdate()
@@ -60,6 +68,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 Grounded = true;
+                Djump = true;
                 m_Anim.SetBool("Grounded",Grounded);
 
             }
@@ -98,10 +107,14 @@ public class PlayerController : MonoBehaviour
             }
         m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
         // If the player should jump...
-        if (Grounded && jump)
+        if ( Grounded && jump)
         {
             // Add a vertical force to the player.
             Jump(m_JumpForce);
+        } else if ( !Grounded && jump && power.HavePower("DoubleJump") && Djump) // or if he can double jump
+        {
+            Jump(m_JumpForce);
+            Djump = false;
         }
     }
 
