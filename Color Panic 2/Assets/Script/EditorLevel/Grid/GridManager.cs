@@ -35,28 +35,28 @@ public class GridManager : MonoBehaviour
 
     private void setupBackground()
     {
-        BackgroundImage.size = new Vector2(Camera.main.orthographicSize * 2 * 1.4f, Camera.main.orthographicSize * 2);
-        BackgroundImage.transform.localPosition = new Vector3(- Camera.main.orthographicSize*2/5 + 1, 0, 0);
+        BackgroundImage.size = new Vector2(50, 30);
+        BackgroundImage.transform.localPosition = new Vector3(- 1, 0, 0);
         BackgroundImage.color = Colors.neutral[0];
         
     }
 
     public Vector3 GridToPosition(int x, int y)
     {
-        return new Vector3(x, y) * (cellSize) - new Vector3(Mathf.FloorToInt(Camera.main.orthographicSize * Camera.main.aspect), Mathf.FloorToInt(Camera.main.orthographicSize), 0f);
+        return new Vector3(x, y) * (cellSize) - new Vector3(Mathf.FloorToInt(15 * Camera.main.aspect), Mathf.FloorToInt(15), 0f);
     }
 
     public Vector3 GridToPosition2(int x, int y)
     {
-        return new Vector3(x, y) * (cellSize) - new Vector3(Mathf.FloorToInt(Camera.main.orthographicSize * Camera.main.aspect), Mathf.FloorToInt(Camera.main.orthographicSize), 0f) + transform.position;
+        return new Vector3(x, y) * (cellSize) - new Vector3(Mathf.FloorToInt(15 * Camera.main.aspect), Mathf.FloorToInt(15), 0f) + transform.position;
     }
 
 
     private void setupLevelToDraw()
     {
 
-        _grid = new BlockEnum[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
-        _gridObject = new BlockBase[Mathf.FloorToInt(Camera.main.orthographicSize * 2 * 1.4f), Mathf.FloorToInt(Camera.main.orthographicSize * 2)];
+        _grid = new BlockEnum[50, 30];
+        _gridObject = new BlockBase[50, 30];
         LineRenderer = GetComponent<LineRenderer>();
 
         LineRenderer.SetPosition(0, GridToPosition2(0, 0));
@@ -69,8 +69,8 @@ public class GridManager : MonoBehaviour
     public (int,int) PositionToGrid(Vector3 position)
     {
        
-        int x = Mathf.FloorToInt(position.x) + Mathf.FloorToInt(Camera.main.orthographicSize * Camera.main.aspect) - Mathf.FloorToInt(transform.position.x);
-        int y = Mathf.FloorToInt(position.y) + Mathf.FloorToInt(Camera.main.orthographicSize) - Mathf.FloorToInt(transform.position.y);
+        int x = Mathf.FloorToInt(position.x) + Mathf.FloorToInt(15 * Camera.main.aspect) - Mathf.FloorToInt(transform.position.x);
+        int y = Mathf.FloorToInt(position.y) + Mathf.FloorToInt(15) - Mathf.FloorToInt(transform.position.y);
         return (x, y);
     }
 
