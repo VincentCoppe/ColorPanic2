@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-    [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.                
+    [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.     
+    [SerializeField] private float DashForce = 1000f;                            
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
@@ -66,12 +67,9 @@ public class PlayerController : MonoBehaviour
         {
             if (colliders[i].gameObject != gameObject)
             {
-
                 Grounded = true;
                 Djump = true;
                 dash = true;
-                
-
             } else {
                 Grounded = false;
             }
@@ -132,10 +130,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Dash(float move){
-        if (move > 0 ){
-            m_Rigidbody2D.AddForce(new Vector2(10000, 0f));
+        if (FacingRight){
+            m_Rigidbody2D.velocity = new Vector2(DashForce*Time.fixedDeltaTime, 0f);
         } else {
-            m_Rigidbody2D.AddForce(new Vector2(-10000, 0f));
+            m_Rigidbody2D.velocity = new Vector2(-DashForce*Time.fixedDeltaTime, 0f);
         }
     }
 
