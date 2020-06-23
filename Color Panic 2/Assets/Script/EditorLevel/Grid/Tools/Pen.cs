@@ -8,6 +8,11 @@ public class Pen : ToolManager, Tool
 {
     [SerializeField] private Image image = null;
 
+    // Pen sélectionné par défaut
+    private void Start() {
+        ClickIcon();
+    }
+
     public void ClickIcon() {
         SetTool(this);
     }
