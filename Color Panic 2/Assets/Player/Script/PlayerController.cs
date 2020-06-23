@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private MyPower power;
     private bool Djump;
+    private bool dash;
 
     private void Awake()
     {
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
                 Grounded = true;
                 Djump = true;
+                dash = true;
                 
 
             } else {
@@ -116,6 +118,10 @@ public class PlayerController : MonoBehaviour
             Jump(m_JumpForce);
             Djump = false;
         }
+        if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash ){
+            Dash(move);
+            dash = false;
+        }
     }
 
     private void Jump(float force)
@@ -123,6 +129,14 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Grounded", false);
         Grounded = false;
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
+    }
+
+    private void Dash(float move){
+        if (move > 0 ){
+            m_Rigidbody2D.AddForce(new Vector2(10000, 0f));
+        } else {
+            m_Rigidbody2D.AddForce(new Vector2(-10000, 0f));
+        }
     }
 
     private void Push((float, float) xy)
