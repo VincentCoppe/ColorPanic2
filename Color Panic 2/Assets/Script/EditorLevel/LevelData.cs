@@ -20,4 +20,8 @@ public class LevelData {
             }
         }
     }
+
+    public void SetGrid(int x, int y, BlockBase[,] blocks) {
+        _blocks[x,y] = blocks;
+    }
 }
