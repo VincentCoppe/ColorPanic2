@@ -99,7 +99,7 @@ public class GridManager : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            toolManager.Action();
+            toolManager.Action(this);
             
         }
         if (Input.GetMouseButton(2))

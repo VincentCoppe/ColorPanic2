@@ -15,11 +15,11 @@ public class Pen : ToolManager, Tool
         image.color = color;
     }
 
-    public void Action(GridManager gridManager, TileGameObject ground) {
-        (int, int) test = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+    public void Action(GridManager gridManager, TileGameObject block) {
+        (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         try
         {
-            ground.Block.NewBlock(ground).SpawnTiles(test.Item1, test.Item2, gridManager, gridManager.Colors.neutral);
+            block.Block.NewBlock(block).SpawnTiles(mouse.Item1, mouse.Item2, gridManager, gridManager.Colors.neutral);
             
         } catch (IndexOutOfRangeException e){}
     }

@@ -13,6 +13,7 @@ public class BlockBase
     protected TileGameObject _instance;
 
     public GameObject GameObject { get; protected set; }
+    public BlockEnum Block => _block;
 
     public (int, int)[] Get8Neighbours(int x, int y)
     {
