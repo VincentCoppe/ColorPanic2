@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleJump : Power
+public class Green : Power
 {
     public override void ApplyEffect(Collider2D other){
         other.gameObject.SendMessage("AddPower", this);

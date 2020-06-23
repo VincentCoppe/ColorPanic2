@@ -11,8 +11,8 @@ public class MyPower
     public MyPower(){
         PowersState = new Dictionary<string, bool>
         {
-            { "DoubleJump", false },
-            { "Fly", false }
+            { "Green", false },
+            { "Red", false }
         };
 
     }
