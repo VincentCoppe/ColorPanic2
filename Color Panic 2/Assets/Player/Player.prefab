@@ -201,9 +201,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MaxSpeed: 10
-  m_JumpForce: 800
+  m_JumpForce: 1000
   DashTime: 0.1
-  DashSpeed: 8
+  DashSpeed: 80
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 512

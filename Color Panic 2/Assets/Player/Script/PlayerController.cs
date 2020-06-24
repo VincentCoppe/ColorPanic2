@@ -85,10 +85,10 @@ public class PlayerController : MonoBehaviour
             dashTimer -= Time.fixedDeltaTime;
             m_Rigidbody2D.gravityScale = 0f;
             if(FacingRight){
-                m_Rigidbody2D.velocity = new Vector2(m_MaxSpeed*DashSpeed, 0f);
+                m_Rigidbody2D.velocity = new Vector2(1f*DashSpeed, 0f);
             }
             else {
-                m_Rigidbody2D.velocity = new Vector2(-m_MaxSpeed*DashSpeed, 0f);
+                m_Rigidbody2D.velocity = new Vector2(-1f*DashSpeed, 0f);
             }
             if(dashTimer<=0){
                 dashing = false;
@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
     {
         m_Anim.SetBool("Grounded", false);
         Grounded = false;
+        m_Rigidbody2D.velocity = new Vector2(0f, 0f);
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
     }
 
