@@ -7,13 +7,19 @@ using UnityEngine.UI;
 public class Reset : MonoBehaviour
 {
     [SerializeField] private GridManager gridManager = null;
+    [SerializeField] private ToolsHistory toolsHistory = null;
+    private Dictionary<BlockBase, (int,int)> blocksErased = new Dictionary<BlockBase, (int, int)>();
     public void Action() {
         for(int y=0; y<gridManager.GridObject.GetLength(1); y++)
         {
             for(int x=0; x<gridManager.GridObject.GetLength(0); x++) {
                 BlockBase blockToErase = gridManager.GridObject[x, y];
-                blockToErase?.DestroyTiles(x, y);
+                if(blockToErase != null) {
+                    blocksErased[blockToErase] = (x, y);
+                    blockToErase.DestroyTiles(x, y);
+                }
             }
-        }        
+        }  
+        toolsHistory.AddToUndoErase(blocksErased);      
     }
 }

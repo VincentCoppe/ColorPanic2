@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class Rect : ToolManager, Tool
 {
     [SerializeField] private Image image = null;
+    [SerializeField] private ToolsHistory toolsHistory = null;
     private HashSet<(int, int)> rect = new HashSet<(int, int)>();
-    private (int, int) start = (99999, 99999);
+    private (int, int) start = (-1, -1);
 
     public void ClickIcon() {
         SetTool(this);
@@ -17,16 +18,17 @@ public class Rect : ToolManager, Tool
         image.color = color;
     }
 
-    public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse2) {
-       
+    public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse2) {       
         if(Input.GetMouseButtonDown(0)) {
             start = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            rect = new HashSet<(int, int)>();
         } else if (Input.GetMouseButtonUp(0)) {
             foreach ((int, int) blockToPrint in rect)
             {
                 block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral);
             }
-        } else if (start != (99999, 99999)) {
+            toolsHistory.AddToUndoDraw(rect);
+        } else if (start != (-1, -1)) {
             rect = new HashSet<(int, int)>();
             rect.Add(start);
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));

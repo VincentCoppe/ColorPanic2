@@ -30,9 +30,9 @@ public class BlockBase
     public virtual void Init(long data) { }
 
 
-    public void SpawnTiles(int x, int y, GridManager manager, Color[] Colors) {
+    public bool SpawnTiles(int x, int y, GridManager manager, Color[] Colors) {
         Manager = manager;
-        Spawn(x, y, Colors);
+        return Spawn(x, y, Colors);
     }
 
     public virtual void UpdateColors(Color[] Colors) { }

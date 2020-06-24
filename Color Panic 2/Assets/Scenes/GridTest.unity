@@ -510,6 +510,7 @@ MonoBehaviour:
   ground: {fileID: 0}
   size: {fileID: 0}
   image: {fileID: 385722984}
+  toolsHistory: {fileID: 1410053821}
 --- !u!114 &385722983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,6 +1429,7 @@ MonoBehaviour:
   ground: {fileID: 0}
   size: {fileID: 0}
   image: {fileID: 853220546}
+  toolsHistory: {fileID: 1410053821}
 --- !u!1 &911834895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,6 +1578,7 @@ MonoBehaviour:
   ground: {fileID: 0}
   size: {fileID: 0}
   image: {fileID: 911834898}
+  toolsHistory: {fileID: 1410053821}
 --- !u!1 &1029405100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,6 +2693,7 @@ MonoBehaviour:
   ground: {fileID: 0}
   size: {fileID: 0}
   image: {fileID: 1784074827}
+  toolsHistory: {fileID: 1410053821}
 --- !u!1 &1823070376
 GameObject:
   m_ObjectHideFlags: 0
@@ -3061,6 +3065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManager: {fileID: 1826148557}
+  toolsHistory: {fileID: 1410053821}
 --- !u!1 &2085639232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3120,7 @@ MonoBehaviour:
   ground: {fileID: 0}
   size: {fileID: 0}
   image: {fileID: 2085639236}
+  toolsHistory: {fileID: 1410053821}
 --- !u!114 &2085639235
 MonoBehaviour:
   m_ObjectHideFlags: 0

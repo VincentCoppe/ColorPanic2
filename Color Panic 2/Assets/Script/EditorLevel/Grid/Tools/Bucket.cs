@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Bucket : ToolManager, Tool
 {
     [SerializeField] private Image image = null;
+    [SerializeField] private ToolsHistory toolsHistory = null;
 
     public void ClickIcon() {
         SetTool(this);
@@ -38,7 +39,6 @@ public class Bucket : ToolManager, Tool
                 block.Block.NewBlock(block).SpawnTiles(reached.Item1, reached.Item2, gridManager, gridManager.Colors.neutral);
             }
         }
-
-        
+        toolsHistory.AddToUndoDraw(reachable);
     }
 }
