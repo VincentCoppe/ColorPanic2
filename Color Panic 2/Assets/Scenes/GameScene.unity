@@ -4762,15 +4762,25 @@ PrefabInstance:
       propertyPath: DashTime
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1032025416664888386, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032025416664888386, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1032025416664888390, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.41
+      value: -15.01
       objectReference: {fileID: 0}
     - target: {fileID: 1032025416664888390, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.6
+      value: -8.13
       objectReference: {fileID: 0}
     - target: {fileID: 1032025416664888390, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
         type: 3}
