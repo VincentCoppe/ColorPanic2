@@ -17,7 +17,7 @@ public class ContourRect : ToolManager, Tool
         image.color = color;
     }
 
-    public void Action(GridManager gridManager, TileGameObject block, int size) {
+    public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse2) {
         try
         {
             if(Input.GetMouseButtonDown(0)) {

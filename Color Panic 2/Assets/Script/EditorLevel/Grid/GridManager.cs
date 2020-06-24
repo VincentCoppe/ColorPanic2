@@ -71,7 +71,9 @@ public class GridManager : MonoBehaviour
        
         int x = Mathf.FloorToInt(position.x) + Mathf.FloorToInt(15 * Camera.main.aspect) - Mathf.FloorToInt(transform.position.x);
         int y = Mathf.FloorToInt(position.y) + Mathf.FloorToInt(15) - Mathf.FloorToInt(transform.position.y);
-        return (x, y);
+        if (x<50 && x>=0 && y < 30 && y>=0)
+            return (x, y);
+        return (-1,-1);
     }
 
     public GameObject Instantiate(GameObject toSpawn)
@@ -101,9 +103,11 @@ public class GridManager : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
         {
-            toolManager.Action(this);
+            (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if (mouse != (-1,-1)) toolManager.Action(this,mouse);
             
         }
+        /*
         if (Input.GetMouseButton(2))
         {
             (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -118,6 +122,7 @@ public class GridManager : MonoBehaviour
 
             }
         }
+        */
     }
 
     public (int, int)[] Get8Neighbours(int x, int y)

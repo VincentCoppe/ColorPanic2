@@ -14,8 +14,8 @@ public class ToolManager : MonoBehaviour
         Tool.SetBgColor(new Color(0,1,0));
     }
 
-    public void Action(GridManager gridManager) {
-        Tool?.Action(gridManager, ground, size.size);
+    public void Action(GridManager gridManager, (int,int) mouse) {
+        Tool?.Action(gridManager, ground, size.size, mouse);
     }
 
 }
