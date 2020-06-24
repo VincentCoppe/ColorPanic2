@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-    [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.     
-    [SerializeField] private float DashForce = 1000f;                            
+    [SerializeField] private float m_JumpForce = 1000f;                  // Amount of force added when the player jumps.       
+    [SerializeField] private float DashTime = 0.1f;                  // A mask determining what is ground to the character   
+    [SerializeField] private float DashSpeed = 6;                  // A mask determining what is ground to the character              
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+    
 
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
@@ -27,6 +29,10 @@ public class PlayerController : MonoBehaviour
     private MyPower power;
     private bool Djump;
     private bool dash;
+    private bool dashing;
+    private float dashTimer;
+    private float gravity;
+
 
     private void Awake()
     {
@@ -37,6 +43,7 @@ public class PlayerController : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
     }
 
@@ -60,8 +67,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Grounded = false;
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -75,43 +80,42 @@ public class PlayerController : MonoBehaviour
             }
         }
         m_Anim.SetBool("Grounded",Grounded);
+
+        if (dashing){
+            dashTimer -= Time.fixedDeltaTime;
+            m_Rigidbody2D.gravityScale = 0f;
+            if(FacingRight){
+                m_Rigidbody2D.velocity = new Vector2(m_MaxSpeed*DashSpeed, 0f);
+            }
+            else {
+                m_Rigidbody2D.velocity = new Vector2(-m_MaxSpeed*DashSpeed, 0f);
+            }
+            if(dashTimer<=0){
+                dashing = false;
+                m_Rigidbody2D.gravityScale = gravity;
+                m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+            }
+        }
+
     }
 
 
     public void Move(float move, bool jump)
     {
+        if (dashing) return; 
+        m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
-        //only control the player if grounded or airControl is turned on
-        
-
-            // The Speed animator parameter is set to the absolute value of the horizontal input.
-
-            // Move the character
-            m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
-           
-            
-
-            // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !FacingRight)
-            {
-                // ... flip the player.
-                
-                Flip();
-            }
-            // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && FacingRight)
-            {
-            // ... flip the player.
-           
+        if (move > 0 && !FacingRight){
             Flip();
-            }
+        }
+        else if (move < 0 && FacingRight){
+        Flip();
+        }
         m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
-        // If the player should jump...
-        if ( Grounded && jump)
+        if ( Grounded && jump && !dashing)
         {
-            // Add a vertical force to the player.
             Jump(m_JumpForce);
-        } else if ( !Grounded && jump && power.HavePower("Green") && Djump) // or if he can double jump
+        } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing) // or if he can double jump
         {
             Jump(m_JumpForce);
             Djump = false;
@@ -130,11 +134,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Dash(float move){
-        if (FacingRight){
-            m_Rigidbody2D.velocity = new Vector2(DashForce*Time.fixedDeltaTime, 0f);
-        } else {
-            m_Rigidbody2D.velocity = new Vector2(-DashForce*Time.fixedDeltaTime, 0f);
-        }
+        m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+        dashTimer = DashTime;
+        dashing = true;
     }
 
     private void Push((float, float) xy)
@@ -153,10 +155,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        // Switch the way the player is labelled as facing.
         FacingRight = !FacingRight;
-
-        // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
