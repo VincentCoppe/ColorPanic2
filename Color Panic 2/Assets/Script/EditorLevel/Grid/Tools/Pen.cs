@@ -42,6 +42,6 @@ public class Pen : ToolManager, Tool
             }
             
             
-        } catch (IndexOutOfRangeException e){}
+        } catch (IndexOutOfRangeException){}
     }
 }

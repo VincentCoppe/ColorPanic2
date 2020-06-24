@@ -39,6 +39,6 @@ public class Erase : ToolManager, Tool
             }
             
             
-        } catch (IndexOutOfRangeException e){}
+        } catch (IndexOutOfRangeException){}
     }
 }

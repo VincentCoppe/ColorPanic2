@@ -99,7 +99,7 @@ public class GridManager : MonoBehaviour
     
     public void Update()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
         {
             toolManager.Action(this);
             
@@ -113,7 +113,7 @@ public class GridManager : MonoBehaviour
                 Spike.Block.NewBlock(Spike).SpawnTiles(test.Item1, test.Item2, this, Colors.neutral);
 
             }
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException)
             {
 
             }

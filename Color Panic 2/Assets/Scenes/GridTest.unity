@@ -1193,6 +1193,7 @@ GameObject:
   - component: {fileID: 853220547}
   - component: {fileID: 853220546}
   - component: {fileID: 853220545}
+  - component: {fileID: 853220548}
   m_Layer: 5
   m_Name: Contour Rect
   m_TagString: Untagged
@@ -1212,7 +1213,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1029405104}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1261,7 +1262,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 853220546}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 853220548}
+        m_TargetAssemblyTypeName: ContourRect, Assembly-CSharp
+        m_MethodName: ClickIcon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &853220546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,6 +1314,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853220543}
   m_CullTransparentMesh: 0
+--- !u!114 &853220548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853220543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1043a6a8a392240992a2bd12f9e729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 0}
+  size: {fileID: 0}
+  image: {fileID: 853220546}
 --- !u!1 &911834895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1361,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1029405104}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1533,10 +1561,10 @@ RectTransform:
   m_Children:
   - {fileID: 2085639233}
   - {fileID: 385722981}
-  - {fileID: 911834896}
-  - {fileID: 2065794473}
   - {fileID: 853220544}
   - {fileID: 1784074825}
+  - {fileID: 911834896}
+  - {fileID: 2065794473}
   m_Father: {fileID: 1733920298}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2279,7 +2307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 0}
+  m_AnchoredPosition: {x: -9.9, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1748894663
@@ -2388,8 +2416,9 @@ GameObject:
   - component: {fileID: 1784074828}
   - component: {fileID: 1784074827}
   - component: {fileID: 1784074826}
+  - component: {fileID: 1784074829}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Rect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2407,7 +2436,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1029405104}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2456,7 +2485,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1784074827}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1784074829}
+        m_TargetAssemblyTypeName: Rect, Assembly-CSharp
+        m_MethodName: ClickIcon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1784074827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2495,6 +2536,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784074824}
   m_CullTransparentMesh: 0
+--- !u!114 &1784074829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784074824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1c3248a9829804c879f54afde3739d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground: {fileID: 0}
+  size: {fileID: 0}
+  image: {fileID: 1784074827}
 --- !u!1 &1826148553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2657,6 +2713,7 @@ GameObject:
   - component: {fileID: 2065794475}
   - component: {fileID: 2065794474}
   - component: {fileID: 2065794476}
+  - component: {fileID: 2065794477}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -2676,7 +2733,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1029405104}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2764,7 +2821,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2065794474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2065794477}
+        m_TargetAssemblyTypeName: Reset, Assembly-CSharp
+        m_MethodName: Action
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2065794477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065794472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5978c171de77f1c49b5caffb8adb24ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridManager: {fileID: 1826148557}
 --- !u!1 &2085639232
 GameObject:
   m_ObjectHideFlags: 0

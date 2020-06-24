@@ -43,6 +43,6 @@ public class Bucket : ToolManager, Tool
                 }
             }
 
-        } catch (IndexOutOfRangeException e){}
+        } catch (IndexOutOfRangeException){}
     }
 }
