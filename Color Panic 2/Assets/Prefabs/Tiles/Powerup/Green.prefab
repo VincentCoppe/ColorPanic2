@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5779388650809411375}
   - component: {fileID: 7000364513098848813}
   m_Layer: 0
-  m_Name: DoubleJump
+  m_Name: Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169e58d4fb726e846b7962b5d739a0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: 4
+  _color: 3
 --- !u!212 &6526417720498733322
 SpriteRenderer:
   m_ObjectHideFlags: 0

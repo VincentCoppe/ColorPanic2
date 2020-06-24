@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
-    [SerializeField] private TileGameObject ground = null;
+    private TileGameObject tile = null;
     [SerializeField] private Size size = null;
     public static Tool Tool;
 
@@ -14,8 +14,13 @@ public class ToolManager : MonoBehaviour
         Tool.SetBgColor(new Color(0,1,0));
     }
 
+    public void setTile(TileGameObject t)
+    {
+        tile = t;
+    }
+
     public void Action(GridManager gridManager, (int,int) mouse) {
-        Tool?.Action(gridManager, ground, size.size, mouse);
+        Tool?.Action(gridManager, tile, size.size, mouse);
     }
 
 }
