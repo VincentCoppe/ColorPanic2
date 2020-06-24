@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool OnRightWall { get; private set; }
     private bool FacingRight = true; // For determining which way the player is currently facing.
     private Vector3 respawn = new Vector3(0,0,0);
-    private GameObject CurrentCheckpoint = null;
+    private Checkpoint CurrentCheckpoint = null;
 
     private MyPower power;
     private bool Djump;
@@ -49,8 +49,8 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
+        power.ResetPowers(CurrentCheckpoint.SavedPowers);
         this.gameObject.transform.localPosition = respawn;
-        power.ResetPowers();
     }
 
     public void MoveX(float move)
@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         }
         m_Anim.SetBool("Grounded",Grounded);
 
+        //Force applied during the dash
         if (dashing){
             dashTimer -= Time.fixedDeltaTime;
             m_Rigidbody2D.gravityScale = 0f;
@@ -90,10 +91,11 @@ public class PlayerController : MonoBehaviour
             else {
                 m_Rigidbody2D.velocity = new Vector2(-1f*DashSpeed, 0f);
             }
+            //End of the dash
             if(dashTimer<=0){
                 dashing = false;
                 m_Rigidbody2D.gravityScale = gravity;
-                m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+                ResetMovement();
             }
         }
 
@@ -103,23 +105,26 @@ public class PlayerController : MonoBehaviour
     public void Move(float move, bool jump)
     {
         if (dashing) return; 
+        //Move
         m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
-        if (move > 0 && !FacingRight){
+        //Flip sprite
+        if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
             Flip();
         }
-        else if (move < 0 && FacingRight){
-        Flip();
-        }
         m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
+
+        //Jump
         if ( Grounded && jump && !dashing)
         {
             Jump(m_JumpForce);
+        //Double jump
         } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing) // or if he can double jump
         {
             Jump(m_JumpForce);
             Djump = false;
         }
+        //Dash
         if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash ){
             Dash(move);
             dash = false;
@@ -130,12 +135,12 @@ public class PlayerController : MonoBehaviour
     {
         m_Anim.SetBool("Grounded", false);
         Grounded = false;
-        m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+        ResetMovement();
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
     }
 
     private void Dash(float move){
-        m_Rigidbody2D.velocity = new Vector2(0f, 0f);
+        ResetMovement();
         dashTimer = DashTime;
         dashing = true;
     }
@@ -145,13 +150,29 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
     }
 
-    private void SetRespawn(GameObject checkpoint){
-        if (CurrentCheckpoint != null){
-            CurrentCheckpoint.GetComponent<Animator>().SetBool("Activate", false);
+    private void SetRespawn(Checkpoint checkpoint){
+        //Disable old checkpoint
+        if (CurrentCheckpoint != null && CurrentCheckpoint != checkpoint){
+            CurrentCheckpoint.Activation(false);
         }
-        CurrentCheckpoint = checkpoint;
-        checkpoint.GetComponent<Animator>().SetBool("Activate", true);
-        respawn = checkpoint.gameObject.transform.localPosition;
+        //Set new checkpoint
+        if (CurrentCheckpoint != checkpoint){
+            checkpoint.Activation(true);
+            checkpoint.SavedPowers =  new List<Power>(power.Powers);
+
+            //Transfer power from the old checkpoint to the new one
+            if (CurrentCheckpoint!=null){
+                foreach(Power p in CurrentCheckpoint.SavedPowers){
+                    if (!checkpoint.SavedPowers.Contains(p)){
+                        checkpoint.SavedPowers.Add(p);
+                    }
+                }
+            }
+
+            //Set the respawn point of the player
+            respawn = checkpoint.gameObject.transform.localPosition;
+            CurrentCheckpoint = checkpoint;
+        }
     }
 
 
@@ -161,5 +182,9 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void ResetMovement(){
+        m_Rigidbody2D.velocity = new Vector2(0f, 0f);
     }
 }

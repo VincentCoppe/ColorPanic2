@@ -6,11 +6,19 @@ public class Checkpoint : MonoBehaviour
 {
 
     [SerializeField] public Animator animator = null;
+    public List<Power> SavedPowers;
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
             Vector3 pos = transform.localPosition;
-            other.gameObject.SendMessage("SetRespawn",this.gameObject);
+            other.gameObject.SendMessage("SetRespawn",this);
         }
     }
+
+    public void Activation(bool activation){
+        this.GetComponent<Animator>().SetBool("Activate", activation);
+    }
+
+
 
 }

@@ -6,13 +6,15 @@ using System.Linq;
 public class MyPower
 {
     Dictionary<string, bool> PowersState = new Dictionary<string, bool>();
-    List<Power> Powers = new List<Power>();
+    public List<Power> Powers;
 
     public MyPower(){
-        PowersState = new Dictionary<string, bool>
+        Powers = new List<Power>();
+        PowersState = new Dictionary<string,
+         bool>
         {
-            { "Green", false },
-            { "Red", false }
+            { "Green", false }, //DoubleJump
+            { "Red", false } //Dash
         };
 
     }
@@ -24,12 +26,22 @@ public class MyPower
         }
     }
 
-    public void ResetPowers(){
+    public void ResetPowers(List<Power> SavedPowers){
         foreach(Power p in Powers){
-            p.gameObject.SetActive(true);
+            if (!SavedPowers.Contains(p)){
+                p.gameObject.SetActive(true);
+            }
         }
+
+        List<string> powernames = new List<string>();
+        foreach (Power sp in SavedPowers){
+            powernames.Add(sp.GetType().ToString());
+        }
+
         foreach(string p in PowersState.Keys.ToList()){
-            PowersState[p] = false;
+                if (!powernames.Contains(p)){
+                    PowersState[p] = false;
+                } 
         }
         Powers = new List<Power>();
     }
