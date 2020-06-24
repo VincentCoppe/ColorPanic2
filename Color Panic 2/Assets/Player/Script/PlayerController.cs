@@ -147,9 +147,10 @@ public class PlayerController : MonoBehaviour
 
     private void SetRespawn(GameObject checkpoint){
         if (CurrentCheckpoint != null){
-            CurrentCheckpoint.gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+            CurrentCheckpoint.GetComponent<Animator>().SetBool("Activate", false);
         }
         CurrentCheckpoint = checkpoint;
+        checkpoint.GetComponent<Animator>().SetBool("Activate", true);
         respawn = checkpoint.gameObject.transform.localPosition;
     }
 
