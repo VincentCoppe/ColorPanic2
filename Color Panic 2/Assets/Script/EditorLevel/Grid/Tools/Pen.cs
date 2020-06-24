@@ -22,6 +22,14 @@ public class Pen : ToolManager, Tool
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
         HashSet<(int, int)> blocksToPrint = new HashSet<(int, int)>();
+        /*
+        if(Input.GetMouseButtonDown(0)) {
+                blocksPrinted = new HashSet<(int, int)>();
+            } else if (Input.GetMouseButtonUp(0)) {
+                Debug.Log("ouccc");
+                toolsHistory.AddToHistoryDraw(blocksPrinted);
+            }
+            */
         
         blocksToPrint.Add(mouse);
         size--;
