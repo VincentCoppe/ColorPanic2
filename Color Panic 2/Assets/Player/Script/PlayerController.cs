@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
     [SerializeField] private float m_JumpForce = 1000f;                  // Amount of force added when the player jumps.       
     [SerializeField] private float DashTime = 0.1f;                  // A mask determining what is ground to the character   
-    [SerializeField] private float DashSpeed = 6;                  // A mask determining what is ground to the character              
+    [SerializeField] private float DashSpeed = 6;                  // A mask determining what is ground to the character     
+    [SerializeField] private float GravityScale = 2.5f;          
     [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
     
 
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Rigidbody2D.gravityScale = m_Rigidbody2D.gravityScale*GravityScale;
         gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
     }

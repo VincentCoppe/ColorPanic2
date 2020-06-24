@@ -4747,6 +4747,21 @@ PrefabInstance:
       propertyPath: DashForce
       value: 10000
       objectReference: {fileID: 0}
+    - target: {fileID: 1032025416664888384, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
+        type: 3}
+      propertyPath: m_JumpForce
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032025416664888384, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
+        type: 3}
+      propertyPath: DashSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1032025416664888384, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
+        type: 3}
+      propertyPath: DashTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1032025416664888390, guid: 11b696b0f6ea5d749a90c9c4d72b218f,
         type: 3}
       propertyPath: m_LocalPosition.x
