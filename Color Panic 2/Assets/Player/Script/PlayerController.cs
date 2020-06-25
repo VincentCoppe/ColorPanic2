@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     private Transform m_RightCheck;
     private Transform m_LeftCheck;
+
+    private Transform m_RightCheckLow;
+    private Transform m_LeftCheckLow;
     private Animator m_Anim;            
     private Rigidbody2D m_Rigidbody2D;
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour
         m_CeilingCheck = transform.Find("CeilingCheck");
         m_LeftCheck = transform.Find("LeftWallCheck");
         m_RightCheck = transform.Find("RightWallCheck");
+        m_LeftCheckLow = transform.Find("LeftWallCheckLow");
+        m_RightCheckLow = transform.Find("RightWallCheckLow");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         gravity = m_Rigidbody2D.gravityScale;
@@ -100,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
         //Check wall on left
         Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*2, m_WhatIsGround);
+        Collider2D[] collidersLL = Physics2D.OverlapCircleAll(m_LeftCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
         for (int i = 0; i < collidersL.Length; i++)
         {
             if (collidersL[i].gameObject != gameObject)
@@ -111,12 +117,36 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        for (int i = 0; i < collidersLL.Length; i++)
+        {
+            if (collidersLL[i].gameObject != gameObject)
+            {
+                if (FacingRight){
+                    OnRightWall = true;
+                } else {
+                    OnLeftWall = true;
+                }
+            }
+        }
+        
 
         //Check wall on right
         Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius*2, m_WhatIsGround);
+        Collider2D[] collidersRL = Physics2D.OverlapCircleAll(m_RightCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
         for (int i = 0; i < collidersR.Length; i++)
         {
             if (collidersR[i].gameObject != gameObject)
+            {
+                if (FacingRight){
+                    OnLeftWall = true;
+                } else {
+                    OnRightWall = true;
+                }
+            }
+        }
+        for (int i = 0; i < collidersRL.Length; i++)
+        {
+            if (collidersRL[i].gameObject != gameObject)
             {
                 if (FacingRight){
                     OnLeftWall = true;
@@ -143,6 +173,7 @@ public class PlayerController : MonoBehaviour
                 ResetMovement();
             }
         }
+        m_Anim.SetBool("Dashing",dashing);
 
     }
 
