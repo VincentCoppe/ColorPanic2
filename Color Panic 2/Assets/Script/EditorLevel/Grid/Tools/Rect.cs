@@ -36,32 +36,32 @@ public class Rect : ToolManager, Tool
             rect = new HashSet<(int, int)>();
             rect.Add(start);
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            while(mouse.Item1 >= start.Item1) {
-                int mem = mouse.Item2;
-                while(mouse.Item2 >= start.Item2) {
+            size = Math.Abs(start.Item2-mouse.Item2);
+            int memSize = size;
+            (int, int) memMouse = mouse;
+            (int, int) memStart = start;
+            
+            while(size > 0) {
+                mouse.Item1 = memMouse.Item1;
+                while(mouse.Item1 > start.Item1 || mouse.Item1 < start.Item1) {
+                    rect.Add((mouse.Item1, start.Item2));
                     rect.Add((mouse.Item1, mouse.Item2));
+                    mouse.Item1 = mouse.Item1 > start.Item1 ? mouse.Item1-1 : mouse.Item1+1;
+                }
+                rect.Add((mouse.Item1, start.Item2));
+                rect.Add((mouse.Item1, mouse.Item2));
+                if(mouse.Item2 > start.Item2) {
                     mouse.Item2--;
-                }
-                while(mouse.Item2 <= start.Item2) {
-                    rect.Add((mouse.Item1, mouse.Item2));
+                    start.Item2++;
+                } else {
                     mouse.Item2++;
+                    start.Item2--;
                 }
-                mouse.Item2 = mem;
-                mouse.Item1--;
+                size--;
             }
-            while(mouse.Item1 <= start.Item1) {
-                int mem = mouse.Item2;
-                while(mouse.Item2 >= start.Item2) {
-                    rect.Add((mouse.Item1, mouse.Item2));
-                    mouse.Item2--;
-                }
-                while(mouse.Item2 <= start.Item2) {
-                    rect.Add((mouse.Item1, mouse.Item2));
-                    mouse.Item2++;
-                }
-                mouse.Item2 = mem;
-                mouse.Item1++;
-            }
+            size = memSize;
+            mouse = memMouse;
+            start = memStart;
         }
 
         
