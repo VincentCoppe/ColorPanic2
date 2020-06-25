@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObjectBlock : BlockBase
 {
-    
-   
+
+    public ObjectEnum ObjectType = ObjectEnum.Jumper;
 
     public override void Init(long data) { }
 

@@ -13,4 +13,15 @@ public class JumperBlock : ObjectBlock
         return base.Save() | ((long) (data.JumperTransform.localEulerAngles.z/2)<<8);
     }
 
+    protected override bool Spawn(int x, int y, Color[] Colors)
+    {
+        if (base.Spawn(x, y, Colors))
+        {
+            ObjectType = Data<CBD_Tapis>().ObjectType;
+            return true;
+        }
+        return false;
+    }
+
+
 }

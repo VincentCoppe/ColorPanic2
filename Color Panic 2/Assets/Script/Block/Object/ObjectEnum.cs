@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 public enum ObjectEnum
 {
-    Jumper
+    Jumper,
+    Tapis
+    
 
 
 }

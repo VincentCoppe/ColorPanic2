@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
             if(dashTimer<=0){
                 dashing = false;
                 m_Rigidbody2D.gravityScale = gravity;
-                ResetMovement();
+               // ResetMovement();
             }
         }
         m_Anim.SetBool("Dashing",dashing);
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
     private void WallJump(float force, bool FacingRight)
     {
         if (FacingRight){
-            m_Rigidbody2D.AddForce(new Vector2(force/1.8f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(-force/1.8f, 0f));
         } else {
             m_Rigidbody2D.AddForce(new Vector2(force/1.8f, 0f));
         }

@@ -23,7 +23,14 @@ public static class BlockEnumExt {
             case BlockEnum.Spike: return new BlockSpike(prefab);
             case BlockEnum.Powerup: return new BlockPowerup(prefab);
             case BlockEnum.Checkpoint: return new CheckpointBlock(prefab);
-            case BlockEnum.Object: return new ObjectBlock(prefab);
+            case BlockEnum.Object:
+                switch (((CBD_Object)prefab.Data).ObjectType)
+                {
+                    case ObjectEnum.Jumper: return new JumperBlock(prefab);
+                    case ObjectEnum.Tapis: return new BlockTapis(prefab);
+                    default: return null;
+                }
+               
             default: return null;
         }
     }
