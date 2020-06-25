@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         OnRightWall = false;
         m_Anim.SetBool("Grabbing",grabbing);
         //Check ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius*1.2f, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Grounded",Grounded);
 
         //Check wall on left
-        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*3, m_WhatIsGround);
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*2, m_WhatIsGround);
         for (int i = 0; i < collidersL.Length; i++)
         {
             if (collidersL[i].gameObject != gameObject)
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Check wall on right
-        Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius*3, m_WhatIsGround);
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius*2, m_WhatIsGround);
         for (int i = 0; i < collidersR.Length; i++)
         {
             if (collidersR[i].gameObject != gameObject)
@@ -180,14 +180,13 @@ public class PlayerController : MonoBehaviour
 
     private void Grab(){
         grabbing = true;
-        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         MoveY(GrabFallSpeed);
     }
 
     private void Ungrab(){
         grabbing = false;
-        m_Rigidbody2D.constraints = RigidbodyConstraints2D.None;
-        m_Rigidbody2D.freezeRotation = true;
+        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public void MoveY(float move)

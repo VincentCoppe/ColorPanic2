@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5844036777933558395}
   - component: {fileID: 8099817593296666758}
   - component: {fileID: 2131727990826560033}
+  - component: {fileID: -5555009248446246230}
   m_Layer: 0
   m_Name: spike
   m_TagString: Untagged
@@ -125,6 +126,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07bae49bbfe245f4ab8899602a35b557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &-5555009248446246230
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267098232572139987}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4232264044505396016
 GameObject:
   m_ObjectHideFlags: 0
