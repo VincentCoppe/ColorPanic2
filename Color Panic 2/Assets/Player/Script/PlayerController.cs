@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
-    [SerializeField] private float m_JumpForce = 1000f;                  // Amount of force added when the player jumps.       
-    [SerializeField] private float DashTime = 0.1f;                  // A mask determining what is ground to the character   
-    [SerializeField] private float DashSpeed = 6;                  // A mask determining what is ground to the character           
-    [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+    [SerializeField] private float m_MaxSpeed = 10f;      
+    [SerializeField] private float m_JumpForce = 1000f;                
+    [SerializeField] private float DashTime = 0.1f;                
+    [SerializeField] private float DashSpeed = 6;         
+    [SerializeField] private float GrabFallSpeed = 0.1f;                    
+    [SerializeField] private LayerMask m_WhatIsGround;                 
     
 
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     private Transform m_RightCheck;
     private Transform m_LeftCheck;
-    private Animator m_Anim;            // Reference to the player's animator component.
+    private Animator m_Anim;            
     private Rigidbody2D m_Rigidbody2D;
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
-    public bool Grounded { get; private set; } // Whether or not the player is grounded.
+    public bool Grounded { get; private set; } 
     public bool OnLeftWall { get; private set; }
     public bool OnRightWall { get; private set; }
-    private bool FacingRight = true; // For determining which way the player is currently facing.
+    private bool FacingRight = true; 
     private Vector3 respawn = new Vector3(0,0,0);
     private Checkpoint CurrentCheckpoint = null;
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool Djump;
     private bool dash;
     private bool dashing;
+    private bool grabbing;
     private float dashTimer;
     private float gravity;
 
@@ -43,7 +45,6 @@ public class PlayerController : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        m_Rigidbody2D.gravityScale = m_Rigidbody2D.gravityScale;
         gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
     }
@@ -68,6 +69,10 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Grounded = false;
+        OnLeftWall = false;
+        OnRightWall = false;
+        m_Anim.SetBool("Grabbing",grabbing);
+        //Check ground
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -76,11 +81,37 @@ public class PlayerController : MonoBehaviour
                 Grounded = true;
                 Djump = true;
                 dash = true;
-            } else {
-                Grounded = false;
             }
         }
         m_Anim.SetBool("Grounded",Grounded);
+
+        //Check wall on left
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius/2, m_WhatIsGround);
+        for (int i = 0; i < collidersL.Length; i++)
+        {
+            if (collidersL[i].gameObject != gameObject)
+            {
+                if (FacingRight){
+                    OnRightWall = true;
+                } else {
+                    OnLeftWall = true;
+                }
+            }
+        }
+
+        //Check wall on right
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius/2, m_WhatIsGround);
+        for (int i = 0; i < collidersR.Length; i++)
+        {
+            if (collidersR[i].gameObject != gameObject)
+            {
+                if (FacingRight){
+                    OnLeftWall = true;
+                } else {
+                    OnRightWall = true;
+                }
+            }
+        }
 
         //Force applied during the dash
         if (dashing){
@@ -102,10 +133,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
     public void Move(float move, bool jump)
     {
         if (dashing) return; 
+        if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
+            if (OnLeftWall && move > 0 || OnRightWall && move < 0){
+                Grab();
+                return;
+            }
+        }
+        Ungrab();
         //Move
         m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
 
@@ -120,7 +157,7 @@ public class PlayerController : MonoBehaviour
         {
             Jump(m_JumpForce);
         //Double jump
-        } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing) // or if he can double jump
+        } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing)
         {
             Jump(m_JumpForce);
             Djump = false;
@@ -130,6 +167,25 @@ public class PlayerController : MonoBehaviour
             Dash(move);
             dash = false;
         }
+    }
+
+    private void Grab(){
+        grabbing = true;
+        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+        MoveY(GrabFallSpeed);
+    }
+
+    private void Ungrab(){
+        grabbing = false;
+        m_Rigidbody2D.constraints = RigidbodyConstraints2D.None;
+        m_Rigidbody2D.freezeRotation = true;
+    }
+
+    public void MoveY(float move)
+    {
+        Vector3 vector = transform.localPosition;
+        vector.y -= move;
+        transform.localPosition = vector;
     }
 
     private void Jump(float force)
