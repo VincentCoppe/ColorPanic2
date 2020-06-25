@@ -75,9 +75,11 @@ public class PlayerController : MonoBehaviour
 
     public void AddPower(Power newpower){
         power.AddPower(newpower);
+        Recharge( newpower.GetType().ToString());
+    }
 
-        string pow = newpower.GetType().ToString();
-        switch(pow){
+    private void Recharge(string power){
+        switch(power){
             case "Green" : Djump = true; break;
             case "Red" : dash = true; break;
             //others powers
@@ -89,6 +91,10 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
+
+        if(Input.GetKey(KeyCode.R)){
+            Death();
+        }
 
         //Check if the player is in grab
         if (grabbing){
