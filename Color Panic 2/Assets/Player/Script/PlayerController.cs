@@ -186,28 +186,30 @@ public class PlayerController : MonoBehaviour
     {
         if (dashing || WalljumpTimer>0) return; 
 
-        //Flip sprite
-        if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
-            Flip();
-        }
-
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
-            if (OnLeftWall && move > 0 || OnRightWall && move < 0 ){
-                if ( jump && Djump && power.HavePower("Green") ){
-                    Grounded = false;
-                    Djump = false;
-                    grabbing = false;
-                    WallJump(m_JumpForce, FacingRight);
-                    return;
-                }
+            if (!grabbing && ((OnRightWall && move < 0) || (OnLeftWall && move > 0))){
                 grabbing = true;
                 return;
             }
+            if ( (jump || (FacingRight && move < 0) || (!FacingRight && move > 0) ) && Djump && power.HavePower("Green") ){
+                Grounded = false;
+                Djump = false;
+                grabbing = false;
+                WallJump(m_JumpForce, FacingRight);
+                return;
+            }
+
         }
+
         //Ungrab if player move/jump, or if there is no wall/the ground
-        if(Grounded ||  move < 0 || move > 0 || jump || (!OnLeftWall && !OnRightWall)){
+        if(grabbing && (Grounded ||  (!FacingRight && move > 0) || (FacingRight && move < 0) || jump || !OnLeftWall && FacingRight || !OnRightWall && !FacingRight  )){
             grabbing = false;
+        }
+
+        //Flip sprite
+        if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
+            Flip();
         }
 
         //Move
