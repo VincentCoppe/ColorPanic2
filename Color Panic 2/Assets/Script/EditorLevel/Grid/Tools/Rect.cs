@@ -23,11 +23,14 @@ public class Rect : ToolManager, Tool
             start = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             rect = new HashSet<(int, int)>();
         } else if (Input.GetMouseButtonUp(0)) {
+            HashSet<(int, int)> res = new HashSet<(int, int)>();
             foreach ((int, int) blockToPrint in rect)
             {
-                block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral);
+                if(block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral)) {
+                    res.Add(blockToPrint);
+                }
             }
-            toolsHistory.AddToUndoDraw(rect);
+            toolsHistory.AddToUndoDraw(res);
         } else if (start != (-1, -1)) {
             rect = new HashSet<(int, int)>();
             rect.Add(start);

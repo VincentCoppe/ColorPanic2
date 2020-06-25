@@ -44,8 +44,9 @@ public class Pen : ToolManager, Tool
         }
 
         foreach ((int, int) blockToPrint in blocksToPrint) {
-            block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral);
-            blocksPrinted.Add(blockToPrint);
+            if(block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral)) {
+                blocksPrinted.Add(blockToPrint);
+            }
         }
         
     }
