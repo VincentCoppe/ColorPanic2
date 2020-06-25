@@ -3,7 +3,7 @@
 public class JumpPlayer : MonoBehaviour
 {
     public float JumpForce;
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
             float rota = transform.localEulerAngles.z;
             float sin = Mathf.Sin((rota*Mathf.PI)/180); 

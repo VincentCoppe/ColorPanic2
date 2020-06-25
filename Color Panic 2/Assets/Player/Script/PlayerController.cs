@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Grabbing",grabbing);
         
         //Check ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius*1.2f, m_WhatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
-            if (OnLeftWall && move > 0 || OnRightWall && move < 0){
+            if (OnLeftWall && move > 0 || OnRightWall && move < 0 ){
                 grabbing = true;
                 return;
             }
@@ -234,6 +234,11 @@ public class PlayerController : MonoBehaviour
         Vector3 vector = transform.localPosition;
         vector.y -= move;
         transform.localPosition = vector;
+    }
+
+    private void WallJump(float force)
+    {
+        m_Rigidbody2D.AddForce(new Vector2(5000f, force));
     }
 
     private void Jump(float force)
