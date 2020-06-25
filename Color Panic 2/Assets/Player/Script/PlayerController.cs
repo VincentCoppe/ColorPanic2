@@ -76,6 +76,12 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
+
+        if (grabbing){
+            Grab();
+        } else{
+            Ungrab();
+        }
         m_Anim.SetBool("Grabbing",grabbing);
         //Check ground
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius*1.2f, m_WhatIsGround);
@@ -150,11 +156,15 @@ public class PlayerController : MonoBehaviour
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
             if (OnLeftWall && move > 0 || OnRightWall && move < 0){
-                Grab();
+                grabbing = true;
                 return;
             }
         }
-        Ungrab();
+        Debug.Log(jump);
+        if(Grounded || OnLeftWall && move < 0 || OnRightWall && move > 0 || jump){
+            Debug.Log("yes");
+            grabbing = false;
+        }
 
         //Move
         m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
@@ -179,13 +189,11 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Grab(){
-        grabbing = true;
         m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         MoveY(GrabFallSpeed);
     }
 
     private void Ungrab(){
-        grabbing = false;
         m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
