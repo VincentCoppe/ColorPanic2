@@ -22,7 +22,7 @@ public class ContourRect : ToolManager, Tool
         if(Input.GetMouseButtonDown(0)) {
             start = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             rect = new HashSet<(int, int)>();
-        } else if (Input.GetMouseButtonUp(0)) {
+        } else if (Input.GetMouseButtonUp(0) && start != (-1,-1)) {
             HashSet<(int, int)> res = new HashSet<(int, int)>();
             foreach ((int, int) blockToPrint in rect)
             {
@@ -30,32 +30,56 @@ public class ContourRect : ToolManager, Tool
                     res.Add(blockToPrint);
                 }
             }
+            start = (-1, -1);
             toolsHistory.AddToUndoDraw(res);
         } else if (start != (-1, -1)) {
             rect = new HashSet<(int, int)>();
-            rect.Add(start);
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            while(mouse.Item1 > start.Item1) {
-                rect.Add((mouse.Item1, start.Item2));
-                rect.Add((mouse.Item1, mouse.Item2));
-                mouse.Item1--;
+            rect.Add(start);
+            int memSize = size;
+            (int, int) memMouse = mouse;
+            (int, int) memStart = start;
+            
+            while(size > 0) {
+                mouse.Item1 = memMouse.Item1;
+                while(mouse.Item1 > start.Item1 || mouse.Item1 < start.Item1) {
+                    rect.Add((mouse.Item1, start.Item2));
+                    rect.Add((mouse.Item1, mouse.Item2));
+                    mouse.Item1 = mouse.Item1 > start.Item1 ? mouse.Item1-1 : mouse.Item1+1;
+                }
+                if(mouse.Item2 > start.Item2) {
+                    mouse.Item2--;
+                    start.Item2++;
+                } else {
+                    mouse.Item2++;
+                    start.Item2--;
+                }
+                size--;
             }
-            while(mouse.Item1 < start.Item1) {
-                rect.Add((mouse.Item1, start.Item2));
-                rect.Add((mouse.Item1, mouse.Item2));
-                mouse.Item1++;
+            size = memSize;
+            mouse = memMouse;
+            start = memStart;
+            
+            while(size > 0) {
+                mouse.Item2 = memMouse.Item2;
+                while(mouse.Item2 > start.Item2 || mouse.Item2 < start.Item2) {
+                    rect.Add((start.Item1, mouse.Item2));
+                    rect.Add((mouse.Item1, mouse.Item2));
+                    mouse.Item2 = mouse.Item2 > start.Item2 ? mouse.Item2-1 : mouse.Item2+1;
+                }
+                if(mouse.Item1 > start.Item1) {
+                    mouse.Item1--;
+                    start.Item1++;
+                } else {
+                    mouse.Item1++;
+                    start.Item1--;
+                }
+                size--;
             }
-            mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            while(mouse.Item2 > start.Item2) {
-                rect.Add((start.Item1, mouse.Item2));
-                rect.Add((mouse.Item1, mouse.Item2));
-                mouse.Item2--;
-            }
-            while(mouse.Item2 < start.Item2) {
-                rect.Add((start.Item1, mouse.Item2));
-                rect.Add((mouse.Item1, mouse.Item2));
-                mouse.Item2++;
-            }
+            size = memSize;
+            mouse = memMouse;
+            start = memStart;
+            
         }
     }
 }

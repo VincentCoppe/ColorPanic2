@@ -22,7 +22,7 @@ public class Rect : ToolManager, Tool
         if(Input.GetMouseButtonDown(0)) {
             start = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             rect = new HashSet<(int, int)>();
-        } else if (Input.GetMouseButtonUp(0)) {
+        } else if (Input.GetMouseButtonUp(0) && start != (-1,-1)) {
             HashSet<(int, int)> res = new HashSet<(int, int)>();
             foreach ((int, int) blockToPrint in rect)
             {
@@ -30,6 +30,7 @@ public class Rect : ToolManager, Tool
                     res.Add(blockToPrint);
                 }
             }
+            start = (-1, -1);
             toolsHistory.AddToUndoDraw(res);
         } else if (start != (-1, -1)) {
             rect = new HashSet<(int, int)>();

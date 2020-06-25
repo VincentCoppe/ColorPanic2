@@ -22,17 +22,21 @@ public class ToolsHistory : MonoBehaviour
 
     // METHODES POUR UNDO
     public void AddToUndoDraw(HashSet<(int, int)> action) {
-        undoDraw.Push(action);
-        undoActions.Push(true);
-        ResetRedo();
-        CheckInteractable();
+        if(action.Count > 0) {
+            undoDraw.Push(action);
+            undoActions.Push(true);
+            ResetRedo();
+            CheckInteractable();
+        }
     }
 
     public void AddToUndoErase(Dictionary<BlockBase, (int,int)> action) {
-        undoErase.Push(action);
-        undoActions.Push(false);
-        ResetRedo();
-        CheckInteractable();
+        if(action.Count > 0) {
+            undoErase.Push(action);
+            undoActions.Push(false);
+            ResetRedo();
+            CheckInteractable();
+        }
     }
 
     private void ResetRedo() {
