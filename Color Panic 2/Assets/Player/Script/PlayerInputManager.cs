@@ -27,6 +27,10 @@ public class PlayerInputManager : MonoBehaviour
     private void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
+        //Take the last input of the player
+        if ( (Input.GetKey(KeyCode.RightArrow) && h < 0) || (Input.GetKey(KeyCode.LeftArrow) && h > 0) ){
+            h *= -1;
+        }
         // Pass all parameters to the character control script.
         m_Character.Move(h, m_Jump);
         m_Jump = false;

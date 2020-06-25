@@ -77,12 +77,14 @@ public class PlayerController : MonoBehaviour
         OnLeftWall = false;
         OnRightWall = false;
 
+        //Check if the player is in grab
         if (grabbing){
             Grab();
         } else{
             Ungrab();
         }
         m_Anim.SetBool("Grabbing",grabbing);
+        
         //Check ground
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius*1.2f, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
@@ -160,9 +162,8 @@ public class PlayerController : MonoBehaviour
                 return;
             }
         }
-        Debug.Log(jump);
-        if(Grounded || OnLeftWall && move < 0 || OnRightWall && move > 0 || jump){
-            Debug.Log("yes");
+        //Ungrab if player move/jump, or if there is no wall/the ground
+        if(Grounded ||  move < 0 || move > 0 || jump || (!OnLeftWall && !OnRightWall)){
             grabbing = false;
         }
 
