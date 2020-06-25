@@ -17,7 +17,7 @@ public class JumperBlock : ObjectBlock
     {
         if (base.Spawn(x, y, Colors))
         {
-            ObjectType = Data<CBD_Tapis>().ObjectType;
+            ObjectType = Data<CBD_Jumper>().ObjectType;
             return true;
         }
         return false;
