@@ -182,10 +182,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void Move(float move, bool jump)
-    {
-        if (dashing || WalljumpTimer>0) return; 
-
+    private void HandleGrab(float move, bool jump){
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
             if (!grabbing && ((OnRightWall && move < 0) || (OnLeftWall && move > 0))){
@@ -203,9 +200,16 @@ public class PlayerController : MonoBehaviour
         }
 
         //Ungrab if player move/jump, or if there is no wall/the ground
-        if(grabbing && (Grounded ||  (!FacingRight && move > 0) || (FacingRight && move < 0) || jump || !OnLeftWall && FacingRight || !OnRightWall && !FacingRight  )){
+        if(grabbing && (Grounded ||  (!FacingRight && move > 0) || (FacingRight && move < 0) || !OnLeftWall && FacingRight || !OnRightWall && !FacingRight  )){
             grabbing = false;
         }
+    }
+
+    public void Move(float move, bool jump)
+    {
+        if (dashing || WalljumpTimer>0) return; 
+
+        HandleGrab(move, jump);
 
         //Flip sprite
         if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
