@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool grabbing;
     private float dashTimer;
     private float gravity;
+    private float WalljumpTimer = 0;
 
 
     private void Awake()
@@ -175,11 +176,15 @@ public class PlayerController : MonoBehaviour
         }
         m_Anim.SetBool("Dashing",dashing);
 
+        if (WalljumpTimer>0){
+            WalljumpTimer -= Time.fixedDeltaTime;
+        }
+
     }
 
     public void Move(float move, bool jump)
     {
-        if (dashing) return; 
+        if (dashing || WalljumpTimer>0) return; 
 
         //Flip sprite
         if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
@@ -189,6 +194,13 @@ public class PlayerController : MonoBehaviour
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
             if (OnLeftWall && move > 0 || OnRightWall && move < 0 ){
+                if ( jump && Djump && power.HavePower("Green") ){
+                    Grounded = false;
+                    Djump = false;
+                    grabbing = false;
+                    WallJump(m_JumpForce, FacingRight);
+                    return;
+                }
                 grabbing = true;
                 return;
             }
@@ -236,9 +248,15 @@ public class PlayerController : MonoBehaviour
         transform.localPosition = vector;
     }
 
-    private void WallJump(float force)
+    private void WallJump(float force, bool FacingRight)
     {
-        m_Rigidbody2D.AddForce(new Vector2(5000f, force));
+        if (FacingRight){
+            m_Rigidbody2D.AddForce(new Vector2(force/1.8f, 0f));
+        } else {
+            m_Rigidbody2D.AddForce(new Vector2(force/1.8f, 0f));
+        }
+        Jump(force*1.1f);
+        WalljumpTimer = 0.1f;
     }
 
     private void Jump(float force)
