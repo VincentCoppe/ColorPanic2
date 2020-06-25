@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 8904262535096694647}
   - component: {fileID: -1348770984273340132}
   - component: {fileID: 9184231245416354790}
-  - component: {fileID: -5910430629897566949}
-  - component: {fileID: 6174102458068379548}
-  - component: {fileID: 5902080933755106709}
-  m_Layer: 0
-  m_Name: Checkpoint
+  - component: {fileID: -5962031797307303518}
+  - component: {fileID: -5502512996940151318}
+  - component: {fileID: -9090305845500523186}
+  - component: {fileID: -815021882178107876}
+  m_Layer: 9
+  m_Name: JumperUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8904262535096694649}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.63, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,13 +76,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -5588244012374682611, guid: 51990e4594b29e7448f8b388f4dbaa28,
+  m_Sprite: {fileID: -7239348862603348701, guid: 9367510c5df956b4589dfacd662fcdc2,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4532307, g: 0.5228664, b: 0.990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -99,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Block: 5
-  data: {fileID: 0}
---- !u!61 &-5910430629897566949
+  Block: 6
+  data: {fileID: -9090305845500523186}
+--- !u!61 &-5962031797307303518
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,23 +112,23 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.005536616, y: 0.025837421}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.67887723, y: 0.94832516}
   m_EdgeRadius: 0
---- !u!114 &6174102458068379548
+--- !u!114 &-5502512996940151318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,12 +137,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 8904262535096694649}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75665f9f36985804b92ee90d973030ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d456553662e71746bb46a2cc9b64e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  SavedPowers: []
---- !u!95 &5902080933755106709
+  JumpForce: 2000
+--- !u!114 &-9090305845500523186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad280df48beac44387b88181ba1ee4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 0
+  _jumperTransform: {fileID: 8904262535096694647}
+--- !u!95 &-815021882178107876
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -151,7 +165,7 @@ Animator:
   m_GameObject: {fileID: 8904262535096694649}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 327e9b4897172824ba7758e7d034ec43, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8bf0a72cd575ff04893b7d53214ca821, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
