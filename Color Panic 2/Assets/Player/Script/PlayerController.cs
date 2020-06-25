@@ -75,6 +75,13 @@ public class PlayerController : MonoBehaviour
 
     public void AddPower(Power newpower){
         power.AddPower(newpower);
+
+        string pow = newpower.GetType().ToString();
+        switch(pow){
+            case "Green" : Djump = true; break;
+            case "Red" : dash = true; break;
+            //others powers
+        }
     }
 
     private void FixedUpdate()
@@ -104,7 +111,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleDash(){
-                //Force applied during the dash
+        //Force applied during the dash
         if (dashing){
             dashTimer -= Time.fixedDeltaTime;
             m_Rigidbody2D.gravityScale = 0f;
