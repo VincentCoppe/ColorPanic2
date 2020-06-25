@@ -47,11 +47,16 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
+        respawn = transform.localPosition;
     }
 
     public void Death()
     {
-        power.ResetPowers(CurrentCheckpoint.SavedPowers);
+        if (CurrentCheckpoint != null){
+            power.ResetPowers(CurrentCheckpoint.SavedPowers);
+        } else {
+            power.ResetPowers();
+        }
         this.gameObject.transform.localPosition = respawn;
     }
 

@@ -46,6 +46,17 @@ public class MyPower
         Powers = new List<Power>();
     }
 
+    public void ResetPowers(){
+        foreach(Power p in Powers){
+            p.gameObject.SetActive(true);
+        }
+
+        foreach(string p in PowersState.Keys.ToList()){
+            PowersState[p] = false;
+        }
+        Powers = new List<Power>();
+    }
+
     public bool HavePower(string power){
         return PowersState[power];
     }
