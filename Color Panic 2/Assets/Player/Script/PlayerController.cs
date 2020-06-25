@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Grounded",Grounded);
 
         //Check wall on left
-        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius/2, m_WhatIsGround);
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*3, m_WhatIsGround);
         for (int i = 0; i < collidersL.Length; i++)
         {
             if (collidersL[i].gameObject != gameObject)
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Check wall on right
-        Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius/2, m_WhatIsGround);
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius*3, m_WhatIsGround);
         for (int i = 0; i < collidersR.Length; i++)
         {
             if (collidersR[i].gameObject != gameObject)
@@ -136,6 +136,13 @@ public class PlayerController : MonoBehaviour
     public void Move(float move, bool jump)
     {
         if (dashing) return; 
+
+        //Flip sprite
+        if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
+            Flip();
+        }
+
+        //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
             if (OnLeftWall && move > 0 || OnRightWall && move < 0){
                 Grab();
@@ -143,14 +150,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         Ungrab();
+
         //Move
         m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
-
-        //Flip sprite
-        if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
-            Flip();
-        }
         m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
+
 
         //Jump
         if ( Grounded && jump && !dashing)
