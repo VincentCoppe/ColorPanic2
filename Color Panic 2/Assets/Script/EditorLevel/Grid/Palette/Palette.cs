@@ -13,4 +13,6 @@ public class Palette : MonoBehaviour
         toolManager.setTile(TileToChange);
         MasterPalette.updateActivePalette(GetComponent<Image>());
     }
+
+    
 }

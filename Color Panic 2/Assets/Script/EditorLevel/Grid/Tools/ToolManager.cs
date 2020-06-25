@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ToolManager : MonoBehaviour
 {
-    private TileGameObject tile = null;
+    [SerializeField] private TileGameObject tile = null;
     [SerializeField] private Size size = null;
     public static Tool Tool;
 
