@@ -91,46 +91,40 @@ public class PlayerController : MonoBehaviour
         }
         m_Anim.SetBool("Grabbing",grabbing);
         
-        //Check ground
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].gameObject != gameObject)
-            {
-                Grounded = true;
-                Djump = true;
-                dash = true;
-            }
-        }
-        m_Anim.SetBool("Grounded",Grounded);
+        HandleGroundCheck();
+        HandleLeftCheck();
+        HandleRightCheck();
 
-        //Check wall on left
-        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*2, m_WhatIsGround);
-        Collider2D[] collidersLL = Physics2D.OverlapCircleAll(m_LeftCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
-        for (int i = 0; i < collidersL.Length; i++)
-        {
-            if (collidersL[i].gameObject != gameObject)
-            {
-                if (FacingRight){
-                    OnRightWall = true;
-                } else {
-                    OnLeftWall = true;
-                }
-            }
-        }
-        for (int i = 0; i < collidersLL.Length; i++)
-        {
-            if (collidersLL[i].gameObject != gameObject)
-            {
-                if (FacingRight){
-                    OnRightWall = true;
-                } else {
-                    OnLeftWall = true;
-                }
-            }
-        }
-        
+        HandleDash();
 
+        if (WalljumpTimer>0){
+            WalljumpTimer -= Time.fixedDeltaTime;
+        }
+
+    }
+
+    private void HandleDash(){
+                //Force applied during the dash
+        if (dashing){
+            dashTimer -= Time.fixedDeltaTime;
+            m_Rigidbody2D.gravityScale = 0f;
+            if(FacingRight){
+                m_Rigidbody2D.velocity = new Vector2(1f*DashSpeed, 0f);
+            }
+            else {
+                m_Rigidbody2D.velocity = new Vector2(-1f*DashSpeed, 0f);
+            }
+            //End of the dash
+            if(dashTimer<=0){
+                dashing = false;
+                m_Rigidbody2D.gravityScale = gravity;
+               // ResetMovement();
+            }
+        }
+        m_Anim.SetBool("Dashing",dashing);
+    }
+
+    private void HandleRightCheck(){
         //Check wall on right
         Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius*2, m_WhatIsGround);
         Collider2D[] collidersRL = Physics2D.OverlapCircleAll(m_RightCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
@@ -156,30 +150,49 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
 
-        //Force applied during the dash
-        if (dashing){
-            dashTimer -= Time.fixedDeltaTime;
-            m_Rigidbody2D.gravityScale = 0f;
-            if(FacingRight){
-                m_Rigidbody2D.velocity = new Vector2(1f*DashSpeed, 0f);
-            }
-            else {
-                m_Rigidbody2D.velocity = new Vector2(-1f*DashSpeed, 0f);
-            }
-            //End of the dash
-            if(dashTimer<=0){
-                dashing = false;
-                m_Rigidbody2D.gravityScale = gravity;
-               // ResetMovement();
+    private void HandleLeftCheck(){
+        //Check wall on left
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*2, m_WhatIsGround);
+        Collider2D[] collidersLL = Physics2D.OverlapCircleAll(m_LeftCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
+        for (int i = 0; i < collidersL.Length; i++)
+        {
+            if (collidersL[i].gameObject != gameObject)
+            {
+                if (FacingRight){
+                    OnRightWall = true;
+                } else {
+                    OnLeftWall = true;
+                }
             }
         }
-        m_Anim.SetBool("Dashing",dashing);
-
-        if (WalljumpTimer>0){
-            WalljumpTimer -= Time.fixedDeltaTime;
+        for (int i = 0; i < collidersLL.Length; i++)
+        {
+            if (collidersLL[i].gameObject != gameObject)
+            {
+                if (FacingRight){
+                    OnRightWall = true;
+                } else {
+                    OnLeftWall = true;
+                }
+            }
         }
+    }
 
+    private void HandleGroundCheck(){
+        //Check ground
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                Grounded = true;
+                Djump = true;
+                dash = true;
+            }
+        }
+        m_Anim.SetBool("Grounded",Grounded);
     }
 
     private void HandleGrab(float move, bool jump){
@@ -198,7 +211,6 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
         //Ungrab if player move/jump, or if there is no wall/the ground
         if(grabbing && (Grounded ||  (!FacingRight && move > 0) || (FacingRight && move < 0) || !OnLeftWall && FacingRight || !OnRightWall && !FacingRight  )){
             grabbing = false;
@@ -257,11 +269,11 @@ public class PlayerController : MonoBehaviour
     private void WallJump(float force, bool FacingRight)
     {
         if (FacingRight){
-            m_Rigidbody2D.AddForce(new Vector2(-force/1.8f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(-force/1.6f, 0f));
         } else {
-            m_Rigidbody2D.AddForce(new Vector2(force/1.8f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(force/1.6f, 0f));
         }
-        Jump(force*1.1f);
+        Jump(force);
         WalljumpTimer = 0.1f;
     }
 
