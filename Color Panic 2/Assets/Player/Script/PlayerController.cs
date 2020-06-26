@@ -27,15 +27,14 @@ public class PlayerController : MonoBehaviour
     public bool OnLeftWall { get; private set; }
     public bool OnRightWall { get; private set; }
     private bool FacingRight = true; 
-    private Vector3 respawn = new Vector3(0,0,0);
-    private Checkpoint CurrentCheckpoint = null;
-
+    private Vector3 respawn = new Vector3(0,0,0); //Saved respawn location of the player
+    private Checkpoint CurrentCheckpoint = null; //Current saved checkpoint of the user
     private MyPower power;
-    private bool Djump;
-    private bool dash;
-    private bool dashing;
-    private bool grabbing;
-    private float dashTimer;
+    private bool Djump; //Can the player do a double jump ?
+    private bool dash;  //The player can dash ?
+    private bool dashing;   //The player is currently dashing ?
+    private bool grabbing;  //The player is currently grabbing ?
+    private float dashTimer;  
     private float gravity;
     private float WalljumpTimer = 0;
 
@@ -55,19 +54,21 @@ public class PlayerController : MonoBehaviour
         respawn = transform.localPosition;
     }
 
+    //On death, reset power and move the player to the respawn location
     public void Death()
     {
         power.ResetPowers();
         ResetMovement();
         if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != ""){
             power.LastPower = CurrentCheckpoint.SavedPowers;
+            SetColor();
         } else {
             SetColor(false);
         }
-        SetColor();
         this.gameObject.transform.localPosition = respawn;
     }
 
+    //Move on axis X the player
     public void MoveX(float move)
     {
         Vector3 vector = transform.localPosition;
@@ -75,12 +76,14 @@ public class PlayerController : MonoBehaviour
         transform.localPosition = vector;
     }
 
+    //When the player pick up a power
     public void AddPower(Power newpower){
         power.AddPower(newpower);
         SetColor();
         Recharge(newpower.GetType().ToString());
     }
 
+    //Get another dash/double jump when the player pick up a power
     private void Recharge(string power){
         switch(power){
             case "Green" : Djump = true; break;
@@ -89,6 +92,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Set the color of the player depending on his current power
     private void SetColor(bool color = true){
         Renderer rend = gameObject.GetComponent<Renderer>();
         if (!color) {
@@ -131,6 +135,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //What happen during a dash
     private void HandleDash(){
         //Force applied during the dash
         if (dashing){
@@ -152,8 +157,9 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Dashing",dashing);
     }
 
+    //Check wall on the right of the player
     private void HandleRightCheck(){
-        //Check wall on right
+        
         Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius*2, m_WhatIsGround);
         Collider2D[] collidersRL = Physics2D.OverlapCircleAll(m_RightCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
         for (int i = 0; i < collidersR.Length; i++)
@@ -180,8 +186,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Check wall on the left of the player
     private void HandleLeftCheck(){
-        //Check wall on left
         Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius*2, m_WhatIsGround);
         Collider2D[] collidersLL = Physics2D.OverlapCircleAll(m_LeftCheckLow.position, k_GroundedRadius*2, m_WhatIsGround);
         for (int i = 0; i < collidersL.Length; i++)
@@ -208,8 +214,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Check ground under the player
     private void HandleGroundCheck(){
-        //Check ground
+        
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -223,6 +230,7 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Grounded",Grounded);
     }
 
+    //Function used to know if the play should grab, ungrab, or walljump, depending on inputs
     private void HandleGrab(float move, bool jump){
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
@@ -245,6 +253,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //All the movements of the player
     public void Move(float move, bool jump)
     {
         if (dashing || WalljumpTimer>0) return; 
@@ -278,15 +287,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Action grab
     private void Grab(){
         m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
         MoveY(GrabFallSpeed);
     }
 
+    //Action to end the grab
     private void Ungrab(){
         m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
+    //Push the player on the axis Y
     public void MoveY(float move)
     {
         Vector3 vector = transform.localPosition;
@@ -294,6 +306,7 @@ public class PlayerController : MonoBehaviour
         transform.localPosition = vector;
     }
 
+    //Wall jump used when the player in on grab
     private void WallJump(float force, bool FacingRight)
     {
         if (FacingRight){
@@ -324,6 +337,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
     }
 
+    //Set the respawn location & checkpoint saved power when the player walk on a new checkpoint
     private void SetRespawn(Checkpoint checkpoint){
         //Disable old checkpoint
         if (CurrentCheckpoint != null && CurrentCheckpoint != checkpoint){
@@ -342,7 +356,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    //Flip the player sprite
     private void Flip()
     {
         FacingRight = !FacingRight;
@@ -351,6 +365,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    //Reset the velocity of the rigidbody to stop the player movement
     private void ResetMovement(){
         m_Rigidbody2D.velocity = new Vector2(0f, 0f);
     }
