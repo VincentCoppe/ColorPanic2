@@ -20,19 +20,9 @@ public class BlockSpike : BlockBase
 
     protected override bool Spawn(int x, int y, Color[] Colors)
     {
-        if (CheckGroundNeighbours(x, y) && base.Spawn(x, y,Colors)) {
+        if (base.Spawn(x, y,Colors)) {
             CalculateOrientation(x,y);
             return true;
-        }
-        return false;
-    }
-
-    private bool CheckGroundNeighbours(int x, int y)
-    {
-        (int, int)[] Neighbours = Manager.Get4Neighbours(x, y);
-        foreach((int,int) Neighbour in Neighbours)
-        {
-            if (Manager.Grid[Neighbour.Item1, Neighbour.Item2] == BlockEnum.Ground) return true;
         }
         return false;
     }
