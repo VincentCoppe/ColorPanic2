@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private float gravity;
     private float WalljumpTimer = 0;
     private bool reverse = false; //Gravity reverse
+    private bool gravityReverse; //Can the player reverse the gravity ?
 
 
     private void Awake()
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
         switch(power){
             case "Green" : Djump = true; break;
             case "Red" : dash = true; break;
+            case "Viridian" : gravityReverse = true; break;
             //others powers
         }
     }
@@ -240,6 +242,7 @@ public class PlayerController : MonoBehaviour
                 Grounded = true;
                 Djump = true;
                 Hjump = true;
+                gravityReverse = true;
                 dash = true;
             }
         }
@@ -313,8 +316,9 @@ public class PlayerController : MonoBehaviour
             dash = false;
         }
         //Gravity reverse
-        if (jump && power.HavePower("Viridian") && Grounded){
+        if (jump && power.HavePower("Viridian") && gravityReverse){
             GravityReverse();
+            gravityReverse = false;
         }
     }
 
@@ -408,6 +412,7 @@ public class PlayerController : MonoBehaviour
         theScale.y *= -1;
         transform.localScale = theScale;
         reverse = !reverse;
+        ResetMovement();
     }
 
     //Reset the velocity of the rigidbody to stop the player movement
