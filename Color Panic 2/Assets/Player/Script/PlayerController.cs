@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_JumpForce = 1000f;                
     [SerializeField] private float DashTime = 0.1f;                
     [SerializeField] private float DashSpeed = 6;         
-    [SerializeField] private float GrabFallSpeed = 0.1f;                    
+    [SerializeField] private float GrabFallFactorReduction = 0.8f;                    
     [SerializeField] private LayerMask m_WhatIsGround;   
 
     [SerializeField] private Color Viridian; 
@@ -307,8 +307,8 @@ public class PlayerController : MonoBehaviour
 
     //Action grab
     private void Grab(){
-        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
-        MoveY(GrabFallSpeed);
+        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabFallFactorReduction);
     }
 
     //Action to end the grab

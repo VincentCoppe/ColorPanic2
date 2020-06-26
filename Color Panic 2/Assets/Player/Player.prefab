@@ -206,7 +206,7 @@ MonoBehaviour:
   m_JumpForce: 1500
   DashTime: 0.2
   DashSpeed: 30
-  GrabFallSpeed: 0.06
+  GrabFallFactorReduction: 0.8
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 512
