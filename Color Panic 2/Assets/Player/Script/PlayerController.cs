@@ -59,8 +59,10 @@ public class PlayerController : MonoBehaviour
     {
         power.ResetPowers();
         ResetMovement();
-        if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != null){
+        if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != ""){
             power.LastPower = CurrentCheckpoint.SavedPowers;
+        } else {
+            SetColor(false);
         }
         SetColor();
         this.gameObject.transform.localPosition = respawn;
@@ -87,8 +89,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetColor(){
+    private void SetColor(bool color = true){
         Renderer rend = gameObject.GetComponent<Renderer>();
+        if (!color) {
+            rend.material.color = Color.white;
+            return;
+        }
         switch(power.LastPower){
             case "Green" : rend.material.color = Color.green; break;
             case "Red" : rend.material.color = Color.red; break;
