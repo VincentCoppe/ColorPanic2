@@ -36,7 +36,7 @@ public class Rect : ToolManager, Tool
             rect = new HashSet<(int, int)>();
             rect.Add(start);
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            size = Math.Abs(start.Item2-mouse.Item2);
+            size = start.Item2-mouse.Item2 != 0 ? Math.Abs(start.Item2-mouse.Item2) : 1;
             int memSize = size;
             (int, int) memMouse = mouse;
             (int, int) memStart = start;
