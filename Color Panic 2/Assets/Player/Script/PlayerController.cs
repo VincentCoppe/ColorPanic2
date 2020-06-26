@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != null){
             power.LastPower = CurrentCheckpoint.SavedPowers;
         }
+        SetColor();
         this.gameObject.transform.localPosition = respawn;
     }
 
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddPower(Power newpower){
         power.AddPower(newpower);
+        SetColor();
         Recharge(newpower.GetType().ToString());
     }
 
@@ -85,11 +87,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void SetColor(){
+        Renderer rend = gameObject.GetComponent<Renderer>();
+        switch(power.LastPower){
+            case "Green" : rend.material.color = Color.green; break;
+            case "Red" : rend.material.color = Color.red; break;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (CurrentCheckpoint != null){
-        Debug.Log(CurrentCheckpoint.SavedPowers);
-        }
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
@@ -318,9 +325,10 @@ public class PlayerController : MonoBehaviour
         }
         //Set new checkpoint
         if (CurrentCheckpoint != checkpoint){
-            checkpoint.Activation(true);
             if (power.LastPower != null)
                 checkpoint.SavedPowers =  (string)power.LastPower.Clone();
+            checkpoint.Activation(true);
+
 
             //Set the respawn point of the player
             respawn = checkpoint.gameObject.transform.localPosition;
