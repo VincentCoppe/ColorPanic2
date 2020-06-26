@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private Checkpoint CurrentCheckpoint = null; //Current saved checkpoint of the user
     private MyPower power;
     private bool Djump; //Can the player do a double jump ?
+    private bool Hjump; //High jump
     private bool dash;  //The player can dash ?
     private bool dashing;   //The player is currently dashing ?
     private bool grabbing;  //The player is currently grabbing ?
@@ -236,6 +237,7 @@ public class PlayerController : MonoBehaviour
             {
                 Grounded = true;
                 Djump = true;
+                Hjump = true;
                 dash = true;
             }
         }
@@ -269,7 +271,6 @@ public class PlayerController : MonoBehaviour
     public void Move(float move, bool jump)
     {
         if (dashing || WalljumpTimer>0) return; 
-
         HandleGrab(move, jump);
 
         //Flip sprite
@@ -285,8 +286,13 @@ public class PlayerController : MonoBehaviour
 
 
         //Jump
+        Debug.Log(m_Rigidbody2D.velocity.y);
+        if ( !Grounded && !jump && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y > 16 && m_Rigidbody2D.velocity.y < 18 && Hjump && Djump){
+            Hjump = false;
+            Jump(m_JumpForce*0.8f);
+        }
         if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
-            Jump(m_JumpForce);
+            Jump(m_JumpForce*0.8f);
         } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
             Djump = false;
@@ -348,6 +354,10 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         ResetMovement();
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
+    }
+
+    private void HighJump(float force){
+
     }
 
     private void Dash(float move){
