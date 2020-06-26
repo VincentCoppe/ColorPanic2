@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        // Setting up references.
         m_GroundCheck = transform.Find("GroundCheck");
         m_CeilingCheck = transform.Find("CeilingCheck");
         m_LeftCheck = transform.Find("LeftWallCheck");
@@ -58,10 +57,10 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
-        if (CurrentCheckpoint != null){
-            power.ResetPowers(CurrentCheckpoint.SavedPowers);
-        } else {
-            power.ResetPowers();
+        power.ResetPowers();
+        ResetMovement();
+        if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != null){
+            power.LastPower = CurrentCheckpoint.SavedPowers;
         }
         this.gameObject.transform.localPosition = respawn;
     }
@@ -75,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddPower(Power newpower){
         power.AddPower(newpower);
-        Recharge( newpower.GetType().ToString());
+        Recharge(newpower.GetType().ToString());
     }
 
     private void Recharge(string power){
@@ -88,6 +87,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (CurrentCheckpoint != null){
+        Debug.Log(CurrentCheckpoint.SavedPowers);
+        }
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
@@ -317,16 +319,8 @@ public class PlayerController : MonoBehaviour
         //Set new checkpoint
         if (CurrentCheckpoint != checkpoint){
             checkpoint.Activation(true);
-            checkpoint.SavedPowers =  new List<Power>(power.Powers);
-
-            //Transfer power from the old checkpoint to the new one
-            if (CurrentCheckpoint!=null){
-                foreach(Power p in CurrentCheckpoint.SavedPowers){
-                    if (!checkpoint.SavedPowers.Contains(p)){
-                        checkpoint.SavedPowers.Add(p);
-                    }
-                }
-            }
+            if (power.LastPower != null)
+                checkpoint.SavedPowers =  (string)power.LastPower.Clone();
 
             //Set the respawn point of the player
             respawn = checkpoint.gameObject.transform.localPosition;

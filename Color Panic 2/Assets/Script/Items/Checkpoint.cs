@@ -6,7 +6,7 @@ public class Checkpoint : MonoBehaviour
 {
 
     [SerializeField] public Animator animator = null;
-    public List<Power> SavedPowers;
+    public string SavedPowers;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
