@@ -17,11 +17,15 @@ public class Checkpoint : MonoBehaviour
 
     public void Activation(bool activation){
         this.GetComponent<Animator>().SetBool("Activate", activation);
-        SetColor();
+        SetColor(activation);
     }
 
-    private void SetColor(){
+    private void SetColor(bool activation){
         Renderer rend = gameObject.GetComponent<Renderer>();
+        if (!activation) {
+            rend.material.color = Color.white;
+            return;
+        } 
         switch(SavedPowers){
             case "Green" : rend.material.color = Color.green; break;
             case "Red" : rend.material.color = Color.red; break;
