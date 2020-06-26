@@ -62,8 +62,8 @@ public class Rect : ToolManager, Tool
             size = memSize;
             mouse = memMouse;
             start = memStart;
-        }
-
-        
+        }        
     }
+
+    public void EndAction() {}
 }

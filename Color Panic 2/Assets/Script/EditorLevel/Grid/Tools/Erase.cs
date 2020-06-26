@@ -46,6 +46,9 @@ public class Erase : ToolManager, Tool
                 blockErase.DestroyTiles(blockToErase.Item1, blockToErase.Item2);
             }
         }
-            
+    }
+
+    public void EndAction() {
+        toolsHistory.AddToUndoErase(blocksErased);
     }
 }

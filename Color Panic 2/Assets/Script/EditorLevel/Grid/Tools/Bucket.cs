@@ -46,4 +46,6 @@ public class Bucket : ToolManager, Tool
             }          
         }
     }
+
+    public void EndAction(){}
 }

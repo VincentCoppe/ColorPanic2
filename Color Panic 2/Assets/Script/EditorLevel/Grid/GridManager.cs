@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private TileGameObject Spike = null;
     [SerializeField] private ToolManager toolManager = null;
 
-
+    private bool wasDrawing = false;
 
 
     BlockEnum[,] _grid = null;
@@ -104,7 +104,15 @@ public class GridManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
         {
             (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (mouse != (-1,-1)) toolManager.Action(this,mouse);
+            if (mouse != (-1,-1)) {
+                toolManager.Action(this,mouse);
+                wasDrawing = true;
+            } else if(Input.GetMouseButtonUp(0) && wasDrawing) {
+                toolManager.EndAction();
+                wasDrawing = false;
+            } else if(Input.GetMouseButtonUp(0)){
+                wasDrawing = false;
+            }
             
         }
         /*

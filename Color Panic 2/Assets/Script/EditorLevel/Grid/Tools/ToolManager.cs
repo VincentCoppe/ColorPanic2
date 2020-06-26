@@ -20,7 +20,11 @@ public class ToolManager : MonoBehaviour
     }
 
     public void Action(GridManager gridManager, (int,int) mouse) {
-        Tool?.Action(gridManager, tile, size.size, mouse);
+        Tool.Action(gridManager, tile, size.size, mouse);
+    }
+
+    public void EndAction() {
+        Tool.EndAction();
     }
 
 }
