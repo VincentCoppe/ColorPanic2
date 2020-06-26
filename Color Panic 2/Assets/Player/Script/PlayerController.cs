@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private float dashTimer;  
     private float gravity;
     private float WalljumpTimer = 0;
+    private bool reverse = false; //Gravity reverse
 
 
     private void Awake()
@@ -67,6 +68,8 @@ public class PlayerController : MonoBehaviour
         }
         this.gameObject.transform.localPosition = respawn;
     }
+
+    
 
     //Move on axis X the player
     public void MoveX(float move)
@@ -102,6 +105,7 @@ public class PlayerController : MonoBehaviour
         switch(power.LastPower){
             case "Green" : rend.material.color = Color.green; break;
             case "Red" : rend.material.color = Color.red; break;
+            case "Blue" : rend.material.color = Color.blue; break;
         }
     }
 
@@ -131,6 +135,10 @@ public class PlayerController : MonoBehaviour
 
         if (WalljumpTimer>0){
             WalljumpTimer -= Time.fixedDeltaTime;
+        }
+        if (reverse && !power.HavePower("Blue")){
+            reverse = false;
+            GravityReverse();
         }
 
     }
@@ -261,7 +269,9 @@ public class PlayerController : MonoBehaviour
         HandleGrab(move, jump);
 
         //Flip sprite
-        if ( (move > 0 && !FacingRight) || (move < 0 && FacingRight)){
+        if ( ((move > 0 && !FacingRight) || (move < 0 && FacingRight)) && reverse == false){
+            Flip();
+        } else if ( ((move < 0 && !FacingRight) || (move > 0 && FacingRight)) && reverse == true){
             Flip();
         }
 
@@ -271,19 +281,25 @@ public class PlayerController : MonoBehaviour
 
 
         //Jump
-        if ( Grounded && jump && !dashing)
-        {
+        if ( Grounded && jump && !dashing){
             Jump(m_JumpForce);
-        //Double jump
-        } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing)
-        {
+        } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
             Djump = false;
         }
+        HandlePowerAction(move, jump);
+    }
+
+    private void HandlePowerAction(float move, bool jump){
         //Dash
         if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash ){
             Dash(move);
             dash = false;
+        }
+        //Gravity reverse
+        if (jump && power.HavePower("Blue")){
+            GravityReverse();
+            reverse = !reverse;
         }
     }
 
@@ -362,6 +378,14 @@ public class PlayerController : MonoBehaviour
         FacingRight = !FacingRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
+    private void GravityReverse(){
+        FacingRight = !FacingRight;
+        Vector3 theScale = transform.localScale;
+        m_Rigidbody2D.gravityScale *= -1;
+        theScale.y *= -1;
         transform.localScale = theScale;
     }
 

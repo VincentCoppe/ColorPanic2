@@ -32,6 +32,7 @@ public class Checkpoint : MonoBehaviour
         switch(SavedPowers){
             case "Green" : rend.material.color = Color.green; break;
             case "Red" : rend.material.color = Color.red; break;
+            case "Blue" : rend.material.color = Color.blue; break;
         }
     }
 

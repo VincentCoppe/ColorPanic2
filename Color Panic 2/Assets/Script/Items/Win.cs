@@ -8,6 +8,7 @@ public class Win : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
             //other.gameObject.SendMessage("Win");
             Debug.Log("You win !");
+            gameObject.SetActive(false);
         }
     }
 }
