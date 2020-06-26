@@ -107,10 +107,12 @@ public class GridManager : MonoBehaviour
             if (mouse != (-1,-1)) {
                 toolManager.Action(this,mouse);
                 wasDrawing = true;
-            } else if(Input.GetMouseButtonUp(0) && wasDrawing) {
-                toolManager.EndAction();
+            }
+            if(mouse != (-1,-1) && Input.GetMouseButtonUp(0)){
                 wasDrawing = false;
-            } else if(Input.GetMouseButtonUp(0)){
+            }
+            if(Input.GetMouseButtonUp(0) && wasDrawing && mouse == (-1,-1)) {
+                toolManager.EndAction();
                 wasDrawing = false;
             }
             
