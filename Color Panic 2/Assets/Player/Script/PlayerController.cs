@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float DashTime = 0.1f;                
     [SerializeField] private float DashSpeed = 6;     
     [SerializeField] private float GrabUpFactor = 0.95f;     
-    [SerializeField] private float GrabDownFactor = 0.7f;                    
+    [SerializeField] private float GrabDownFactor = 0.7f;   
+    [SerializeField] private float HighJumpFactor = 0.8f;  
+    [SerializeField] private float LowJumpFactor = 0.8f;                   
     [SerializeField] private LayerMask m_WhatIsGround;   
 
     [SerializeField] private Color Viridian; 
@@ -292,11 +294,11 @@ public class PlayerController : MonoBehaviour
         //High jump
         if ( !Grounded && !jump && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y > 16 && m_Rigidbody2D.velocity.y < 18 && Hjump && Djump){
             Hjump = false;
-            Jump(m_JumpForce*0.8f);
+            Jump(m_JumpForce*HighJumpFactor);
         }
         //Low jump
         if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
-            Jump(m_JumpForce*0.8f);
+            Jump(m_JumpForce*LowJumpFactor);
         //Double jump
         } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
