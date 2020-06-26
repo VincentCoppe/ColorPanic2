@@ -32,33 +32,21 @@ public class BlockGround : BlockBase
             Manager.Grid[x, y] = BlockEnum.Air;
             Manager.GridObject[x, y] = null;
             CalculateNeighbours(x, y, true);
-            DestroySpikes(x, y);
+            OrientedSpikes(x, y);
             UnityEngine.Object.Destroy(GameObject);
         }
     }
 
-    private void DestroySpikes(int x, int y)
+    private void OrientedSpikes(int x, int y)
     {
         (int, int)[] neighbours = Manager.Get4Neighbours(x, y);
         
         foreach((int, int) neighbour in neighbours)
         {
             if (Manager.Grid[neighbour.Item1, neighbour.Item2] == BlockEnum.Spike)
-            {
-                bool Destroy = true;
-                foreach ((int, int) n in Manager.Get4Neighbours(neighbour.Item1, neighbour.Item2))
-                {
-                    if (n != (x, y) && Manager.Grid[n.Item1, n.Item2] == BlockEnum.Ground)
-                    {
-                        Destroy = false;
-                    }
-                }
-                if (Destroy) Manager.GridObject[neighbour.Item1, neighbour.Item2].DestroyTiles(neighbour.Item1, neighbour.Item2);
-                else
-                {
-                    BlockSpike a = (BlockSpike)Manager.GridObject[neighbour.Item1, neighbour.Item2];
-                    a.CalculateOrientation(neighbour.Item1, neighbour.Item2);
-                }
+            {                
+                BlockSpike a = (BlockSpike)Manager.GridObject[neighbour.Item1, neighbour.Item2];
+                a.CalculateOrientation(neighbour.Item1, neighbour.Item2);
             }
         }
 
@@ -73,6 +61,7 @@ public class BlockGround : BlockBase
     {
         if (base.Spawn(x, y,Colors)) {
             CalculateNeighbours(x, y, true);
+            OrientedSpikes(x, y);
             return true;
         }
         return false;
