@@ -8,6 +8,7 @@ public class Reset : MonoBehaviour
 {
     [SerializeField] private GridManager gridManager = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
+
     private Dictionary<BlockBase, (int,int)> blocksErased = new Dictionary<BlockBase, (int, int)>();
     public void Action() {
         for(int y=0; y<gridManager.GridObject.GetLength(1); y++)

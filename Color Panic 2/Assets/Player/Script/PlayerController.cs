@@ -7,9 +7,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_MaxSpeed = 10f;      
     [SerializeField] private float m_JumpForce = 1000f;                
     [SerializeField] private float DashTime = 0.1f;                
-    [SerializeField] private float DashSpeed = 6;         
-    [SerializeField] private float GrabFallSpeed = 0.1f;                    
-    [SerializeField] private LayerMask m_WhatIsGround;                 
+    [SerializeField] private float DashSpeed = 6;     
+    [SerializeField] private float GrabUpFactor = 0.95f;     
+    [SerializeField] private float GrabDownFactor = 0.7f;                    
+    [SerializeField] private LayerMask m_WhatIsGround;   
+
+    [SerializeField] private Color Viridian; 
+    [SerializeField] private Color Red;   
+    [SerializeField] private Color Green;        
     
 
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
@@ -103,9 +108,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
         switch(power.LastPower){
-            case "Green" : rend.material.color = Color.green; break;
-            case "Red" : rend.material.color = Color.red; break;
-            case "Blue" : rend.material.color = Color.blue; break;
+            case "Green" : rend.material.color = Green; break;
+            case "Red" : rend.material.color = Red; break;
+            case "Viridian" : rend.material.color = Viridian; break;
         }
     }
 
@@ -136,8 +141,7 @@ public class PlayerController : MonoBehaviour
         if (WalljumpTimer>0){
             WalljumpTimer -= Time.fixedDeltaTime;
         }
-        if (reverse && !power.HavePower("Blue")){
-            reverse = false;
+        if (reverse && !power.HavePower("Viridian")){
             GravityReverse();
         }
 
@@ -281,7 +285,7 @@ public class PlayerController : MonoBehaviour
 
 
         //Jump
-        if ( Grounded && jump && !dashing){
+        if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
             Jump(m_JumpForce);
         } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
@@ -292,21 +296,25 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePowerAction(float move, bool jump){
         //Dash
-        if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash ){
+        if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash && !grabbing ){
             Dash(move);
             dash = false;
         }
         //Gravity reverse
-        if (jump && power.HavePower("Blue")){
+        if (jump && power.HavePower("Viridian") && Grounded){
             GravityReverse();
-            reverse = !reverse;
         }
     }
 
     //Action grab
     private void Grab(){
-        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
-        MoveY(GrabFallSpeed);
+        m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        if (m_Rigidbody2D.velocity.y > 0){
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabUpFactor);
+        }else {
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabDownFactor);
+        }
+        Debug.Log(m_Rigidbody2D.velocity.y);
     }
 
     //Action to end the grab
@@ -387,6 +395,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.gravityScale *= -1;
         theScale.y *= -1;
         transform.localScale = theScale;
+        reverse = !reverse;
     }
 
     //Reset the velocity of the rigidbody to stop the player movement

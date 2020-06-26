@@ -48,6 +48,9 @@ public class Pen : ToolManager, Tool
                 blocksPrinted.Add(blockToPrint);
             }
         }
-        
+    }
+
+    public void EndAction() {
+        toolsHistory.AddToUndoDraw(blocksPrinted);
     }
 }

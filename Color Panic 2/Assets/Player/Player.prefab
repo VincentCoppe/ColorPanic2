@@ -114,7 +114,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 4723107735738678597, guid: 6cc461ed07af94a4799bdb305a10f8e4,
     type: 3}
-  m_Color: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
+  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -206,10 +206,14 @@ MonoBehaviour:
   m_JumpForce: 1500
   DashTime: 0.2
   DashSpeed: 30
-  GrabFallSpeed: 0.06
+  GrabUpFactor: 0.95
+  GrabFallFactor: 0.7
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 512
+  Viridian: {r: 0.002491996, g: 0.51975214, b: 0.5283019, a: 1}
+  Red: {r: 0.8207547, g: 0.10453009, b: 0.1501493, a: 1}
+  Green: {r: 0.16836035, g: 0.8396226, b: 0.11485406, a: 1}
 --- !u!114 &1032025416664888387
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -82,4 +82,6 @@ public class ContourRect : ToolManager, Tool
             
         }
     }
+
+    public void EndAction(){}
 }
