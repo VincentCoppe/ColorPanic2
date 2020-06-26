@@ -8,9 +8,8 @@ public class GridManager : MonoBehaviour
 
 
     [SerializeField] private SpriteRenderer BackgroundImage = null;
-    [SerializeField] private TileGameObject Ground = null;
-    [SerializeField] private TileGameObject Spike = null;
     [SerializeField] private ToolManager toolManager = null;
+    [SerializeField] private GameObject LevelDrawer = null;
 
 
 
@@ -78,7 +77,9 @@ public class GridManager : MonoBehaviour
 
     public GameObject Instantiate(GameObject toSpawn)
     {
-        return Instantiate(toSpawn, transform);
+        GameObject Spawned = Instantiate(toSpawn, transform);
+        Spawned.transform.SetParent(LevelDrawer.transform);
+        return Spawned;
     }
 
 
@@ -107,22 +108,6 @@ public class GridManager : MonoBehaviour
             if (mouse != (-1,-1)) toolManager.Action(this,mouse);
             
         }
-        /*
-        if (Input.GetMouseButton(2))
-        {
-            (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            try
-            {
-
-                Spike.Block.NewBlock(Spike).SpawnTiles(test.Item1, test.Item2, this, Colors.neutral);
-
-            }
-            catch (IndexOutOfRangeException)
-            {
-
-            }
-        }
-        */
     }
 
     public (int, int)[] Get8Neighbours(int x, int y)
