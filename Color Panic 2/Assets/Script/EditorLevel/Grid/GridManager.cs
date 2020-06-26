@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private ToolManager toolManager = null;
     [SerializeField] private GameObject LevelDrawer = null;
 
-    private bool wasDrawing = false;
+    private bool drawing = false;
 
 
     BlockEnum[,] _grid = null;
@@ -105,16 +105,18 @@ public class GridManager : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
         {
             (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (mouse != (-1,-1)) {
+            if(Input.GetMouseButtonDown(0)) {
+                drawing = mouse != (-1,-1);
+            }
+            if (drawing && mouse != (-1,-1)) {
                 toolManager.Action(this,mouse);
-                wasDrawing = true;
             }
             if(mouse != (-1,-1) && Input.GetMouseButtonUp(0)){
-                wasDrawing = false;
+                drawing = false;
             }
-            if(Input.GetMouseButtonUp(0) && wasDrawing && mouse == (-1,-1)) {
+            if(Input.GetMouseButtonUp(0) && drawing && mouse == (-1,-1)) {
                 toolManager.EndAction();
-                wasDrawing = false;
+                drawing = false;
             }
             
         }
