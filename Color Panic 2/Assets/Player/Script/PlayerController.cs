@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_MaxSpeed = 10f;      
     [SerializeField] private float m_JumpForce = 1000f;                
     [SerializeField] private float DashTime = 0.1f;                
-    [SerializeField] private float DashSpeed = 6;         
-    [SerializeField] private float GrabFallFactorReduction = 0.8f;                    
+    [SerializeField] private float DashSpeed = 6;     
+    [SerializeField] private float GrabUpFactor = 0.95f;     
+    [SerializeField] private float GrabDownFactor = 0.7f;                    
     [SerializeField] private LayerMask m_WhatIsGround;   
 
     [SerializeField] private Color Viridian; 
@@ -295,7 +296,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePowerAction(float move, bool jump){
         //Dash
-        if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash ){
+        if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash && !grabbing ){
             Dash(move);
             dash = false;
         }
@@ -308,7 +309,12 @@ public class PlayerController : MonoBehaviour
     //Action grab
     private void Grab(){
         m_Rigidbody2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-        m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabFallFactorReduction);
+        if (m_Rigidbody2D.velocity.y > 0){
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabUpFactor);
+        }else {
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabDownFactor);
+        }
+        Debug.Log(m_Rigidbody2D.velocity.y);
     }
 
     //Action to end the grab
