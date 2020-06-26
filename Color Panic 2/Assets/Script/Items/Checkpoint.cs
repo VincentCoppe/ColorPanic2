@@ -6,6 +6,9 @@ public class Checkpoint : MonoBehaviour
 {
 
     [SerializeField] public Animator animator = null;
+    [SerializeField] public Color Viridian;
+    [SerializeField] public Color Red;
+    [SerializeField] public Color Green;
     public string SavedPowers;
 
     //When the player touch the checkpoint, set it as the new respawn
@@ -30,9 +33,9 @@ public class Checkpoint : MonoBehaviour
             return;
         } 
         switch(SavedPowers){
-            case "Green" : rend.material.color = Color.green; break;
-            case "Red" : rend.material.color = Color.red; break;
-            case "Blue" : rend.material.color = Color.blue; break;
+            case "Green" : rend.material.color = Green; break;
+            case "Red" : rend.material.color = Red; break;
+            case "Viridian" : rend.material.color = Viridian; break;
         }
     }
 

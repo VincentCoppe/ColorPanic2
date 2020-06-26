@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1142254546824376964}
   - component: {fileID: -6989563963511733472}
   m_Layer: 0
-  m_Name: Blue
+  m_Name: Viridian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9db2e157657e24240a52736ee4730dc7, type: 3}
-  m_Color: {r: 0.126691, g: 0.16584858, b: 0.6886792, a: 1}
+  m_Color: {r: 0, g: 0.4745098, b: 0.48235294, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

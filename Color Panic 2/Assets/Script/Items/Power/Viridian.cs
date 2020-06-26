@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blue : Power
+public class Viridian : Power
 {
     public override void ApplyEffect(Collider2D other){
         other.gameObject.SendMessage("AddPower", this);
