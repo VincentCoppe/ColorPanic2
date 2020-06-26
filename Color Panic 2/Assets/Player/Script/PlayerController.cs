@@ -284,20 +284,24 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
         m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
 
+        HandleJump(move,jump);
+        HandlePowerAction(move, jump);
+    }
 
-        //Jump
-        Debug.Log(m_Rigidbody2D.velocity.y);
+    private void HandleJump(float move, bool jump){
+        //High jump
         if ( !Grounded && !jump && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y > 16 && m_Rigidbody2D.velocity.y < 18 && Hjump && Djump){
             Hjump = false;
             Jump(m_JumpForce*0.8f);
         }
+        //Low jump
         if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
             Jump(m_JumpForce*0.8f);
+        //Double jump
         } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
             Djump = false;
         }
-        HandlePowerAction(move, jump);
     }
 
     private void HandlePowerAction(float move, bool jump){
@@ -354,10 +358,6 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         ResetMovement();
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
-    }
-
-    private void HighJump(float force){
-
     }
 
     private void Dash(float move){

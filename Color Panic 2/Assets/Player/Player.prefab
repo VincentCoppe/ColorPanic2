@@ -207,7 +207,7 @@ MonoBehaviour:
   DashTime: 0.2
   DashSpeed: 30
   GrabUpFactor: 0.95
-  GrabFallFactor: 0.7
+  GrabDownFactor: 0.7
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 512
