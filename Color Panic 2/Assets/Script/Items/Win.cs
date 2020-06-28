@@ -6,8 +6,7 @@ public class Win : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
-            //other.gameObject.SendMessage("Win");
-            Debug.Log("You win !");
+            other.gameObject.SendMessage("Win");
             gameObject.SetActive(false);
         }
     }

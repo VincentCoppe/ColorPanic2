@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private float WalljumpTimer = 0;
     private bool reverse = false; //Gravity reverse
     private bool gravityReverse; //Can the player reverse the gravity ?
+    public bool win = false;
 
 
     private void Awake()
@@ -86,6 +87,10 @@ public class PlayerController : MonoBehaviour
         Vector3 vector = transform.localPosition;
         vector.x -= move;
         transform.localPosition = vector;
+    }
+
+    public void Win(){
+        win = true;
     }
 
     //When the player pick up a power
