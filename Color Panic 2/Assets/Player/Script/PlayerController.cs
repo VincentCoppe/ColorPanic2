@@ -335,7 +335,6 @@ public class PlayerController : MonoBehaviour
         }else {
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, m_Rigidbody2D.velocity.y * GrabDownFactor);
         }
-        Debug.Log(m_Rigidbody2D.velocity.y);
     }
 
     //Action to end the grab
