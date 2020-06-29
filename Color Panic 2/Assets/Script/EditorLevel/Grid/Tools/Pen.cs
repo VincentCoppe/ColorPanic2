@@ -23,14 +23,21 @@ public class Pen : ToolManager, Tool
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
-        HashSet<(int, int)> blocksToPrint = new HashSet<(int, int)>();
-        
         if(Input.GetMouseButtonDown(0)) {
             blocksPrinted = new HashSet<(int, int)>();
         } else if (Input.GetMouseButtonUp(0)) {
             toolsHistory.AddToUndoDraw(blocksPrinted);
         }
-        
+
+        foreach ((int, int) blockToPrint in ComputeBlocksToPrint(gridManager, size, mouse)) {
+            if(block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral)) {
+                blocksPrinted.Add(blockToPrint);
+            }
+        }
+    }
+
+    private HashSet<(int, int)> ComputeBlocksToPrint(GridManager gridManager, int size, (int,int) mouse) {
+        HashSet<(int, int)> blocksToPrint = new HashSet<(int, int)>();
         blocksToPrint.Add(mouse);
         size--;
         while(size > 0) {
@@ -42,15 +49,14 @@ public class Pen : ToolManager, Tool
             }
             size--;
         }
-
-        foreach ((int, int) blockToPrint in blocksToPrint) {
-            if(block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral)) {
-                blocksPrinted.Add(blockToPrint);
-            }
-        }
+        return blocksToPrint;
     }
 
     public void EndAction() {
         toolsHistory.AddToUndoDraw(blocksPrinted);
+    }
+
+    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
+        return ComputeBlocksToPrint(gridManager, size, mouse);
     }
 }

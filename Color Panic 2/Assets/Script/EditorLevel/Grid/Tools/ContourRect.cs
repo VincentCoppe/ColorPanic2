@@ -32,6 +32,7 @@ public class ContourRect : ToolManager, Tool
             }
             start = (-1, -1);
             toolsHistory.AddToUndoDraw(res);
+            rect = new HashSet<(int, int)>();
         } else if (start != (-1, -1)) {
             rect = new HashSet<(int, int)>();
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -84,4 +85,7 @@ public class ContourRect : ToolManager, Tool
     }
 
     public void EndAction(){}
+    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
+        return rect;
+    }
 }

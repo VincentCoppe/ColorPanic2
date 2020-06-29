@@ -51,4 +51,5 @@ public class Erase : ToolManager, Tool
     public void EndAction() {
         toolsHistory.AddToUndoErase(blocksErased);
     }
+    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {return new HashSet<(int, int)>();}
 }

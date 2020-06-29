@@ -6,6 +6,7 @@ public class ToolManager : MonoBehaviour
 {
     [SerializeField] private TileGameObject tile = null;
     [SerializeField] private Size size = null;
+    [SerializeField] private HoverBlock hoverBlock = null;
     public static Tool Tool;
 
     protected void SetTool(Tool tool) {
@@ -21,10 +22,19 @@ public class ToolManager : MonoBehaviour
 
     public void Action(GridManager gridManager, (int,int) mouse) {
         Tool.Action(gridManager, tile, size.size, mouse);
+        
     }
 
     public void EndAction() {
         Tool.EndAction();
+    }
+
+    public void DisplayHover(GridManager gridManager, (int,int) mouse) {
+        hoverBlock.DisplayCells(gridManager, tile, Tool.GetBlocksToHover(gridManager, size.size, mouse));
+    }
+
+    public void CleanHover() {
+        hoverBlock.CleanCells();
     }
 
 }

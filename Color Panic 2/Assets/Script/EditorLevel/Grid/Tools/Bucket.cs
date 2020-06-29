@@ -48,4 +48,5 @@ public class Bucket : ToolManager, Tool
     }
 
     public void EndAction(){}
+    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {return new HashSet<(int, int)>();}
 }

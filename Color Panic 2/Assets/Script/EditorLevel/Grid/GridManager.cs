@@ -101,9 +101,9 @@ public class GridManager : MonoBehaviour
     
     public void Update()
     {
+        (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
         {
-            (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if(Input.GetMouseButtonDown(0)) {
                 drawing = mouse != (-1,-1);
             }
@@ -118,6 +118,11 @@ public class GridManager : MonoBehaviour
                 drawing = false;
             }
             
+        }
+        if(mouse != (-1,-1)) {
+            toolManager.DisplayHover(this, mouse);
+        } else {
+            toolManager.CleanHover();
         }
         /*
         if (Input.GetMouseButton(2))

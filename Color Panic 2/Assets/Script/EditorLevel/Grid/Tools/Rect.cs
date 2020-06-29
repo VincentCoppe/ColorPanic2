@@ -32,6 +32,7 @@ public class Rect : ToolManager, Tool
             }
             start = (-1, -1);
             toolsHistory.AddToUndoDraw(res);
+            rect = new HashSet<(int, int)>();
         } else if (start != (-1, -1)) {
             rect = new HashSet<(int, int)>();
             rect.Add(start);
@@ -66,4 +67,7 @@ public class Rect : ToolManager, Tool
     }
 
     public void EndAction() {}
+    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
+        return rect;
+    }
 }

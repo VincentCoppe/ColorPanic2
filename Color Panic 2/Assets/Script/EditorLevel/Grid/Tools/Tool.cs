@@ -8,4 +8,5 @@ public interface Tool
     void SetBgColor(Color color);
     void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse);
     void EndAction();
+    HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse);
 }
