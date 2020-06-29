@@ -13,11 +13,11 @@ public class CameraControl : MonoBehaviour
         float PlayerLoc = player.transform.localPosition.x;
         float CameraLoc = this.transform.localPosition.x;
         float Distance = CameraLoc - PlayerLoc;
-        if (Distance < -17) {
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x+2, player.transform.localPosition.y, player.transform.localPosition.z);
+        if (Distance < -18) {
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x+1, player.transform.localPosition.y, player.transform.localPosition.z);
             this.transform.localPosition = new Vector3(this.transform.localPosition.x+35.31f, this.transform.localPosition.y, this.transform.localPosition.z);
-        } else if (Distance > 17) {
-            player.transform.localPosition = new Vector3(player.transform.localPosition.x-2, player.transform.localPosition.y, player.transform.localPosition.z);
+        } else if (Distance > 18) {
+            player.transform.localPosition = new Vector3(player.transform.localPosition.x-1, player.transform.localPosition.y, player.transform.localPosition.z);
             this.transform.localPosition = new Vector3(this.transform.localPosition.x-35.31f, this.transform.localPosition.y, this.transform.localPosition.z);
         }
 

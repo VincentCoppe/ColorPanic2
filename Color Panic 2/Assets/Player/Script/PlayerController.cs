@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float GrabDownFactor = 0.7f;   
     [SerializeField] private float HighJumpFactor = 0.8f;  
     [SerializeField] private float LowJumpFactor = 0.8f;                   
-    [SerializeField] private LayerMask m_WhatIsGround;   
+    [SerializeField] private LayerMask m_WhatIsGround;  
+    [SerializeField] private float GravityFactorViridian = 0.20f; 
 
     [SerializeField] private Color Viridian; 
     [SerializeField] private Color Red;   
@@ -75,6 +76,9 @@ public class PlayerController : MonoBehaviour
             SetColor();
         } else {
             SetColor(false);
+        }
+        if (reverse){
+            GravityReverse();
         }
         this.gameObject.transform.localPosition = respawn;
     }
@@ -151,6 +155,13 @@ public class PlayerController : MonoBehaviour
         if (WalljumpTimer>0){
             WalljumpTimer -= Time.fixedDeltaTime;
         }
+
+        if (power.HavePower("Viridian")){
+            m_Rigidbody2D.gravityScale = gravity*GravityFactorViridian;
+        } else {
+            m_Rigidbody2D.gravityScale = gravity;
+        }
+        Debug.Log(m_Rigidbody2D.gravityScale);
         if (reverse && !power.HavePower("Viridian")){
             GravityReverse();
         }
@@ -258,11 +269,13 @@ public class PlayerController : MonoBehaviour
     private void HandleGrab(float move, bool jump){
         //Grab if not grounded and there is a wall
         if (OnLeftWall && !Grounded || OnRightWall && !Grounded){
-            if (!grabbing && ((OnRightWall && move < 0) || (OnLeftWall && move > 0))){
+            if (!grabbing && (
+            ( ( (OnRightWall && move < 0) || (OnLeftWall && move > 0) ) && !reverse ) 
+            || ( ( (OnRightWall && move > 0) || (OnLeftWall && move < 0)) && reverse ) )){
                 grabbing = true;
                 return;
             }
-            if ( (jump || (FacingRight && move < 0) || (!FacingRight && move > 0) ) && Djump && power.HavePower("Green") ){
+            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) ) && Djump && power.HavePower("Green") ){
                 Grounded = false;
                 Djump = false;
                 grabbing = false;
@@ -272,7 +285,8 @@ public class PlayerController : MonoBehaviour
 
         }
         //Ungrab if player move/jump, or if there is no wall/the ground
-        if(grabbing && (Grounded ||  (!FacingRight && move > 0) || (FacingRight && move < 0) || !OnLeftWall && FacingRight || !OnRightWall && !FacingRight  )){
+        if(grabbing && (Grounded ||  (!FacingRight && move > 0 && !reverse) || (FacingRight && move < 0 && !reverse) 
+        || (!FacingRight && move < 0 && reverse) || (FacingRight && move > 0 && reverse) || !OnLeftWall && FacingRight || !OnRightWall && !FacingRight  )){
             grabbing = false;
         }
     }
@@ -412,7 +426,7 @@ public class PlayerController : MonoBehaviour
     private void GravityReverse(){
         FacingRight = !FacingRight;
         Vector3 theScale = transform.localScale;
-        m_Rigidbody2D.gravityScale *= -1;
+        gravity *= -1;
         theScale.y *= -1;
         transform.localScale = theScale;
         reverse = !reverse;
