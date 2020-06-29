@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private bool reverse = false; //Gravity reverse
     private bool gravityReverse; //Can the player reverse the gravity ?
     public bool win = false;
+    public bool pause = false;
 
 
     private void Awake()
@@ -293,7 +294,7 @@ public class PlayerController : MonoBehaviour
     //All the movements of the player
     public void Move(float move, bool jump)
     {
-        if (dashing || WalljumpTimer>0 || win) return; 
+        if (dashing || WalljumpTimer>0 || win || pause) return; 
         HandleGrab(move, jump);
 
         //Flip sprite
