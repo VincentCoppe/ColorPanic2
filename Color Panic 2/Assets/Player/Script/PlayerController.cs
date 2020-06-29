@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
     //All the movements of the player
     public void Move(float move, bool jump)
     {
-        if (dashing || WalljumpTimer>0) return; 
+        if (dashing || WalljumpTimer>0 || win) return; 
         HandleGrab(move, jump);
 
         //Flip sprite
