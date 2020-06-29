@@ -161,7 +161,6 @@ public class PlayerController : MonoBehaviour
         } else {
             m_Rigidbody2D.gravityScale = gravity;
         }
-        Debug.Log(m_Rigidbody2D.gravityScale);
         if (reverse && !power.HavePower("Viridian")){
             GravityReverse();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CameraControl : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class CameraControl : MonoBehaviour
 
         if (player.win){
             Win.transform.gameObject.SetActive(true);
+            StartCoroutine(WaitForWin());
+        }
+
+        IEnumerator WaitForWin(){
+            yield return new  WaitForSeconds(4);
+            SceneManager.LoadScene("Menu");
         }
 
     }
