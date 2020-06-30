@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +9,13 @@ public class HoverBlock : MonoBehaviour
 
     public void DisplayCells(GridManager Manager, GameObject _prefab, HashSet<(int, int)> coords) {
         foreach((int, int) coord in coords) {
-            if(!blocksHovered.ContainsKey(coord) && (_prefab.name == "Erase" || Manager.GridObject[coord.Item1, coord.Item2] == null)) {
-                GameObject go = Manager.Instantiate(_prefab);
-                go.transform.localPosition = Manager.GridToPosition(coord.Item1, coord.Item2) + new Vector3(0.5f, 0.5f, 0);
-                blocksHovered[coord] = go;
-            }
+            try {
+                if(!blocksHovered.ContainsKey(coord) && (_prefab.name == "Erase" || Manager.GridObject[coord.Item1, coord.Item2] == null)) {
+                    GameObject go = Manager.Instantiate(_prefab);
+                    go.transform.localPosition = Manager.GridToPosition(coord.Item1, coord.Item2) + new Vector3(0.5f, 0.5f, 0);
+                    blocksHovered[coord] = go;
+                }
+            } catch (IndexOutOfRangeException) {}
         }
         List<(int, int)> toRemove = new List<(int, int)>();
         foreach((int, int) coord in blocksHovered.Keys) {
