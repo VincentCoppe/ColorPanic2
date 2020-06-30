@@ -8,6 +8,7 @@ public class ToolManager : MonoBehaviour
     [SerializeField] private Size size = null;
     [SerializeField] private HoverBlock hoverBlock = null;
     [SerializeField] private Transform hoverErase = null;
+    [SerializeField] private Sprite sprite = null;
     public static Tool Tool;
 
     protected void SetTool(Tool tool) {
@@ -31,6 +32,7 @@ public class ToolManager : MonoBehaviour
     }
 
     public void DisplayHover(GridManager gridManager, (int,int) mouse) {
+        //Cursor.SetCursor(sprite.texture, Vector2.zero, CursorMode.ForceSoftware);
         if(!(Tool is Erase))
             hoverBlock.DisplayCells(gridManager, tile.gameObject, Tool.GetBlocksToHover(gridManager, size.size, mouse));
         else 
