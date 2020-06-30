@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,15 +21,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color Red;   
     [SerializeField] private Color Green;        
     
+    [SerializeField] private ParticleSystem SpawnParticle;
+    [SerializeField] private ParticleSystem DeadParticle;
 
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
     private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
     private Transform m_RightCheck;
     private Transform m_LeftCheck;
-
     private Transform m_RightCheckLow;
     private Transform m_LeftCheckLow;
-    private Animator m_Anim;            
+
+    private Animator m_Anim;       
+    
     private Rigidbody2D m_Rigidbody2D;
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
@@ -50,7 +55,9 @@ public class PlayerController : MonoBehaviour
     private bool gravityReverse; //Can the player reverse the gravity ?
     public bool win = false;
     public bool pause = false;
+    private bool respawning = false;
     public bool teleport;
+
 
     public int keys = 0;
 
@@ -63,6 +70,7 @@ public class PlayerController : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_LeftCheckLow = transform.Find("LeftWallCheckLow");
         m_RightCheckLow = transform.Find("RightWallCheckLow");
+        
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         gravity = m_Rigidbody2D.gravityScale;
@@ -73,21 +81,43 @@ public class PlayerController : MonoBehaviour
     //On death, reset power and move the player to the respawn location
     public void Death()
     {
-        power.ResetPowers();
-        ResetMovement();
-        if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != ""){
-            power.LastPower = CurrentCheckpoint.SavedPowers;
-            SetColor();
-        } else {
-            SetColor(false);
-        }
-        if (reverse){
-            GravityReverse();
-        }
-        this.gameObject.transform.localPosition = respawn;
+        
+        
+        StartCoroutine(Die());
+        
+        
     }
 
-    
+    IEnumerator Die()
+    {
+        respawning = true;
+        GetComponent<SpriteRenderer>().enabled = false;
+        DeadParticle.Play();
+        yield return new WaitForSecondsRealtime(0.5f);
+        power.ResetPowers();
+        m_Rigidbody2D.velocity = Vector2.zero;
+        ResetMovement();
+        if (CurrentCheckpoint != null && CurrentCheckpoint.SavedPowers != "")
+        {
+            power.LastPower = CurrentCheckpoint.SavedPowers;
+            SetColor();
+        }
+        else
+        {
+            SetColor(false);
+        }
+        if (reverse)
+        {
+            GravityReverse();
+        }
+        transform.localPosition = respawn;
+        SpawnParticle.Play();
+        yield return new WaitForSecondsRealtime(0.5f);
+        GetComponent<SpriteRenderer>().enabled = true;
+       respawning = false;
+    }
+
+
 
     //Move on axis X the player
     public void MoveX(float move)
@@ -300,7 +330,7 @@ public class PlayerController : MonoBehaviour
     //All the movements of the player
     public void Move(float move, bool jump)
     {
-        if (dashing || WalljumpTimer>0 || win || pause) return; 
+        if (dashing || WalljumpTimer>0 || win || pause || respawning) return; 
         HandleGrab(move, jump);
 
         //Flip sprite
