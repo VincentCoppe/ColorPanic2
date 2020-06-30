@@ -9,18 +9,41 @@ public class GameManagement : MonoBehaviour
 
     [SerializeField] PlayerController Player;
     [SerializeField] GameObject Camera;
-    [SerializeField] TMP_Text WinText;
+    [SerializeField] GameObject WinText;
     [SerializeField] GameObject PauseMenu;
+    [SerializeField] TMP_Text PowerText;
     private bool pause = false;
     private bool setActive = false;
+    private string savedPower;
 
     void Update()
     {
         CameraManagement();
         WinManagement();
         PauseManagement();
+        HandlePower();
 
         if(Input.GetKeyDown("escape")){pause = !pause;}
+    }
+
+    private void HandlePower(){
+        if (savedPower != Player.power.LastPower){
+            StartCoroutine(DisplayPower(Player.power.LastPower));
+            savedPower = Player.power.LastPower;
+        }
+    }
+
+    IEnumerator DisplayPower(string power){
+        PowerText.gameObject.SetActive(true);
+        switch (power){
+            case "Green" : PowerText.text = "You can now double jump"; break;
+            case "Red" : PowerText.text = "You can now dash"; break;
+            case "Viridian" : PowerText.text = "You can now reverse the gravity"; break;
+            case "Purple" : PowerText.text = "You can now teleport"; break;
+            //others
+        }
+        yield return new WaitForSecondsRealtime(2f);
+        PowerText.gameObject.SetActive(false);
     }
 
     private void CameraManagement(){
@@ -54,7 +77,7 @@ public class GameManagement : MonoBehaviour
     }
 
     IEnumerator WaitForWin(){
-            yield return new  WaitForSeconds(4);
+            yield return new  WaitForSeconds(3f);
             SceneManager.LoadScene("Menu");
     }
 

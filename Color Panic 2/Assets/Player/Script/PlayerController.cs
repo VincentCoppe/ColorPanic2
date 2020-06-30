@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private bool FacingRight = true; 
     private Vector3 respawn = new Vector3(0,0,0); //Saved respawn location of the player
     private Checkpoint CurrentCheckpoint = null; //Current saved checkpoint of the user
-    private MyPower power;
+    public MyPower power;
     private bool Djump; //Can the player do a double jump ?
     private bool Hjump; //High jump
     private bool dash;  //The player can dash ?
@@ -470,12 +470,13 @@ public class PlayerController : MonoBehaviour
     //Set the respawn location & checkpoint saved power when the player walk on a new checkpoint
     private void SetRespawn(Checkpoint checkpoint){
         //Disable old checkpoint
-        if (CurrentCheckpoint != null && CurrentCheckpoint != checkpoint){
+        if (CurrentCheckpoint != null){
             CurrentCheckpoint.Activation(false);
         }
         //Set new checkpoint or new color of same checkpoint
-        if (power.LastPower != null)
+        if (power.LastPower != null){
             checkpoint.SavedPowers =  (string)power.LastPower.Clone();
+        }
         checkpoint.Activation(true);
 
         //Set the respawn point of the player
