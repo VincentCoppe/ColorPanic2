@@ -66,8 +66,10 @@ public class Rect : ToolManager, Tool
         }        
     }
 
-    public void EndAction() {}
+    public void EndAction() {
+        rect = new HashSet<(int, int)>();
+    }
     public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
-        return rect;
+        return rect.Count != 0 ? rect : new HashSet<(int, int)>{mouse};
     }
 }

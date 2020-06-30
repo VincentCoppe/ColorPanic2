@@ -37,6 +37,8 @@ public class ContourRect : ToolManager, Tool
             rect = new HashSet<(int, int)>();
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             rect.Add(start);
+            size = start.Item2 != mouse.Item2 ? size : 1;
+            size = start.Item1 != mouse.Item1 ? size : 1;
             int memSize = size;
             (int, int) memMouse = mouse;
             (int, int) memStart = start;
@@ -84,8 +86,10 @@ public class ContourRect : ToolManager, Tool
         }
     }
 
-    public void EndAction(){}
+    public void EndAction(){
+        rect = new HashSet<(int, int)>();
+    }
     public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
-        return rect;
+        return rect.Count != 0 ? rect : new HashSet<(int, int)>{mouse};
     }
 }
