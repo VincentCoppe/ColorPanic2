@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public bool pause = false;
     public bool teleport;
 
+    public int keys = 0;
+
 
     private void Awake()
     {
@@ -137,7 +139,7 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
-
+        Debug.Log(keys);
         if(Input.GetKey(KeyCode.R)){
             Death();
         }
@@ -348,6 +350,17 @@ public class PlayerController : MonoBehaviour
             Teleport();
             dash = false;
         }
+    }
+
+    private void Open(GameObject Door){
+        if(keys > 0){
+            Door.gameObject.SetActive(false);
+            keys--;
+        }
+    }
+
+    private void IncreaseKeys(){
+        keys++;
     }
 
     private void Teleport(){
