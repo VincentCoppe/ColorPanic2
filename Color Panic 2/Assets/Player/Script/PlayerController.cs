@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Color Viridian; 
     [SerializeField] private Color Red;   
-    [SerializeField] private Color Green;        
+    [SerializeField] private Color Green;       
+    [SerializeField] private Color Purple;   
     
 
     private Transform m_CeilingCheck;   // A position marking where to check for ceilings
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
             case "Green" : Djump = true; break;
             case "Red" : dash = true; break;
             case "Viridian" : gravityReverse = true; break;
-            case "Yellow" : teleport = true; break;
+            case "Purple" : teleport = true; break;
             //others powers
         }
     }
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour
             case "Green" : rend.material.color = Green; break;
             case "Red" : rend.material.color = Red; break;
             case "Viridian" : rend.material.color = Viridian; break;
-            case "Yellow" : rend.material.color = Color.yellow; break;
+            case "Purple" : rend.material.color = Purple; break;
         }
     }
 
@@ -265,7 +266,6 @@ public class PlayerController : MonoBehaviour
                 Hjump = true;
                 gravityReverse = true;
                 dash = true;
-                teleport = true;
             }
         }
         m_Anim.SetBool("Grounded",Grounded);
@@ -325,10 +325,11 @@ public class PlayerController : MonoBehaviour
             Jump(m_JumpForce*HighJumpFactor);
         }
         //Low jump
-        if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
+        else if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
             Jump(m_JumpForce*LowJumpFactor);
+        }
         //Double jump
-        } else if ( !Grounded && jump && power.HavePower("Green") && Djump && !dashing){
+        else if ( !Grounded && (Input.GetKey("space") || jump) && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
             Djump = false;
         }
@@ -339,16 +340,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash && !grabbing ){
             Dash(move);
             dash = false;
+            return;
         }
         //Gravity reverse
-        if (jump && power.HavePower("Viridian") && gravityReverse){
+        if (Input.GetKey("space") && power.HavePower("Viridian") && gravityReverse){
             GravityReverse();
             gravityReverse = false;
+            return;
         }
         //Teleport
-        if (Input.GetKey("space") && !Grounded && power.HavePower("Yellow") && teleport && !grabbing ){
+        if (Input.GetKey("space") && power.HavePower("Purple") && teleport ){
             Teleport();
-            dash = false;
+            return;
+        }
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown("space")){
+            teleport = true;
         }
     }
 
