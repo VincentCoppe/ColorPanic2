@@ -26,13 +26,23 @@ public class GameManagement : MonoBehaviour
     private void CameraManagement(){
         float PlayerLoc = Player.transform.localPosition.x;
         float CameraLoc = Camera.transform.localPosition.x;
-        float Distance = CameraLoc - PlayerLoc;
-        if (Distance < -18) {
+        float DistanceX = CameraLoc - PlayerLoc;
+        float PlayerLocY = Player.transform.localPosition.y;
+        float CameraLocY = Camera.transform.localPosition.y;
+        float DistanceY = CameraLocY - PlayerLocY;
+        if (DistanceX < -18) {
             Player.transform.localPosition = new Vector3(Player.transform.localPosition.x+1, Player.transform.localPosition.y, Player.transform.localPosition.z);
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x+35.31f, Camera.transform.localPosition.y, Camera.transform.localPosition.z);
-        } else if (Distance > 18) {
+        } else if (DistanceX > 18) {
             Player.transform.localPosition = new Vector3(Player.transform.localPosition.x-1, Player.transform.localPosition.y, Player.transform.localPosition.z);
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x-35.31f, Camera.transform.localPosition.y, Camera.transform.localPosition.z);
+        }
+        if (DistanceY > 9.1) {
+            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y-1, Player.transform.localPosition.z);
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y-20, Camera.transform.localPosition.z);
+        } else if (DistanceY < -9.1){
+            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y+1, Player.transform.localPosition.z);
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y+20, Camera.transform.localPosition.z);
         }
     }
 
