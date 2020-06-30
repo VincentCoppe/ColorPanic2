@@ -7,6 +7,7 @@ public class ToolManager : MonoBehaviour
     [SerializeField] private TileGameObject tile = null;
     [SerializeField] private Size size = null;
     [SerializeField] private HoverBlock hoverBlock = null;
+    [SerializeField] private Transform hoverErase = null;
     public static Tool Tool;
 
     protected void SetTool(Tool tool) {
@@ -30,7 +31,10 @@ public class ToolManager : MonoBehaviour
     }
 
     public void DisplayHover(GridManager gridManager, (int,int) mouse) {
-        hoverBlock.DisplayCells(gridManager, tile, Tool.GetBlocksToHover(gridManager, size.size, mouse));
+        if(!(Tool is Erase))
+            hoverBlock.DisplayCells(gridManager, tile.gameObject, Tool.GetBlocksToHover(gridManager, size.size, mouse));
+        else 
+            hoverBlock.DisplayCells(gridManager, hoverErase.gameObject, Tool.GetBlocksToHover(gridManager, size.size, mouse));
     }
 
     public void CleanHover() {
