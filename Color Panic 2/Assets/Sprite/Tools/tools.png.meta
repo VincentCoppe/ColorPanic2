@@ -40,13 +40,13 @@ TextureImporter:
     second: reset
   - first:
       213: 8285091835809268112
-    second: spike
+    second: full_rect
   - first:
       213: 7811721685257397968
-    second: wall
+    second: select_rect
   - first:
       213: -699345051048265687
-    second: powerup
+    second: magic_wand
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -398,7 +398,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spike
+      name: full_rect
       rect:
         serializedVersion: 2
         x: 0
@@ -419,7 +419,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall
+      name: select_rect
       rect:
         serializedVersion: 2
         x: 16
@@ -440,7 +440,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: powerup
+      name: magic_wand
       rect:
         serializedVersion: 2
         x: 32
