@@ -140,7 +140,6 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
-        Debug.Log(keys);
         if(Input.GetKey(KeyCode.R)){
             Death();
         }
