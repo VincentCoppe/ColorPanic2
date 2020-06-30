@@ -11,8 +11,8 @@ public class GameManagement : MonoBehaviour
     [SerializeField] GameObject Camera;
     [SerializeField] TMP_Text WinText;
     [SerializeField] GameObject PauseMenu;
-    [SerializeField] GameObject ResumeButton;
     private bool pause = false;
+    private bool setActive = false;
 
     void Update()
     {
@@ -50,11 +50,19 @@ public class GameManagement : MonoBehaviour
 
     private void PauseManagement(){
         Player.pause = pause;
-        if (pause){
-            PauseMenu.transform.gameObject.SetActive(true);
+        if (setActive && pause && !PauseMenu.transform.gameObject.active){
+            pause = false;
+            setActive = false;
             return;
         }
+        if (pause){
+            PauseMenu.transform.gameObject.SetActive(true);
+            setActive = true;
+            return;
+        }
+        
         PauseMenu.transform.gameObject.SetActive(false);
+        setActive = false;
     }
 
 

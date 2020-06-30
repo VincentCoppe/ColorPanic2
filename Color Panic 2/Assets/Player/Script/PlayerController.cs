@@ -401,17 +401,14 @@ public class PlayerController : MonoBehaviour
         if (CurrentCheckpoint != null && CurrentCheckpoint != checkpoint){
             CurrentCheckpoint.Activation(false);
         }
-        //Set new checkpoint
-        if (CurrentCheckpoint != checkpoint){
-            if (power.LastPower != null)
-                checkpoint.SavedPowers =  (string)power.LastPower.Clone();
-            checkpoint.Activation(true);
+        //Set new checkpoint or new color of same checkpoint
+        if (power.LastPower != null)
+            checkpoint.SavedPowers =  (string)power.LastPower.Clone();
+        checkpoint.Activation(true);
 
-
-            //Set the respawn point of the player
-            respawn = checkpoint.gameObject.transform.localPosition;
-            CurrentCheckpoint = checkpoint;
-        }
+        //Set the respawn point of the player
+        respawn = checkpoint.gameObject.transform.localPosition;
+        CurrentCheckpoint = checkpoint;
     }
 
     //Flip the player sprite
