@@ -217,8 +217,11 @@ MonoBehaviour:
   Viridian: {r: 0.002491996, g: 0.51975214, b: 0.5283019, a: 1}
   Red: {r: 0.8207547, g: 0.10453009, b: 0.1501493, a: 1}
   Green: {r: 0.16836035, g: 0.8396226, b: 0.11485406, a: 1}
+  Purple: {r: 0.6585065, g: 0.380429, b: 0.7830189, a: 1}
   win: 0
   pause: 0
+  teleport: 0
+  keys: 0
 --- !u!114 &1032025416664888387
 MonoBehaviour:
   m_ObjectHideFlags: 0
