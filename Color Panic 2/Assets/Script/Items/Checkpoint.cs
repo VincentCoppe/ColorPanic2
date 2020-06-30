@@ -36,6 +36,7 @@ public class Checkpoint : MonoBehaviour
             case "Green" : rend.material.color = Green; break;
             case "Red" : rend.material.color = Red; break;
             case "Viridian" : rend.material.color = Viridian; break;
+            case "Yellow" : rend.material.color = Color.yellow; break;
         }
     }
 

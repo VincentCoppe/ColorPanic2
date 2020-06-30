@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private bool gravityReverse; //Can the player reverse the gravity ?
     public bool win = false;
     public bool pause = false;
+    public bool teleport;
 
 
     private void Awake()
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour
             case "Green" : Djump = true; break;
             case "Red" : dash = true; break;
             case "Viridian" : gravityReverse = true; break;
+            case "Yellow" : teleport = true; break;
             //others powers
         }
     }
@@ -126,6 +128,7 @@ public class PlayerController : MonoBehaviour
             case "Green" : rend.material.color = Green; break;
             case "Red" : rend.material.color = Red; break;
             case "Viridian" : rend.material.color = Viridian; break;
+            case "Yellow" : rend.material.color = Color.yellow; break;
         }
     }
 
@@ -260,6 +263,7 @@ public class PlayerController : MonoBehaviour
                 Hjump = true;
                 gravityReverse = true;
                 dash = true;
+                teleport = true;
             }
         }
         m_Anim.SetBool("Grounded",Grounded);
@@ -339,6 +343,23 @@ public class PlayerController : MonoBehaviour
             GravityReverse();
             gravityReverse = false;
         }
+        //Teleport
+        if (Input.GetKey("space") && !Grounded && power.HavePower("Yellow") && teleport && !grabbing ){
+            Teleport();
+            dash = false;
+        }
+    }
+
+    private void Teleport(){
+        teleport = false;
+        Vector3 pos = transform.localPosition;
+        Vector3 newPos = new Vector3();
+        if (FacingRight){
+            newPos = new Vector3(pos.x+2.5f, pos.y, pos.z);
+        } else {
+            newPos = new Vector3(pos.x-2.5f, pos.y, pos.z);
+        }
+        transform.localPosition = newPos;
     }
 
     //Action grab
