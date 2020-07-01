@@ -958,10 +958,11 @@ MonoBehaviour:
   tile: {fileID: 0}
   size: {fileID: 717787081}
   hoverBlock: {fileID: 0}
-  hoverErase: {fileID: 0}
   sprite: {fileID: 0}
   image: {fileID: 385722984}
   toolsHistory: {fileID: 1410053821}
+  hoverErase: {fileID: 3353828364201586653, guid: f856d89ef84c7dd4aa6637accf1bfa17,
+    type: 3}
 --- !u!114 &385722983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,7 +2352,6 @@ MonoBehaviour:
   tile: {fileID: 0}
   size: {fileID: 717787081}
   hoverBlock: {fileID: 0}
-  hoverErase: {fileID: 0}
   sprite: {fileID: 0}
   image: {fileID: 853220546}
   toolsHistory: {fileID: 1410053821}
@@ -2623,7 +2623,6 @@ MonoBehaviour:
   tile: {fileID: 0}
   size: {fileID: 717787081}
   hoverBlock: {fileID: 0}
-  hoverErase: {fileID: 0}
   sprite: {fileID: 0}
   image: {fileID: 911834898}
   toolsHistory: {fileID: 1410053821}
@@ -2662,8 +2661,6 @@ MonoBehaviour:
   tile: {fileID: 1566193578260157341, guid: ec20e37c5b39a524798da05fff14a4ad, type: 3}
   size: {fileID: 717787081}
   hoverBlock: {fileID: 1029405105}
-  hoverErase: {fileID: 3353828364201586653, guid: f856d89ef84c7dd4aa6637accf1bfa17,
-    type: 3}
   sprite: {fileID: -8309643413193770608, guid: 8c1bc9534a33152489cfd73af8b9cff6, type: 3}
 --- !u!114 &1029405102
 MonoBehaviour:
@@ -5616,7 +5613,6 @@ MonoBehaviour:
   tile: {fileID: 0}
   size: {fileID: 717787081}
   hoverBlock: {fileID: 0}
-  hoverErase: {fileID: 0}
   sprite: {fileID: 0}
   image: {fileID: 1784074827}
   toolsHistory: {fileID: 1410053821}
@@ -6070,7 +6066,6 @@ MonoBehaviour:
   tile: {fileID: 0}
   size: {fileID: 0}
   hoverBlock: {fileID: 0}
-  hoverErase: {fileID: 0}
   sprite: {fileID: 0}
   image: {fileID: 1988722796}
   toolsHistory: {fileID: 1410053821}
@@ -6275,7 +6270,6 @@ MonoBehaviour:
   tile: {fileID: 0}
   size: {fileID: 717787081}
   hoverBlock: {fileID: 0}
-  hoverErase: {fileID: 0}
   sprite: {fileID: 0}
   image: {fileID: 2085639236}
   toolsHistory: {fileID: 1410053821}

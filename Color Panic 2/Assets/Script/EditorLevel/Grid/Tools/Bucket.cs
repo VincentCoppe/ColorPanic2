@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bucket : ToolManager, Tool
+public class Bucket : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
@@ -48,5 +48,5 @@ public class Bucket : ToolManager, Tool
     }
 
     public void EndAction(){}
-    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {return new HashSet<(int, int)>();}
+    public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {return new Dictionary<(int, int), GameObject>();}
 }

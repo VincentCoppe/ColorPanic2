@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagicWand : ToolManager, Tool
+public class MagicWand : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
@@ -15,6 +15,8 @@ public class MagicWand : ToolManager, Tool
 
     public void ClickIcon() {
         SetTool(this);
+        selectedBlocks = new Dictionary<(int, int), BlockBase>();
+        rect = new (int, int)[2];
     }
     public void SetBgColor(Color color) {
         image.color = color;
@@ -76,6 +78,13 @@ public class MagicWand : ToolManager, Tool
         HashSet<(int, int)> res = new HashSet<(int, int)>();
         foreach((int, int) reached in selectedBlocks.Keys) {
             res.Add((mouse.Item1+reached.Item1, mouse.Item2+reached.Item2));
+        }
+        return res;
+    }
+    public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
+        Dictionary<(int, int), GameObject> res = new Dictionary<(int, int), GameObject>();
+        foreach ((int, int) blockToPrint in selectedBlocks.Keys) {
+            res[(mouse.Item1+blockToPrint.Item1, mouse.Item2+blockToPrint.Item2)] = selectedBlocks[blockToPrint].GameObject;
         }
         return res;
     }
