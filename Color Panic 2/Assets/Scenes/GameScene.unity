@@ -4471,7 +4471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 191592948}
-  Camera: {fileID: 762977454}
+  Camera: {fileID: 762977456}
   WinText: {fileID: 617784656}
   PauseMenu: {fileID: 472294697}
   PowerText: {fileID: 107675642}

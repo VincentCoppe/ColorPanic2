@@ -58,9 +58,10 @@ public class PlayerController : MonoBehaviour
     public bool pause = false;
     private bool respawning = false;
     public bool teleport;
-
-
     public int keys = 0;
+
+    public float OppositeX;
+    public float OppositeY;
 
 
     private void Awake()
