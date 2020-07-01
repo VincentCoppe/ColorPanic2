@@ -393,8 +393,11 @@ public class PlayerController : MonoBehaviour
 
     private void Open(GameObject Door){
         if(keys > 0){
-            Door.gameObject.SetActive(false);
+            Key.keyUsed.Invoke(Door.transform);
             keys--;
+            Keyblock.KeyBlockEvent.Invoke(Door.transform.position);
+            Destroy(Door, 0.3f);
+            
         }
     }
 

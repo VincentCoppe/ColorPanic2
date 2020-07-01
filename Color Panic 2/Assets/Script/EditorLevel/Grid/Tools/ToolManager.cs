@@ -7,11 +7,10 @@ public class ToolManager : MonoBehaviour
     [SerializeField] private TileGameObject tile = null;
     [SerializeField] private Size size = null;
     [SerializeField] private HoverBlock hoverBlock = null;
-    [SerializeField] private Transform hoverErase = null;
     [SerializeField] private Sprite sprite = null;
-    public static Tool Tool;
+    public static ITool Tool;
 
-    protected void SetTool(Tool tool) {
+    protected void SetTool(ITool tool) {
         Tool?.SetBgColor(new Color(1,1,1));
         Tool = tool;
         Tool.SetBgColor(new Color(0,1,0));
@@ -33,10 +32,7 @@ public class ToolManager : MonoBehaviour
 
     public void DisplayHover(GridManager gridManager, (int,int) mouse) {
         //Cursor.SetCursor(sprite.texture, Vector2.zero, CursorMode.ForceSoftware);
-        if(!(Tool is Erase))
-            hoverBlock.DisplayCells(gridManager, tile.gameObject, Tool.GetBlocksToHover(gridManager, size.size, mouse));
-        else 
-            hoverBlock.DisplayCells(gridManager, hoverErase.gameObject, Tool.GetBlocksToHover(gridManager, size.size, mouse));
+        hoverBlock.DisplayCells(gridManager, Tool.GetBlocksToHover(gridManager, tile, size.size, mouse));
     }
 
     public void CleanHover() {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ContourRect : ToolManager, Tool
+public class ContourRect : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
@@ -89,7 +89,12 @@ public class ContourRect : ToolManager, Tool
     public void EndAction(){
         rect = new HashSet<(int, int)>();
     }
-    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
-        return rect.Count != 0 ? rect : new HashSet<(int, int)>{mouse};
+
+    public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
+        Dictionary<(int, int), GameObject> res = new Dictionary<(int, int), GameObject>();
+        foreach ((int, int) blockToPrint in rect) {
+            res[blockToPrint] = block.gameObject;
+        }
+        return res.Count != 0 ? res : new Dictionary<(int, int), GameObject>{[mouse] = block.gameObject};
     }
 }

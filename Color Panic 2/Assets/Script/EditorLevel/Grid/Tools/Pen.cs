@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Pen : ToolManager, Tool
+public class Pen : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
@@ -56,7 +56,11 @@ public class Pen : ToolManager, Tool
         toolsHistory.AddToUndoDraw(blocksPrinted);
     }
 
-    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
-        return ComputeBlocksToPrint(gridManager, size, mouse);
+    public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
+        Dictionary<(int, int), GameObject> res = new Dictionary<(int, int), GameObject>();
+        foreach ((int, int) blockToPrint in ComputeBlocksToPrint(gridManager, size, mouse)) {
+            res[blockToPrint] = block.gameObject;
+        }
+        return res;
     }
 }

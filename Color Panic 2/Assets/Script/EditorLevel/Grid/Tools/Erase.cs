@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Erase : ToolManager, Tool
+public class Erase : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
+    [SerializeField] private Transform hoverErase = null;
     private Dictionary<BlockBase, (int,int)> blocksErased = new Dictionary<BlockBase, (int, int)>();
 
     public void ClickIcon() {
@@ -52,7 +53,11 @@ public class Erase : ToolManager, Tool
     public void EndAction() {
         toolsHistory.AddToUndoErase(blocksErased);
     }
-    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
-        return ComputeBlocksToErase(gridManager, size, mouse);
+    public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
+        Dictionary<(int, int), GameObject> res = new Dictionary<(int, int), GameObject>();
+        foreach ((int, int) blockToPrint in ComputeBlocksToErase(gridManager, size, mouse)) {
+            res[blockToPrint] = hoverErase.gameObject;
+        }
+        return res;
     }
 }
