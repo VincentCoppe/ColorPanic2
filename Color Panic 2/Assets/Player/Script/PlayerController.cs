@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
     private void MoveOppositeY(bool up){
         Debug.Log(m_Rigidbody2D.velocity.y);
         if (up){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+OppositeY-1, this.transform.localPosition.z);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+OppositeY, this.transform.localPosition.z);
         } 
         if (!up){
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-OppositeY, this.transform.localPosition.z);
