@@ -11,10 +11,10 @@ public class PowerupPalette : Palette
 
     public override void ChangeTile(ToolManager manager)
     {
+        Sprite sprite = GetComponent<Image>().sprite;
         Color color = GetComponent<Image>().color;
-        
         base.ChangeTile(manager);
-        PowerupIcon.color = color;
+        PowerupIcon.sprite = sprite;
         Palette.SetActive(false);
         GetComponent<Image>().color = color;
     }

@@ -10371,6 +10371,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3738935930399538703, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.47005224
+      objectReference: {fileID: 0}
+    - target: {fileID: 3738935930399538703, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.047413826
+      objectReference: {fileID: 0}
+    - target: {fileID: 3738935930399538703, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0029482841
+      objectReference: {fileID: 0}
+    - target: {fileID: 3738935930399538703, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.98074436
+      objectReference: {fileID: 0}
     - target: {fileID: 7292328735280419028, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
         type: 3}
       propertyPath: m_Name
@@ -10379,12 +10399,12 @@ PrefabInstance:
     - target: {fileID: 7292328735280419034, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.67
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: 7292328735280419034, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.91
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 7292328735280419034, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
         type: 3}
@@ -10430,6 +10450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7292328735280419034, guid: e22f9f28eeb4f454cb8cc41275cdea3a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22f9f28eeb4f454cb8cc41275cdea3a, type: 3}
@@ -12260,7 +12285,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3895
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -13613,7 +13638,7 @@ PrefabInstance:
     - target: {fileID: 8904262535096694647, guid: ec20e37c5b39a524798da05fff14a4ad,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 96.6
       objectReference: {fileID: 0}
     - target: {fileID: 8904262535096694649, guid: ec20e37c5b39a524798da05fff14a4ad,
         type: 3}

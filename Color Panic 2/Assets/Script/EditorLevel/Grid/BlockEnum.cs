@@ -28,6 +28,9 @@ public static class BlockEnumExt {
                 {
                     case ObjectEnum.Jumper: return new JumperBlock(prefab);
                     case ObjectEnum.Tapis: return new BlockTapis(prefab);
+                    case ObjectEnum.SandBlock: return new SandBlock(prefab);
+                    case ObjectEnum.Key: return new KeyBlockEditor(prefab);
+                    case ObjectEnum.KeyBlock: return new KeyblockBlock(prefab);
                     default: return null;
                 }
                

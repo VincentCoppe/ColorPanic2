@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 public enum ObjectEnum
 {
     Jumper,
-    Tapis
+    Tapis,
+    SandBlock,
+    Key,
+    KeyBlock
     
 
 

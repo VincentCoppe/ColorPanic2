@@ -69,6 +69,8 @@ GameObject:
   - component: {fileID: -4632337939815803205}
   - component: {fileID: 2732206835911491329}
   - component: {fileID: 5084106513541694999}
+  - component: {fileID: 3930348085862088029}
+  - component: {fileID: 684907447615895172}
   m_Layer: 11
   m_Name: Door
   m_TagString: Untagged
@@ -171,3 +173,31 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3.5
+--- !u!114 &3930348085862088029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Block: 7
+  data: {fileID: 684907447615895172}
+--- !u!114 &684907447615895172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775e3a5429ccedf43893ba85e98c75c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 4
+  _door: 1
