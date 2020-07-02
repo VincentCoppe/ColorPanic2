@@ -12,6 +12,7 @@ public class GameManagement : MonoBehaviour
     [SerializeField] GameObject WinText;
     [SerializeField] GameObject PauseMenu;
     [SerializeField] TMP_Text PowerText;
+    [SerializeField] GameObject PowerImg;
     private bool pause = false;
     private bool setActive = false;
     private string savedPower;
@@ -46,6 +47,7 @@ public class GameManagement : MonoBehaviour
 
     IEnumerator DisplayPower(string power){
         PowerText.gameObject.SetActive(true);
+        PowerImg.gameObject.SetActive(true);
         switch (power){
             case "Green" : PowerText.text = "You can now double jump"; break;
             case "Red" : PowerText.text = "You can now dash"; break;
@@ -55,6 +57,7 @@ public class GameManagement : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(2f);
         PowerText.gameObject.SetActive(false);
+        PowerImg.gameObject.SetActive(false);
     }
 
     private void CameraManagement(){
@@ -75,10 +78,10 @@ public class GameManagement : MonoBehaviour
             Player.transform.localPosition = new Vector3(Player.transform.localPosition.x-1, Player.transform.localPosition.y, Player.transform.localPosition.z);
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x-(3.531f*size), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
         }
-        if (DistanceY > (Width*size)) {
+        if (DistanceY > (Width*size+1)) {
             Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y-2f, Player.transform.localPosition.z);
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y-(2f*size), Camera.transform.localPosition.z);
-        } else if (DistanceY < (-Width*size)){
+        } else if (DistanceY < (-Width*size-1)){
             Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y+2f, Player.transform.localPosition.z);
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y+(2f*size), Camera.transform.localPosition.z);
         }

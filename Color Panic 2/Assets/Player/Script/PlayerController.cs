@@ -92,41 +92,21 @@ public class PlayerController : MonoBehaviour
     }
 
     private void MoveOppositeX(bool right){
-        if (right && DistanceX > 0){
-            Debug.Log("1");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x+DistanceX*2, this.transform.localPosition.y, this.transform.localPosition.z);
+        if (right){
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x-OppositeX+1, this.transform.localPosition.y, this.transform.localPosition.z);
         } 
-        if (right && DistanceX < 0){
-            Debug.Log("2");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x+(-DistanceX)-1, this.transform.localPosition.y, this.transform.localPosition.z);
-        }
-        if (!right && DistanceX < 0){
-            Debug.Log("3");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x+(DistanceX)*2+1, this.transform.localPosition.y, this.transform.localPosition.z);
-        }
-        if (!right && DistanceX > 0){
-            Debug.Log("4");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x+(-DistanceX)/2+1, this.transform.localPosition.y, this.transform.localPosition.z);
+        if (!right){
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+OppositeX-1, this.transform.localPosition.y, this.transform.localPosition.z);
         }
     }
     
     private void MoveOppositeY(bool up){
         Debug.Log(m_Rigidbody2D.velocity.y);
-        if (up && DistanceY > 0){
-            Debug.Log("1");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+DistanceY*2-1, this.transform.localPosition.z);
+        if (up){
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+OppositeY-1, this.transform.localPosition.z);
         } 
-        if (up && DistanceY < 0){
-            Debug.Log("2");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+(-DistanceY)-1, this.transform.localPosition.z);
-        }
-        if (!up && DistanceY < 0){
-            Debug.Log("3");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-(-DistanceY)*2, this.transform.localPosition.z);
-        }
-        if (!up && DistanceY > 0){
-            Debug.Log("4");
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-(DistanceY/2)+1, this.transform.localPosition.z);
+        if (!up){
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-OppositeY, this.transform.localPosition.z);
         }
     }
 
