@@ -62,7 +62,8 @@ public class PlayerController : MonoBehaviour
 
     public float OppositeX;
     public float OppositeY;
-
+    public float DistanceX;
+    public float DistanceY;
 
     private void Awake()
     {
@@ -88,6 +89,45 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(Die());
         
         
+    }
+
+    private void MoveOppositeX(bool right){
+        if (right && DistanceX > 0){
+            Debug.Log("1");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+DistanceX*2, this.transform.localPosition.y, this.transform.localPosition.z);
+        } 
+        if (right && DistanceX < 0){
+            Debug.Log("2");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+(-DistanceX)-1, this.transform.localPosition.y, this.transform.localPosition.z);
+        }
+        if (!right && DistanceX < 0){
+            Debug.Log("3");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+(DistanceX)*2+1, this.transform.localPosition.y, this.transform.localPosition.z);
+        }
+        if (!right && DistanceX > 0){
+            Debug.Log("4");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+(-DistanceX)/2+1, this.transform.localPosition.y, this.transform.localPosition.z);
+        }
+    }
+    
+    private void MoveOppositeY(bool up){
+        Debug.Log(m_Rigidbody2D.velocity.y);
+        if (up && DistanceY > 0){
+            Debug.Log("1");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+DistanceY*2-1, this.transform.localPosition.z);
+        } 
+        if (up && DistanceY < 0){
+            Debug.Log("2");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+(-DistanceY)-1, this.transform.localPosition.z);
+        }
+        if (!up && DistanceY < 0){
+            Debug.Log("3");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-(-DistanceY)*2, this.transform.localPosition.z);
+        }
+        if (!up && DistanceY > 0){
+            Debug.Log("4");
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-(DistanceY/2)+1, this.transform.localPosition.z);
+        }
     }
 
     IEnumerator Die()
@@ -174,7 +214,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.R)){
             Death();
         }
-
         //Check if the player is in grab
         if (grabbing){
             Grab();

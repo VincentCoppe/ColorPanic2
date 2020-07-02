@@ -62,9 +62,11 @@ public class GameManagement : MonoBehaviour
         float PlayerLoc = Player.transform.localPosition.x;
         float CameraLoc = Camera.transform.localPosition.x;
         float DistanceX = CameraLoc - PlayerLoc;
+        Player.DistanceX = DistanceX;
         float PlayerLocY = Player.transform.localPosition.y;
         float CameraLocY = Camera.transform.localPosition.y;
         float DistanceY = CameraLocY - PlayerLocY;
+        Player.DistanceY = DistanceY;
         if (DistanceX < (-Lenght*size)) {
             Player.transform.localPosition = new Vector3(Player.transform.localPosition.x+1, Player.transform.localPosition.y, Player.transform.localPosition.z);
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x+(3.531f*size), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
