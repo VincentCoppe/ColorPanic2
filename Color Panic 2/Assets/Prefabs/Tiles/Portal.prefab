@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 8352477669745114801}
   - component: {fileID: 3738935930399538703}
   - component: {fileID: 3556076871090716525}
+  - component: {fileID: 7662014740265750754}
+  - component: {fileID: 6415849030259935051}
   m_Layer: 12
-  m_Name: PortalDown
+  m_Name: Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,4 +124,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de1f27a1dbd1534cbf974ef435b979f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Up: 0
+--- !u!114 &7662014740265750754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292328735280419028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Block: 8
+  data: {fileID: 6415849030259935051}
+--- !u!114 &6415849030259935051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7292328735280419028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53639f25416d941458776c7d63921b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _warpTransform: {fileID: 7292328735280419034}
