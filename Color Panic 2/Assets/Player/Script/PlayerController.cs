@@ -73,7 +73,6 @@ public class PlayerController : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_LeftCheckLow = transform.Find("LeftWallCheckLow");
         m_RightCheckLow = transform.Find("RightWallCheckLow");
-        
         m_Anim = GetComponent<Animator>();
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         gravity = m_Rigidbody2D.gravityScale;
@@ -81,16 +80,83 @@ public class PlayerController : MonoBehaviour
         respawn = transform.localPosition;
     }
 
+    private void FixedUpdate()
+    {
+        Grounded = false;
+        OnLeftWall = false;
+        OnRightWall = false;
+
+        //Die if press R
+        if(Input.GetKey(KeyCode.R)){
+            Death();
+        }
+        //Check if the player is in grab
+        if (grabbing){
+            Grab();
+        } else{
+            Ungrab();
+        }
+        m_Anim.SetBool("Grabbing",grabbing);
+        
+        HandleGroundCheck();
+        HandleLeftCheck();
+        HandleRightCheck();
+        HandleDash();
+
+        if (WalljumpTimer>0){
+            WalljumpTimer -= Time.fixedDeltaTime;
+        }
+
+        //Reduce the gravity if the player have the viridian power
+        if (power.HavePower("Viridian")){
+            m_Rigidbody2D.gravityScale = gravity*GravityFactorViridian;
+        } else {
+            m_Rigidbody2D.gravityScale = gravity;
+        }
+        //Cancel the gravity reverse if the player loose viridian
+        if (reverse && !power.HavePower("Viridian")){
+            GravityReverse();
+        }
+
+    }
+
+    //All the movements of the player called when he press keys to move or jump
+    public void Move(float move, bool jump)
+    {
+        //if the player can move, return
+        if (dashing || WalljumpTimer>0 || win || pause || respawning) return; 
+        HandleGrab(move, jump);
+
+        //Flip sprite
+        if ( ((move > 0 && !FacingRight) || (move < 0 && FacingRight)) && reverse == false){
+            Flip();
+        } else if ( ((move < 0 && !FacingRight) || (move > 0 && FacingRight)) && reverse == true){
+            Flip();
+        }
+
+        //Move
+        m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
+        m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
+
+        //Handle jump & differents powers
+        HandleJump(move,jump);
+        if (Input.GetKey("space"))
+            HandlePowerAction(move, jump);
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown("space")){
+            teleport = true;
+        }
+    }
+
     //On death, reset power and move the player to the respawn location
     public void Death()
     {
-        
-        
-        StartCoroutine(Die());
-        
-        
+        StartCoroutine(Die()); 
     }
 
+    //Teleport the player at the opposite of the map on the axis x
     private void MoveOppositeX(bool right){
         if (right){
             this.transform.localPosition = new Vector3(this.transform.localPosition.x-OppositeX+1, this.transform.localPosition.y, this.transform.localPosition.z);
@@ -100,6 +166,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    //Teleport the player at the opposite of the map on the axis y 
     private void MoveOppositeY(bool up){
         Debug.Log(m_Rigidbody2D.velocity.y);
         if (up){
@@ -110,6 +177,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Coroutine called when the player die so play the animation, and teleport him to his checkpoint
     IEnumerator Die()
     {
         respawning = true;
@@ -138,8 +206,6 @@ public class PlayerController : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = true;
        respawning = false;
     }
-
-
 
     //Move on axis X the player
     public void MoveX(float move)
@@ -184,43 +250,6 @@ public class PlayerController : MonoBehaviour
             case "Viridian" : rend.material.color = Viridian; break;
             case "Purple" : rend.material.color = Purple; break;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        Grounded = false;
-        OnLeftWall = false;
-        OnRightWall = false;
-        if(Input.GetKey(KeyCode.R)){
-            Death();
-        }
-        //Check if the player is in grab
-        if (grabbing){
-            Grab();
-        } else{
-            Ungrab();
-        }
-        m_Anim.SetBool("Grabbing",grabbing);
-        
-        HandleGroundCheck();
-        HandleLeftCheck();
-        HandleRightCheck();
-
-        HandleDash();
-
-        if (WalljumpTimer>0){
-            WalljumpTimer -= Time.fixedDeltaTime;
-        }
-
-        if (power.HavePower("Viridian")){
-            m_Rigidbody2D.gravityScale = gravity*GravityFactorViridian;
-        } else {
-            m_Rigidbody2D.gravityScale = gravity;
-        }
-        if (reverse && !power.HavePower("Viridian")){
-            GravityReverse();
-        }
-
     }
 
     //What happen during a dash
@@ -346,70 +375,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //All the movements of the player
-    public void Move(float move, bool jump)
-    {
-        if (dashing || WalljumpTimer>0 || win || pause || respawning) return; 
-        HandleGrab(move, jump);
-
-        //Flip sprite
-        if ( ((move > 0 && !FacingRight) || (move < 0 && FacingRight)) && reverse == false){
-            Flip();
-        } else if ( ((move < 0 && !FacingRight) || (move > 0 && FacingRight)) && reverse == true){
-            Flip();
-        }
-
-        //Move
-        m_Rigidbody2D.velocity = new Vector2(move * m_MaxSpeed, m_Rigidbody2D.velocity.y);
-        m_Anim.SetFloat("AbsSpeed", Mathf.Abs(m_Rigidbody2D.velocity.x));
-
-        HandleJump(move,jump);
-        HandlePowerAction(move, jump);
-    }
-
+    //Function called when the player press jump
     private void HandleJump(float move, bool jump){
-        //High jump
+        //High jump if jump is still down when at the max velocity of the low jump
         if ( !Grounded && !jump && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y > 16 && m_Rigidbody2D.velocity.y < 18 && Hjump && Djump){
             Hjump = false;
             Jump(m_JumpForce*HighJumpFactor);
         }
-        //Low jump
+        //Low jump when press jump
         else if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
             Jump(m_JumpForce*LowJumpFactor);
         }
-        //Double jump
+        //Double jump when press jump in air
         else if ( !Grounded && (Input.GetKey("space") || jump) && power.HavePower("Green") && Djump && !dashing){
             Jump(m_JumpForce);
             Djump = false;
         }
     }
 
+    //Function called when the player press space to use his power
+    //Use a power according to what is the power saved
     private void HandlePowerAction(float move, bool jump){
-        //Dash
-        if (Input.GetKey("space") && !Grounded && power.HavePower("Red") && dash && !grabbing ){
-            Dash(move);
-            dash = false;
-            return;
-        }
-        //Gravity reverse
-        if (Input.GetKey("space") && power.HavePower("Viridian") && gravityReverse){
-            GravityReverse();
-            gravityReverse = false;
-            return;
-        }
-        //Teleport
-        if (Input.GetKey("space") && power.HavePower("Purple") && teleport ){
-            Teleport();
-            return;
+        switch(this.power.LastPower){
+            case "Red" : 
+                //Dash
+                if (!Grounded && dash && !grabbing ){
+                    Dash(move);
+                }
+                break;
+            case "Viridian" : 
+                //Gravity reverse
+                if (gravityReverse){
+                    GravityReverse();
+                    gravityReverse = false; 
+                }
+                break;
+            case "Purple" : 
+                //Teleport
+                if (teleport){
+                    Teleport();
+                }
+                break;
+            //case "Yellow" : ...
+            default : return;
         }
     }
 
-    private void Update() {
-        if(Input.GetKeyDown("space")){
-            teleport = true;
-        }
-    }
-
+    //Open a door if the player own a key
     private void Open(GameObject Door){
         if(keys > 0){
             Key.keyUsed.Invoke(Door.transform);
@@ -424,6 +436,7 @@ public class PlayerController : MonoBehaviour
         keys++;
     }
 
+    //Change the position of the player on the x axis
     private void Teleport(){
         teleport = false;
         Vector3 pos = transform.localPosition;
@@ -471,6 +484,7 @@ public class PlayerController : MonoBehaviour
         WalljumpTimer = 0.1f;
     }
 
+    //Push the player up on y axis
     private void Jump(float force)
     {
         m_Anim.SetBool("Grounded", false);
@@ -479,12 +493,15 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
     }
 
+    //Enable the dash for a short period, making the player moving fast
     private void Dash(float move){
+        dash = false; 
         ResetMovement();
         dashTimer = DashTime;
         dashing = true;
     }
 
+    //Push the player on x or y
     private void Push((float, float) xy)
     {
         m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
@@ -516,6 +533,7 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
     }
 
+    //Power to reverse the gravity affecting the player
     private void GravityReverse(){
         FacingRight = !FacingRight;
         Vector3 theScale = transform.localScale;
