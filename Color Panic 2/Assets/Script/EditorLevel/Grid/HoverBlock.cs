@@ -10,7 +10,12 @@ public class HoverBlock : MonoBehaviour
     public void DisplayCells(GridManager Manager, Dictionary<(int, int), GameObject> blocks) {
         foreach((int, int) coord in blocks.Keys) {
             try {
-                if((!blocksHovered.ContainsKey(coord) /*|| (blocksHovered.ContainsKey(coord) && blocksHovered[coord] != blocks[coord])*/) && (blocks[coord].name == "Erase" || Manager.GridObject[coord.Item1, coord.Item2] == null)) {
+                if((!blocksHovered.ContainsKey(coord)) && (blocks[coord].name == "Erase" || Manager.GridObject[coord.Item1, coord.Item2] == null)) {
+                    GameObject go = Manager.Instantiate(blocks[coord]);
+                    go.transform.localPosition = Manager.GridToPosition(coord.Item1, coord.Item2) + new Vector3(0.5f, 0.5f, 0);
+                    blocksHovered[coord] = go;
+                } else if ((blocksHovered.ContainsKey(coord) && blocksHovered[coord] != blocks[coord])) {
+                    UnityEngine.Object.Destroy(blocksHovered[coord]);
                     GameObject go = Manager.Instantiate(blocks[coord]);
                     go.transform.localPosition = Manager.GridToPosition(coord.Item1, coord.Item2) + new Vector3(0.5f, 0.5f, 0);
                     blocksHovered[coord] = go;

@@ -84,7 +84,7 @@ public class MagicWand : ToolManager, ITool
     public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
         Dictionary<(int, int), GameObject> res = new Dictionary<(int, int), GameObject>();
         foreach ((int, int) blockToPrint in selectedBlocks.Keys) {
-            res[(mouse.Item1+blockToPrint.Item1, mouse.Item2+blockToPrint.Item2)] = selectedBlocks[blockToPrint].GameObject;
+            res[(mouse.Item1+blockToPrint.Item1, mouse.Item2+blockToPrint.Item2)] = selectedBlocks[blockToPrint].Prefab.gameObject;
         }
         return res;
     }
