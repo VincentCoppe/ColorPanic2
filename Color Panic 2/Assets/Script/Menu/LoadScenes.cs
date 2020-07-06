@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadScenes : MonoBehaviour
 {
-    public void LoadGame(){
-        SceneManager.LoadScene("GameScene");
+    public void LoadLevel1(){
+        SceneManager.LoadScene("Level1");
+    }
+    
+    public void LoadLevel2(){
+        SceneManager.LoadScene("Level2");
     }
 
     public void LoadEditor(){
