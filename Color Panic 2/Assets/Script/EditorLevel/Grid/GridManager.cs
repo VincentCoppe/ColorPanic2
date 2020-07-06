@@ -10,7 +10,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] private SpriteRenderer BackgroundImage = null;
     [SerializeField] private TileGameObject Ground = null;
     [SerializeField] private TileGameObject Spike = null;
-    [SerializeField] private ToolManager toolManager = null;
 
     private bool drawing = false;
 
@@ -21,14 +20,16 @@ public class GridManager : MonoBehaviour
 
     
     public ColorPicker Colors = null;
+    public ToolManager toolManager = null;
     public BlockEnum[,] Grid { get { return _grid; } }
     public BlockBase[,] GridObject { get { return _gridObject; } }
     private float cellSize = 1f;
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Setup()
     {
+        
         setupLevelToDraw();
         setupBackground();
     }

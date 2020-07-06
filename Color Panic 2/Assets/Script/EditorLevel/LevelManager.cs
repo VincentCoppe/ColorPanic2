@@ -1,15 +1,33 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
     private LevelData _levelData;
-    private GridManager _prefab;
+    [SerializeField] private GridManager _prefab;
+    [SerializeField] private ColorPicker ColorPicker;
+    [SerializeField] private ToolManager ToolManager;
     private GridManager[,] _gridManagers;
+    private GameObject precedentLevelSelected = null;
+    private GridManager CurrentGM;
     private bool[,] _loaded;
 
     private int activeX, activeY;
+    
+    public void Start()
+    {
+        newLevel();
+    }
 
+    private void newLevel()
+    {
+        
+        CreateGridManagers();
+    }
+
+
+    /*
     public void LoadLevel(LevelData levelData) {
         _levelData = levelData;
         CreateGridManagers();
@@ -37,13 +55,15 @@ public class LevelManager : MonoBehaviour {
         activeX = x;
         activeY = y;
     }
-
+    */
     private GridManager GetGrid(int x, int y) {
         if (x >= 0 && y >= 0 && x < _levelData.Width && y < _levelData.Height)
             return _gridManagers[x,y];
         return null;
+        
     }
 
+    /*
     private void Initialize(int x, int y) {
         var grid = GetGrid(x, y);
         if (grid) {
@@ -59,6 +79,7 @@ public class LevelManager : MonoBehaviour {
             _loaded[x,y] = true;
         }
     }
+    */
 
     private void CreateGridManagers()
     {
@@ -68,17 +89,41 @@ public class LevelManager : MonoBehaviour {
                 Destroy(grid);
             }
         }
-        _gridManagers = new GridManager[_levelData.Width, _levelData.Height];
-        _loaded = new bool[_levelData.Width, _levelData.Height];
-        for (int x = 0; x < _levelData.Width; x++)
+        _gridManagers = new GridManager[8, 8];
+        _loaded = new bool[8, 8];
+        for (int x = 0; x < 8; x++)
         {
-            for (int y = 0; y < _levelData.Height; y++)
+            for (int y = 0; y < 8; y++)
             {
                 _gridManagers[x,y] = Instantiate(_prefab.gameObject, transform).GetComponent<GridManager>();
                 _gridManagers[x,y].transform.localPosition = new Vector2(x * 50, y * 30);
+                _gridManagers[x, y].Colors = ColorPicker;
+                _gridManagers[x, y].toolManager = ToolManager;
+                _gridManagers[x, y].Setup();
                 _gridManagers[x,y].transform.rotation = Quaternion.identity;
                 _loaded[x,y] = false;
+                CurrentGM = _gridManagers[0, 0];
+                CurrentGM.gameObject.SetActive(true);
             }
         }
     }
+
+
+  
+
+
+    public void ChangeLevel(GameObject button)
+    {
+        int x = Int32.Parse(button.name.Split(',')[0].Split('(')[1]);
+        int y = Int32.Parse(button.name.Split(',')[1].Split(')')[0]);
+        button.GetComponent<Image>().color = Color.green;
+        if(precedentLevelSelected!=null)
+            precedentLevelSelected.GetComponent<Image>().color = Color.white;
+        precedentLevelSelected = button;
+        _gridManagers[x, y].gameObject.SetActive(true);
+        CurrentGM.gameObject.SetActive(false);
+        CurrentGM = _gridManagers[x, y];
+        Camera.main.transform.position = new Vector3(4 + 50 * x, 2.5f + 30 * y, -10);
+    }
+    
 }
