@@ -9,6 +9,7 @@ public class MagicWand : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
+    [SerializeField] private LineRenderer lineRenderer = null;
 
     private Dictionary<(int, int), BlockBase> selectedBlocks = new Dictionary<(int, int), BlockBase>();
     private (int, int)[] rect = new (int, int)[2];
@@ -41,14 +42,22 @@ public class MagicWand : ToolManager, ITool
                 reachable[mouse] = gridManager.GridObject[mouse.Item1, mouse.Item2];
                 stack.Push(mouse);
 
+                //List<Vector3> vectors = new List<Vector3>();
                 while(stack.Count > 0) {
                     (int, int) currentCoords = stack.Pop();
                     BlockBase currentBlock = gridManager.GridObject[currentCoords.Item1, currentCoords.Item2];
-                    foreach ((int, int) neighbor in gridManager.Get4Neighbours(currentCoords.Item1, currentCoords.Item2).Where(c => gridManager.Grid[c.Item1, c.Item2] != BlockEnum.Air && !reachable.ContainsKey(c))) {
-                        reachable[neighbor] = gridManager.GridObject[neighbor.Item1, neighbor.Item2];
-                        stack.Push(neighbor);
+                    foreach ((int, int) neighbor in gridManager.Get4Neighbours(currentCoords.Item1, currentCoords.Item2).Where(c => !reachable.ContainsKey(c))) {
+                        if(gridManager.Grid[neighbor.Item1, neighbor.Item2] != BlockEnum.Air) {
+                            reachable[neighbor] = gridManager.GridObject[neighbor.Item1, neighbor.Item2];
+                            stack.Push(neighbor);
+                        } else {
+                            //vectors.Add(gridManager.GridToPosition(currentCoords.Item1, currentCoords.Item2));
+                            //vectors.Add(gridManager.GridToPosition(neighbor.Item1, neighbor.Item2));
+                        }
                     }
                 }
+                //lineRenderer.positionCount = vectors.Count;
+                //lineRenderer.SetPositions(vectors.ToArray());
                 int minX = 9999999;
                 int minY = 9999999;
                 int maxX = -1;
@@ -74,13 +83,7 @@ public class MagicWand : ToolManager, ITool
     }
 
     public void EndAction(){}
-    public HashSet<(int,int)> GetBlocksToHover(GridManager gridManager, int size, (int,int) mouse) {
-        HashSet<(int, int)> res = new HashSet<(int, int)>();
-        foreach((int, int) reached in selectedBlocks.Keys) {
-            res.Add((mouse.Item1+reached.Item1, mouse.Item2+reached.Item2));
-        }
-        return res;
-    }
+    
     public Dictionary<(int, int), GameObject> GetBlocksToHover(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
         Dictionary<(int, int), GameObject> res = new Dictionary<(int, int), GameObject>();
         foreach ((int, int) blockToPrint in selectedBlocks.Keys) {
