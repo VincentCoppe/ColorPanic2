@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class setupUiTable : MonoBehaviour
 {
     public GameObject a00;
-    
-    public LevelManager LevelManager;
+   
 
     
     void Start()
