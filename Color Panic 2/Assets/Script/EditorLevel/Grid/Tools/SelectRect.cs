@@ -29,11 +29,14 @@ public class SelectRect : ToolManager, ITool
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
-        if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)) {
+        if(Input.GetMouseButtonDown(1)) {
             selectedBlocks = new Dictionary<(int, int), BlockBase>();
-            rect = new (int, int)[] {mouse, (-1,-1)};     
+            rect = new (int, int)[] {(-1,-1), (-1,-1)};     
         }
-        else if (Input.GetMouseButton(0)) {
+        else if(Input.GetMouseButtonDown(0) && selectedBlocks.Count == 0) {
+            rect[0] = mouse;
+        }
+        else if (Input.GetMouseButton(0) && selectedBlocks.Count == 0) {
             Vector3[] vectors = new Vector3[4];
             lineRenderer.positionCount = 4;
             vectors[0] = gridManager.GridToPosition(rect[0].Item1, rect[0].Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.zero : Vector3.right) + (rect[0].Item2 <= mouse.Item2 ? Vector3.zero : Vector3.up) - Vector3.forward;
@@ -42,7 +45,7 @@ public class SelectRect : ToolManager, ITool
             vectors[3] = new Vector3(gridManager.GridToPosition(rect[0].Item1, rect[0].Item2).x + (rect[0].Item1 <= mouse.Item1 ? Vector3.zero : Vector3.right).x, gridManager.GridToPosition(mouse.Item1, mouse.Item2).y + (rect[0].Item2 <= mouse.Item2 ? Vector3.up : Vector3.zero).y, -1);
             lineRenderer.SetPositions(vectors);     
         }
-        else if(Input.GetMouseButtonUp(0)) {
+        else if(Input.GetMouseButtonUp(0) && selectedBlocks.Count == 0) {
             rect[1] = mouse;
         }
         if((Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C)) || (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X)) && rect[1] != (-1,-1)) {
