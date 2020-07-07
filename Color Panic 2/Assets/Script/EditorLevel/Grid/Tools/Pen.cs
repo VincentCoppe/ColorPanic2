@@ -27,11 +27,11 @@ public class Pen : ToolManager, ITool
             blocksPrinted = new HashSet<(int, int)>();
         } else if (Input.GetMouseButtonUp(0)) {
             toolsHistory.AddToUndoDraw(blocksPrinted);
-        }
-
-        foreach ((int, int) blockToPrint in ComputeBlocksToPrint(gridManager, size, mouse)) {
-            if(block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral)) {
-                blocksPrinted.Add(blockToPrint);
+        } else if(Input.GetMouseButton(0)) {
+            foreach ((int, int) blockToPrint in ComputeBlocksToPrint(gridManager, size, mouse)) {
+                if(block.Block.NewBlock(block).SpawnTiles(blockToPrint.Item1, blockToPrint.Item2, gridManager, gridManager.Colors.neutral)) {
+                    blocksPrinted.Add(blockToPrint);
+                }
             }
         }
     }

@@ -33,7 +33,7 @@ public class Rect : ToolManager, ITool
             start = (-1, -1);
             toolsHistory.AddToUndoDraw(res);
             rect = new HashSet<(int, int)>();
-        } else if (start != (-1, -1)) {
+        } else if (Input.GetMouseButton(0) && start != (-1, -1)) {
             rect = new HashSet<(int, int)>();
             rect.Add(start);
             (int, int) mouse = gridManager.PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));

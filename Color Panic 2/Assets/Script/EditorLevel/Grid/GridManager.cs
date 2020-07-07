@@ -124,8 +124,8 @@ public class GridManager : MonoBehaviour
             toolManager.DisplayHover(this, mouse);
         } else {
             toolManager.CleanHover();
-        }/*
-        if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X))) {
+        }
+        if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X)) || Input.GetMouseButtonDown(1)) {
             toolManager.Action(this, mouse);
         }
         /*

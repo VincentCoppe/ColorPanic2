@@ -24,12 +24,13 @@ public class Erase : ToolManager, ITool
             blocksErased = new Dictionary<BlockBase, (int, int)>();
         } else if (Input.GetMouseButtonUp(0)) {
             toolsHistory.AddToUndoErase(blocksErased);
-        }
-        foreach ((int, int) blockToErase in ComputeBlocksToErase(gridManager, size, mouse)) {
-            BlockBase blockErase = gridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
-            if(blockErase != null) {
-                blocksErased[blockErase] = blockToErase;
-                blockErase.DestroyTiles(blockToErase.Item1, blockToErase.Item2);
+        } else if(Input.GetMouseButton(0)) {
+            foreach ((int, int) blockToErase in ComputeBlocksToErase(gridManager, size, mouse)) {
+                BlockBase blockErase = gridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
+                if(blockErase != null) {
+                    blocksErased[blockErase] = blockToErase;
+                    blockErase.DestroyTiles(blockToErase.Item1, blockToErase.Item2);
+                }
             }
         }
     }
