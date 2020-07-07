@@ -98,8 +98,9 @@ public class GameManagement : MonoBehaviour
             yield return new  WaitForSeconds(3f);
             string namenum = SceneManager.GetActiveScene().name.Split('-')[1];
             int num = int.Parse(namenum);
-            Debug.Log("Progression : "+num);
             if(ProgressionManagement.progression < num) ProgressionManagement.progression = num;
+            SaveProgression.SaveProg(ProgressionManagement.progression);
+            Debug.Log("Progression : "+ProgressionManagement.progression);
             SceneManager.LoadScene("Menu");
     }
 
