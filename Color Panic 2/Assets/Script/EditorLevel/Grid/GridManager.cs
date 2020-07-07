@@ -125,6 +125,9 @@ public class GridManager : MonoBehaviour
         } else {
             toolManager.CleanHover();
         }
+        if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X)) || Input.GetMouseButtonDown(1)) {
+            toolManager.Action(this, mouse);
+        }
     }
 
     public (int, int)[] Get8Neighbours(int x, int y)

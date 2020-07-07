@@ -20,4 +20,8 @@ public class LoadScenes : MonoBehaviour
     public void LoadEditor(){
         SceneManager.LoadScene("GridTest");
     }
+
+    public void Exit(){
+        Application.Quit();
+    }
 }

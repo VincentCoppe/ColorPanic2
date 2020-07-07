@@ -24,18 +24,11 @@ public class MagicWand : ToolManager, ITool
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
-        if(Input.GetMouseButtonDown(0) && selectedBlocks.Count != 0) {
-            HashSet<(int, int)> res = new HashSet<(int, int)>();
-            foreach((int, int) reached in selectedBlocks.Keys) {
-                try {
-                    if(selectedBlocks[reached].Block.NewBlock(selectedBlocks[reached].Prefab).SpawnTiles(mouse.Item1+reached.Item1, mouse.Item2+reached.Item2, gridManager, gridManager.Colors.neutral)) {
-                        res.Add((reached.Item1+mouse.Item1, reached.Item2+mouse.Item2));
-                    }
-                } catch (IndexOutOfRangeException) {}
-            }
-            toolsHistory.AddToUndoDraw(res); 
+        if(Input.GetMouseButtonDown(1)) {
+            selectedBlocks = new Dictionary<(int, int), BlockBase>();
+            rect = new (int, int)[2];     
         }
-        else if(Input.GetMouseButtonDown(0)) {
+        if(Input.GetMouseButtonDown(0) && selectedBlocks.Count == 0) {
             Stack<(int, int)> stack = new Stack<(int, int)>();
             Dictionary<(int, int), BlockBase> reachable = new Dictionary<(int, int), BlockBase>();
             if(gridManager.Grid[mouse.Item1, mouse.Item2] != BlockEnum.Air) {                
@@ -75,9 +68,16 @@ public class MagicWand : ToolManager, ITool
                 }                
             }          
         }
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.C)) {
-        }
-        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V)) {
+        else if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V) && selectedBlocks.Count != 0) {
+            HashSet<(int, int)> res = new HashSet<(int, int)>();
+            foreach((int, int) reached in selectedBlocks.Keys) {
+                try {
+                    if(selectedBlocks[reached].Block.NewBlock(selectedBlocks[reached].Prefab).SpawnTiles(mouse.Item1+reached.Item1, mouse.Item2+reached.Item2, gridManager, gridManager.Colors.neutral)) {
+                        res.Add((reached.Item1+mouse.Item1, reached.Item2+mouse.Item2));
+                    }
+                } catch (IndexOutOfRangeException) {}
+            }
+            toolsHistory.AddToUndoDraw(res); 
         }
         
     }
