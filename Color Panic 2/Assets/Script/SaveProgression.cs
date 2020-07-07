@@ -5,7 +5,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveProgression
 {
     public static void SaveProg(int progression){
-        Debug.Log("Save : "+progression);
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath+"/player.progression";
         FileStream stream = new FileStream(path, FileMode.Create);

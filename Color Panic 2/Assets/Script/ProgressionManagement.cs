@@ -8,7 +8,6 @@ public class ProgressionManagement : MonoBehaviour
 
     private void Awake() {
         progression = SaveProgression.LoadProgression();
-        Debug.Log("Load : "+progression);
     }
 
     [SerializeField] List<GameObject> Levels;

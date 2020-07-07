@@ -100,7 +100,6 @@ public class GameManagement : MonoBehaviour
             int num = int.Parse(namenum);
             if(ProgressionManagement.progression < num) ProgressionManagement.progression = num;
             SaveProgression.SaveProg(ProgressionManagement.progression);
-            Debug.Log("Progression : "+ProgressionManagement.progression);
             SceneManager.LoadScene("Menu");
     }
 
