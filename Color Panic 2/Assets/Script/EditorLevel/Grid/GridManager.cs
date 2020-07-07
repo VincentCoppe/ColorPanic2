@@ -124,26 +124,7 @@ public class GridManager : MonoBehaviour
             toolManager.DisplayHover(this, mouse);
         } else {
             toolManager.CleanHover();
-        }/*
-        if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X))) {
-            toolManager.Action(this, mouse);
         }
-        /*
-        if (Input.GetMouseButton(2))
-        {
-            (int, int) test = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            try
-            {
-
-                Spike.Block.NewBlock(Spike).SpawnTiles(test.Item1, test.Item2, this, Colors.neutral);
-
-            }
-            catch (IndexOutOfRangeException)
-            {
-
-            }
-        }
-        */
     }
 
     public (int, int)[] Get8Neighbours(int x, int y)

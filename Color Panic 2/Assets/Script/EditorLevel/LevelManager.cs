@@ -8,11 +8,12 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GridManager _prefab;
     [SerializeField] private ColorPicker ColorPicker;
     [SerializeField] private ToolManager ToolManager;
+    [SerializeField] private GameObject A00;
     private GridManager[,] _gridManagers;
     private GameObject precedentLevelSelected = null;
     private GridManager CurrentGM;
     private bool[,] _loaded;
-
+    public GridManager[,] GridManagers {  get { return _gridManagers; } }
     private int activeX, activeY;
     
     public void Start()
@@ -81,7 +82,7 @@ public class LevelManager : MonoBehaviour {
     }
     */
 
-    private void CreateGridManagers()
+    public void CreateGridManagers()
     {
         if (_gridManagers != null) {
             foreach (var grid in _gridManagers)
@@ -104,6 +105,7 @@ public class LevelManager : MonoBehaviour {
                 _loaded[x,y] = false;
                 CurrentGM = _gridManagers[0, 0];
                 CurrentGM.gameObject.SetActive(true);
+                precedentLevelSelected = A00;
             }
         }
     }
@@ -114,16 +116,20 @@ public class LevelManager : MonoBehaviour {
 
     public void ChangeLevel(GameObject button)
     {
-        int x = Int32.Parse(button.name.Split(',')[0].Split('(')[1]);
-        int y = Int32.Parse(button.name.Split(',')[1].Split(')')[0]);
-        button.GetComponent<Image>().color = Color.green;
-        if(precedentLevelSelected!=null)
-            precedentLevelSelected.GetComponent<Image>().color = Color.white;
-        precedentLevelSelected = button;
-        _gridManagers[x, y].gameObject.SetActive(true);
-        CurrentGM.gameObject.SetActive(false);
-        CurrentGM = _gridManagers[x, y];
-        Camera.main.transform.position = new Vector3(4 + 50 * x, 2.5f + 30 * y, -10);
+        if (precedentLevelSelected != button)
+        {
+            int x = Int32.Parse(button.name.Split(',')[0].Split('(')[1]);
+            int y = Int32.Parse(button.name.Split(',')[1].Split(')')[0]);
+            button.GetComponent<Image>().color = Color.green;
+            if(precedentLevelSelected!=null)
+                precedentLevelSelected.GetComponent<Image>().color = Color.white;
+            precedentLevelSelected = button;
+            _gridManagers[x, y].gameObject.SetActive(true);
+            CurrentGM.gameObject.SetActive(false);
+            CurrentGM = _gridManagers[x, y];
+            Camera.main.transform.position = new Vector3(4 + 50 * x, 2.5f + 30 * y, -10);
+
+        }
     }
     
 }

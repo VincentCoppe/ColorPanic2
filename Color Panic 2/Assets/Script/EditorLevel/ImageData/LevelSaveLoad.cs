@@ -1,34 +1,27 @@
 using System;
 using System.IO;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public static class LevelSaveLoad {
-    public static void SaveLevel(LevelData level, string path) {
-        Texture2D target = new Texture2D(level.Width * 50, level.Height * 30, TextureFormat.RGBA32, false);
-        
-        for (int x = 0; x < level.Width; x++)
+public class LevelSaveLoad : MonoBehaviour {
+
+    [SerializeField] private LevelManager _level;
+    public LevelManager Level { get { return _level; }}
+
+    public void SaveLevel(Text path) {
+
+        Texture2D Save = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);
+
+        for (int y = 0; y < Save.height; y++)
         {
-            for (int y = 0; y < level.Height; y++)
-            {
-                SaveGrid(target, level.Blocks[x,y]);
-            }
-        }
-
-        target.Apply();
-
-        byte[] bytes = target.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + "/Resources/levels/testGridLevel.png", bytes);
-    }
-
-    private static void SaveGrid(Texture2D target, BlockBase[,] blocks) {
-        for (int x = 0; x < blocks.GetLength(0); x++)
-        {
-            for (int y = 0; y < blocks.GetLength(1); y++)
+            for (int x = 0; x < Save.width; x++)
             {
                 Color32 color = new Color32();
                 try
                 {
-                    BlockBase block = blocks[x,y];
+
+                    BlockBase block = Level.GridManagers[Mathf.FloorToInt(x / 50), Mathf.FloorToInt(y / 30)].GridObject[x % 50, y % 30];
                     long save = block.Save();
                     byte[] b = BitConverter.GetBytes(save);
                     color.r = b[3];
@@ -36,18 +29,27 @@ public static class LevelSaveLoad {
                     color.b = b[1];
                     color.a = b[0];
 
-                } catch (NullReferenceException e)
+                }
+                catch (NullReferenceException e)
                 {
                     color = Color.white;
-                } finally
-                {
-                    target.SetPixel(y, x, color);
                 }
+                finally
+                {
+                    Save.SetPixel(x, y, color);
+
+                }
+
             }
         }
+        Save.Apply();
+
+        byte[] bytes = Save.EncodeToPNG();
+        File.WriteAllBytes(Application.dataPath + "/Resources/levels/"+path.text+".png", bytes);
+       
     }
 
-    public static LevelData LoadLevel(string path) {
+    public LevelData LoadLevel(string path) {
         byte[] bytes = File.ReadAllBytes(path);
         Texture2D source = null;
         ImageConversion.LoadImage(source, bytes);
@@ -63,7 +65,7 @@ public static class LevelSaveLoad {
         return level;
     }
 
-    private static BlockBase[,] LoadGrid(Texture2D source, int x, int y) {
+    private BlockBase[,] LoadGrid(Texture2D source, int x, int y) {
         BlockBase[,] blocks = new BlockBase[50,30];
         for (int dx = 0; dx < 50; dx++)
         {

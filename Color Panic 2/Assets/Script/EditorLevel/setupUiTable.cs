@@ -23,9 +23,10 @@ public class setupUiTable : MonoBehaviour
                 table[x][y].GetComponent<RectTransform>().localPosition = new Vector3(-63 + x * 18, -36 + y * 11, 0);
                 
                 table[x][y].name = "(" + x + "," + y + ")";
-                    
+               
                 }
             }
         }
+        a00.GetComponent<Image>().color = Color.green;
     }
 }
