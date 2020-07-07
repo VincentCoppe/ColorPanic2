@@ -168,7 +168,6 @@ public class PlayerController : MonoBehaviour
     
     //Teleport the player at the opposite of the map on the axis y 
     private void MoveOppositeY(bool up){
-        Debug.Log(m_Rigidbody2D.velocity.y);
         if (up){
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+OppositeY, this.transform.localPosition.z);
         } 
