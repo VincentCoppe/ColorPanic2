@@ -65,6 +65,13 @@ public class LevelManager : MonoBehaviour {
         
     }
 
+    public void ChangeTheme(int theme)
+    {
+        foreach(GridManager manager in _gridManagers)
+        {
+            manager.ChangeTheme((ThemeEnum)theme);
+        }
+    }
     /*
     private void Initialize(int x, int y) {
         var grid = GetGrid(x, y);
@@ -104,12 +111,13 @@ public class LevelManager : MonoBehaviour {
                 _gridManagers[x, y].Setup();
                 _gridManagers[x,y].transform.rotation = Quaternion.identity;
                 _loaded[x,y] = false;
-                CurrentGM = _gridManagers[0, 0];
-                CurrentGM.gameObject.SetActive(true);
                 precedentLevelSelected = A00;
                 ToolsHistory.GridManager = CurrentGM;
+                _gridManagers[x, y].gameObject.SetActive(false);
             }
         }
+        CurrentGM = _gridManagers[0, 0];
+        CurrentGM.gameObject.SetActive(true);
     }
 
 

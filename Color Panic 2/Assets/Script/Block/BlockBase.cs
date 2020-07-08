@@ -11,7 +11,7 @@ public class BlockBase
 
     protected TileGameObject _prefab;
     protected TileGameObject _instance;
-
+    protected Color[] Colors;
     public GameObject GameObject { get; protected set; }
     public TileGameObject Prefab { get { return _prefab; } }
     public BlockEnum Block { get { return _block; } }
@@ -30,15 +30,16 @@ public class BlockBase
     public virtual void Init(long data) { }
 
 
-    public bool SpawnTiles(int x, int y, GridManager manager, Color[] Colors) {
+    public bool SpawnTiles(int x, int y, GridManager manager, Color[] colors) {
         Manager = manager;
-        return Spawn(x, y, Colors);
+        Colors = colors;
+        return Spawn(x, y);
     }
 
-    public virtual void UpdateColors(Color[] Colors) { }
-    
+    public virtual void UpdateColors(Color[] colors) { Colors = colors; }
+    public virtual void ChangeTheme(int x, int y) { }
 
-    protected virtual bool Spawn(int x, int y, Color[] Colors) {
+    protected virtual bool Spawn(int x, int y) {
         if (Manager.Grid[x, y] != BlockEnum.Air) return false;
         
         Manager.Grid[x, y] = _block;

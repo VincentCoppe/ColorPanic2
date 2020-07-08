@@ -45,11 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c67c981027ffb46baba858bf1905fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Background:
+  - {fileID: 21300000, guid: 6d36e71d1a908ba4ab7f2c0cfa2ce9ba, type: 3}
+  - {fileID: 21300000, guid: c504578ee436e2d4897387ec957c78d9, type: 3}
+  - {fileID: 21300000, guid: c504578ee436e2d4897387ec957c78d9, type: 3}
   BackgroundImage: {fileID: 1293292743272190528}
-  Ground: {fileID: 9184231245416354790, guid: ec20e37c5b39a524798da05fff14a4ad, type: 3}
-  Spike: {fileID: -5844036777933558395, guid: f3364fc8c053ae245ade4675b2920eca, type: 3}
-  toolManager: {fileID: 0}
+  Theme: 0
   Colors: {fileID: 0}
+  toolManager: {fileID: 0}
 --- !u!120 &1293292742330771828
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -5
-  m_Sprite: {fileID: 21300000, guid: 6d36e71d1a908ba4ab7f2c0cfa2ce9ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c504578ee436e2d4897387ec957c78d9, type: 3}
   m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_FlipX: 0
   m_FlipY: 0

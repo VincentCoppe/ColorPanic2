@@ -9,6 +9,7 @@ public class BlockGround : BlockBase
 {
     private CBD_Ground _data;
 
+
     private int[][] Placement = new int[][] {
         new int[]{0,1,3},
         new int[]{1},
@@ -57,9 +58,9 @@ public class BlockGround : BlockBase
         return base.Save();
     }
 
-    protected override bool Spawn(int x, int y, Color[] Colors)
+    protected override bool Spawn(int x, int y)
     {
-        if (base.Spawn(x, y,Colors)) {
+        if (base.Spawn(x, y)) {
             CalculateNeighbours(x, y, true);
             OrientedSpikes(x, y);
             return true;
@@ -103,25 +104,88 @@ public class BlockGround : BlockBase
             AllFalse = (!a) ? AllFalse + Math.Pow(2, i) : AllFalse;
             data.Corners[i].gameObject.SetActive(a);
         }
-        int brick = 0;
-        if (AllFalse == 255)
+        switch(Manager.Theme)
         {
-            brick = UnityEngine.Random.Range(0, 16);
-            if (brick >= 4) brick = 4;
+            case ThemeEnum.Dungeon:
+                int brick = 0;
+                if (AllFalse == 255)
+                {
+                    brick = UnityEngine.Random.Range(0, 16);
+                    if (brick >= 4) brick = 4;
+                }
+                else
+                {
+                    brick = UnityEngine.Random.Range(0, 4);
+                }
+                data.Center[0].sprite = data.Brick1[brick];
+                data.Center[1].sprite = data.Brick2[brick];
+                data.Center[2].sprite = data.Station[0];
+                for (int i = 0; i < data.Corners.Length; i++)
+                {
+                    if(i == 0 || i == 2 || i == 5 || i == 7)
+                    {
+                        data.Corners[i].sprite = data.BrickCorner[0];
+                    } else
+                    {
+                        data.Corners[i].sprite = data.BrickCorner[1];
+                    }
+                }
+                return;
+            case ThemeEnum.Station:
+                for (int i = 0; i < data.Corners.Length; i++)
+                {
+                    if (i == 0 || i == 2 || i == 5 || i == 7)
+                    {
+                        data.Corners[i].sprite = data.StationCorner[0];
+                    }
+                    else
+                    {
+                        data.Corners[i].sprite = data.StationCorner[1];
+                    }
+                    data.Corners[i].color = Colors[2];
+                }
+                
+                
+ 
+                data.Center[0].sprite = data.Station[0];
+                data.Center[1].sprite = data.Station[1];
+                data.Center[2].sprite = data.Station[1];
+
+                return;
         }
-        else
-        {
-            brick = UnityEngine.Random.Range(0, 4);
-        }
-        data.Center[0].sprite = data.Brick1[brick];
-        data.Center[1].sprite = data.Brick2[brick];
     }
 
     public override void UpdateColors(Color[] Colors)
     {
         var data = Data<CBD_Ground>();
-        data.Center[0].color = Colors[1];
-        data.Center[1].color = Colors[2];
-        data.Center[2].color = Colors[0];
+        switch (Manager.Theme)
+        {
+            case ThemeEnum.Dungeon:
+                data.Center[0].color = Colors[1];
+                data.Center[1].color = Colors[2];
+                data.Center[2].color = Colors[0];
+                foreach(var cor in data.Corners)
+                {
+                    cor.color = Color.black;
+                }
+                return;
+            case ThemeEnum.Station:
+                data.Center[0].color = Colors[1];
+                data.Center[1].color = Colors[0];
+                data.Center[2].color = Colors[0];
+                foreach (var cor in data.Corners)
+                {
+                    cor.color = Colors[2];
+                }
+                return;
+
+        }
+        base.UpdateColors(Colors);
+    }
+
+    public override void ChangeTheme(int x, int y)
+    {
+        CalculateNeighbours(x, y, true);
+        UpdateColors(Colors);
     }
 }

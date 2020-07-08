@@ -23,9 +23,9 @@ public class BlockTapis : ObjectBlock
         return base.Save() | ((long)data.Center.localEulerAngles.z << 8);
     }
 
-    protected override bool Spawn(int x, int y, Color[] Colors)
+    protected override bool Spawn(int x, int y)
     {
-        if (base.Spawn(x, y, Colors))
+        if (base.Spawn(x, y))
         {
             
             ObjectType = Data<CBD_Tapis>().ObjectType;

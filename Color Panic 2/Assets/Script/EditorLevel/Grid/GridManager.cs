@@ -7,22 +7,17 @@ public class GridManager : MonoBehaviour
 {
 
 
-    [SerializeField] private SpriteRenderer BackgroundImage = null;
-    [SerializeField] private TileGameObject Ground = null;
-    [SerializeField] private TileGameObject Spike = null;
-
+    [SerializeField] private Sprite[] Background = new Sprite[3];
+    [SerializeField] private SpriteRenderer BackgroundImage;
     private bool drawing = false;
-
-
-    BlockEnum[,] _grid = null;
-    BlockBase[,] _gridObject = null;
+    public ThemeEnum Theme = ThemeEnum.Dungeon;
     LineRenderer LineRenderer = null;
 
     
     public ColorPicker Colors = null;
     public ToolManager toolManager = null;
-    public BlockEnum[,] Grid { get { return _grid; } }
-    public BlockBase[,] GridObject { get { return _gridObject; } }
+    public BlockEnum[,] Grid { get; private set; } = null;
+    public BlockBase[,] GridObject { get; private set; } = null;
     private float cellSize = 1f;
 
 
@@ -36,9 +31,11 @@ public class GridManager : MonoBehaviour
 
     private void setupBackground()
     {
+        //print((int)Theme);
+        BackgroundImage.sprite = Background[(int)Theme];
         BackgroundImage.size = new Vector2(50, 30);
         BackgroundImage.transform.localPosition = new Vector3(- 1, 0, 0);
-        BackgroundImage.color = Colors.neutral[0];
+      //  BackgroundImage.color = Colors.neutral[0];
         
     }
 
@@ -56,8 +53,8 @@ public class GridManager : MonoBehaviour
     private void setupLevelToDraw()
     {
 
-        _grid = new BlockEnum[50, 30];
-        _gridObject = new BlockBase[50, 30];
+        Grid = new BlockEnum[50, 30];
+        GridObject = new BlockBase[50, 30];
         LineRenderer = GetComponent<LineRenderer>();
 
         LineRenderer.SetPosition(0, GridToPosition2(0, 0));
@@ -82,7 +79,23 @@ public class GridManager : MonoBehaviour
         return Instantiate(toSpawn, transform);
     }
 
-
+    public void ChangeTheme(ThemeEnum theme)
+    {
+        Theme = theme;
+        setupBackground();
+        for (int x = 0; x < Grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < Grid.GetLength(1); y++)
+            {
+                if (Grid[x, y] == BlockEnum.Ground)
+                {
+                    BlockGround block = (BlockGround)GridObject[x, y];
+                    block.ChangeTheme(x,y);
+                }
+            }
+        }
+        
+    }
     
     public void ChangeColor()
     {

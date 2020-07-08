@@ -9,10 +9,10 @@ public class WarpBlock : BlockBase
     {
     }
 
-    protected override bool Spawn(int x, int y, Color[] Colors)
+    protected override bool Spawn(int x, int y)
     {
         if (checkSpawn(x,y))
-            if (base.Spawn(x, y, Colors)){
+            if (base.Spawn(x, y)){
                 CalculateOrientation(x,y);
                 return true;
             }

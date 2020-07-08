@@ -1,34 +1,13 @@
 fileFormatVersion: 2
-guid: f5981899a41fad64baba52edd48ad4e3
+guid: 363b0be47c69d414c8ef6311b96ae771
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 203122805781892493
-    second: sandblock_0
+      213: -4614681554025679101
+    second: StationCenter_0
   - first:
-      213: 7520883920080132121
-    second: sandblock_1
-  - first:
-      213: 5132977881634716289
-    second: sandblock_2
-  - first:
-      213: 3934840788723012510
-    second: sandblock_3
-  - first:
-      213: 1012350300858686026
-    second: sandblock_4
-  - first:
-      213: -3326292801567686415
-    second: sandblock_0
-  - first:
-      213: 6643925817259044896
-    second: sandblock_1
-  - first:
-      213: 8722040838762116757
-    second: sandblock_2
-  - first:
-      213: -3598803620794399515
-    second: sandblock_3
+      213: 5273416442928897436
+    second: StationCenter_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -62,9 +41,9 @@ TextureImporter:
     filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -75,7 +54,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -90,9 +69,9 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 64
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -102,9 +81,9 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 64
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
@@ -116,7 +95,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sandblock_0
+      name: StationCenter_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +109,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f08e970252a6d1d0800000000000000
-      internalID: -3326292801567686415
+      spriteID: 30770c4839b55ffb0800000000000000
+      internalID: -4614681554025679101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sandblock_1
+      name: StationCenter_1
       rect:
         serializedVersion: 2
         x: 16
@@ -151,71 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 020b5cb6457f33c50800000000000000
-      internalID: 6643925817259044896
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sandblock_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 596bdd67ee9ea0970800000000000000
-      internalID: 8722040838762116757
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sandblock_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e409269c2b7e0ec0800000000000000
-      internalID: -3598803620794399515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sandblock_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4a11f62c379c0e00800000000000000
-      internalID: 1012350300858686026
+      spriteID: c9d1b79a050fe2940800000000000000
+      internalID: 5273416442928897436
       vertices: []
       indices: 
       edges: []
