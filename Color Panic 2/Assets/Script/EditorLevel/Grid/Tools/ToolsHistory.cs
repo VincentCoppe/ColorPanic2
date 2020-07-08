@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ToolsHistory : MonoBehaviour
 {
-    [SerializeField] private GridManager gridManager = null;
     [SerializeField] private Button undo = null;
     [SerializeField] private Button redo = null;
 
+    public GridManager GridManager;
 
     // VARIABLES POUR UNDO
     private Stack<HashSet<(int, int)>> undoDraw = new Stack<HashSet<(int, int)>>();
@@ -45,6 +45,14 @@ public class ToolsHistory : MonoBehaviour
         redoActions = new Stack<bool>();
     }
 
+    public void ResetHistory() {
+        undoDraw = new Stack<HashSet<(int, int)>>();
+        undoErase = new Stack<Dictionary<BlockBase, (int, int)>>();
+        undoActions = new Stack<bool>();
+        ResetRedo();
+        CheckInteractable();
+    }
+
     private void CheckInteractable() {
         undo.interactable = undoActions.Count != 0;
         redo.interactable = redoActions.Count != 0;
@@ -57,7 +65,7 @@ public class ToolsHistory : MonoBehaviour
             Dictionary<BlockBase, (int,int)> blocksToErase = new Dictionary<BlockBase, (int, int)>();
             foreach ((int, int) blockToErase in blocksDrawn)
             {
-                BlockBase blockErase = gridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
+                BlockBase blockErase = GridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
                 blocksToErase[blockErase] = blockToErase;
                 blockErase?.DestroyTiles(blockToErase.Item1, blockToErase.Item2);
             }
@@ -70,7 +78,7 @@ public class ToolsHistory : MonoBehaviour
             foreach (BlockBase block in blocksErased.Keys)
             {
                 (int, int) coords = blocksErased[block];
-                block.Block.NewBlock(block.Prefab).SpawnTiles(coords.Item1, coords.Item2, gridManager, gridManager.Colors.neutral);
+                block.Block.NewBlock(block.Prefab).SpawnTiles(coords.Item1, coords.Item2, GridManager, GridManager.Colors.neutral);
                 blocksToDraw.Add(coords);
             }
             redoErase.Push(blocksToDraw);
@@ -87,7 +95,7 @@ public class ToolsHistory : MonoBehaviour
             foreach (BlockBase block in blocksErased.Keys)
             {
                 (int, int) coords = blocksErased[block];
-                block.Block.NewBlock(block.Prefab).SpawnTiles(coords.Item1, coords.Item2, gridManager, gridManager.Colors.neutral);
+                block.Block.NewBlock(block.Prefab).SpawnTiles(coords.Item1, coords.Item2, GridManager, GridManager.Colors.neutral);
                 blocksToDraw.Add(coords);
             }
             undoDraw.Push(blocksToDraw);
@@ -98,7 +106,7 @@ public class ToolsHistory : MonoBehaviour
             Dictionary<BlockBase, (int,int)> blocksToErase = new Dictionary<BlockBase, (int, int)>();
             foreach ((int, int) blockToErase in blocksDrawn)
             {
-                BlockBase blockErase = gridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
+                BlockBase blockErase = GridManager.GridObject[blockToErase.Item1, blockToErase.Item2];
                 blocksToErase[blockErase] = blockToErase;
                 blockErase?.DestroyTiles(blockToErase.Item1, blockToErase.Item2);
             }
