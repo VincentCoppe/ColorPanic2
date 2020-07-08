@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Open a door if the player own a key
-    private void Open(GameObject Door){
+    public void Open(GameObject Door){
         if(keys > 0){
             Key.keyUsed.Invoke(Door.transform);
             keys--;
@@ -431,7 +431,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void IncreaseKeys(){
+    public void IncreaseKeys(){
         keys++;
     }
 
