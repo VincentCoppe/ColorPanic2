@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Reset : MonoBehaviour
 {
-    [SerializeField] private GridManager gridManager = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
 
     private Dictionary<BlockBase, (int,int)> blocksErased = new Dictionary<BlockBase, (int, int)>();
     public void Action() {
+        GridManager gridManager  = toolsHistory.GridManager;
         for(int y=0; y<gridManager.GridObject.GetLength(1); y++)
         {
             for(int x=0; x<gridManager.GridObject.GetLength(0); x++) {

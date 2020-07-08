@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private ColorPicker ColorPicker;
     [SerializeField] private ToolManager ToolManager;
     [SerializeField] private GameObject A00;
+    [SerializeField] private ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
     private GameObject precedentLevelSelected = null;
     private GridManager CurrentGM;
@@ -106,6 +107,7 @@ public class LevelManager : MonoBehaviour {
                 CurrentGM = _gridManagers[0, 0];
                 CurrentGM.gameObject.SetActive(true);
                 precedentLevelSelected = A00;
+                ToolsHistory.GridManager = CurrentGM;
             }
         }
     }
@@ -128,8 +130,11 @@ public class LevelManager : MonoBehaviour {
             CurrentGM.gameObject.SetActive(false);
             CurrentGM = _gridManagers[x, y];
             Camera.main.transform.position = new Vector3(4 + 50 * x, 2.5f + 30 * y, -10);
+            ToolsHistory.ResetHistory();
+            ToolsHistory.GridManager = CurrentGM;
 
         }
+       
     }
     
 }

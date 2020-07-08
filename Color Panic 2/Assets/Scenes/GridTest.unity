@@ -5899,9 +5899,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96b110af50d06443bf739f53f98ca85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 0}
   undo: {fileID: 1686876029}
   redo: {fileID: 1171509109}
+  GridManager: {fileID: 0}
 --- !u!1 &1412555992
 GameObject:
   m_ObjectHideFlags: 0
@@ -6711,6 +6711,7 @@ MonoBehaviour:
   ColorPicker: {fileID: 809847136}
   ToolManager: {fileID: 1029405101}
   A00: {fileID: 22621063}
+  ToolsHistory: {fileID: 1410053821}
 --- !u!1 &1686876027
 GameObject:
   m_ObjectHideFlags: 0

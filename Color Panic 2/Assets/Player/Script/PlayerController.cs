@@ -44,9 +44,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 respawn = new Vector3(0,0,0); //Saved respawn location of the player
     private Checkpoint CurrentCheckpoint = null; //Current saved checkpoint of the user
     public MyPower power;
-    private bool Djump; //Can the player do a double jump ?
+    public bool Djump; //Can the player do a double jump ?
     private bool Hjump; //High jump
-    private bool dash;  //The player can dash ?
+    public bool dash;  //The player can dash ?
     private bool dashing;   //The player is currently dashing ?
     private bool grabbing;  //The player is currently grabbing ?
     private float dashTimer;  
@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Get another dash/double jump when the player pick up a power
-    private void Recharge(string power){
+    public void Recharge(string power){
         switch(power){
             case "Green" : Djump = true; break;
             case "Red" : dash = true; break;
@@ -421,7 +421,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Open a door if the player own a key
-    private void Open(GameObject Door){
+    public void Open(GameObject Door){
         if(keys > 0){
             Key.keyUsed.Invoke(Door.transform);
             keys--;
@@ -431,7 +431,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void IncreaseKeys(){
+    public void IncreaseKeys(){
         keys++;
     }
 
