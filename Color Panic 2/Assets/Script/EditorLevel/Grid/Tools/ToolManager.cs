@@ -7,7 +7,7 @@ public class ToolManager : MonoBehaviour
     [SerializeField] private TileGameObject tile = null;
     [SerializeField] private Size size = null;
     [SerializeField] private HoverBlock hoverBlock = null;
-    [SerializeField] private Sprite sprite = null;
+    private Sprite sprite;
     public static ITool Tool;
 
     protected void SetTool(ITool tool) {
@@ -31,6 +31,7 @@ public class ToolManager : MonoBehaviour
     }
 
     public void DisplayHover(GridManager gridManager, (int,int) mouse) {
+        //sprite = Resources.Load<Sprite>("Sprite/Tools/tools.png");
         //Cursor.SetCursor(sprite.texture, Vector2.zero, CursorMode.ForceSoftware);
         hoverBlock.DisplayCells(gridManager, Tool.GetBlocksToHover(gridManager, tile, size.size, mouse));
     }
