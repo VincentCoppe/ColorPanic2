@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
     public bool Grounded { get; private set; } 
     public bool OnLeftWall { get; private set; }
     public bool OnRightWall { get; private set; }
-    private bool FacingRight = true; 
-    private Vector3 respawn = new Vector3(0,0,0); //Saved respawn location of the player
+    public bool FacingRight = true; 
+    public Vector3 respawn = new Vector3(0,0,0); //Saved respawn location of the player
     private Checkpoint CurrentCheckpoint = null; //Current saved checkpoint of the user
     public MyPower power;
     public bool Djump; //Can the player do a double jump ?
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private bool dashing;   //The player is currently dashing ?
     private bool grabbing;  //The player is currently grabbing ?
     private float dashTimer;  
-    private float gravity;
+    public float gravity;
     private float WalljumpTimer = 0;
     private bool reverse = false; //Gravity reverse
     private bool gravityReverse; //Can the player reverse the gravity ?
@@ -436,7 +436,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Change the position of the player on the x axis
-    private void Teleport(){
+    public void Teleport(){
         teleport = false;
         Vector3 pos = transform.localPosition;
         Vector3 newPos = new Vector3();
@@ -507,7 +507,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Set the respawn location & checkpoint saved power when the player walk on a new checkpoint
-    private void SetRespawn(Checkpoint checkpoint){
+    public void SetRespawn(Checkpoint checkpoint){
         //Disable old checkpoint
         if (CurrentCheckpoint != null){
             CurrentCheckpoint.Activation(false);
@@ -533,7 +533,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Power to reverse the gravity affecting the player
-    private void GravityReverse(){
+    public void GravityReverse(){
         FacingRight = !FacingRight;
         Vector3 theScale = transform.localScale;
         gravity *= -1;
