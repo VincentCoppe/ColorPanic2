@@ -484,7 +484,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Push the player up on y axis
-    private void Jump(float force)
+    public void Jump(float force)
     {
         m_Anim.SetBool("Grounded", false);
         Grounded = false;
@@ -501,7 +501,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Push the player on x or y
-    private void Push((float, float) xy)
+    public void Push((float, float) xy)
     {
         m_Rigidbody2D.AddForce(new Vector2(xy.Item1, xy.Item2));
     }
@@ -544,7 +544,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Reset the velocity of the rigidbody to stop the player movement
-    private void ResetMovement(){
+    public void ResetMovement(){
         m_Rigidbody2D.velocity = new Vector2(0f, 0f);
     }
 }

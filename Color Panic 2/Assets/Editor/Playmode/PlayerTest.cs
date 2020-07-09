@@ -139,7 +139,38 @@ namespace Tests
             pc.Teleport();
             Assert.True(pc.gameObject.transform.localPosition.x == -2.5f);
         }
-        
+
+        [Test]
+        public void Player_No_Movement()
+        {
+            GameObject go1 = new GameObject();
+            Rigidbody2D rigid = go1.AddComponent<Rigidbody2D>();
+            PlayerController pc = go1.AddComponent<PlayerController>(); 
+            Assert.True(rigid.velocity == new Vector2(0,0));
+        }
+
+        [Test]
+        public void Player_Push()
+        {
+            GameObject go1 = new GameObject();
+            go1.AddComponent<Animator>();
+            Rigidbody2D rigid = go1.AddComponent<Rigidbody2D>();
+            PlayerController pc = go1.AddComponent<PlayerController>(); 
+            rigid.velocity = new Vector2(10,10);
+            Assert.True(rigid.velocity == new Vector2(10,10));
+        }
+
+        [Test]
+        public void Player_Reset_Movement()
+        {
+            GameObject go1 = new GameObject();
+            go1.AddComponent<Animator>();
+            Rigidbody2D rigid = go1.AddComponent<Rigidbody2D>();
+            PlayerController pc = go1.AddComponent<PlayerController>(); 
+            rigid.velocity = new Vector2(10,10);
+            pc.ResetMovement();
+            Assert.True(rigid.velocity == new Vector2(0,0));
+        }
 
     }
 }
