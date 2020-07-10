@@ -39,10 +39,10 @@ public class SelectRect : ToolManager, ITool
         else if (Input.GetMouseButton(0) && selectedBlocks.Count == 0) {
             Vector3[] vectors = new Vector3[4];
             lineRenderer.positionCount = 4;
-            vectors[0] = gridManager.GridToPosition(rect[0].Item1, rect[0].Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.zero : Vector3.right) + (rect[0].Item2 <= mouse.Item2 ? Vector3.zero : Vector3.up) - Vector3.forward;
-            vectors[1] = new Vector3((gridManager.GridToPosition(mouse.Item1, mouse.Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.right : Vector3.zero)).x, (gridManager.GridToPosition(rect[0].Item1, rect[0].Item2) + (rect[0].Item2 <= mouse.Item2 ? Vector3.zero : Vector3.up)).y, -1);
-            vectors[2] = gridManager.GridToPosition(mouse.Item1, mouse.Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.right : Vector3.zero) + (rect[0].Item2 <= mouse.Item2 ? Vector3.up : Vector3.zero) - Vector3.forward;
-            vectors[3] = new Vector3(gridManager.GridToPosition(rect[0].Item1, rect[0].Item2).x + (rect[0].Item1 <= mouse.Item1 ? Vector3.zero : Vector3.right).x, gridManager.GridToPosition(mouse.Item1, mouse.Item2).y + (rect[0].Item2 <= mouse.Item2 ? Vector3.up : Vector3.zero).y, -1);
+            vectors[0] = gridManager.GridToPosition(rect[0].Item1, rect[0].Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.zero : Vector3.right) + (rect[0].Item2 <= mouse.Item2 ? Vector3.zero : Vector3.up) - Vector3.forward + gridManager.transform.position;
+            vectors[1] = new Vector3((gridManager.GridToPosition(mouse.Item1, mouse.Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.right : Vector3.zero)).x, (gridManager.GridToPosition(rect[0].Item1, rect[0].Item2) + (rect[0].Item2 <= mouse.Item2 ? Vector3.zero : Vector3.up)).y, -1) + gridManager.transform.position;
+            vectors[2] = gridManager.GridToPosition(mouse.Item1, mouse.Item2) + (rect[0].Item1 <= mouse.Item1 ? Vector3.right : Vector3.zero) + (rect[0].Item2 <= mouse.Item2 ? Vector3.up : Vector3.zero) - Vector3.forward + gridManager.transform.position;
+            vectors[3] = new Vector3(gridManager.GridToPosition(rect[0].Item1, rect[0].Item2).x + (rect[0].Item1 <= mouse.Item1 ? Vector3.zero : Vector3.right).x, gridManager.GridToPosition(mouse.Item1, mouse.Item2).y + (rect[0].Item2 <= mouse.Item2 ? Vector3.up : Vector3.zero).y, -1) + gridManager.transform.position;
             lineRenderer.SetPositions(vectors);     
         }
         else if(Input.GetMouseButtonUp(0) && selectedBlocks.Count == 0) {

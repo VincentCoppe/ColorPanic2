@@ -5109,9 +5109,9 @@ MonoBehaviour:
   m_JumpForce: 1500
   DashTime: 0.2
   DashSpeed: 30
-  GrabUpFactor: 0.95
+  GrabUpFactor: 1
   GrabDownFactor: 1
-  HighJumpFactor: 0.9
+  HighJumpFactor: 0.95
   LowJumpFactor: 0.7
   m_WhatIsGround:
     serializedVersion: 2
@@ -5123,6 +5123,8 @@ MonoBehaviour:
   Purple: {r: 0.6585065, g: 0.380429, b: 0.7830189, a: 1}
   SpawnParticle: {fileID: 2687266948236445254}
   DeadParticle: {fileID: 2687266948236445273}
+  Djump: 0
+  dash: 0
   win: 0
   pause: 0
   teleport: 0
