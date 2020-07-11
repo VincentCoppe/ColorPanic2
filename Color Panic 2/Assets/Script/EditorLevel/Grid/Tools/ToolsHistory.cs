@@ -20,6 +20,10 @@ public class ToolsHistory : MonoBehaviour
     private Stack<HashSet<(int, int)>> redoErase = new Stack<HashSet<(int, int)>>();
     private Stack<bool> redoActions = new Stack<bool>();
 
+    public void SetCurrentGM(GridManager gm) {
+        GridManager = gm;
+    }
+
     // METHODES POUR UNDO
     public void AddToUndoDraw(HashSet<(int, int)> action) {
         if(action.Count > 0) {
@@ -59,6 +63,9 @@ public class ToolsHistory : MonoBehaviour
     }
 
     public void UndoAction() {
+        if(GridManager == null) {
+            GridManager = Object.FindObjectOfType<LevelManager>().CurrentGM;
+        }
         // Si la dernière action est du dessin, alors on efface
         if(undoActions.Pop()) {
             HashSet<(int, int)> blocksDrawn = undoDraw.Pop();

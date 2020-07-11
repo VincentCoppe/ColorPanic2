@@ -10,7 +10,7 @@ public class Reset : MonoBehaviour
 
     private Dictionary<BlockBase, (int,int)> blocksErased = new Dictionary<BlockBase, (int, int)>();
     public void Action() {
-        GridManager gridManager  = toolsHistory.GridManager;
+        GridManager gridManager = toolsHistory.GridManager;
         for(int y=0; y<gridManager.GridObject.GetLength(1); y++)
         {
             for(int x=0; x<gridManager.GridObject.GetLength(0); x++) {

@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
     private GameObject precedentLevelSelected = null;
-    private GridManager CurrentGM;
+    public GridManager CurrentGM;
     private bool[,] _loaded;
     public GridManager[,] GridManagers {  get { return _gridManagers; } }
     private int activeX, activeY;
@@ -112,7 +112,7 @@ public class LevelManager : MonoBehaviour {
                 _gridManagers[x,y].transform.rotation = Quaternion.identity;
                 _loaded[x,y] = false;
                 precedentLevelSelected = A00;
-                ToolsHistory.GridManager = CurrentGM;
+                ToolsHistory.SetCurrentGM(CurrentGM);
                 _gridManagers[x, y].gameObject.SetActive(false);
             }
         }
@@ -139,7 +139,7 @@ public class LevelManager : MonoBehaviour {
             CurrentGM = _gridManagers[x, y];
             Camera.main.transform.position = new Vector3(4 + 50 * x, 2.5f + 30 * y, -10);
             ToolsHistory.ResetHistory();
-            ToolsHistory.GridManager = CurrentGM;
+            ToolsHistory.SetCurrentGM(CurrentGM);
 
         }
        
