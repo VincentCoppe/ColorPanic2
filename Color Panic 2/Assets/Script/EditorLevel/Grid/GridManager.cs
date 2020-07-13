@@ -136,6 +136,7 @@ public class GridManager : MonoBehaviour
         if(mouse != (-1,-1)) {
             toolManager.DisplayHover(this, mouse);
         } else {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); 
             toolManager.CleanHover();
         }
         if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X)) || Input.GetMouseButtonDown(1)) {

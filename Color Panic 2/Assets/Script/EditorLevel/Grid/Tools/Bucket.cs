@@ -9,12 +9,16 @@ public class Bucket : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
+    [SerializeField] private Sprite iconCursor = null;
 
     public void ClickIcon() {
         SetTool(this);
     }
     public void SetBgColor(Color color) {
         image.color = color;
+    }
+    public Sprite GetCursor() {
+        return iconCursor;
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {

@@ -8,6 +8,7 @@ public class Rect : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
+    [SerializeField] private Sprite iconCursor = null;
     private HashSet<(int, int)> rect = new HashSet<(int, int)>();
     private (int, int) start = (-1, -1);
 
@@ -16,6 +17,9 @@ public class Rect : ToolManager, ITool
     }
     public void SetBgColor(Color color) {
         image.color = color;
+    }
+    public Sprite GetCursor() {
+        return iconCursor;
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse2) {       

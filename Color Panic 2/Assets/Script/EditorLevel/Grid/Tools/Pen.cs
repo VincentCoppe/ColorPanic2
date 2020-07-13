@@ -8,11 +8,16 @@ public class Pen : ToolManager, ITool
 {
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
+    [SerializeField] private Sprite iconCursor = null;
     private HashSet<(int,int)> blocksPrinted = new HashSet<(int, int)>();
 
     // Pen sélectionné par défaut
     private void Start() {
         ClickIcon();
+    }
+
+    public Sprite GetCursor() {
+        return iconCursor;
     }
 
     public void ClickIcon() {

@@ -10,6 +10,7 @@ public class MagicWand : ToolManager, ITool
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
     [SerializeField] private LineRenderer lineRenderer = null;
+    [SerializeField] private Sprite iconCursor = null;
 
     private Dictionary<(int, int), BlockBase> selectedBlocks = new Dictionary<(int, int), BlockBase>();
     private (int, int)[] rect = new (int, int)[2];
@@ -21,6 +22,10 @@ public class MagicWand : ToolManager, ITool
     }
     public void SetBgColor(Color color) {
         image.color = color;
+    }
+
+    public Sprite GetCursor() {
+        return iconCursor;
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {

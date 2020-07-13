@@ -9,6 +9,7 @@ public class Erase : ToolManager, ITool
     [SerializeField] private Image image = null;
     [SerializeField] private ToolsHistory toolsHistory = null;
     [SerializeField] private Transform hoverErase = null;
+    [SerializeField] private Sprite iconCursor = null;
     private Dictionary<BlockBase, (int,int)> blocksErased = new Dictionary<BlockBase, (int, int)>();
 
     public void ClickIcon() {
@@ -17,6 +18,10 @@ public class Erase : ToolManager, ITool
 
     public void SetBgColor(Color color) {
         image.color = color;
+    }
+
+    public Sprite GetCursor() {
+        return iconCursor;
     }
 
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
