@@ -36,7 +36,8 @@ public class SelectRect : ToolManager, ITool
     public void Action(GridManager gridManager, TileGameObject block, int size, (int,int) mouse) {
         if(Input.GetMouseButtonDown(1)) {
             selectedBlocks = new Dictionary<(int, int), BlockBase>();
-            rect = new (int, int)[] {(-1,-1), (-1,-1)};     
+            rect = new (int, int)[] {(-1,-1), (-1,-1)};
+            lineRenderer.positionCount = 0;    
         }
         else if(Input.GetMouseButtonDown(0) && selectedBlocks.Count == 0) {
             rect[0] = mouse;
