@@ -13,8 +13,12 @@ public class LoadScenes : MonoBehaviour
         SceneManager.LoadScene("Level-2");
     }
 
-        public void LoadLevel3(){
+    public void LoadLevel3(){
         SceneManager.LoadScene("Level-3");
+    }
+
+    public void LoadSpecial1(){
+        SceneManager.LoadScene("Special-1");
     }
 
     public void LoadEditor(){
