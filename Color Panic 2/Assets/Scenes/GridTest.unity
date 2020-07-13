@@ -1422,6 +1422,7 @@ MonoBehaviour:
   toolsHistory: {fileID: 1410053821}
   hoverErase: {fileID: 3353828364201586653, guid: f856d89ef84c7dd4aa6637accf1bfa17,
     type: 3}
+  iconCursor: {fileID: 21300000, guid: f3848a5a186d9c246bbb699eb4c8dc7d, type: 3}
 --- !u!114 &385722983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3488,6 +3489,7 @@ MonoBehaviour:
   hoverBlock: {fileID: 0}
   image: {fileID: 853220546}
   toolsHistory: {fileID: 1410053821}
+  iconCursor: {fileID: 21300000, guid: c049fd24ae61dc64db3e896578c5fb5b, type: 3}
 --- !u!1 &874152913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,6 +3886,7 @@ MonoBehaviour:
   image: {fileID: 903443081}
   toolsHistory: {fileID: 1410053821}
   lineRenderer: {fileID: 903443083}
+  iconCursor: {fileID: 21300000, guid: dea0ec6d5811bde4db06b4f342bc9da4, type: 3}
 --- !u!1 &911834895
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,6 +4037,7 @@ MonoBehaviour:
   hoverBlock: {fileID: 0}
   image: {fileID: 911834898}
   toolsHistory: {fileID: 1410053821}
+  iconCursor: {fileID: 21300000, guid: e90b52ca55cfe3d4ea50b7995c747112, type: 3}
 --- !u!1 &949498486
 GameObject:
   m_ObjectHideFlags: 0
@@ -7705,8 +7709,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1122717393}
   m_HandleRect: {fileID: 1122717392}
   m_Direction: 0
-  m_Value: -0.0000006781675
-  m_Size: 0.93959725
+  m_Value: -0.0000006781684
+  m_Size: 0.9395973
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9651,6 +9655,7 @@ MonoBehaviour:
   hoverBlock: {fileID: 0}
   image: {fileID: 1784074827}
   toolsHistory: {fileID: 1410053821}
+  iconCursor: {fileID: 21300000, guid: c29b7e61cea529a4487c87cfe48254f3, type: 3}
 --- !u!1001 &1784143186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10396,7 +10401,8 @@ MonoBehaviour:
   hoverBlock: {fileID: 0}
   image: {fileID: 1988722796}
   toolsHistory: {fileID: 1410053821}
-  lineRenderer: {fileID: 0}
+  lineRenderer: {fileID: 1988722799}
+  iconCursor: {fileID: 21300000, guid: 5dab069ef270f19499c81c8446d6a17c, type: 3}
 --- !u!120 &1988722799
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -10793,6 +10799,7 @@ MonoBehaviour:
   hoverBlock: {fileID: 0}
   image: {fileID: 2085639236}
   toolsHistory: {fileID: 1410053821}
+  iconCursor: {fileID: 21300000, guid: 4ce3411f530f3e7478e18f2849599a4d, type: 3}
 --- !u!114 &2085639235
 MonoBehaviour:
   m_ObjectHideFlags: 0
