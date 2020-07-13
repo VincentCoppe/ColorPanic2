@@ -44,6 +44,21 @@ public class GridManager : MonoBehaviour
         return new Vector3(x, y) * (cellSize) - new Vector3(Mathf.FloorToInt(15 * Camera.main.aspect), Mathf.FloorToInt(15), 0f);
     }
 
+    internal void Clear()
+    {
+        for (int y = 0; y < GridObject.GetLength(1); y++)
+        {
+            for (int x = 0; x <GridObject.GetLength(0); x++)
+            {
+                BlockBase blockToErase = GridObject[x, y];
+                if (blockToErase != null)
+                {
+                    blockToErase.DestroyTiles(x, y);
+                }
+            }
+        }
+    }
+
     public Vector3 GridToPosition2(int x, int y)
     {
         return new Vector3(x, y) * (cellSize) - new Vector3(Mathf.FloorToInt(15 * Camera.main.aspect), Mathf.FloorToInt(15), 0f) + transform.position;

@@ -28,36 +28,6 @@ public class LevelManager : MonoBehaviour {
         CreateGridManagers();
     }
 
-
-    /*
-    public void LoadLevel(LevelData levelData) {
-        _levelData = levelData;
-        CreateGridManagers();
-    }
-
-    public void LoadGrid(int x, int y) {
-        GetGrid(activeX, activeY)?.gameObject.SetActive(false);
-        GetGrid(activeX-1, activeY)?.gameObject.SetActive(false);
-        GetGrid(activeX+1, activeY)?.gameObject.SetActive(false);
-        GetGrid(activeX, activeY-1)?.gameObject.SetActive(false);
-        GetGrid(activeX, activeY+1)?.gameObject.SetActive(false);
-
-        GetGrid(x, y)?.gameObject.SetActive(true);
-        GetGrid(x-1, y)?.gameObject.SetActive(true);
-        GetGrid(x+1, y)?.gameObject.SetActive(true);
-        GetGrid(x, y-1)?.gameObject.SetActive(true);
-        GetGrid(x, y+1)?.gameObject.SetActive(true);
-
-        Initialize(x, y);
-        Initialize(x-1, y);
-        Initialize(x+1, y);
-        Initialize(x, y-1);
-        Initialize(x, y+1);
-
-        activeX = x;
-        activeY = y;
-    }
-    */
     private GridManager GetGrid(int x, int y) {
         if (x >= 0 && y >= 0 && x < _levelData.Width && y < _levelData.Height)
             return _gridManagers[x,y];
@@ -72,23 +42,14 @@ public class LevelManager : MonoBehaviour {
             manager.ChangeTheme((ThemeEnum)theme);
         }
     }
-    /*
-    private void Initialize(int x, int y) {
-        var grid = GetGrid(x, y);
-        if (grid) {
-            if (!_loaded[x,y]) {
-                for (int dx = 0; dx < 50; x++)
-                {
-                    for (int dy = 0; dy < 30; dy++)
-                    {
-                        _levelData.Blocks[x,y][dx,dy].SpawnTiles(dx, dy, grid, _levelData.Colors);
-                    }
-                }
-            }
-            _loaded[x,y] = true;
+
+    public void Clear()
+    {
+        foreach (GridManager manager in _gridManagers)
+        {
+            manager.Clear();
         }
     }
-    */
 
     public void CreateGridManagers()
     {

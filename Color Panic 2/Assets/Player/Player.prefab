@@ -4947,6 +4947,8 @@ GameObject:
   - component: {fileID: 3105630702609896180}
   - component: {fileID: 3105630702609896181}
   - component: {fileID: 3105630702609896182}
+  - component: {fileID: 1393818005703576183}
+  - component: {fileID: 4059083009305794577}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5123,8 +5125,11 @@ MonoBehaviour:
   Purple: {r: 0.6585065, g: 0.380429, b: 0.7830189, a: 1}
   SpawnParticle: {fileID: 2687266948236445254}
   DeadParticle: {fileID: 2687266948236445273}
+  FacingRight: 1
+  respawn: {x: 0, y: 0, z: 0}
   Djump: 0
   dash: 0
+  gravity: 0
   win: 0
   pause: 0
   teleport: 0
@@ -5143,6 +5148,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09602638bf585764686d7c04c31c0ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1393818005703576183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105630702609896187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Block: 3
+  data: {fileID: 4059083009305794577}
+--- !u!114 &4059083009305794577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105630702609896187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7a953ae1ba32cbcb22a09c2ec7da9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3105630702610544724
