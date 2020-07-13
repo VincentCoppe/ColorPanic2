@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
     public float DistanceX;
     public float DistanceY;
 
+    public int coin = 0;
+
     private void Awake()
     {
         m_GroundCheck = transform.Find("GroundCheck");
@@ -78,6 +80,10 @@ public class PlayerController : MonoBehaviour
         gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
         respawn = transform.localPosition;
+    }
+
+    private void Coin(){
+        coin++;
     }
 
     private void FixedUpdate()

@@ -98,9 +98,16 @@ public class GameManagement : MonoBehaviour
             yield return new  WaitForSeconds(3f);
             string namenum = SceneManager.GetActiveScene().name.Split('-')[1];
             int num = int.Parse(namenum);
-            if(ProgressionManagement.progression < num) ProgressionManagement.progression = num;
-            SaveProgression.SaveProg(ProgressionManagement.progression);
+            if (SceneManager.GetActiveScene().name.Split('-')[0] != "Special"){
+                Save(num);
+            }
             SceneManager.LoadScene("Menu");
+    }
+
+    private void Save(int num){
+        if(ProgressionManagement.progression[0] < num) ProgressionManagement.progression[0] = num;
+        if(ProgressionManagement.progression[num] < Player.coin) ProgressionManagement.progression[num] = Player.coin;
+        SaveProgression.SaveProg(ProgressionManagement.progression);
     }
 
     private void PauseManagement(){
