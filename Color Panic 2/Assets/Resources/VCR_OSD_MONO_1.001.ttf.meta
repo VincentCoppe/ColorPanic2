@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: eb0372016c35b4044a850431ef908310
+guid: 3ca93f4db860ef94c980e7ca8712e367
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -1
+  forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Bit Cell
+  - VCR OSD Mono
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 3
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

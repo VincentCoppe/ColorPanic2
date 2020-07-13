@@ -10,10 +10,10 @@ public enum BlockEnum
     Player,
     Trinket,
     Checkpoint,
-    Powerup,
-    Object,
     Warp,
-    End
+    End,
+    Powerup,
+    Object
 }
 
 public static class BlockEnumExt {
@@ -24,6 +24,9 @@ public static class BlockEnumExt {
             case BlockEnum.Powerup: return new BlockPowerup(prefab);
             case BlockEnum.Checkpoint: return new CheckpointBlock(prefab);
             case BlockEnum.Warp: return new WarpBlock(prefab);
+            case BlockEnum.End: return new EndBlock(prefab);
+            case BlockEnum.Player: return new PlayerBlock(prefab);
+            case BlockEnum.Trinket: return new TrinketBlock(prefab);
             case BlockEnum.Object:
                 switch (((CBD_Object)prefab.Data).ObjectType)
                 {

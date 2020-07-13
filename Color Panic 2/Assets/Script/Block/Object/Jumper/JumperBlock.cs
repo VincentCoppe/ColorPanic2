@@ -10,7 +10,7 @@ public class JumperBlock : ObjectBlock
     public override long Save()
     {
         var data = Data<CBD_Jumper>();
-        return base.Save() | ((long) (data.JumperTransform.localEulerAngles.z/2)<<8);
+        return base.Save() | ((long) (data.JumperTransform.localEulerAngles.z)<<8);
     }
 
     protected override bool Spawn(int x, int y)
