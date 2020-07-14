@@ -9,6 +9,10 @@ public class ToolManager : MonoBehaviour
     [SerializeField] private HoverBlock hoverBlock = null;
     public static ITool Tool;
 
+    private void Start() {
+        SetTool(Object.FindObjectOfType<Pen>());
+    }
+
     protected void SetTool(ITool tool) {
         Tool?.SetBgColor(new Color(1,1,1));
         Tool = tool;
