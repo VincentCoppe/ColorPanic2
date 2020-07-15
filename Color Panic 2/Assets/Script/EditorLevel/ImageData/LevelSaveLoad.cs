@@ -62,13 +62,13 @@ public class LevelSaveLoad : MonoBehaviour {
        
     }
 
-    public void LoadLevel(TMP_Text path) {
+    public void LoadLevel(string path) {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
         print("Streaming Assets Path: " + Application.streamingAssetsPath);
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + path.text + ".png");
+            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + path);
 
         }
         catch(Exception e)
