@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManagement : MonoBehaviour
 {
 
-    [SerializeField] PlayerController Player;
+    private PlayerController Player;
     [SerializeField] Camera Camera;
     [SerializeField] GameObject WinText;
     [SerializeField] GameObject PauseMenu;
@@ -22,7 +22,8 @@ public class GameManagement : MonoBehaviour
     [SerializeField] private float Lenght = 1.8f;
     [SerializeField] private float Width = 0.91f;
 
-    private void Start() {
+    public void SetPlayer(PlayerController player){
+        this.Player = player;
         MovementX = Lenght*Camera.orthographicSize;
         MovementY = Width*Camera.orthographicSize;
         Player.OppositeX = MovementX*2;

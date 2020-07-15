@@ -83,6 +83,10 @@ public class LevelManager : MonoBehaviour {
         }
         CurrentGM = _gridManagers[0, 0];
         CurrentGM.gameObject.SetActive(true);
+        CurrentGM = _gridManagers[0, 1];
+        CurrentGM.gameObject.SetActive(true);
+        CurrentGM = _gridManagers[1, 0];
+        CurrentGM.gameObject.SetActive(true);
     }
 
 

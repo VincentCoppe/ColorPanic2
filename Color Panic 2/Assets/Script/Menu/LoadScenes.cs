@@ -33,8 +33,9 @@ public class LoadScenes : MonoBehaviour
         if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded)
         {         
             aaaaa = FindObjectOfType<LevelSaveLoad>();
-          //  aaaaa.LoadLevel(levelName);
+            aaaaa.LoadLevel(levelName.text);
             loaded = true;
+            FindObjectOfType<GameManagement>().SetPlayer(FindObjectOfType<PlayerController>());
         }
         else if(SceneManager.GetSceneByName("Menu") == SceneManager.GetActiveScene() && loaded)
         {
