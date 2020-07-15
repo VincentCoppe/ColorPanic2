@@ -3,7 +3,6 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class LevelSaveLoad : MonoBehaviour {
 
@@ -63,12 +62,11 @@ public class LevelSaveLoad : MonoBehaviour {
        
     }
 
-    public void LoadLevel() {
-        string path = EditorUtility.OpenFilePanel("Load a level", "Assets/Resources/levels", "png");
+    public void LoadLevel(TMP_Text path) {
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(path);
+            bytes = File.ReadAllBytes(Application.dataPath + "/Resources/levels/" + path.text + ".png");
 
         }
         catch
@@ -78,7 +76,6 @@ public class LevelSaveLoad : MonoBehaviour {
         Texture2D source = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);
         source.LoadImage(bytes);
         _level.Clear();
-        _level.ClearHistory();
         
         bool theme =false;
         for (int x=0; x<source.width; x++)

@@ -51,10 +51,6 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public void ClearHistory() {
-        ToolsHistory.ResetHistory();
-    }
-
     public void CreateGridManagers()
     {
         if (_gridManagers != null) {
