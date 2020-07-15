@@ -130,32 +130,36 @@ public class GridManager : MonoBehaviour
     
     public void Update()
     {
-        (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
+        if (toolManager != null)
         {
-            if(Input.GetMouseButtonDown(0)) {
-                drawing = mouse != (-1,-1);
-            }
-            if (drawing && mouse != (-1,-1)) {
-                toolManager.Action(this,mouse);
-            }
-            if(mouse != (-1,-1) && Input.GetMouseButtonUp(0)){
-                drawing = false;
-            }
-            if(Input.GetMouseButtonUp(0) && drawing && mouse == (-1,-1)) {
-                toolManager.EndAction();
-                drawing = false;
-            }
+            (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))
+            {
+                if(Input.GetMouseButtonDown(0)) {
+                    drawing = mouse != (-1,-1);
+                }
+                if (drawing && mouse != (-1,-1)) {
+                    toolManager.Action(this,mouse);
+                }
+                if(mouse != (-1,-1) && Input.GetMouseButtonUp(0)){
+                    drawing = false;
+                }
+                if(Input.GetMouseButtonUp(0) && drawing && mouse == (-1,-1)) {
+                    toolManager.EndAction();
+                    drawing = false;
+                }
             
-        }
-        if(mouse != (-1,-1)) {
-            toolManager.DisplayHover(this, mouse);
-        } else {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); 
-            toolManager.CleanHover();
-        }
-        if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X)) || Input.GetMouseButtonDown(1)) {
-            toolManager.Action(this, mouse);
+            }
+            if(mouse != (-1,-1)) {
+                toolManager.DisplayHover(this, mouse);
+            } else {
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); 
+                toolManager.CleanHover();
+            }
+            if(Input.GetKey(KeyCode.LeftControl) && (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.X)) || Input.GetMouseButtonDown(1)) {
+                toolManager.Action(this, mouse);
+            }
+
         }
     }
 

@@ -58,19 +58,22 @@ public class LevelSaveLoad : MonoBehaviour {
         Save.Apply();
 
         byte[] bytes = Save.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + "/Resources/levels/"+path.text+".png", bytes);
+        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/"+path.text+".png", bytes);
        
     }
 
     public void LoadLevel(TMP_Text path) {
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
+        print("Streaming Assets Path: " + Application.streamingAssetsPath);
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.dataPath + "/Resources/levels/" + path.text + ".png");
+            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + path.text + ".png");
 
         }
-        catch
+        catch(Exception e)
         {
+            Debug.Log(e);
             return;
         }
         Texture2D source = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);

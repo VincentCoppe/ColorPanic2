@@ -72,8 +72,12 @@ public class LevelManager : MonoBehaviour {
                 _gridManagers[x, y].Setup();
                 _gridManagers[x,y].transform.rotation = Quaternion.identity;
                 _loaded[x,y] = false;
-                precedentLevelSelected = A00;
-                ToolsHistory.SetCurrentGM(CurrentGM);
+                if (ToolManager != null)
+                {
+                    precedentLevelSelected = A00;
+                    ToolsHistory.SetCurrentGM(CurrentGM);
+
+                }
                 _gridManagers[x, y].gameObject.SetActive(false);
             }
         }
