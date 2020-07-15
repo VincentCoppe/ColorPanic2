@@ -36,6 +36,7 @@ public class LoadScenes : MonoBehaviour
             aaaaa.LoadLevel(levelName.text);
             loaded = true;
             FindObjectOfType<GameManagement>().SetPlayer(FindObjectOfType<PlayerController>());
+            FindObjectOfType<GameManagement>().SetCurrentLevel(levelName.text);
         }
         else if(SceneManager.GetSceneByName("Menu") == SceneManager.GetActiveScene() && loaded)
         {

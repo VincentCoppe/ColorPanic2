@@ -19,6 +19,7 @@ public class GameManagement : MonoBehaviour
 
     private float MovementX;
     private float MovementY;
+    private string CurrentMap;
     [SerializeField] private float Lenght = 1.8f;
     [SerializeField] private float Width = 0.91f;
 
@@ -28,6 +29,11 @@ public class GameManagement : MonoBehaviour
         MovementY = Width*Camera.orthographicSize;
         Player.OppositeX = MovementX*2;
         Player.OppositeY = MovementY*2;
+    }
+
+    public void SetCurrentLevel(string level){
+        this.CurrentMap = level;
+        Debug.Log(CurrentMap);
     }
 
     void Update()
@@ -97,9 +103,9 @@ public class GameManagement : MonoBehaviour
 
     IEnumerator WaitForWin(){
             yield return new  WaitForSeconds(3f);
-            string namenum = SceneManager.GetActiveScene().name.Split('-')[1];
+            string namenum = CurrentMap.Split('-')[1];
             int num = int.Parse(namenum);
-            if (SceneManager.GetActiveScene().name.Split('-')[0] != "Special"){
+            if (SceneManager.GetActiveScene().name.Split('-')[0] == "Level"){
                 Save(num);
             }
             SceneManager.LoadScene("Menu");
