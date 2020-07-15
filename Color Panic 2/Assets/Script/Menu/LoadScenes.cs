@@ -35,8 +35,14 @@ public class LoadScenes : MonoBehaviour
             aaaaa = FindObjectOfType<LevelSaveLoad>();
             aaaaa.LoadLevel(levelName.text);
             loaded = true;
-            FindObjectOfType<GameManagement>().SetPlayer(FindObjectOfType<PlayerController>());
-            FindObjectOfType<GameManagement>().SetCurrentLevel(levelName.text);
+            PlayerController p = FindObjectOfType<PlayerController>(true);
+            GameManagement gm = FindObjectOfType<GameManagement>();
+            p.transform.SetParent(null);
+            gm.SetPlayer(FindObjectOfType<PlayerController>());
+            gm.SetCurrentLevel(levelName.text);
+            gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+            FindObjectOfType<LevelManager>().SetCurrentGameManager(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+            
         }
         else if(SceneManager.GetSceneByName("Menu") == SceneManager.GetActiveScene() && loaded)
         {

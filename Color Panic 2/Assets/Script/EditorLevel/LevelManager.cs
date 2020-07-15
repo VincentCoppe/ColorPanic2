@@ -83,15 +83,19 @@ public class LevelManager : MonoBehaviour {
         }
         CurrentGM = _gridManagers[0, 0];
         CurrentGM.gameObject.SetActive(true);
-        /*CurrentGM = _gridManagers[0, 1];
-        CurrentGM.gameObject.SetActive(true);
-        CurrentGM = _gridManagers[1, 0];
-        CurrentGM.gameObject.SetActive(true);*/
+        activeX = 0;
+        activeY = 0;
     }
 
-
-  
-
+    public void SetCurrentGameManager(int x, int y){
+        Debug.Log(x);
+        Debug.Log(y);
+        activeX = x;
+        activeY = y;
+        //CurrentGM.gameObject.SetActive(false);
+        CurrentGM = _gridManagers[activeX, activeY];
+        CurrentGM.gameObject.SetActive(true);
+    }
 
     public void ChangeLevel(GameObject button)
     {
@@ -111,7 +115,14 @@ public class LevelManager : MonoBehaviour {
             ToolsHistory.SetCurrentGM(CurrentGM);
 
         }
-       
+    }
+
+    public void ChangeLevelIG(int x, int y){
+        activeX += x;
+        activeY += y;
+        CurrentGM.gameObject.SetActive(false);
+        CurrentGM = _gridManagers[activeX, activeY];
+        CurrentGM.gameObject.SetActive(true);
     }
     
 }

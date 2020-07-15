@@ -22,7 +22,7 @@ public class LoadListMenu : MonoBehaviour
         foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/")){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
-            if(file.EndsWith("png") && !ListFiles.ContainsKey(file)) {
+            if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {
                 LoadListItem listing = Instantiate(_loadListItem, _content);
                 listing.SetInfo(file);
                 ListFiles[file] = listing;

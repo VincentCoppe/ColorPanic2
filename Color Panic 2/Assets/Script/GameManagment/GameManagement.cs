@@ -9,6 +9,7 @@ public class GameManagement : MonoBehaviour
 
     private PlayerController Player;
     [SerializeField] Camera Camera;
+    [SerializeField] LevelManager LvManager;
     [SerializeField] GameObject WinText;
     [SerializeField] GameObject PauseMenu;
     [SerializeField] TMP_Text PowerText;
@@ -34,6 +35,11 @@ public class GameManagement : MonoBehaviour
     public void SetCurrentLevel(string level){
         this.CurrentMap = level;
         Debug.Log(CurrentMap);
+    }
+
+    public void SetCamera(int x, int y){
+        Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x+(50*x), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
+        Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y+(30*y), Camera.transform.localPosition.z);
     }
 
     void Update()
@@ -78,19 +84,22 @@ public class GameManagement : MonoBehaviour
         float DistanceY = CameraLocY - PlayerLocY;
         Player.DistanceY = DistanceY;
         if (DistanceX < (-Lenght*size)) {
-            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x+1, Player.transform.localPosition.y, Player.transform.localPosition.z);
-            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x+(3.531f*size), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
-            //Player.transform.localPosition = new Vector3(Player.transform.localPosition.x-(1.8f*2*size), Player.transform.localPosition.y, Player.transform.localPosition.z);
+            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x+2, Player.transform.localPosition.y, Player.transform.localPosition.z);
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x+(50), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
+            LvManager.ChangeLevelIG(1,0);
         } else if (DistanceX > (Lenght*size)) {
-            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x-1, Player.transform.localPosition.y, Player.transform.localPosition.z);
-            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x-(3.531f*size), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
+            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x-2, Player.transform.localPosition.y, Player.transform.localPosition.z);
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x-(50), Camera.transform.localPosition.y, Camera.transform.localPosition.z);
+            LvManager.ChangeLevelIG(-1,0);
         }
         if (DistanceY > (Width*size+1)) {
-            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y-2f, Player.transform.localPosition.z);
-            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y-(2f*size), Camera.transform.localPosition.z);
+            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y-3f, Player.transform.localPosition.z);
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y-(30), Camera.transform.localPosition.z);
+            LvManager.ChangeLevelIG(0,-1);
         } else if (DistanceY < (-Width*size-1)){
-            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y+2f, Player.transform.localPosition.z);
-            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y+(2f*size), Camera.transform.localPosition.z);
+            Player.transform.localPosition = new Vector3(Player.transform.localPosition.x, Player.transform.localPosition.y+3f, Player.transform.localPosition.z);
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y+(30), Camera.transform.localPosition.z);
+            LvManager.ChangeLevelIG(0,1);
         }
     }
 

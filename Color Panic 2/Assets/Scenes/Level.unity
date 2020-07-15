@@ -170,6 +170,11 @@ PrefabInstance:
       propertyPath: PowerImg
       value: 
       objectReference: {fileID: 1700937477}
+    - target: {fileID: 1103952288672910694, guid: 9e701ae6309005242827e5745229e7ee,
+        type: 3}
+      propertyPath: LvManager
+      value: 
+      objectReference: {fileID: 1367067158}
     - target: {fileID: 1103952288672910695, guid: 9e701ae6309005242827e5745229e7ee,
         type: 3}
       propertyPath: m_LocalPosition.x

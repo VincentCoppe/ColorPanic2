@@ -43,11 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599ab3d3ea0f7b9429b00260bd534fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   Camera: {fileID: 0}
+  LvManager: {fileID: 0}
   WinText: {fileID: 0}
   PauseMenu: {fileID: 0}
   PowerText: {fileID: 0}
   PowerImg: {fileID: 0}
-  Lenght: 1.8
+  Lenght: 1.6
   Width: 0.91
