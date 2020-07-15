@@ -88,8 +88,6 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void SetCurrentGameManager(int x, int y){
-        Debug.Log(x);
-        Debug.Log(y);
         activeX = x;
         activeY = y;
         //CurrentGM.gameObject.SetActive(false);

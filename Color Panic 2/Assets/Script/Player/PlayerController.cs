@@ -525,7 +525,7 @@ public class PlayerController : MonoBehaviour
         checkpoint.Activation(true);
 
         //Set the respawn point of the player
-        respawn = checkpoint.gameObject.transform.localPosition;
+        respawn = checkpoint.gameObject.transform.position;
         CurrentCheckpoint = checkpoint;
     }
 
