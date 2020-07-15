@@ -14,13 +14,15 @@ public class ProgressionManagement : MonoBehaviour
     [SerializeField] List<GameObject> Levels;
     [SerializeField] List<GameObject> SLevels;
     [SerializeField] List<TMP_Text> Coins;
+    [SerializeField] TMP_Text TotalCoins;
     public static List<int> progression;
     [SerializeField] int NumberOfLevels = 3;
 
-    private void Update() {
+    private void Start() {
         EnableLevels();
         EnableSpecialsLevels();
         SetText();
+        SetTotalCoins();
     }
 
     private void EnableLevels(){
@@ -43,5 +45,13 @@ public class ProgressionManagement : MonoBehaviour
         for (int i = 1; i <= NumberOfLevels; i++){
             Coins[i-1].text = progression[i].ToString()+"/3";
         }
+    }
+
+    private void SetTotalCoins(){
+        int TCoins = 0;
+        for (int i = 1; i <= NumberOfLevels; i++){
+            TCoins += progression[i];
+        }
+        TotalCoins.text = "Coins : "+TCoins;
     }
 }
