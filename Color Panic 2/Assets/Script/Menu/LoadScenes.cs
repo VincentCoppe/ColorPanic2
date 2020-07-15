@@ -30,8 +30,7 @@ public class LoadScenes : MonoBehaviour
 
     public void Update()
     {
-        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded)
-        {         
+        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
             aaaaa = FindObjectOfType<LevelSaveLoad>();
             aaaaa.LoadLevel(levelName.text);
             loaded = true;
@@ -42,11 +41,6 @@ public class LoadScenes : MonoBehaviour
             gm.SetCurrentLevel(levelName.text);
             gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
             FindObjectOfType<LevelManager>().SetCurrentGameManager(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-            
-        }
-        else if(SceneManager.GetSceneByName("Menu") == SceneManager.GetActiveScene() && loaded)
-        {
-            loaded = false;
         }
     }
 

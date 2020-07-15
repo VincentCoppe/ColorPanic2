@@ -67,7 +67,7 @@ public class LevelSaveLoad : MonoBehaviour {
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + "Level-1");
+            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + path);
 
         }
         catch(Exception e)
