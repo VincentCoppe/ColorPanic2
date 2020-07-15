@@ -19,7 +19,7 @@ public class LoadListMenu : MonoBehaviour
             item.SetBgColor(new Color(1,1,1));
         }
         selectedFile = null;
-        foreach (string path in System.IO.Directory.GetFiles(Application.dataPath + "/Resources/levels/")){
+        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/")){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
             if(file.EndsWith("png") && !ListFiles.ContainsKey(file)) {
