@@ -62,11 +62,11 @@ public class LevelSaveLoad : MonoBehaviour {
        
     }
 
-    public void LoadLevel(TMP_Text path) {
+    public void LoadLevel(string path) {
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.dataPath + "/Resources/levels/" + path.text + ".png");
+            bytes = File.ReadAllBytes(Application.dataPath + "/Resources/levels/" + path);
 
         }
         catch
