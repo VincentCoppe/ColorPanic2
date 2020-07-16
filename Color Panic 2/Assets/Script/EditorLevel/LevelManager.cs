@@ -73,7 +73,8 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public void ClearHistory() {
+    public void ClearHistory()
+    {
         ToolsHistory.ResetHistory();
     }
 

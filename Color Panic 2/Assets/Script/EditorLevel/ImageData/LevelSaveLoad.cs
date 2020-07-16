@@ -58,7 +58,7 @@ public class LevelSaveLoad : MonoBehaviour {
         Save.Apply();
         byte[] bytes = Save.EncodeToPNG();
         File.WriteAllBytes(Application.streamingAssetsPath + "/levels/" + path.text, bytes);
-       
+        _level.ClearHistory();
     }
 
     public void LoadLevel(string path) {
@@ -78,7 +78,7 @@ public class LevelSaveLoad : MonoBehaviour {
         Texture2D source = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);
         source.LoadImage(bytes);
         _level.Clear();
-        
+        _level.ClearHistory();
         bool theme =false;
         for (int x=0; x<source.width; x++)
         {
