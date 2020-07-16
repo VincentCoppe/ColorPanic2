@@ -8,7 +8,6 @@ public class LoadScenes : MonoBehaviour
 {
     private TMP_Text levelName;
     private bool loaded = false;
-    public LevelSaveLoad aaaaa;
 
     public void Awake()
     {
@@ -20,7 +19,7 @@ public class LoadScenes : MonoBehaviour
 
     public void LoadEditor()
     {
-        SceneManager.LoadScene("GridTest");
+        SceneManager.LoadScene("Editor");
     }
 
     public void SetupLevelName(TMP_Text name)
@@ -31,8 +30,7 @@ public class LoadScenes : MonoBehaviour
     public void Update()
     {
         if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
-            aaaaa = FindObjectOfType<LevelSaveLoad>();
-            aaaaa.LoadLevel(levelName.text);
+            FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName.text);
             loaded = true;
             PlayerController p = FindObjectOfType<PlayerController>(true);
             GameManagement gm = FindObjectOfType<GameManagement>();
