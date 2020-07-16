@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject A00;
     [SerializeField] private ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
+    private bool PlayerPlaced = false;
+    private bool FinishPlaced = false;
     private GameObject precedentLevelSelected = null;
     public GridManager CurrentGM;
     private bool[,] _loaded;
@@ -35,6 +37,26 @@ public class LevelManager : MonoBehaviour {
         
     }
 
+    public void setPlayerPlaced()
+    {
+        PlayerPlaced = !PlayerPlaced;
+    }
+
+    public void setFinishPlaced()
+    {
+        FinishPlaced = !FinishPlaced;
+    }
+
+    public bool getPlayerPlaced()
+    {
+        return PlayerPlaced;
+    }
+
+    public bool getFinishPlaced()
+    {
+        return FinishPlaced;
+    }
+
     public void ChangeTheme(int theme)
     {
         foreach(GridManager manager in _gridManagers)
@@ -49,6 +71,10 @@ public class LevelManager : MonoBehaviour {
         {
             manager.Clear();
         }
+    }
+
+    public void ClearHistory() {
+        ToolsHistory.ResetHistory();
     }
 
     public void CreateGridManagers()

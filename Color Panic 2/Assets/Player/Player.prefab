@@ -4948,7 +4948,7 @@ GameObject:
   - component: {fileID: 3105630702609896181}
   - component: {fileID: 3105630702609896182}
   - component: {fileID: 1393818005703576183}
-  - component: {fileID: 4059083009305794577}
+  - component: {fileID: 8604196162393356261}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5138,6 +5138,7 @@ MonoBehaviour:
   OppositeY: 0
   DistanceX: 0
   DistanceY: 0
+  coin: 0
 --- !u!114 &3105630702609896182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5163,8 +5164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Block: 3
-  data: {fileID: 4059083009305794577}
---- !u!114 &4059083009305794577
+  data: {fileID: 8604196162393356261}
+--- !u!114 &8604196162393356261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5173,9 +5174,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3105630702609896187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac7a953ae1ba32cbcb22a09c2ec7da9f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8923b9b567b2d3947b7207cd4a89475e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelManager: {fileID: 0}
 --- !u!1 &3105630702610544724
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,10 @@ public class ToolsHistory : MonoBehaviour
         GridManager = gm;
     }
 
+    public bool IsHistoryEmpty() {
+        return undoActions.Count == 0;
+    }
+
     // METHODES POUR UNDO
     public void AddToUndoDraw(HashSet<(int, int)> action) {
         if(action.Count > 0) {
