@@ -26,10 +26,8 @@ public class GameManagement : MonoBehaviour
 
     public void SetPlayer(PlayerController player){
         this.Player = player;
-        MovementX = Lenght*Camera.orthographicSize;
-        MovementY = Width*Camera.orthographicSize;
-        Player.OppositeX = MovementX*2;
-        Player.OppositeY = MovementY*2;
+        Player.OppositeX = 24.5f;
+        Player.OppositeY = 29;
     }
 
     public void SetCurrentLevel(string level){

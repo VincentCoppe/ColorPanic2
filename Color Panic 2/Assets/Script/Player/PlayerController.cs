@@ -165,10 +165,10 @@ public class PlayerController : MonoBehaviour
     //Teleport the player at the opposite of the map on the axis x
     private void MoveOppositeX(bool right){
         if (right){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x-OppositeX+1, this.transform.localPosition.y, this.transform.localPosition.z);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x-OppositeX, this.transform.localPosition.y, this.transform.localPosition.z);
         } 
         if (!right){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x+OppositeX-1, this.transform.localPosition.y, this.transform.localPosition.z);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+OppositeX, this.transform.localPosition.y, this.transform.localPosition.z);
         }
     }
     
