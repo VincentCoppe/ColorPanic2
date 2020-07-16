@@ -19,7 +19,7 @@ public class LevelSaveLoad : MonoBehaviour {
     public LevelManager Level { get { return _level; }}
 
 
-    public void SaveLevel(TMP_Text path) {
+    public void SaveLevel(TMP_InputField path) {
 
         Texture2D Save = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);
 
@@ -57,7 +57,7 @@ public class LevelSaveLoad : MonoBehaviour {
         }
         Save.Apply();
         byte[] bytes = Save.EncodeToPNG();
-        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/" + "Level-1", bytes);
+        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/" + path.text, bytes);
        
     }
 

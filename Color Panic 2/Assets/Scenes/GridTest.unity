@@ -1931,7 +1931,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 545455446}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999166
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7562,8 +7562,8 @@ MonoBehaviour:
         m_MethodName: SaveLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1534615226}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 1811877363}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_InputField, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11633,7 +11633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 343, y: -54.19999}
+  m_AnchoredPosition: {x: 428.9, y: -54.19999}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095004916
