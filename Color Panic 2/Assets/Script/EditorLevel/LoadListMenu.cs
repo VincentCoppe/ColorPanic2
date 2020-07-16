@@ -24,7 +24,7 @@ public class LoadListMenu : MonoBehaviour
             string file = tmp[tmp.Length-1];
             if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {
                 LoadListItem listing = Instantiate(_loadListItem, _content);
-                listing.SetInfo(file);
+                listing.SetInfo(file.Split('.')[0]);
                 ListFiles[file] = listing;
             }
         }
