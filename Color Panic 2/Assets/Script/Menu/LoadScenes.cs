@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class LoadScenes : MonoBehaviour
 {
-    private TMP_Text levelName;
+    private string levelName;
     private bool loaded = false;
-    public string folder;
+    private string folder;
 
     public void Awake()
     {
@@ -25,7 +25,14 @@ public class LoadScenes : MonoBehaviour
 
     public void SetupLevelName(TMP_Text name)
     {
-        levelName = name;
+        levelName = name.text;
+    }
+
+    public void SetupLevelName(LoadListMenu loadlistmenu)
+    {
+        Debug.Log(loadlistmenu.selectedFile);
+        levelName = loadlistmenu.selectedFile;
+        Debug.Log(levelName);
     }
 
     public void SetFolder(string fold){
@@ -35,13 +42,13 @@ public class LoadScenes : MonoBehaviour
     public void Update()
     {
         if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
-            FindObjectOfType<LevelSaveLoadIG>().LoadLevel(levelName.text, folder);
+            FindObjectOfType<LevelSaveLoadIG>().LoadLevel(levelName, folder);
             loaded = true;
             PlayerController p = FindObjectOfType<PlayerController>(true);
             GameManagement gm = FindObjectOfType<GameManagement>();
             p.transform.SetParent(null);
             gm.SetPlayer(FindObjectOfType<PlayerController>());
-            gm.SetCurrentLevel(levelName.text);
+            gm.SetCurrentLevel(levelName);
             gm.SetCurrentFolder(folder);
             gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
             FindObjectOfType<LevelManagerIG>().SetCurrentGameManager(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));

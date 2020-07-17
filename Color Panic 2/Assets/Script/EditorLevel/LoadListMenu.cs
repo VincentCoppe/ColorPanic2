@@ -11,7 +11,7 @@ public class LoadListMenu : MonoBehaviour
     [SerializeField] private LevelSaveLoad _levelSaveLoad = null;
 
 
-    private string selectedFile = null;
+    public string selectedFile = null;
     private Dictionary<string,LoadListItem> ListFiles = new Dictionary<string, LoadListItem>();
 
     private void OnEnable() {
@@ -19,7 +19,7 @@ public class LoadListMenu : MonoBehaviour
             item.SetBgColor(new Color(1,1,1));
         }
         selectedFile = null;
-        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/")){
+        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevels/")){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
             if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {

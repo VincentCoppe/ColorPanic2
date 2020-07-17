@@ -114,10 +114,12 @@ public class GameManagement : MonoBehaviour
 
     IEnumerator WaitForWin(){
             yield return new  WaitForSeconds(3f);
+            if (CurrentFolder == "GameLevels"){
             string namenum = CurrentMap.Split('-')[1];
             int num = int.Parse(namenum);
-            if (SceneManager.GetActiveScene().name.Split('-')[0] == "Level" && CurrentFolder == "GameLevels"){
+            if (SceneManager.GetActiveScene().name.Split('-')[0] == "Level"){
                 Save(num);
+            }
             }
             SceneManager.LoadScene("Menu");
     }

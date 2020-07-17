@@ -19,7 +19,7 @@ public class SaveMenu : MonoBehaviour
     private Dictionary<string,SaveListItem> ListFiles = new Dictionary<string, SaveListItem>();
 
     private void OnEnable() {
-        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/")){
+        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevels/")){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
             if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {
@@ -35,7 +35,7 @@ public class SaveMenu : MonoBehaviour
     }
 
     public void OnClickSave() {
-        if(File.Exists(Application.streamingAssetsPath + "/levels/" + inputField.text)) {
+        if(File.Exists(Application.streamingAssetsPath + "/levels/PlayerLevels/" + inputField.text)) {
             confirmOverwrite.SetActive(true);
         } else {
             lsl.SaveLevel(inputField);
@@ -45,7 +45,7 @@ public class SaveMenu : MonoBehaviour
     }
 
     public void ConfirmOverwrite() {
-        File.Delete(Application.streamingAssetsPath + "/levels/" + inputField.text);
+        File.Delete(Application.streamingAssetsPath + "/levels/PlayerLevels/" + inputField.text);
         lsl.SaveLevel(inputField);
     }
 }
