@@ -11,7 +11,8 @@ public enum ObjectEnum
     Tapis,
     SandBlock,
     Key,
-    KeyBlock
+    KeyBlock,
+    Platform
     
 
 

@@ -40,17 +40,17 @@ public class BlockTapis : ObjectBlock
     {
         (int, int)[] Neighbours = Manager.Get8Neighbours(x, y);
 
-        List<ObjectEnum> BeNeighbours = new List<ObjectEnum>();
+        List<bool> BeNeighbours = new List<bool>();
         foreach ((int, int) Neighbour in Neighbours)
         {
-            ObjectEnum a;
+            bool a;
             if(first && Manager.GridObject[Neighbour.Item1, Neighbour.Item2] is BlockTapis)
             {
-                CalculateNeighbours(Neighbour.Item1, Neighbour.Item2, false);
-                a = ObjectEnum.Tapis;
+                ((BlockTapis)Manager.GridObject[Neighbour.Item1, Neighbour.Item2]).CalculateNeighbours(Neighbour.Item1, Neighbour.Item2, false);
+                a = true;
             } else
             {
-                a = ObjectEnum.Jumper;
+                a = false;
             }
             BeNeighbours.Add(a);
         }
@@ -63,7 +63,7 @@ public class BlockTapis : ObjectBlock
 
     }
 
-    public void CalculateEdge(List<ObjectEnum> Neighbours)
+    public void CalculateEdge(List<bool> Neighbours)
     {
         var data = Data<CBD_Tapis>();
         for (int i = 0; i < data.Corners.Length; i++)
@@ -72,7 +72,7 @@ public class BlockTapis : ObjectBlock
 
             foreach (int n in Placement[i])
             {
-                if (Neighbours[n] != ObjectEnum.Tapis) a = true;
+                if (!Neighbours[n]) a = true;
             }
        
             data.Corners[i].gameObject.SetActive(a);

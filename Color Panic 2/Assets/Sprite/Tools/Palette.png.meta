@@ -143,6 +143,15 @@ TextureImporter:
   - first:
       213: -7937421383487901118
     second: Palette_16
+  - first:
+      213: -3873586069520137486
+    second: Palette_16
+  - first:
+      213: -2102772118064792346
+    second: Palette_17
+  - first:
+      213: 8717827566277856412
+    second: Palette_18
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -506,8 +515,8 @@ TextureImporter:
       name: Palette_13
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -527,8 +536,8 @@ TextureImporter:
       name: Palette_14
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -548,7 +557,7 @@ TextureImporter:
       name: Palette_15
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 16
         height: 16
@@ -569,6 +578,48 @@ TextureImporter:
       name: Palette_16
       rect:
         serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2c95f2ef14e3ac0800000000000000
+      internalID: -3873586069520137486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palette_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ecf62b46e371d2e0800000000000000
+      internalID: -2102772118064792346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Palette_18
+      rect:
+        serializedVersion: 2
         x: 48
         y: 0
         width: 16
@@ -580,8 +631,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2423d945e4d98d190800000000000000
-      internalID: -7937421383487901118
+      spriteID: c9c89158bf1fbf870800000000000000
+      internalID: 8717827566277856412
       vertices: []
       indices: 
       edges: []

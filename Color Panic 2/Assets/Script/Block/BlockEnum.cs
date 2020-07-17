@@ -35,6 +35,7 @@ public static class BlockEnumExt {
                     case ObjectEnum.SandBlock: return new SandBlock(prefab);
                     case ObjectEnum.Key: return new KeyBlockEditor(prefab);
                     case ObjectEnum.KeyBlock: return new KeyblockBlock(prefab);
+                    case ObjectEnum.Platform: return new PlatformBlock(prefab);
                     default: return null;
                 }
                

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ca93f4db860ef94c980e7ca8712e367
+guid: a3fc37ace87bbb44dad7fa5505cf39e3
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,8 +9,9 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - VCR OSD Mono
-  fallbackFontReferences: []
+  - Fami Sans Condensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 20b036bc06439a74b9147d927da67759, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
