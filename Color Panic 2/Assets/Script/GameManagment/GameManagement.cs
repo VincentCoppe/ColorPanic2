@@ -135,14 +135,16 @@ public class GameManagement : MonoBehaviour
         if (setActive && pause && !PauseMenu.transform.gameObject.active){
             pause = false;
             setActive = false;
+            Time.timeScale = 1; 
             return;
         }
         if (pause){
             PauseMenu.transform.gameObject.SetActive(true);
             setActive = true;
+            Time.timeScale = 0; 
             return;
         }
-        
+        Time.timeScale = 1; 
         PauseMenu.transform.gameObject.SetActive(false);
         setActive = false;
     }

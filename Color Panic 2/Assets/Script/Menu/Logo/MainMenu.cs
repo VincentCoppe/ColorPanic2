@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LogoColor : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-
-
-   
     [SerializeField] private SpriteRenderer Circle = null;  
 
 
-
+    private void Awake(){
+        Time.timeScale = 1;
+    }
+    
     public void OnClickChangeColor(Image image)
     {
 
