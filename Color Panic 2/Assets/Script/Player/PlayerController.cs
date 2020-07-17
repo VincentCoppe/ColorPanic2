@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
     public float OppositeY;
     public float DistanceX;
     public float DistanceY;
-
     public int coin = 0;
+    private bool col = true; //bool to block multiple collisions with multiples teleport objects, resulting in a big teleportation out of the map
 
     private void Awake()
     {
@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
         Grounded = false;
         OnLeftWall = false;
         OnRightWall = false;
+        col = true;
 
         //Die if press R
         if(Input.GetKey(KeyCode.R)){
@@ -164,21 +165,29 @@ public class PlayerController : MonoBehaviour
 
     //Teleport the player at the opposite of the map on the axis x
     private void MoveOppositeX(bool right){
-        if (right){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x-OppositeX, this.transform.localPosition.y, this.transform.localPosition.z);
-        } 
-        if (!right){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x+OppositeX, this.transform.localPosition.y, this.transform.localPosition.z);
+        if (col == true){
+            if (right){
+                this.transform.localPosition = new Vector3(this.transform.localPosition.x-OppositeX, this.transform.localPosition.y, this.transform.localPosition.z);
+                col = false;
+            } 
+            if (!right){
+                this.transform.localPosition = new Vector3(this.transform.localPosition.x+OppositeX, this.transform.localPosition.y, this.transform.localPosition.z);
+                col = false;
+        }
         }
     }
     
     //Teleport the player at the opposite of the map on the axis y 
     private void MoveOppositeY(bool up){
-        if (up){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+OppositeY, this.transform.localPosition.z);
-        } 
-        if (!up){
-            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-OppositeY, this.transform.localPosition.z);
+        if (col == true){
+            if (up){
+                this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+OppositeY, this.transform.localPosition.z);
+                col = false;
+            } 
+            if (!up){
+                this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-OppositeY, this.transform.localPosition.z);
+                col = false;
+            }
         }
     }
 
