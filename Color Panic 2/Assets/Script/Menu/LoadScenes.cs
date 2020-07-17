@@ -8,6 +8,7 @@ public class LoadScenes : MonoBehaviour
 {
     private TMP_Text levelName;
     private bool loaded = false;
+    public string folder;
 
     public void Awake()
     {
@@ -27,16 +28,21 @@ public class LoadScenes : MonoBehaviour
         levelName = name;
     }
 
+    public void SetFolder(string fold){
+        this.folder = fold;
+    }
+
     public void Update()
     {
         if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
-            FindObjectOfType<LevelSaveLoadIG>().LoadLevel(levelName.text);
+            FindObjectOfType<LevelSaveLoadIG>().LoadLevel(levelName.text, folder);
             loaded = true;
             PlayerController p = FindObjectOfType<PlayerController>(true);
             GameManagement gm = FindObjectOfType<GameManagement>();
             p.transform.SetParent(null);
             gm.SetPlayer(FindObjectOfType<PlayerController>());
             gm.SetCurrentLevel(levelName.text);
+            gm.SetCurrentFolder(folder);
             gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
             FindObjectOfType<LevelManagerIG>().SetCurrentGameManager(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
         }

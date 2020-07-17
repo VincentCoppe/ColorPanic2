@@ -57,7 +57,7 @@ public class LevelSaveLoad : MonoBehaviour {
         }
         Save.Apply();
         byte[] bytes = Save.EncodeToPNG();
-        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/" + path.text, bytes);
+        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/PlayerLevels/" + path.text, bytes);
         _level.ClearHistory();
     }
 
@@ -67,7 +67,7 @@ public class LevelSaveLoad : MonoBehaviour {
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + path);
+            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/PlayerLevels/" + path);
 
         }
         catch(Exception e)

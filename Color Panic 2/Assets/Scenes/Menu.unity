@@ -1436,6 +1436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  folder: 
 --- !u!1 &277351285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +1965,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1528081367}
+        m_TargetAssemblyTypeName: LoadScenes, Scripts
+        m_MethodName: SetFolder
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GameLevels
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &476456190
@@ -4837,6 +4850,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1528081367}
+        m_TargetAssemblyTypeName: LoadScenes, Scripts
+        m_MethodName: SetFolder
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GameLevels
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1299693190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5882,6 +5907,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1528081367}
+        m_TargetAssemblyTypeName: LoadScenes, Scripts
+        m_MethodName: SetFolder
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: GameLevels
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1450602012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6113,6 +6150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  folder: 
 --- !u!1 &1548135644
 GameObject:
   m_ObjectHideFlags: 0
@@ -6652,6 +6690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  folder: 
 --- !u!1 &1758697282
 GameObject:
   m_ObjectHideFlags: 0

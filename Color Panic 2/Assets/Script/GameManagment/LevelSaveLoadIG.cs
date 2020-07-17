@@ -18,13 +18,12 @@ public class LevelSaveLoadIG : MonoBehaviour {
     [SerializeField] private ColorPicker ColorPicker = null;
     public LevelManagerIG Level { get { return _level; }}
 
-    public void LoadLevel(string path) {
+    public void LoadLevel(string path, string folder) {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
-        print("Streaming Assets Path: " + Application.streamingAssetsPath);
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + path);
+            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/"+folder+"/" + path);
 
         }
         catch(Exception e)

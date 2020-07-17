@@ -21,6 +21,7 @@ public class GameManagement : MonoBehaviour
     private float MovementX;
     private float MovementY;
     private string CurrentMap;
+    private string CurrentFolder;
     [SerializeField] private float Lenght = 1.8f;
     [SerializeField] private float Width = 0.91f;
 
@@ -32,7 +33,10 @@ public class GameManagement : MonoBehaviour
 
     public void SetCurrentLevel(string level){
         this.CurrentMap = level;
-        Debug.Log(CurrentMap);
+    }
+
+    public void SetCurrentFolder(string folder){
+        this.CurrentFolder = folder;
     }
 
     public void SetCamera(int x, int y){
@@ -112,7 +116,7 @@ public class GameManagement : MonoBehaviour
             yield return new  WaitForSeconds(3f);
             string namenum = CurrentMap.Split('-')[1];
             int num = int.Parse(namenum);
-            if (SceneManager.GetActiveScene().name.Split('-')[0] == "Level"){
+            if (SceneManager.GetActiveScene().name.Split('-')[0] == "Level" && CurrentFolder == "GameLevels"){
                 Save(num);
             }
             SceneManager.LoadScene("Menu");
