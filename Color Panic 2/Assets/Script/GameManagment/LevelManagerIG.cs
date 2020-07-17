@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManagerIG : MonoBehaviour {
 
     private LevelData _levelData;
     [SerializeField] private GridManager _prefab;
@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour {
 
     public void ClearHistory()
     {
-        ToolsHistory.ResetHistory();
+        //ToolsHistory.ResetHistory();
     }
 
     public void CreateGridManagers()

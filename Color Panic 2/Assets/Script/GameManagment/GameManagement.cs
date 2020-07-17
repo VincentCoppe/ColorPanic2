@@ -9,7 +9,7 @@ public class GameManagement : MonoBehaviour
 
     private PlayerController Player;
     [SerializeField] Camera Camera;
-    [SerializeField] LevelManager LvManager;
+    [SerializeField] LevelManagerIG LvManager;
     [SerializeField] GameObject WinText;
     [SerializeField] GameObject PauseMenu;
     [SerializeField] TMP_Text PowerText;
