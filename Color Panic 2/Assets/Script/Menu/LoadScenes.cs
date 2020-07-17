@@ -30,9 +30,7 @@ public class LoadScenes : MonoBehaviour
 
     public void SetupLevelName(LoadListMenu loadlistmenu)
     {
-        Debug.Log(loadlistmenu.selectedFile);
         levelName = loadlistmenu.selectedFile;
-        Debug.Log(levelName);
     }
 
     public void SetFolder(string fold){
