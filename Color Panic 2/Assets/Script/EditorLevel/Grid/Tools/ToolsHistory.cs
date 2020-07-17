@@ -20,6 +20,14 @@ public class ToolsHistory : MonoBehaviour
     private Stack<HashSet<(int, int)>> redoErase = new Stack<HashSet<(int, int)>>();
     private Stack<bool> redoActions = new Stack<bool>();
 
+    private void Update() {
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Z) && undoActions.Count != 0) {
+            UndoAction();
+        } else if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Y) && redoActions.Count != 0) {
+            RedoAction();
+        }
+    }
+
     public void SetCurrentGM(GridManager gm) {
         GridManager = gm;
     }
