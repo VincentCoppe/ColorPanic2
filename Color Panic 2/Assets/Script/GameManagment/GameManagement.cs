@@ -27,8 +27,8 @@ public class GameManagement : MonoBehaviour
 
     public void SetPlayer(PlayerController player){
         this.Player = player;
-        Player.OppositeX = 49;
-        Player.OppositeY = 29;
+        Player.OppositeX = 48.5f;
+        Player.OppositeY = 28.5f;
     }
 
     public void SetCurrentLevel(string level){
