@@ -75,7 +75,7 @@ public class LevelManager : MonoBehaviour {
 
     public void ClearHistory()
     {
-        ToolsHistory.ResetHistory();
+        //ToolsHistory.ResetHistory();
     }
 
     public void CreateGridManagers()

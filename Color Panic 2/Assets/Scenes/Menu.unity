@@ -1436,7 +1436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aaaaa: {fileID: 0}
 --- !u!1 &277351285
 GameObject:
   m_ObjectHideFlags: 0
@@ -5142,7 +5141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level 3
+  m_text: Level-3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5859,13 +5858,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadScenes, Assembly-CSharp
-        m_MethodName: LoadLevel3
+      - m_Target: {fileID: 1528081367}
+        m_TargetAssemblyTypeName: LoadScenes, Scripts
+        m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1528081367}
+        m_TargetAssemblyTypeName: LoadScenes, Scripts
+        m_MethodName: SetupLevelName
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1337971449}
+          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6102,7 +6113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aaaaa: {fileID: 0}
 --- !u!1 &1548135644
 GameObject:
   m_ObjectHideFlags: 0
@@ -6642,7 +6652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aaaaa: {fileID: 0}
 --- !u!1 &1758697282
 GameObject:
   m_ObjectHideFlags: 0
