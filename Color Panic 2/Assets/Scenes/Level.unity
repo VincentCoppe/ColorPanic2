@@ -174,7 +174,7 @@ PrefabInstance:
         type: 3}
       propertyPath: LvManager
       value: 
-      objectReference: {fileID: 1367067158}
+      objectReference: {fileID: 510204855}
     - target: {fileID: 1103952288672910695, guid: 9e701ae6309005242827e5745229e7ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -631,18 +631,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3837eaa3acb218b4b8546f0c6255d8dc, type: 3}
---- !u!114 &1367067158 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5569027268702502040, guid: 3837eaa3acb218b4b8546f0c6255d8dc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1367067157}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be24cb70ceeb18b53a83539454f6badd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1700937476
 PrefabInstance:
   m_ObjectHideFlags: 0

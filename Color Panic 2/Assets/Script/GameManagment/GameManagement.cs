@@ -26,7 +26,7 @@ public class GameManagement : MonoBehaviour
 
     public void SetPlayer(PlayerController player){
         this.Player = player;
-        Player.OppositeX = 24.5f;
+        Player.OppositeX = 49;
         Player.OppositeY = 29;
     }
 
