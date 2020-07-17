@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,9 @@ public class SaveMenu : MonoBehaviour
     [SerializeField] private LevelSaveLoad lsl = null;
     [SerializeField] private TMP_InputField inputField = null;
     [SerializeField] private Button saveButton = null;
+    [SerializeField] private GameObject confirmOverwrite = null;
+    [SerializeField] private GameObject save = null;
+    [SerializeField] private GameObject levelManager = null;
 
     [SerializeField] private SaveListItem itemSaveList = null;
     [SerializeField] private Transform _content = null;
@@ -31,6 +35,17 @@ public class SaveMenu : MonoBehaviour
     }
 
     public void OnClickSave() {
+        if(File.Exists(Application.streamingAssetsPath + "/levels/" + inputField.text)) {
+            confirmOverwrite.SetActive(true);
+        } else {
+            lsl.SaveLevel(inputField);
+            levelManager.SetActive(true);
+            save.SetActive(false);
+        }
+    }
+
+    public void ConfirmOverwrite() {
+        File.Delete(Application.streamingAssetsPath + "/levels/" + inputField.text);
         lsl.SaveLevel(inputField);
     }
 }
