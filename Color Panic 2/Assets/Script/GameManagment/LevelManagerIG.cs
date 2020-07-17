@@ -9,7 +9,6 @@ public class LevelManagerIG : MonoBehaviour {
     [SerializeField] private ColorPicker ColorPicker;
     [SerializeField] private ToolManager ToolManager;
     [SerializeField] private GameObject A00;
-    [SerializeField] private ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
     private bool PlayerPlaced = false;
     private bool FinishPlaced = false;
@@ -73,11 +72,6 @@ public class LevelManagerIG : MonoBehaviour {
         }
     }
 
-    public void ClearHistory()
-    {
-        //ToolsHistory.ResetHistory();
-    }
-
     public void CreateGridManagers()
     {
         if (_gridManagers != null) {
@@ -102,7 +96,6 @@ public class LevelManagerIG : MonoBehaviour {
                 if (ToolManager != null)
                 {
                     precedentLevelSelected = A00;
-                    ToolsHistory.SetCurrentGM(CurrentGM);
 
                 }
                 _gridManagers[x, y].gameObject.SetActive(false);
@@ -117,29 +110,8 @@ public class LevelManagerIG : MonoBehaviour {
     public void SetCurrentGameManager(int x, int y){
         activeX = x;
         activeY = y;
-        //CurrentGM.gameObject.SetActive(false);
         CurrentGM = _gridManagers[activeX, activeY];
         CurrentGM.gameObject.SetActive(true);
-    }
-
-    public void ChangeLevel(GameObject button)
-    {
-        if (precedentLevelSelected != button)
-        {
-            int x = Int32.Parse(button.name.Split(',')[0].Split('(')[1]);
-            int y = Int32.Parse(button.name.Split(',')[1].Split(')')[0]);
-            button.GetComponent<Image>().color = Color.green;
-            if(precedentLevelSelected!=null)
-                precedentLevelSelected.GetComponent<Image>().color = Color.white;
-            precedentLevelSelected = button;
-            _gridManagers[x, y].gameObject.SetActive(true);
-            CurrentGM.gameObject.SetActive(false);
-            CurrentGM = _gridManagers[x, y];
-            Camera.main.transform.position = new Vector3(4 + 50 * x, 2.5f + 30 * y, -10);
-            ToolsHistory.ResetHistory();
-            ToolsHistory.SetCurrentGM(CurrentGM);
-
-        }
     }
 
     public void ChangeLevelIG(int x, int y){
