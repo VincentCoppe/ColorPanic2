@@ -7,6 +7,7 @@ public class ToolManager : MonoBehaviour
     [SerializeField] private TileGameObject tile = null;
     [SerializeField] private Size size = null;
     [SerializeField] private HoverBlock hoverBlock = null;
+    [SerializeField] private Leave leave = null;
     public static ITool Tool;
 
     private void Start() {
@@ -26,7 +27,7 @@ public class ToolManager : MonoBehaviour
 
     public void Action(GridManager gridManager, (int,int) mouse) {
         Tool.Action(gridManager, tile, size.size, mouse);
-        
+        leave.ModifUnsaved = true;
     }
 
     public void EndAction() {

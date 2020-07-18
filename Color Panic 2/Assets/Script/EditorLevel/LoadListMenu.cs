@@ -9,6 +9,7 @@ public class LoadListMenu : MonoBehaviour
     [SerializeField] private Transform _content = null;
     [SerializeField] private Button _loadButton = null;
     [SerializeField] private LevelSaveLoad _levelSaveLoad = null;
+    [SerializeField] private Leave leave = null;
 
 
     public string selectedFile = null;
@@ -41,5 +42,6 @@ public class LoadListMenu : MonoBehaviour
 
     public void LoadFile() {
         _levelSaveLoad.LoadLevel(selectedFile);
+        leave.ModifUnsaved = false;
     }
 }

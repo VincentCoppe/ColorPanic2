@@ -13,6 +13,7 @@ public class SaveMenu : MonoBehaviour
     [SerializeField] private GameObject confirmOverwrite = null;
     [SerializeField] private GameObject save = null;
     [SerializeField] private GameObject levelManager = null;
+    [SerializeField] private Leave leave = null;
 
     [SerializeField] private SaveListItem itemSaveList = null;
     [SerializeField] private Transform _content = null;
@@ -39,6 +40,7 @@ public class SaveMenu : MonoBehaviour
             confirmOverwrite.SetActive(true);
         } else {
             lsl.SaveLevel(inputField);
+            leave.ModifUnsaved = false;
             levelManager.SetActive(true);
             save.SetActive(false);
         }
@@ -47,5 +49,6 @@ public class SaveMenu : MonoBehaviour
     public void ConfirmOverwrite() {
         File.Delete(Application.streamingAssetsPath + "/levels/PlayerLevels/" + inputField.text);
         lsl.SaveLevel(inputField);
+        leave.ModifUnsaved = false;
     }
 }
