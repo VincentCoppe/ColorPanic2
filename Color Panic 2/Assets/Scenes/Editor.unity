@@ -2268,6 +2268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd54f1c426618848bc6d7abe5665d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  play: {fileID: -5071881493542880123, guid: 8c1bc9534a33152489cfd73af8b9cff6, type: 3}
+  pause: {fileID: 7982943374256336594, guid: 8c1bc9534a33152489cfd73af8b9cff6, type: 3}
   image: {fileID: 353985719}
   levelManager: {fileID: 1648391779}
 --- !u!114 &353985718
@@ -2345,7 +2347,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c6271a290ef75b4c97d58746c86c5b8, type: 3}
+  m_Sprite: {fileID: 7982943374256336594, guid: 8c1bc9534a33152489cfd73af8b9cff6,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

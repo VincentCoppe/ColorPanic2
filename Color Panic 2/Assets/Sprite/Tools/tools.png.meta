@@ -47,6 +47,12 @@ TextureImporter:
   - first:
       213: -699345051048265687
     second: magic_wand
+  - first:
+      213: -5071881493542880123
+    second: play
+  - first:
+      213: 7982943374256336594
+    second: pause
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -456,6 +462,48 @@ TextureImporter:
       bones: []
       spriteID: 92837d0a16d6b46f0800000000000000
       internalID: -699345051048265687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: play
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58cbf7257ae0d99b0800000000000000
+      internalID: -5071881493542880123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pause
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2de6b9414bc19ce60800000000000000
+      internalID: 7982943374256336594
       vertices: []
       indices: 
       edges: []
