@@ -535,11 +535,17 @@ public class PlayerController : MonoBehaviour
         if (power.LastPower != null){
             checkpoint.SavedPowers =  (string)power.LastPower.Clone();
         }
-        checkpoint.Activation(true);
+        StartCoroutine(Waiting(0.2f, checkpoint));
 
         //Set the respawn point of the player
         respawn = checkpoint.gameObject.transform.position;
         CurrentCheckpoint = checkpoint;
+    }
+
+    IEnumerator Waiting(float s, Checkpoint ch){
+        ch.Activation(false);
+        yield return new WaitForSecondsRealtime(s);
+        ch.Activation(true);
     }
 
     //Flip the player sprite
