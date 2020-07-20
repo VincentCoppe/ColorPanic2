@@ -1007,6 +1007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: 
+  loaded: 0
 --- !u!1 &273466622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &476456188
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4078,7 +4080,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 0.8867924, g: 0.8407796, b: 0.8407796, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5959,7 +5961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1450602010
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6292,6 +6294,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: 
+  loaded: 0
 --- !u!1 &1548135644
 GameObject:
   m_ObjectHideFlags: 0
@@ -7402,6 +7406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6891e76b7b6646745bb7fc26e8409e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: 
+  loaded: 0
 --- !u!1 &1741421530
 GameObject:
   m_ObjectHideFlags: 0
