@@ -7,6 +7,7 @@ public class PauseEditor : MonoBehaviour
 {
     [SerializeField] private Image image = null;
     [SerializeField] private LevelManager levelManager = null;
+
     private void Start() {
         Time.timeScale = 0;
         image.color = new Color(1,0,0);
