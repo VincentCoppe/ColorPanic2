@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         col = true;
 
         //Die if press R
-        if(Input.GetKeyDown(KeyCode.R)){
+        if(Input.GetKey(KeyCode.R)){
             Death();
         }
         //Check if the player is in grab
