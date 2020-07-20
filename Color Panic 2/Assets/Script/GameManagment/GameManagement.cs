@@ -14,6 +14,9 @@ public class GameManagement : MonoBehaviour
     [SerializeField] GameObject PauseMenu;
     [SerializeField] TMP_Text PowerText;
     [SerializeField] GameObject PowerImg;
+    [SerializeField] TMP_Text DeathText;
+    [SerializeField] TMP_Text CoinText;
+    [SerializeField] TMP_Text TimerText;
     private bool pause = false;
     private bool setActive = false;
     private string savedPower;
@@ -22,6 +25,9 @@ public class GameManagement : MonoBehaviour
     private float MovementY;
     private string CurrentMap;
     private string CurrentFolder;
+    private double Timer = 00;
+    private int TimerMin = 00;
+    private double TimerMillis = 00;
     [SerializeField] private float Lenght = 1.8f;
     [SerializeField] private float Width = 0.91f;
 
@@ -50,7 +56,27 @@ public class GameManagement : MonoBehaviour
         WinManagement();
         PauseManagement();
         HandlePower();
+        UpdateText();
         if(Input.GetKeyDown("escape")){pause = !pause;}
+    }
+
+    private void FixedUpdate() {
+        HandleTimer();
+    }
+
+    private void HandleTimer(){
+        Timer += Time.deltaTime;
+        TimerMillis = (int)((Timer - (int)Timer) * 100);
+        if (Timer >= 60){
+            TimerMin++;
+            Timer = 0;
+        }
+    }
+
+    private void UpdateText(){
+        DeathText.text = Player.death.ToString();
+        CoinText.text = Player.coin.ToString();
+        TimerText.text = TimerMin.ToString("00")+":"+Timer.ToString("00")+":"+TimerMillis.ToString("00");
     }
 
     private void HandlePower(){

@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     public float DistanceX;
     public float DistanceY;
     public int coin = 0;
+    public int death = 0;
     private bool col = true; //bool to block multiple collisions with multiples teleport objects, resulting in a big teleportation out of the map
 
     private void Awake()
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
         col = true;
 
         //Die if press R
-        if(Input.GetKey(KeyCode.R)){
+        if(Input.GetKeyDown(KeyCode.R)){
             Death();
         }
         //Check if the player is in grab
@@ -160,6 +161,7 @@ public class PlayerController : MonoBehaviour
     //On death, reset power and move the player to the respawn location
     public void Death()
     {
+        
         StartCoroutine(Die()); 
     }
 
@@ -195,6 +197,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Die()
     {
         respawning = true;
+        death++;
         GetComponent<SpriteRenderer>().enabled = false;
         DeadParticle.Play();
         yield return new WaitForSecondsRealtime(0.5f);
