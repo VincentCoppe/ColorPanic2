@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private ColorPicker ColorPicker;
     [SerializeField] private ToolManager ToolManager;
     [SerializeField] private GameObject A00;
-    [SerializeField] private ToolsHistory ToolsHistory;
+    [SerializeField] public ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
     private bool PlayerPlaced = false;
     private bool FinishPlaced = false;

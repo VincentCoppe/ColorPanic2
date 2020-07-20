@@ -61,13 +61,13 @@ public class LevelSaveLoad : MonoBehaviour {
         _level.ClearHistory();
     }
 
-    public void LoadLevel(string path) {
+    public void LoadLevel(string path, string folder) {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
         print("Streaming Assets Path: " + Application.streamingAssetsPath);
         byte[] bytes = null;
         try
         {
-            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/PlayerLevels/" + path);
+            bytes = File.ReadAllBytes(Application.streamingAssetsPath + "/levels/" + folder + "/" + path);
 
         }
         catch(Exception e)
@@ -78,7 +78,8 @@ public class LevelSaveLoad : MonoBehaviour {
         Texture2D source = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);
         source.LoadImage(bytes);
         _level.Clear();
-        _level.ClearHistory();
+        if(_level.ToolsHistory!=null)
+            _level.ClearHistory();
         bool theme =false;
         for (int x=0; x<source.width; x++)
         {

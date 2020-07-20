@@ -40,7 +40,7 @@ public class LoadScenes : MonoBehaviour
     public void Update()
     {
         if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
-            FindObjectOfType<LevelSaveLoadIG>().LoadLevel(levelName, folder);
+            FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName, folder);
             loaded = true;
             PlayerController p = FindObjectOfType<PlayerController>(true);
             GameManagement gm = FindObjectOfType<GameManagement>();
@@ -49,7 +49,7 @@ public class LoadScenes : MonoBehaviour
             gm.SetCurrentLevel(levelName);
             gm.SetCurrentFolder(folder);
             gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-            FindObjectOfType<LevelManagerIG>().SetCurrentGameManager(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+            FindObjectOfType<LevelManager>().SetCurrentGameManager(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
         }
     }
 

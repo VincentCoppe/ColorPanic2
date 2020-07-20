@@ -41,7 +41,7 @@ public class LoadListMenu : MonoBehaviour
     }
 
     public void LoadFile() {
-        _levelSaveLoad.LoadLevel(selectedFile);
+        _levelSaveLoad.LoadLevel(selectedFile, "PlayerLevels");
         leave.ModifUnsaved = false;
     }
 }
