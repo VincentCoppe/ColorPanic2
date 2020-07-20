@@ -18,6 +18,10 @@ public class GameManagement : MonoBehaviour
     [SerializeField] TMP_Text CoinText;
     [SerializeField] TMP_Text TimerText;
     [SerializeField] RestartLvl restart;
+    [SerializeField] Color Red;
+    [SerializeField] Color Purple;
+    [SerializeField] Color Viridian;
+    [SerializeField] Color Green;
     private bool pause = false;
     private bool setActive = false;
     private string savedPower;
@@ -93,10 +97,10 @@ public class GameManagement : MonoBehaviour
         PowerText.gameObject.SetActive(true);
         PowerImg.gameObject.SetActive(true);
         switch (power){
-            case "Green" : PowerText.text = "You can now double jump"; break;
-            case "Red" : PowerText.text = "You can now dash"; break;
-            case "Viridian" : PowerText.text = "You can now reverse the gravity"; break;
-            case "Purple" : PowerText.text = "You can now teleport"; break;
+            case "Green" : PowerText.text = "You can now double jump"; PowerText.color = Green; break;
+            case "Red" : PowerText.text = "You can now dash"; PowerText.color = Red; break;
+            case "Viridian" : PowerText.text = "You can now reverse the gravity"; PowerText.color = Viridian; break;
+            case "Purple" : PowerText.text = "You can now teleport"; PowerText.color = Purple; break;
             //others
         }
         yield return new WaitForSecondsRealtime(2f);

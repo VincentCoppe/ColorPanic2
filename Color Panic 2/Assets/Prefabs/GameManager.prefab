@@ -49,5 +49,13 @@ MonoBehaviour:
   PauseMenu: {fileID: 0}
   PowerText: {fileID: 0}
   PowerImg: {fileID: 0}
+  DeathText: {fileID: 0}
+  CoinText: {fileID: 0}
+  TimerText: {fileID: 0}
+  restart: {fileID: 0}
+  Red: {r: 0.7607843, g: 0.10898005, b: 0.10898005, a: 1}
+  Purple: {r: 0.6313726, g: 0.13216448, b: 0.8490566, a: 1}
+  Viridian: {r: 0.19215687, g: 0.62352943, b: 0.5803922, a: 1}
+  Green: {r: 0.0950898, g: 0.62352943, b: 0.093983635, a: 1}
   Lenght: 1.67
   Width: 0.91
