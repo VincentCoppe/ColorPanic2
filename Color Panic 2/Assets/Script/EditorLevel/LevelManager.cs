@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject A00;
     [SerializeField] private ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
-    private bool PlayerPlaced = false;
+    private Vector3 PlayerPlaced = new Vector3(-1,-1,-1);
     private bool FinishPlaced = false;
     private GameObject precedentLevelSelected = null;
     public GridManager CurrentGM;
@@ -37,9 +37,9 @@ public class LevelManager : MonoBehaviour {
         
     }
 
-    public void setPlayerPlaced()
+    public void setPlayerPlaced(Vector3 vector)
     {
-        PlayerPlaced = !PlayerPlaced;
+        PlayerPlaced = vector;
     }
 
     public void setFinishPlaced()
@@ -47,9 +47,9 @@ public class LevelManager : MonoBehaviour {
         FinishPlaced = !FinishPlaced;
     }
 
-    public bool getPlayerPlaced()
+    public Vector3 getPlayerPlaced()
     {
-        return PlayerPlaced;
+        return PlayerPlaced ;
     }
 
     public bool getFinishPlaced()
