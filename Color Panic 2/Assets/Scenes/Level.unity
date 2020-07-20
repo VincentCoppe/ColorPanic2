@@ -190,6 +190,11 @@ PrefabInstance:
       propertyPath: TimerText
       value: 
       objectReference: {fileID: 1700937477}
+    - target: {fileID: 1103952288672910694, guid: 9e701ae6309005242827e5745229e7ee,
+        type: 3}
+      propertyPath: restart
+      value: 
+      objectReference: {fileID: 6821565168971431358}
     - target: {fileID: 1103952288672910695, guid: 9e701ae6309005242827e5745229e7ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -984,6 +989,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 386249193497099822, guid: 2f374cf6481bf1944a34196cd7adc9fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8540811096799620456, guid: 2f374cf6481bf1944a34196cd7adc9fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1091,3 +1101,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f374cf6481bf1944a34196cd7adc9fc, type: 3}
+--- !u!114 &6821565168971431358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1288947360792291648, guid: 2f374cf6481bf1944a34196cd7adc9fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 6821565168971431357}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50b28e16d6c25742a8e95af473ea9ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

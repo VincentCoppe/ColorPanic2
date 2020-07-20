@@ -12,7 +12,6 @@ public class GetTimer : MonoBehaviour
         if (ProgressionManagement.times.ContainsKey(Name.text)){
             time = ProgressionManagement.times[Name.text];
         }
-        Debug.Log(time);
         This.text = time;
     }
 }

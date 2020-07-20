@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadScenes : MonoBehaviour
 {
-    private string levelName;
-    private bool loaded = false;
+    public string levelName;
+    public bool loaded = false;
     private string folder;
 
     public void Awake()

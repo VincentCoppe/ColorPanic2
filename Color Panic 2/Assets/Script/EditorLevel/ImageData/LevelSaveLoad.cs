@@ -63,7 +63,6 @@ public class LevelSaveLoad : MonoBehaviour {
 
     public void LoadLevel(string path, string folder) {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
-        print("Streaming Assets Path: " + Application.streamingAssetsPath);
         byte[] bytes = null;
         try
         {

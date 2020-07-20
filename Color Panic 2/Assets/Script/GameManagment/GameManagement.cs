@@ -17,6 +17,7 @@ public class GameManagement : MonoBehaviour
     [SerializeField] TMP_Text DeathText;
     [SerializeField] TMP_Text CoinText;
     [SerializeField] TMP_Text TimerText;
+    [SerializeField] RestartLvl restart;
     private bool pause = false;
     private bool setActive = false;
     private string savedPower;
@@ -39,10 +40,12 @@ public class GameManagement : MonoBehaviour
 
     public void SetCurrentLevel(string level){
         this.CurrentMap = level;
+        restart.level = CurrentMap;
     }
 
     public void SetCurrentFolder(string folder){
         this.CurrentFolder = folder;
+        restart.folder = CurrentFolder;
     }
 
     public void SetCamera(int x, int y){
@@ -65,7 +68,7 @@ public class GameManagement : MonoBehaviour
     }
 
     private void HandleTimer(){
-        if (!Player.win) Timer += Time.deltaTime;
+        if (Player != null && !Player.win) Timer += Time.deltaTime;
         TimerMillis = (int)((Timer - (int)Timer) * 100);
         if (Timer >= 60){
             TimerMin++;
