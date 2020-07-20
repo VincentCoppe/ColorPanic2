@@ -9,6 +9,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Sprite[] Background = new Sprite[3];
     [SerializeField] private SpriteRenderer BackgroundImage;
+    private LevelManager Parent;
     private bool drawing = false;
     public ThemeEnum Theme = ThemeEnum.Dungeon;
     LineRenderer LineRenderer = null;
@@ -22,9 +23,9 @@ public class GridManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    public void Setup()
+    public void Setup(LevelManager p)
     {
-        
+        Parent = p;
         setupLevelToDraw();
         setupBackground();
     }
@@ -130,7 +131,7 @@ public class GridManager : MonoBehaviour
     
     public void Update()
     {
-        if (toolManager != null)
+        if (toolManager != null && Parent.CurrentGM.Item1.Equals(this))
         {
             (int,int) mouse = PositionToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             if(Input.GetMouseButtonDown(0) || Input.GetMouseButton(0) || Input.GetMouseButtonUp(0))

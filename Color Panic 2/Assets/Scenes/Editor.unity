@@ -1995,7 +1995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2859,7 +2859,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 545455447}
   m_HandleRect: {fileID: 545455446}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8107,7 +8107,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: -8
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!224 &1323577294
 RectTransform:
@@ -11115,7 +11115,6 @@ MonoBehaviour:
   ToolManager: {fileID: 1029405101}
   A00: {fileID: 22621063}
   ToolsHistory: {fileID: 1410053821}
-  CurrentGM: {fileID: 0}
 --- !u!1 &1654639424
 GameObject:
   m_ObjectHideFlags: 0
