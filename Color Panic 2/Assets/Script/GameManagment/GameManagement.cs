@@ -69,7 +69,7 @@ public class GameManagement : MonoBehaviour
         TimerMillis = (int)((Timer - (int)Timer) * 100);
         if (Timer >= 60){
             TimerMin++;
-            Timer = 0;
+            Timer = Timer-60;
         }
     }
 

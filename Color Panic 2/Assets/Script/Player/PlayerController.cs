@@ -161,8 +161,10 @@ public class PlayerController : MonoBehaviour
     //On death, reset power and move the player to the respawn location
     public void Death()
     {
-        
-        StartCoroutine(Die()); 
+        if(respawning == false) {
+            respawning = true;
+            StartCoroutine(Die());
+        } 
     }
 
     //Teleport the player at the opposite of the map on the axis x
@@ -196,7 +198,6 @@ public class PlayerController : MonoBehaviour
     //Coroutine called when the player die so play the animation, and teleport him to his checkpoint
     IEnumerator Die()
     {
-        respawning = true;
         death++;
         GetComponent<SpriteRenderer>().enabled = false;
         DeadParticle.Play();
@@ -221,7 +222,7 @@ public class PlayerController : MonoBehaviour
         SpawnParticle.Play();
         yield return new WaitForSecondsRealtime(0.5f);
         GetComponent<SpriteRenderer>().enabled = true;
-       respawning = false;
+        respawning = false;
     }
 
     //Move on axis X the player
