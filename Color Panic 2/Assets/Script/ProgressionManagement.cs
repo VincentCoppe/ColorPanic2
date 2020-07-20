@@ -9,6 +9,7 @@ public class ProgressionManagement : MonoBehaviour
 
     private void Awake() {
         progression = SaveProgression.LoadProgression();
+        times = SaveProgression.LoadTimes();
     }
 
     [SerializeField] List<GameObject> Levels;
@@ -16,6 +17,7 @@ public class ProgressionManagement : MonoBehaviour
     [SerializeField] List<TMP_Text> Coins;
     [SerializeField] TMP_Text TotalCoins;
     public static List<int> progression;
+    public static Dictionary<string,string> times;
     [SerializeField] int NumberOfLevels = 3;
 
     private void Start() {

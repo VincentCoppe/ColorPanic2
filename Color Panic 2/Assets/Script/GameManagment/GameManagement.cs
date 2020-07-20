@@ -65,7 +65,7 @@ public class GameManagement : MonoBehaviour
     }
 
     private void HandleTimer(){
-        Timer += Time.deltaTime;
+        if (!Player.win) Timer += Time.deltaTime;
         TimerMillis = (int)((Timer - (int)Timer) * 100);
         if (Timer >= 60){
             TimerMin++;
@@ -134,6 +134,7 @@ public class GameManagement : MonoBehaviour
     private void WinManagement(){
         if (Player.win){
             WinText.transform.gameObject.SetActive(true);
+            Time.timeScale = 0;
             StartCoroutine(WaitForWin());
         }
     }
@@ -154,6 +155,23 @@ public class GameManagement : MonoBehaviour
         if(ProgressionManagement.progression[0] < num) ProgressionManagement.progression[0] = num;
         if(ProgressionManagement.progression[num] < Player.coin) ProgressionManagement.progression[num] = Player.coin;
         SaveProgression.SaveProg(ProgressionManagement.progression);
+
+        if (!ProgressionManagement.times.ContainsKey(CurrentMap)) {
+            ProgressionManagement.times[CurrentMap] = TimerText.text;
+        } else {
+            int oldMin = int.Parse(ProgressionManagement.times[CurrentMap].Split(':')[0]);
+            int oldSec = int.Parse(ProgressionManagement.times[CurrentMap].Split(':')[1]);
+            int oldMillis = int.Parse(ProgressionManagement.times[CurrentMap].Split(':')[2]);
+            int oldTime = oldMillis+(oldSec*100)+(oldMin*100*60);
+            int Min = int.Parse(TimerText.text.Split(':')[0]);
+            int Sec = int.Parse(TimerText.text.Split(':')[1]);
+            int Millis = int.Parse(TimerText.text.Split(':')[2]);
+            int newTime = Millis+(Sec*100)+(Min*100*60);
+            if (newTime<oldTime){
+                ProgressionManagement.times[CurrentMap] = TimerText.text;
+            }
+        }
+        SaveProgression.SaveTime(ProgressionManagement.times);
     }
 
     private void PauseManagement(){

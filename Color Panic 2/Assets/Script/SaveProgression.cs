@@ -14,6 +14,14 @@ public static class SaveProgression
         stream.Close();
     }
 
+    public static void SaveTime(Dictionary<string,string> times){
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath+"/player.time";
+        FileStream stream = new FileStream(path, FileMode.Create);
+        formatter.Serialize(stream, times);
+        stream.Close();
+    }
+
     public static List<int> LoadProgression(){
         string path = Application.persistentDataPath+"/player.progression";
         if (File.Exists(path)){
@@ -24,6 +32,20 @@ public static class SaveProgression
             return progression;
         } else {
             List<int> a = new List<int> {0, 0, 0, 0};
+            return a;
+        }
+    }
+
+    public static Dictionary<string,string> LoadTimes(){
+        string path = Application.persistentDataPath+"/player.time";
+        if (File.Exists(path)){
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            Dictionary<string,string> times = (Dictionary<string,string>)formatter.Deserialize(stream);
+            stream.Close();
+            return times;
+        } else {
+            Dictionary<string,string> a = new Dictionary<string,string>();
             return a;
         }
     }
