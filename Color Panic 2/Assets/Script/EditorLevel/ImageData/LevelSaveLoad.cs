@@ -111,7 +111,7 @@ public class LevelSaveLoad : MonoBehaviour {
             case (BlockEnum.Air):
                 if (!themeBool)
                 {
-                    _level.ChangeTheme((pixel.g / 10));
+                    _level.ChangeThemeint((pixel.g / 10));
                     themeBool = true;
                 }
                 return themeBool;

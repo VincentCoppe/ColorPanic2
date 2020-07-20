@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,11 +59,21 @@ public class LevelManager : MonoBehaviour {
         return FinishPlaced;
     }
 
-    public void ChangeTheme(int theme)
+    public void ChangeTheme(TMP_Dropdown dropdown)
     {
+        
         foreach(GridManager manager in _gridManagers)
         {
-            manager.ChangeTheme((ThemeEnum)theme);
+            manager.ChangeTheme((ThemeEnum)dropdown.value);
+        }
+    }
+
+    public void ChangeThemeint(int a)
+    {
+
+        foreach (GridManager manager in _gridManagers)
+        {
+            manager.ChangeTheme((ThemeEnum)a);
         }
     }
 
