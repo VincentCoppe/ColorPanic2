@@ -16,6 +16,8 @@ public class RestartLvl : MonoBehaviour
     public void RestartLevel(){
         LoadScenes LS = FindObjectOfType<LoadScenes>();
         GameManagement GM = FindObjectOfType<GameManagement>();
+        LS.levelName = level;
+        LS.SetFolder(folder);
         LS.loaded = false;
         GM.ResetTimer();
         this.gameObject.transform.parent.gameObject.SetActive(false);
