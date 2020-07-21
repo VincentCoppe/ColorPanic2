@@ -28,7 +28,6 @@ public class ProgressionManagement : MonoBehaviour
     }
 
     private void EnableLevels(){
-        Debug.Log(progression[0]);
         for(int i = 0; i <= progression[0]; i++){
             Levels[i].SetActive(true);
         }

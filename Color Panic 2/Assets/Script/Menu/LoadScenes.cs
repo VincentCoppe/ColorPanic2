@@ -39,7 +39,7 @@ public class LoadScenes : MonoBehaviour
 
     public void Update()
     {
-        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
+        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){    
             FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName, folder);
             loaded = true;
             PlayerController p = FindObjectOfType<PlayerController>(true);

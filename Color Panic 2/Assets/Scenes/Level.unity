@@ -994,6 +994,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5883043458906553655, guid: 2f374cf6481bf1944a34196cd7adc9fc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6821565168971431358}
+    - target: {fileID: 5883043458906553655, guid: 2f374cf6481bf1944a34196cd7adc9fc,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartLevel
+      objectReference: {fileID: 0}
     - target: {fileID: 8540811096799620456, guid: 2f374cf6481bf1944a34196cd7adc9fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1099,11 +1109,12 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1288947360792291648, guid: 2f374cf6481bf1944a34196cd7adc9fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2f374cf6481bf1944a34196cd7adc9fc, type: 3}
 --- !u!114 &6821565168971431358 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1288947360792291648, guid: 2f374cf6481bf1944a34196cd7adc9fc,
+  m_CorrespondingSourceObject: {fileID: -1832511724472092964, guid: 2f374cf6481bf1944a34196cd7adc9fc,
     type: 3}
   m_PrefabInstance: {fileID: 6821565168971431357}
   m_PrefabAsset: {fileID: 0}
