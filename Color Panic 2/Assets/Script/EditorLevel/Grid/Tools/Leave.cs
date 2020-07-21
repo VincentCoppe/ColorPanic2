@@ -10,7 +10,9 @@ public class Leave : MonoBehaviour
     public bool ModifUnsaved = false;
 
     public void LoadMenu(){
-        SceneManager.LoadScene("Menu");
+        if(FindObjectOfType<LoadScenes>().folder == "GameLevels")
+            SceneManager.LoadScene("LevelSelection");
+        else SceneManager.LoadScene("Menu");
     }
 
     public void CheckQuit() {

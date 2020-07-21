@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour {
     {
         
         CreateGridManagers();
+        FindObjectOfType<LoadScenes>().LoadLevelManager();
     }
 
     private GridManager GetGrid(int x, int y) {

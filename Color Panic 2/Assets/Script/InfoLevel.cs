@@ -12,7 +12,7 @@ public class InfoLevel : MonoBehaviour
     [SerializeField] private TMP_Text Timer = null;
     [SerializeField] private Image Score = null;
     [SerializeField] private Sprite[] ScoreSprite;
-    [SerializeField] private GameObject buttonLaunchLevel;
+    [SerializeField] private LoaderMenu loader;
     private string levelNameForLoad;
 
 
@@ -39,9 +39,7 @@ public class InfoLevel : MonoBehaviour
 
     public void LoadLevel()
     {
-        FindObjectOfType<LoadScenes>().SetupLevelName(levelNameForLoad);
-        FindObjectOfType<LoadScenes>().SetFolder("GameLevels");
-        FindObjectOfType<LoadScenes>().LoadLevel();
+        loader.LoadLevel(levelNameForLoad,"GameLevels");
     }
 
 }

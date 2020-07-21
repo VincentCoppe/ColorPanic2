@@ -4,18 +4,29 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadScenes : MonoBehaviour
+public class LoadScenes : MonoBehaviour 
 {
     public string levelName;
-    public bool loaded = false;
-    private string folder;
-    
+    public string folder = "GameLevels";
+    private static LoadScenes _instance;
+    public static LoadScenes Instance {  get { return _instance; } }
     public bool restart = false;
     public void Awake()
     {
-        DontDestroyOnLoad(this.transform);
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+
+        } else
+        {
+            _instance = this;
+            DontDestroyOnLoad(this.transform);
+            return;
+
+        }
     }
     public void LoadLevel(){
+
         SceneManager.LoadScene("Level");
     }
 
@@ -43,23 +54,23 @@ public class LoadScenes : MonoBehaviour
         this.folder = fold;
     }
 
-    public void Update()
+    public void LoadLevelManager()
     {
-        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){    
-            FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName, folder);
-            PlayerController p = FindObjectOfType<PlayerController>(true);
-            GameManagement gm = FindObjectOfType<GameManagement>();
-            p.transform.SetParent(null);
-            gm.SetPlayer(FindObjectOfType<PlayerController>());
-            gm.SetCurrentLevel(levelName);
-            gm.SetCurrentFolder(folder);
-            if (!restart) { 
-                gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-                FindObjectOfType<LevelManager>().ChangeLevelIG(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-            }
-            loaded = true;
-            restart = false;
+            
+        FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName, folder);
+        PlayerController p = FindObjectOfType<PlayerController>(true);
+        GameManagement gm = FindObjectOfType<GameManagement>();
+        p.transform.SetParent(null);
+        gm.SetPlayer(FindObjectOfType<PlayerController>());
+        gm.SetCurrentLevel(levelName);
+        gm.SetCurrentFolder(folder);
+        if (!restart) { 
+            gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+            FindObjectOfType<LevelManager>().ChangeLevelIG(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
         }
+            
+        restart = false;
+        
     }
 
 
