@@ -9,7 +9,8 @@ public class LoadScenes : MonoBehaviour
     public string levelName;
     public bool loaded = false;
     private string folder;
-
+    
+    public bool restart = false;
     public void Awake()
     {
         DontDestroyOnLoad(this.transform);
@@ -44,17 +45,20 @@ public class LoadScenes : MonoBehaviour
 
     public void Update()
     {
-        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){         
+        if(SceneManager.GetSceneByName("Level")== SceneManager.GetActiveScene() && !loaded){    
             FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName, folder);
-            loaded = true;
             PlayerController p = FindObjectOfType<PlayerController>(true);
             GameManagement gm = FindObjectOfType<GameManagement>();
             p.transform.SetParent(null);
             gm.SetPlayer(FindObjectOfType<PlayerController>());
             gm.SetCurrentLevel(levelName);
             gm.SetCurrentFolder(folder);
-            gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-            FindObjectOfType<LevelManager>().ChangeLevelIG(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+            if (!restart) { 
+                gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+                FindObjectOfType<LevelManager>().ChangeLevelIG(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+            }
+            loaded = true;
+            restart = false;
         }
     }
 

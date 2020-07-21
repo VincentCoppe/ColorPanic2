@@ -22,7 +22,7 @@ public class GameManagement : MonoBehaviour
     [SerializeField] Color Purple;
     [SerializeField] Color Viridian;
     [SerializeField] Color Green;
-    private bool pause = false;
+    public bool pause = false;
     private bool setActive = false;
     private string savedPower;
 
@@ -78,6 +78,12 @@ public class GameManagement : MonoBehaviour
             TimerMin++;
             Timer = Timer-60;
         }
+    }
+
+    public void ResetTimer(){
+        Timer = 0;
+        TimerMillis = 0;
+        TimerMin = 0;
     }
 
     private void UpdateText(){

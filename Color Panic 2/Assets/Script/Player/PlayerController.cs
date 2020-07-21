@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float LowJumpFactor = 0.8f;                   
     [SerializeField] private LayerMask m_WhatIsGround;  
     [SerializeField] private float GravityFactorViridian = 0.20f; 
-
+    [SerializeField] private float VelocityYCap = 40; 
     [SerializeField] private Color Viridian; 
     [SerializeField] private Color Red;   
     [SerializeField] private Color Green;       
@@ -81,10 +81,6 @@ public class PlayerController : MonoBehaviour
         gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
         respawn = transform.localPosition;
-    }
-
-    private void Coin(){
-        coin++;
     }
 
     private void FixedUpdate()
@@ -156,6 +152,14 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown("space")){
             teleport = true;
         }
+
+        //Cap velocity max y
+        if(m_Rigidbody2D.velocity.y >= VelocityYCap){
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, VelocityYCap);
+        }
+        if(m_Rigidbody2D.velocity.y <= -VelocityYCap){
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, -VelocityYCap);
+        }
     }
 
     //On death, reset power and move the player to the respawn location
@@ -165,6 +169,23 @@ public class PlayerController : MonoBehaviour
             respawning = true;
             StartCoroutine(Die());
         } 
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnRightWall && OnLeftWall){
+            Vector3 pos = transform.localPosition;
+            Vector3 newPos = new Vector3();
+            if (FacingRight){
+                newPos = new Vector3(pos.x-0.5f, pos.y, pos.z);
+            } else {
+                newPos = new Vector3(pos.x+0.5f, pos.y, pos.z);
+            }
+            transform.localPosition = newPos;
+        }
+    }
+
+    private void Coin(){
+        coin++;
     }
 
     //Teleport the player at the opposite of the map on the axis x
@@ -384,7 +405,6 @@ public class PlayerController : MonoBehaviour
                 WallJump(m_JumpForce, FacingRight);
                 return;
             }
-
         }
         //Ungrab if player move/jump, or if there is no wall/the ground
         if(grabbing && (Grounded ||  (!FacingRight && move > 0 && !reverse) || (FacingRight && move < 0 && !reverse) 
