@@ -721,9 +721,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 214203918}
-        m_TargetAssemblyTypeName: LoadSelect, Assembly-CSharp
-        m_MethodName: DisplayLevels
+      - m_Target: {fileID: 1528081367}
+        m_TargetAssemblyTypeName: LoadScenes, Scripts
+        m_MethodName: LoadLevelSelection
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -747,62 +747,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Menu: {fileID: 335838388}
   Levels: {fileID: 1278556335}
---- !u!1 &244082257
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 244082259}
-  - component: {fileID: 244082258}
-  m_Layer: 0
-  m_Name: ProgressionManagement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &244082258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244082257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f39d2bc3e89fe844897bb2c0df287bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Levels:
-  - {fileID: 1299693187}
-  - {fileID: 476456187}
-  - {fileID: 1450602009}
-  - {fileID: 1354211200}
-  SLevels:
-  - {fileID: 689370370}
-  Coins:
-  - {fileID: 1328505629}
-  - {fileID: 1161012074}
-  - {fileID: 647024932}
-  TotalCoins: {fileID: 513561925}
-  NumberOfLevels: 3
---- !u!4 &244082259
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244082257}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267149110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1254,7 @@ RectTransform:
   - {fileID: 267149111}
   - {fileID: 1687761830}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2190,7 +2134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &623361301
 GameObject:
@@ -3689,7 +3633,7 @@ RectTransform:
   m_Children:
   - {fileID: 273466623}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4079,7 +4023,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4292269794
   m_fontColor: {r: 0.8867924, g: 0.8407796, b: 0.8407796, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -4967,7 +4911,7 @@ RectTransform:
   - {fileID: 623361305}
   - {fileID: 1818531500}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5866,7 +5810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1411965048
 GameObject:
@@ -6280,7 +6224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1528081367
 MonoBehaviour:

@@ -149,41 +149,46 @@ public class GameManagement : MonoBehaviour
     IEnumerator WaitForWin(){
             yield return new  WaitForSeconds(3f);
             if (CurrentFolder == "GameLevels"){
-            string namenum = CurrentMap.Split('-')[1];
-            int num = int.Parse(namenum);
-            if (SceneManager.GetActiveScene().name.Split('-')[0] == "Level"){
-                Save(num);
+            string[] nameParse = CurrentMap.Split('-');
+            int num = int.Parse(nameParse[1]);
+            int world = int.Parse(nameParse[0]);
+            if (SceneManager.GetActiveScene().name == "Level"){
+                Save(num,world);
             }
             }
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("LevelSelection");
     }
 
-    private void Save(int num){
-        if(ProgressionManagement.progression[0] < num) ProgressionManagement.progression[0] = num;
-        if(ProgressionManagement.progression[num] < Player.coin) ProgressionManagement.progression[num] = Player.coin;
-        SaveProgression.SaveProg(ProgressionManagement.progression);
-
-        if (!ProgressionManagement.times.ContainsKey(CurrentMap)) {
-            ProgressionManagement.times[CurrentMap] = TimerText.text;
-        } else {
-            int oldMin = int.Parse(ProgressionManagement.times[CurrentMap].Split(':')[0]);
-            int oldSec = int.Parse(ProgressionManagement.times[CurrentMap].Split(':')[1]);
-            int oldMillis = int.Parse(ProgressionManagement.times[CurrentMap].Split(':')[2]);
-            int oldTime = oldMillis+(oldSec*100)+(oldMin*100*60);
+    private void Save(int num, int world){
+        string result = "";
+        if (!ProgressionManagement.progression.ContainsKey(world+"-"+num))
+        {
+            result += Player.death + "-";
+            result += Player.coin + "-";
+            result += TimerText.text;
+        } else
+        {
+            int oldDeath = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[0]);
+            result += Mathf.Min(Player.death, oldDeath) + "-";
+            int oldCoin = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[1]);
+            result += Mathf.Min(Player.coin, oldCoin) + "-";
+            int oldMin = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[2].Split(':')[0]);
+            int oldSec = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[2].Split(':')[1]);
+            int oldMillis = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[2].Split(':')[2]);
+            int oldTime = oldMillis + (oldSec * 100) + (oldMin * 100 * 60);
             int Min = int.Parse(TimerText.text.Split(':')[0]);
             int Sec = int.Parse(TimerText.text.Split(':')[1]);
             int Millis = int.Parse(TimerText.text.Split(':')[2]);
-            int newTime = Millis+(Sec*100)+(Min*100*60);
-            if (newTime<oldTime){
-                ProgressionManagement.times[CurrentMap] = TimerText.text;
-            }
+            int newTime = Millis + (Sec * 100) + (Min * 100 * 60);
+            result += (newTime<oldTime) ? TimerText.text : oldMin + ":" + oldSec + ":" + oldMillis;
         }
-        SaveProgression.SaveTime(ProgressionManagement.times);
+        ProgressionManagement.progression[world + "-" + num] = result;
+        SaveProgression.SaveProg(ProgressionManagement.progression);
     }
 
     private void PauseManagement(){
         Player.pause = pause;
-        if (setActive && pause && !PauseMenu.transform.gameObject.active){
+        if (setActive && pause && !PauseMenu.gameObject.activeInHierarchy){
             pause = false;
             setActive = false;
             Time.timeScale = 1; 

@@ -9,9 +9,9 @@ public class GetTimer : MonoBehaviour
     [SerializeField] TMP_Text This;
     private void Start() {
         string time = "";
-        if (ProgressionManagement.times.ContainsKey(Name.text)){
-            time = ProgressionManagement.times[Name.text];
-        }
+       // if (ProgressionManagement.times.ContainsKey(Name.text)){
+        //    time = ProgressionManagement.times[Name.text];
+       // }
         This.text = time;
     }
 }

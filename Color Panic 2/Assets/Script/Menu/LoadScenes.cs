@@ -18,14 +18,19 @@ public class LoadScenes : MonoBehaviour
         SceneManager.LoadScene("Level");
     }
 
+    public void LoadLevelSelection()
+    {
+        SceneManager.LoadScene("LevelSelection");
+    }
+
     public void LoadEditor()
     {
         SceneManager.LoadScene("Editor");
     }
 
-    public void SetupLevelName(TMP_Text name)
+    public void SetupLevelName(string name)
     {
-        levelName = name.text;
+        levelName = name;
     }
 
     public void SetupLevelName(LoadListMenu loadlistmenu)
