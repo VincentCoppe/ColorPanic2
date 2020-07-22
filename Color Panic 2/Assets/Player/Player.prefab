@@ -5093,10 +5093,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   GravityFactorViridian: 0.7
+  VelocityYCap: 40
   Viridian: {r: 0.002491996, g: 0.51975214, b: 0.5283019, a: 1}
   Red: {r: 0.8207547, g: 0.10453009, b: 0.1501493, a: 1}
   Green: {r: 0.16836035, g: 0.8396226, b: 0.11485406, a: 1}
   Purple: {r: 0.6585065, g: 0.380429, b: 0.7830189, a: 1}
+  Yellow: {r: 0.9245283, g: 0.8848282, b: 0.14391243, a: 1}
   SpawnParticle: {fileID: 2687266948236445254}
   DeadParticle: {fileID: 2687266948236445273}
   FacingRight: 1
@@ -5113,6 +5115,7 @@ MonoBehaviour:
   DistanceX: 0
   DistanceY: 0
   coin: 0
+  death: 0
 --- !u!114 &3105630702609896182
 MonoBehaviour:
   m_ObjectHideFlags: 0

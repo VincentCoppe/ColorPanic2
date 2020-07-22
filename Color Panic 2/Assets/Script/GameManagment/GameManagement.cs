@@ -22,6 +22,7 @@ public class GameManagement : MonoBehaviour
     [SerializeField] Color Purple;
     [SerializeField] Color Viridian;
     [SerializeField] Color Green;
+    [SerializeField] Color Yellow;
     public bool pause = false;
     private bool setActive = false;
     private string savedPower;
@@ -107,6 +108,7 @@ public class GameManagement : MonoBehaviour
             case "Red" : PowerText.text = "You can now dash"; PowerText.color = Red; break;
             case "Viridian" : PowerText.text = "You can now reverse the gravity"; PowerText.color = Viridian; break;
             case "Purple" : PowerText.text = "You can now teleport"; PowerText.color = Purple; break;
+            case "Yellow" : PowerText.text = "You can now Wall jump"; PowerText.color = Yellow; break;
             //others
         }
         yield return new WaitForSecondsRealtime(2f);

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color Red;   
     [SerializeField] private Color Green;       
     [SerializeField] private Color Purple;   
+    [SerializeField] private Color Yellow; 
     
     [SerializeField] private ParticleSystem SpawnParticle;
     [SerializeField] private ParticleSystem DeadParticle;
@@ -292,6 +293,7 @@ public class PlayerController : MonoBehaviour
             case "Red" : rend.material.color = Red; break;
             case "Viridian" : rend.material.color = Viridian; break;
             case "Purple" : rend.material.color = Purple; break;
+            case "Yellow" : rend.material.color = Yellow; break;
         }
     }
 
@@ -414,7 +416,7 @@ public class PlayerController : MonoBehaviour
                 grabbing = true;
                 return;
             }
-            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) ) && Djump && power.HavePower("Green") ){
+            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) ) && ((Djump && power.HavePower("Green")) || power.HavePower("Yellow"))  ){
                 Grounded = false;
                 Djump = false;
                 grabbing = false;
@@ -530,9 +532,9 @@ public class PlayerController : MonoBehaviour
     private void WallJump(float force, bool FacingRight)
     {
         if (FacingRight){
-            m_Rigidbody2D.AddForce(new Vector2(-force/1.6f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(-force/2f, 0f));
         } else {
-            m_Rigidbody2D.AddForce(new Vector2(force/1.6f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(force/2f, 0f));
         }
         Jump(force);
         WalljumpTimer = 0.1f;
