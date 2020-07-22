@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-    private void OnCollisionStay2D(Collision2D other) {
+    /*private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnRightWall && OnLeftWall){
             Vector3 pos = transform.localPosition;
             Vector3 newPos = new Vector3();
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
             }
             transform.localPosition = newPos;
         }
-    }
+    }*/
 
     private void Coin(){
         coin++;

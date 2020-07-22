@@ -10,7 +10,6 @@ public class LoadScenes : MonoBehaviour
     public string folder = "GameLevels";
     private static LoadScenes _instance;
     public static LoadScenes Instance {  get { return _instance; } }
-    public bool restart = false;
     public void Awake()
     {
         if (_instance != null && _instance != this)
@@ -64,12 +63,6 @@ public class LoadScenes : MonoBehaviour
         gm.SetPlayer(FindObjectOfType<PlayerController>());
         gm.SetCurrentLevel(levelName);
         gm.SetCurrentFolder(folder);
-        if (!restart) { 
-            gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-            FindObjectOfType<LevelManager>().ChangeLevelIG(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
-        }
-            
-        restart = false;
         
     }
 
