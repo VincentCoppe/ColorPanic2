@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
     public bool Grounded { get; private set; } 
+    public bool Ceiling { get; private set; } 
     public bool OnLeftWall { get; private set; }
     public bool OnRightWall { get; private set; }
     public bool FacingRight = true; 
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Grounded = false;
+        Ceiling = false;
         OnLeftWall = false;
         OnRightWall = false;
         col = true;
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
         m_Anim.SetBool("Grabbing",grabbing);
         
         HandleGroundCheck();
+        HandleCeilingCheck();
         HandleLeftCheck();
         HandleRightCheck();
         HandleDash();
@@ -171,8 +174,9 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-    /*private void OnCollisionStay2D(Collision2D other) {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnRightWall && OnLeftWall){
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnRightWall && OnLeftWall && Grounded && Ceiling ){
+            Debug.Log("In the wall ?");
             Vector3 pos = transform.localPosition;
             Vector3 newPos = new Vector3();
             if (FacingRight){
@@ -182,7 +186,7 @@ public class PlayerController : MonoBehaviour
             }
             transform.localPosition = newPos;
         }
-    }*/
+    }
 
     private void Coin(){
         coin++;
@@ -386,6 +390,18 @@ public class PlayerController : MonoBehaviour
             }
         }
         m_Anim.SetBool("Grounded",Grounded);
+    }
+
+    private void HandleCeilingCheck(){
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                Ceiling = true;
+            }
+        }
     }
 
     //Function used to know if the play should grab, ungrab, or walljump, depending on inputs
