@@ -25,7 +25,7 @@ public class LoadTest : MonoBehaviour
     private Dictionary<string,SaveListItem> ListFiles = new Dictionary<string, SaveListItem>();
 
     private void OnEnable() {
-        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevels/")){
+        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevelsEditor/")){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
             if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {
@@ -65,14 +65,13 @@ public class LoadTest : MonoBehaviour
             leave.ModifUnsaved = false;
             levelManager.gameObject.SetActive(true);
             windowTestable.SetActive(false);
-            if (!levelManager.Tested)
-            {
-                LoadScenes a = FindObjectOfType<LoadScenes>();
-                a.SetFolder("PlayerLevelsEditor");
-                a.SetupLevelName(fileName.text);
-                a.TestingLevel = true;
-                a.LoadLevel();
-            }
+            
+            LoadScenes a = FindObjectOfType<LoadScenes>();
+            a.SetFolder("PlayerLevelsEditor");
+            a.SetupLevelName(fileName.text);
+            a.TestingLevel = true;
+            a.LoadLevel();
+            
         }
     }
 
@@ -83,14 +82,12 @@ public class LoadTest : MonoBehaviour
         confirmOverwrite.SetActive(false);
         levelManager.gameObject.SetActive(true);
         windowTestable.SetActive(false);
-        if (!levelManager.Tested)
-        {
-            LoadScenes a = FindObjectOfType<LoadScenes>();
-            a.SetFolder("PlayerLevelsEditor");
-            a.SetupLevelName(fileName.text);
-            a.TestingLevel = true;
-            a.LoadLevel();
+        LoadScenes a = FindObjectOfType<LoadScenes>();
+        a.SetFolder("PlayerLevelsEditor");
+        a.SetupLevelName(fileName.text);
+        a.TestingLevel = true;
+        a.LoadLevel();
 
-        }
+        
     }
 }

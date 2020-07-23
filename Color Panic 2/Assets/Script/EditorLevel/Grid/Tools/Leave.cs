@@ -13,11 +13,13 @@ public class Leave : MonoBehaviour
         LoadScenes LoadScenes = FindObjectOfType<LoadScenes>();
         if (LoadScenes.folder == "GameLevels")
             SceneManager.LoadScene("LevelSelection");
-        else if(SceneManager.GetActiveScene().name == "LevelTest")
+        
+        else if (LoadScenes.TestingLevel)
         {
-           
             LoadScenes.setLevelTested(false);
-        } else
+            LoadScenes.LoadEditor();
+        }
+         else
         {
             SceneManager.LoadScene("Menu");
 
