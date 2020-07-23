@@ -1,14 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.UI;
 using TMPro;
 
 public class LoadTest : MonoBehaviour
 {
+    
     [SerializeField] private LevelManager levelManager = null;
+    [SerializeField] private LevelSaveLoad lsl = null;
+    [SerializeField] private Leave leave = null;
+    [SerializeField] private GameObject confirmOverwrite = null;
+
     [SerializeField] private GameObject windowTestable = null;
+    [SerializeField] private Button buttonTest = null;
+    [SerializeField] private TMP_InputField fileName = null;
+
     [SerializeField] private GameObject windowNotTestable = null;
     [SerializeField] private TMP_Text missingElements = null;
+
+    [SerializeField] private SaveListItem itemSaveList = null;
+    [SerializeField] private Transform _content = null;
+    private Dictionary<string,SaveListItem> ListFiles = new Dictionary<string, SaveListItem>();
+
+    private void OnEnable() {
+        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevels/")){
+            string[] tmp = path.Split('/');
+            string file = tmp[tmp.Length-1];
+            if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {
+                SaveListItem listing = Instantiate(itemSaveList, _content);
+                listing.SetInfo(file);
+                ListFiles[file] = listing;
+            }
+        }
+    }
    
 
     public void CheckLevelTestable() {
@@ -25,5 +51,29 @@ public class LoadTest : MonoBehaviour
         } else {
             windowTestable.SetActive(true);
         }
+    }
+
+    public void CheckInteractible() {
+        buttonTest.interactable = fileName.text.Length != 0;
+    }
+
+    public void OnClickSave() {
+        if(File.Exists(Application.streamingAssetsPath + "/levels/PlayerLevels/" + fileName.text)) {
+            confirmOverwrite.SetActive(true);
+        } else {
+            lsl.SaveLevel(fileName);
+            leave.ModifUnsaved = false;
+            levelManager.gameObject.SetActive(true);
+            windowTestable.SetActive(false);
+        }
+    }
+
+    public void ConfirmOverwrite() {
+        File.Delete(Application.streamingAssetsPath + "/levels/PlayerLevels/" + fileName.text);
+        lsl.SaveLevel(fileName);
+        leave.ModifUnsaved = false;
+        confirmOverwrite.SetActive(false);
+        levelManager.gameObject.SetActive(true);
+        windowTestable.SetActive(false);
     }
 }
