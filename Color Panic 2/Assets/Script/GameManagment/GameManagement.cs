@@ -157,14 +157,21 @@ public class GameManagement : MonoBehaviour
     IEnumerator WaitForWin(){
             yield return new  WaitForSeconds(3f);
             if (CurrentFolder == "GameLevels"){
-            string[] nameParse = CurrentMap.Split('-');
-            int num = int.Parse(nameParse[1]);
-            int world = int.Parse(nameParse[0]);
-            if (SceneManager.GetActiveScene().name == "Level"){
+                string[] nameParse = CurrentMap.Split('-');
+                int num = int.Parse(nameParse[1]);
+                int world = int.Parse(nameParse[0]);
                 Save(num,world);
+                SceneManager.LoadScene("LevelSelection");
+                
+            } else
+            {
+                LoadScenes a = FindObjectOfType<LoadScenes>();
+                if (a.TestingLevel){
+                    SceneManager.LoadScene("Editor");
+                    FindObjectOfType<LoadScenes>().setLevelTested(true);
+                } 
+                
             }
-            }
-            SceneManager.LoadScene("LevelSelection");
     }
 
     private void Save(int num, int world){

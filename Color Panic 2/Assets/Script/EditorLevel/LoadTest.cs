@@ -58,22 +58,39 @@ public class LoadTest : MonoBehaviour
     }
 
     public void OnClickSave() {
-        if(File.Exists(Application.streamingAssetsPath + "/levels/PlayerLevels/" + fileName.text)) {
+        if(File.Exists(Application.streamingAssetsPath + "/levels/PlayerLevelsEditor/" + fileName.text)) {
             confirmOverwrite.SetActive(true);
         } else {
-            lsl.SaveLevel(fileName);
+            lsl.SaveLevel(fileName.text, "PlayerLevelsEditor");
             leave.ModifUnsaved = false;
             levelManager.gameObject.SetActive(true);
             windowTestable.SetActive(false);
+            if (!levelManager.Tested)
+            {
+                LoadScenes a = FindObjectOfType<LoadScenes>();
+                a.SetFolder("PlayerLevelsEditor");
+                a.SetupLevelName(fileName.text);
+                a.TestingLevel = true;
+                a.LoadLevel();
+            }
         }
     }
 
     public void ConfirmOverwrite() {
-        File.Delete(Application.streamingAssetsPath + "/levels/PlayerLevels/" + fileName.text);
-        lsl.SaveLevel(fileName);
+        File.Delete(Application.streamingAssetsPath + "/levels/PlayerLevelsEditor/" + fileName.text);
+        lsl.SaveLevel(fileName.text, "PlayerLevelsEditor");
         leave.ModifUnsaved = false;
         confirmOverwrite.SetActive(false);
         levelManager.gameObject.SetActive(true);
         windowTestable.SetActive(false);
+        if (!levelManager.Tested)
+        {
+            LoadScenes a = FindObjectOfType<LoadScenes>();
+            a.SetFolder("PlayerLevelsEditor");
+            a.SetupLevelName(fileName.text);
+            a.TestingLevel = true;
+            a.LoadLevel();
+
+        }
     }
 }

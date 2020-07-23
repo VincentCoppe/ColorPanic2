@@ -20,7 +20,7 @@ public class LoadListMenu : MonoBehaviour
             item.SetBgColor(new Color(1,1,1));
         }
         selectedFile = null;
-        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevels/")){
+        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevelsEditor/")){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
             if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {
@@ -41,7 +41,7 @@ public class LoadListMenu : MonoBehaviour
     }
 
     public void LoadFile() {
-        _levelSaveLoad.LoadLevel(selectedFile, "PlayerLevels");
+        _levelSaveLoad.LoadLevel(selectedFile, "PlayerLevelsEditor");
         leave.ModifUnsaved = false;
     }
 }

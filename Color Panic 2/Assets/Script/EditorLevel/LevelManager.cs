@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
@@ -18,8 +19,10 @@ public class LevelManager : MonoBehaviour {
     private GameObject precedentLevelSelected = null;
     public (GridManager,(int,int)) CurrentGM;
     private bool[,] _loaded;
+    private Leave Leave;
     public GridManager[,] GridManagers {  get { return _gridManagers; } }
     private int activeX, activeY;
+    public bool Tested = false;
     
     public void Start()
     {
@@ -28,9 +31,23 @@ public class LevelManager : MonoBehaviour {
 
     private void newLevel()
     {
-        
+        Leave = FindObjectOfType<Leave>();
+        LoadScenes SceneLoader = FindObjectOfType<LoadScenes>();
         CreateGridManagers();
-        FindObjectOfType<LoadScenes>().LoadLevelManager();
+        if (SceneManager.GetActiveScene().name == "Level")
+            SceneLoader.LoadLevelManager();
+        else if (SceneManager.GetActiveScene().name == "Editor" && SceneLoader.TestingLevel)
+        {
+
+            SceneLoader.TestingLevel = false;
+            FindObjectOfType<LevelSaveLoad>().LoadLevel(SceneLoader.levelName, SceneLoader.folder);
+            if (SceneLoader.getLevelTested())
+            {
+                Tested = true;
+                FindObjectOfType<LevelSaveLoad>().SaveLevel(SceneLoader.levelName, "PlayerLevels");
+            }
+        }
+
     }
 
     private GridManager GetGrid(int x, int y) {
@@ -38,6 +55,12 @@ public class LevelManager : MonoBehaviour {
             return _gridManagers[x,y];
         return null;
         
+    }
+
+    public void Update()
+    {
+        if(SceneManager.GetActiveScene().name == "Editor")
+            Tested = !Leave.ModifUnsaved;
     }
 
     public void setPlayerPlaced(Vector3 vector)
@@ -83,7 +106,9 @@ public class LevelManager : MonoBehaviour {
         foreach (GridManager manager in _gridManagers)
         {
             manager.Clear();
+
         }
+        Tested = false;
     }
 
     public void ClearHistory()

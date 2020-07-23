@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSaveLoad : MonoBehaviour {
@@ -19,7 +20,7 @@ public class LevelSaveLoad : MonoBehaviour {
     public LevelManager Level { get { return _level; }}
 
 
-    public void SaveLevel(TMP_InputField path) {
+    public void SaveLevel(string path, string folder) {
 
         Texture2D Save = new Texture2D(Level.GridManagers.GetLength(0) * 50, Level.GridManagers.GetLength(1) * 30, TextureFormat.RGBA32, false);
 
@@ -57,7 +58,7 @@ public class LevelSaveLoad : MonoBehaviour {
         }
         Save.Apply();
         byte[] bytes = Save.EncodeToPNG();
-        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/PlayerLevels/" + path.text, bytes);
+        File.WriteAllBytes(Application.streamingAssetsPath + "/levels/" + folder + "/" + path, bytes);
         _level.ClearHistory();
     }
 
@@ -111,6 +112,10 @@ public class LevelSaveLoad : MonoBehaviour {
             case (BlockEnum.Air):
                 if (!themeBool)
                 {
+                    if (pixel.r == 0 && SceneManager.GetActiveScene().name == "Level")
+                    {
+                       // levelNotTested
+                    }
                     _level.ChangeThemeint((pixel.g / 10));
                     themeBool = true;
                 }

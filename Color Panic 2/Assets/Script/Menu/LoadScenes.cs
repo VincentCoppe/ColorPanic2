@@ -9,7 +9,10 @@ public class LoadScenes : MonoBehaviour
     public string levelName;
     public string folder = "GameLevels";
     private static LoadScenes _instance;
+    private bool TestedLevel = false;
+    public bool TestingLevel = false;
     public static LoadScenes Instance {  get { return _instance; } }
+
     public void Awake()
     {
         if (_instance != null && _instance != this)
@@ -29,6 +32,11 @@ public class LoadScenes : MonoBehaviour
         SceneManager.LoadScene("Level");
     }
 
+    public void LoadLevelTest()
+    {
+        SceneManager.LoadScene("TestLevel");
+    }
+
     public void LoadLevelSelection()
     {
         SceneManager.LoadScene("LevelSelection");
@@ -37,6 +45,16 @@ public class LoadScenes : MonoBehaviour
     public void LoadEditor()
     {
         SceneManager.LoadScene("Editor");
+    }
+
+    public void setLevelTested(bool value)
+    {
+        TestedLevel = value;
+    }
+
+    public bool getLevelTested()
+    {
+        return TestedLevel;
     }
 
     public void SetupLevelName(string name)
@@ -57,13 +75,13 @@ public class LoadScenes : MonoBehaviour
     {
             
         FindObjectOfType<LevelSaveLoad>().LoadLevel(levelName, folder);
-        PlayerController p = FindObjectOfType<PlayerController>(true);
         GameManagement gm = FindObjectOfType<GameManagement>();
-        p.transform.SetParent(null);
-        gm.SetPlayer(FindObjectOfType<PlayerController>());
         gm.SetCurrentLevel(levelName);
         gm.SetCurrentFolder(folder);
+        PlayerController p = FindObjectOfType<PlayerController>(true);
+        p.transform.SetParent(null);
         gm.SetCamera(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
+        gm.SetPlayer(p);
         FindObjectOfType<LevelManager>().ChangeLevelIG(Mathf.FloorToInt((p.transform.position.x+25)/50), Mathf.FloorToInt((p.transform.position.y+15)/30));
         
     }

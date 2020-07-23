@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public static class SaveProgression
 {
+   
     public static void SaveProg(Dictionary<string, string> progression){
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath+"/player.progression";
