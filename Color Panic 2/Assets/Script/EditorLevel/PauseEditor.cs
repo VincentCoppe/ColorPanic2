@@ -8,6 +8,9 @@ public class PauseEditor : MonoBehaviour
     [SerializeField] private Sprite play = null;
     [SerializeField] private Sprite pause = null;
     [SerializeField] private Image image = null;
+    [SerializeField] private LoadTest lt = null;
+    [SerializeField] private LevelSaveLoad levelSaveLoad = null;
+    [SerializeField] private GameObject windowCantPlay = null;
     [SerializeField] private LevelManager levelManager = null;
 
     private void Start() {
@@ -17,20 +20,21 @@ public class PauseEditor : MonoBehaviour
     }
 
     public void TimePause(){
-        if(Time.timeScale == 1){
-            Vector3 coords = levelManager.getPlayerPlaced();
-            if(coords != new Vector3(-1, -1, -1)) {
-                PlayerController pc = FindObjectOfType<PlayerController>(true);
-                pc.transform.position = coords;
-                pc.ResetMovement();
+        if(lt.LevelName != "") {
+            if(Time.timeScale == 1){
+                levelSaveLoad.SaveLevel(lt.LevelName, "PlayerLevelsEditor");
+                levelSaveLoad.LoadLevel(lt.LevelName, "PlayerLevelsEditor");
+                Time.timeScale = 0;
+                image.color = new Color(1,0,0);
+                image.sprite = pause;
+            } else {
+                Time.timeScale = 1;
+                image.color = new Color(0,1,0);
+                image.sprite = play;
             }
-            Time.timeScale = 0;
-            image.color = new Color(1,0,0);
-            image.sprite = pause;
         } else {
-            Time.timeScale = 1;
-            image.color = new Color(0,1,0);
-            image.sprite = play;
+            levelManager.gameObject.SetActive(false);
+            windowCantPlay.SetActive(true);
         }
     }
 }
