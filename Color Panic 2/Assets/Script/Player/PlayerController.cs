@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;      
     [SerializeField] private float m_JumpForce = 1000f;
+    [SerializeField] private float WallJumpPushForce = 400;
     [SerializeField] private float FlyForce = 200;     
     [SerializeField] private float FlySpeedCap =  25;
     [SerializeField] private float FlyFuel = 50;            
@@ -424,11 +425,11 @@ public class PlayerController : MonoBehaviour
                 grabbing = true;
                 return;
             }
-            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) ) && ((Djump && power.HavePower("Green")) || power.HavePower("Yellow"))  ){
+            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) ) && ((Djump && power.HavePower("Green")) || power.HavePower("Yellow")) && grabbing  ){
                 Grounded = false;
                 Djump = false;
                 grabbing = false;
-                WallJump(m_JumpForce, FacingRight);
+                WallJump(FacingRight);
                 return;
             }
         }
@@ -442,16 +443,16 @@ public class PlayerController : MonoBehaviour
     //Function called when the player press jump
     private void HandleJump(float move, bool jump){
         //High jump if jump is still down when at the max velocity of the low jump
-        if ( !Grounded && !jump && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y > 16 && m_Rigidbody2D.velocity.y < 18 && Hjump && Djump){
+        if ( !Grounded && !jump && Input.GetButton("Jump") && m_Rigidbody2D.velocity.y > 16 && m_Rigidbody2D.velocity.y < 18 && Hjump && Djump && !grabbing){
             Hjump = false;
             Jump(m_JumpForce*HighJumpFactor);
         }
         //Low jump when press jump
-        else if ( Grounded && jump && !dashing && !power.HavePower("Viridian")){
+        else if ( Grounded && jump && !dashing && !power.HavePower("Viridian")  && !grabbing){
             Jump(m_JumpForce*LowJumpFactor);
         }
         //Double jump when press jump in air
-        else if ( !Grounded && (Input.GetKey("space") || jump) && power.HavePower("Green") && Djump && !dashing){
+        else if ( !Grounded && (Input.GetKey("space") || jump) && power.HavePower("Green") && Djump && !dashing  && !grabbing){
             Jump(m_JumpForce);
             Djump = false;
         }
@@ -551,15 +552,16 @@ public class PlayerController : MonoBehaviour
     }
 
     //Wall jump used when the player in on grab
-    private void WallJump(float force, bool FacingRight)
+    private void WallJump(bool FacingRight)
     {
+        Ungrab();
+        ResetMovement();
         if (FacingRight){
-            m_Rigidbody2D.AddForce(new Vector2(-force/2f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(-WallJumpPushForce, m_JumpForce));
         } else {
-            m_Rigidbody2D.AddForce(new Vector2(force/2f, 0f));
+            m_Rigidbody2D.AddForce(new Vector2(WallJumpPushForce, m_JumpForce));
         }
-        Jump(force);
-        WalljumpTimer = 0.1f;
+        WalljumpTimer = 0.2f;
     }
 
     //Push the player up on y axis

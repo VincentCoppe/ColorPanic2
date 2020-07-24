@@ -5083,13 +5083,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxSpeed: 10
   m_JumpForce: 1500
+  WallJumpPushForce: 400
   FlyForce: 200
   FlySpeedCap: 25
   FlyFuel: 30
   DashTime: 0.2
   DashSpeed: 30
   GrabUpFactor: 1
-  GrabDownFactor: 1
+  GrabDownFactor: 0.8
   HighJumpFactor: 0.95
   LowJumpFactor: 0.7
   m_WhatIsGround:
