@@ -47,7 +47,7 @@ public class SaveMenu : MonoBehaviour
         }
         else
         {
-            lsl.SaveLevel(inputField.text, "PlayersLevelsEditor");
+            lsl.SaveLevel(inputField.text, "PlayerLevelsEditor");
             leave.ModifUnsaved = false;
             levelManager.gameObject.SetActive(true);
             save.SetActive(false);
@@ -57,7 +57,7 @@ public class SaveMenu : MonoBehaviour
     public void ConfirmOverwrite()
     {
         File.Delete(Application.streamingAssetsPath + "/levels/PlayerLevelsEditor/" + inputField.text);
-        lsl.SaveLevel(inputField.text, "PlayersLevelsEditor");
+        lsl.SaveLevel(inputField.text, "PlayerLevelsEditor");
         leave.ModifUnsaved = false;
     }
 }

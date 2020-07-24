@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private ColorPicker ColorPicker;
     [SerializeField] private ToolManager ToolManager;
     [SerializeField] private GameObject A00;
+    [SerializeField] private GameObject windowLevelTested;
     [SerializeField] public ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
     private Vector3 PlayerPlaced = new Vector3(-1,-1,-1);
@@ -45,6 +46,8 @@ public class LevelManager : MonoBehaviour {
             {
                 Tested = true;
                 FindObjectOfType<LevelSaveLoad>().SaveLevel(SceneLoader.levelName, "PlayerLevels");
+                windowLevelTested.SetActive(true);
+                this.gameObject.SetActive(false);
             }
         }
 

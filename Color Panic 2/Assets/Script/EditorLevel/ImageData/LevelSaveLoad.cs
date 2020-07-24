@@ -17,6 +17,7 @@ public class LevelSaveLoad : MonoBehaviour {
 
     [SerializeField] private LevelManager _level;
     [SerializeField] private ColorPicker ColorPicker = null;
+    [SerializeField] private LoadTest lt = null;
     public LevelManager Level { get { return _level; }}
 
 
@@ -60,6 +61,7 @@ public class LevelSaveLoad : MonoBehaviour {
         byte[] bytes = Save.EncodeToPNG();
         File.WriteAllBytes(Application.streamingAssetsPath + "/levels/" + folder + "/" + path, bytes);
         _level.ClearHistory();
+        lt.LevelName = path;
     }
 
     public void LoadLevel(string path, string folder) {
@@ -88,6 +90,8 @@ public class LevelSaveLoad : MonoBehaviour {
                 theme = CreateBlockBase(source.GetPixel(x, y),x,y,theme);
             }
         }
+        if(lt != null)
+            lt.LevelName = path;
     }
     /*
     private BlockBase[,] LoadGrid(Texture2D source, int x, int y) {
