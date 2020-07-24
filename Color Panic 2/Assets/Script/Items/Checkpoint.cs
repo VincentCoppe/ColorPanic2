@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] public Color Green;
     [SerializeField] public Color Purple;
     [SerializeField] public Color Yellow;
+    [SerializeField] public Color Blue;
     public string SavedPowers;
 
     //When the player touch the checkpoint, set it as the new respawn
@@ -40,6 +41,7 @@ public class Checkpoint : MonoBehaviour
             case "Viridian" : rend.material.color = Viridian; break;
             case "Purple" : rend.material.color = Purple; break;
             case "Yellow" : rend.material.color = Yellow; break;
+            case "Blue" : rend.material.color = Blue; break;
         }
     }
 

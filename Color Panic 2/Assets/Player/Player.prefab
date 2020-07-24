@@ -5083,6 +5083,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxSpeed: 10
   m_JumpForce: 1500
+  FlyForce: 200
+  FlyFuel: 100
   DashTime: 0.2
   DashSpeed: 30
   GrabUpFactor: 1
@@ -5099,6 +5101,7 @@ MonoBehaviour:
   Green: {r: 0.16836035, g: 0.8396226, b: 0.11485406, a: 1}
   Purple: {r: 0.6585065, g: 0.380429, b: 0.7830189, a: 1}
   Yellow: {r: 0.9245283, g: 0.8848282, b: 0.14391243, a: 1}
+  Blue: {r: 0.09158063, g: 0.38039216, b: 0.9245283, a: 1}
   SpawnParticle: {fileID: 2687266948236445254}
   DeadParticle: {fileID: 2687266948236445273}
   FacingRight: 1

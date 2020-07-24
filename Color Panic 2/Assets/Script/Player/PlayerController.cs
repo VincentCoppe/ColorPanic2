@@ -7,7 +7,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;      
-    [SerializeField] private float m_JumpForce = 1000f;                
+    [SerializeField] private float m_JumpForce = 1000f;
+    [SerializeField] private float FlyForce = 100;     
+    [SerializeField] private float FlyFuel = 100;            
     [SerializeField] private float DashTime = 0.1f;                
     [SerializeField] private float DashSpeed = 6;     
     [SerializeField] private float GrabUpFactor = 0.95f;     
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color Green;       
     [SerializeField] private Color Purple;   
     [SerializeField] private Color Yellow; 
+    [SerializeField] private Color Blue;
     
     [SerializeField] private ParticleSystem SpawnParticle;
     [SerializeField] private ParticleSystem DeadParticle;
@@ -277,6 +280,7 @@ public class PlayerController : MonoBehaviour
             case "Red" : dash = true; break;
             case "Viridian" : gravityReverse = true; break;
             case "Purple" : teleport = true; break;
+            case "Blue" : FlyFuel = 100 ; break;
             //others powers
         }
     }
@@ -294,6 +298,7 @@ public class PlayerController : MonoBehaviour
             case "Viridian" : rend.material.color = Viridian; break;
             case "Purple" : rend.material.color = Purple; break;
             case "Yellow" : rend.material.color = Yellow; break;
+            case "Blue" : rend.material.color = Blue; break;
         }
     }
 
@@ -385,6 +390,7 @@ public class PlayerController : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 Grounded = true;
+                FlyFuel = 100;
                 Djump = true;
                 Hjump = true;
                 gravityReverse = true;
@@ -472,9 +478,23 @@ public class PlayerController : MonoBehaviour
                     Teleport();
                 }
                 break;
+            case "Blue" : 
+                //Teleport
+                if (!Grounded && m_Rigidbody2D.velocity.y < 25 && FlyFuel > 0){
+                    if(m_Rigidbody2D.velocity.y <= 0) ResetMovement();
+                    Fly(FlyForce);
+                }
+                break;
             //case "Yellow" : ...
             default : return;
         }
+    }
+
+    public void Fly(float force)
+    {
+        m_Anim.SetBool("Grounded", false);
+        FlyFuel = FlyFuel - 2;
+        m_Rigidbody2D.AddForce(new Vector2(0f, force));
     }
 
     //Open a door if the player own a key
