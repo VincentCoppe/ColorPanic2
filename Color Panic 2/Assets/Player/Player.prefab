@@ -5084,7 +5084,7 @@ MonoBehaviour:
   m_MaxSpeed: 10
   m_JumpForce: 1500
   FlyForce: 200
-  FlyFuel: 100
+  FlyFuel: 50
   DashTime: 0.2
   DashSpeed: 30
   GrabUpFactor: 1

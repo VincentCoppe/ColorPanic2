@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float m_MaxSpeed = 10f;      
     [SerializeField] private float m_JumpForce = 1000f;
-    [SerializeField] private float FlyForce = 100;     
-    [SerializeField] private float FlyFuel = 100;            
+    [SerializeField] private float FlyForce = 200;     
+    [SerializeField] private float FlySpeedCap =  25;
+    [SerializeField] private float FlyFuel = 50;            
     [SerializeField] private float DashTime = 0.1f;                
     [SerializeField] private float DashSpeed = 6;     
     [SerializeField] private float GrabUpFactor = 0.95f;     
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public float DistanceY;
     public int coin = 0;
     public int death = 0;
+    private float CurrentFlyFuel = 0;
     private bool col = true; //bool to block multiple collisions with multiples teleport objects, resulting in a big teleportation out of the map
 
     private void Awake()
@@ -280,7 +282,7 @@ public class PlayerController : MonoBehaviour
             case "Red" : dash = true; break;
             case "Viridian" : gravityReverse = true; break;
             case "Purple" : teleport = true; break;
-            case "Blue" : FlyFuel = 100 ; break;
+            case "Blue" : CurrentFlyFuel = FlyFuel ; break;
             //others powers
         }
     }
@@ -390,7 +392,7 @@ public class PlayerController : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 Grounded = true;
-                FlyFuel = 100;
+                CurrentFlyFuel = FlyFuel;
                 Djump = true;
                 Hjump = true;
                 gravityReverse = true;
@@ -480,7 +482,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Blue" : 
                 //Teleport
-                if (!Grounded && m_Rigidbody2D.velocity.y < 25 && FlyFuel > 0){
+                if (!Grounded && m_Rigidbody2D.velocity.y < FlySpeedCap && CurrentFlyFuel > 0){
                     if(m_Rigidbody2D.velocity.y <= 0) ResetMovement();
                     Fly(FlyForce);
                 }
@@ -493,7 +495,7 @@ public class PlayerController : MonoBehaviour
     public void Fly(float force)
     {
         m_Anim.SetBool("Grounded", false);
-        FlyFuel = FlyFuel - 2;
+        CurrentFlyFuel = CurrentFlyFuel - 1;
         m_Rigidbody2D.AddForce(new Vector2(0f, force));
     }
 
