@@ -883,6 +883,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1289164539884491187, guid: dac6961f647d2ec40af8ea816301e3b2,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 12087
+      objectReference: {fileID: 0}
     - target: {fileID: 1289164540338689842, guid: dac6961f647d2ec40af8ea816301e3b2,
         type: 3}
       propertyPath: m_IsActive

@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fire
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - Menu
   - Object
   - Insivible
-  - 
+  - Monster
   - 
   - 
   - 
@@ -41,6 +41,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monster
+    uniqueID: 3197962023
     locked: 0
   - name: Player
     uniqueID: 1032909977
