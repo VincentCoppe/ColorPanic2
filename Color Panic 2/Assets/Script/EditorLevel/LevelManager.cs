@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour
+{
 
     private LevelData _levelData;
     [SerializeField] private GridManager _prefab;
@@ -15,16 +16,34 @@ public class LevelManager : MonoBehaviour {
     [SerializeField] private GameObject windowLevelTested;
     [SerializeField] public ToolsHistory ToolsHistory;
     private GridManager[,] _gridManagers;
-    private Vector3 PlayerPlaced = new Vector3(-1,-1,-1);
+    private Vector3 PlayerPlaced = new Vector3(-1, -1, -1);
     private bool FinishPlaced = false;
     private GameObject precedentLevelSelected = null;
-    public (GridManager,(int,int)) CurrentGM;
+    public (GridManager, (int, int)) CurrentGM;
     private bool[,] _loaded;
     private Leave Leave;
-    public GridManager[,] GridManagers {  get { return _gridManagers; } }
+    public GridManager[,] GridManagers { get { return _gridManagers; } }
     private int activeX, activeY;
     public bool Tested = false;
-    
+    private static LevelManager _instance;
+    public static LevelManager Instance { get { return _instance; } }
+
+    public void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+
+        }
+        else
+        {
+            _instance = this;
+            return;
+
+        }
+    }
+
+
     public void Start()
     {
         newLevel();
@@ -33,7 +52,7 @@ public class LevelManager : MonoBehaviour {
     private void newLevel()
     {
         Leave = FindObjectOfType<Leave>();
-        LoadScenes SceneLoader = FindObjectOfType<LoadScenes>();
+        LoadScenes SceneLoader = LoadScenes.Instance;
         CreateGridManagers();
         if (SceneManager.GetActiveScene().name == "Level")
             SceneLoader.LoadLevelManager();
@@ -53,16 +72,17 @@ public class LevelManager : MonoBehaviour {
 
     }
 
-    private GridManager GetGrid(int x, int y) {
+    private GridManager GetGrid(int x, int y)
+    {
         if (x >= 0 && y >= 0 && x < _levelData.Width && y < _levelData.Height)
-            return _gridManagers[x,y];
+            return _gridManagers[x, y];
         return null;
-        
+
     }
 
     public void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Editor")
+        if (SceneManager.GetActiveScene().name == "Editor")
             Tested = !Leave.ModifUnsaved;
     }
 
@@ -78,7 +98,7 @@ public class LevelManager : MonoBehaviour {
 
     public Vector3 getPlayerPlaced()
     {
-        return PlayerPlaced ;
+        return PlayerPlaced;
     }
 
     public bool getFinishPlaced()
@@ -88,10 +108,18 @@ public class LevelManager : MonoBehaviour {
 
     public void ChangeTheme(TMP_Dropdown dropdown)
     {
-        
-        foreach(GridManager manager in _gridManagers)
+
+        foreach (GridManager manager in _gridManagers)
         {
             manager.ChangeTheme((ThemeEnum)dropdown.value);
+        }
+    }
+
+    public void ChangeColor(Color[] colors)
+    {
+        foreach (GridManager manager in _gridManagers)
+        {
+            manager.ChangeColor(colors);
         }
     }
 
@@ -121,7 +149,8 @@ public class LevelManager : MonoBehaviour {
 
     public void CreateGridManagers()
     {
-        if (_gridManagers != null) {
+        if (_gridManagers != null)
+        {
             foreach (var grid in _gridManagers)
             {
                 Destroy(grid);
@@ -133,13 +162,13 @@ public class LevelManager : MonoBehaviour {
         {
             for (int y = 0; y < 8; y++)
             {
-                _gridManagers[x,y] = Instantiate(_prefab.gameObject, transform).GetComponent<GridManager>();
-                _gridManagers[x,y].transform.localPosition = new Vector2(x * 50, y * 30);
+                _gridManagers[x, y] = Instantiate(_prefab.gameObject, transform).GetComponent<GridManager>();
+                _gridManagers[x, y].transform.localPosition = new Vector2(x * 50, y * 30);
                 _gridManagers[x, y].Colors = ColorPicker;
                 _gridManagers[x, y].toolManager = ToolManager;
                 _gridManagers[x, y].Setup(this);
-                _gridManagers[x,y].transform.rotation = Quaternion.identity;
-                _loaded[x,y] = false;
+                _gridManagers[x, y].transform.rotation = Quaternion.identity;
+                _loaded[x, y] = false;
                 if (ToolManager != null)
                 {
                     precedentLevelSelected = A00;
@@ -149,9 +178,9 @@ public class LevelManager : MonoBehaviour {
                 _gridManagers[x, y].gameObject.SetActive(false);
             }
         }
-        CurrentGM = (_gridManagers[0, 0],(0,0));
+        CurrentGM = (_gridManagers[0, 0], (0, 0));
         ActivateCurrentGM(0, 0);
-        
+
     }
 
     public void ChangeLevel(GameObject button)
@@ -161,7 +190,7 @@ public class LevelManager : MonoBehaviour {
             int x = Int32.Parse(button.name.Split(',')[0].Split('(')[1]);
             int y = Int32.Parse(button.name.Split(',')[1].Split(')')[0]);
             button.GetComponent<Image>().color = Color.green;
-            if(precedentLevelSelected!=null)
+            if (precedentLevelSelected != null)
                 precedentLevelSelected.GetComponent<Image>().color = Color.white;
             precedentLevelSelected = button;
             ActivateCurrentGM(x, y);
@@ -182,22 +211,23 @@ public class LevelManager : MonoBehaviour {
             _gridManagers[r.Item1, r.Item2].gameObject.SetActive(false);
         }
         CurrentGM.Item1.gameObject.SetActive(false);
-        (int,int)[] Result1 = Get4Neighbours(x, y);
-        foreach((int,int) r in Result1)
+        (int, int)[] Result1 = Get4Neighbours(x, y);
+        foreach ((int, int) r in Result1)
         {
             _gridManagers[r.Item1, r.Item2].gameObject.SetActive(true);
         }
         _gridManagers[x, y].gameObject.SetActive(true);
 
-        CurrentGM = (_gridManagers[x, y],(x,y));
+        CurrentGM = (_gridManagers[x, y], (x, y));
 
     }
 
-    public void ChangeLevelIG(int x, int y){
+    public void ChangeLevelIG(int x, int y)
+    {
         activeX += x;
         activeY += y;
         CurrentGM.Item1.gameObject.SetActive(false);
-        CurrentGM = (_gridManagers[activeX, activeY],(activeX,activeY));
+        CurrentGM = (_gridManagers[activeX, activeY], (activeX, activeY));
         CurrentGM.Item1.gameObject.SetActive(true);
     }
 

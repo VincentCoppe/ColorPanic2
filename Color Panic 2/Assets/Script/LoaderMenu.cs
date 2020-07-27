@@ -7,30 +7,30 @@ public class LoaderMenu : MonoBehaviour
 {
     public void LoadEditor()
     {
-        FindObjectOfType<LoadScenes>().LoadEditor();
+        LoadScenes.Instance.LoadEditor();
     }
 
     public void Exit()
     {
-        FindObjectOfType<LoadScenes>().Exit();
+        LoadScenes.Instance.Exit();
     }
 
     public void LoadLevelSelection()
     {
-        FindObjectOfType<LoadScenes>().LoadLevelSelection();
+        LoadScenes.Instance.LoadLevelSelection();
     }
 
     public void LoadLevel(TMP_Text name)
     {
-        FindObjectOfType<LoadScenes>().SetFolder("PlayerLevels");
-        FindObjectOfType<LoadScenes>().SetupLevelName(name.text);
-        FindObjectOfType<LoadScenes>().LoadLevel();
+        LoadScenes.Instance.SetFolder("PlayerLevels");
+        LoadScenes.Instance.SetupLevelName(name.text);
+        LoadScenes.Instance.LoadLevel();
     }
 
     public void LoadLevel(string name,string folder)
     {
-        FindObjectOfType<LoadScenes>().SetFolder(folder);
-        FindObjectOfType<LoadScenes>().SetupLevelName(name);
-        FindObjectOfType<LoadScenes>().LoadLevel();
+        LoadScenes.Instance.SetFolder(folder);
+        LoadScenes.Instance.SetupLevelName(name);
+        LoadScenes.Instance.LoadLevel();
     }
 }

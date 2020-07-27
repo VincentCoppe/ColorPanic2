@@ -14,7 +14,7 @@ public class RestartLvl : MonoBehaviour
         }
     }
     public void RestartLevel(){
-        FindObjectOfType<LoadScenes>().LoadLevel();
+        LoadScenes.Instance.LoadLevel();
         
     }
 }

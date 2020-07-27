@@ -12,7 +12,7 @@ public class Reset : MonoBehaviour
     public void Action() {
         GridManager gridManager = toolsHistory.GridManager;
         if(gridManager == null) {
-            gridManager = UnityEngine.Object.FindObjectOfType<LevelManager>().CurrentGM.Item1;
+            gridManager = LevelManager.Instance.CurrentGM.Item1;
         }
         for(int y=0; y<gridManager.GridObject.GetLength(1); y++)
         {

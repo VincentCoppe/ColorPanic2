@@ -95,6 +95,21 @@ public class GridManager : MonoBehaviour
         return Instantiate(toSpawn, transform);
     }
 
+    internal void ChangeColor(Color[] colors)
+    {
+        for (int x = 0; x < Grid.GetLength(0); x++)
+        {
+            for (int y = 0; y < Grid.GetLength(1); y++)
+            {
+                if (Grid[x, y] == BlockEnum.Ground)
+                {
+                    BlockGround block = (BlockGround)GridObject[x, y];
+                    block.UpdateColors(colors);
+                }
+            }
+        }
+    }
+
     public void ChangeTheme(ThemeEnum theme)
     {
         Theme = theme;
@@ -111,22 +126,6 @@ public class GridManager : MonoBehaviour
             }
         }
         
-    }
-    
-    public void ChangeColor()
-    {
-        for(int x=0; x<Grid.GetLength(0); x++)
-        {
-            for (int y = 0; y < Grid.GetLength(1); y++)
-            {
-                if(Grid[x,y] == BlockEnum.Ground)
-                {
-                    BlockGround block = (BlockGround)GridObject[x, y];
-                    block.UpdateColors(Colors.Red);
-                }
-            }
-        }
-        BackgroundImage.color = Colors.Red[0];
     }
     
     public void Update()

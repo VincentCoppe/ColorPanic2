@@ -10,6 +10,6 @@ public class CBD_Player : CustomBlockData
 
     public void setLevelManager()
     {
-        LevelManager = FindObjectOfType<LevelManager>(true);
+        LevelManager = LevelManager.Instance;
     }
 }

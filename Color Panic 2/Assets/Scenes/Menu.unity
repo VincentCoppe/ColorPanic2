@@ -2968,9 +2968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: 
-  loaded: 0
   folder: 
-  restart: 0
+  TestingLevel: 0
 --- !u!1 &1615014760
 GameObject:
   m_ObjectHideFlags: 0

@@ -76,7 +76,7 @@ public class ToolsHistory : MonoBehaviour
 
     public void UndoAction() {
         if(GridManager == null) {
-            GridManager = Object.FindObjectOfType<LevelManager>().CurrentGM.Item1;
+            GridManager = LevelManager.Instance.CurrentGM.Item1;
         }
         // Si la dernière action est du dessin, alors on efface
         if(undoActions.Pop()) {

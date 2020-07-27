@@ -158,6 +158,7 @@ public class BlockGround : BlockBase
     public override void UpdateColors(Color[] Colors)
     {
         var data = Data<CBD_Ground>();
+        this.Colors = Colors;
         switch (Manager.Theme)
         {
             case ThemeEnum.Dungeon:

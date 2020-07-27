@@ -43,7 +43,7 @@ public class LoadTest : MonoBehaviour
     }
 
     public void OnClickGoTest() {
-        LoadScenes a = FindObjectOfType<LoadScenes>();
+        LoadScenes a = LoadScenes.Instance;
         a.SetFolder("PlayerLevelsEditor");
         a.SetupLevelName(LevelName);
         a.TestingLevel = true;

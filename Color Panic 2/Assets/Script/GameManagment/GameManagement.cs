@@ -167,10 +167,10 @@ public class GameManagement : MonoBehaviour
                 
             } else
             {
-                LoadScenes a = FindObjectOfType<LoadScenes>();
+                LoadScenes a = LoadScenes.Instance;
                 if (a.TestingLevel){
                     SceneManager.LoadScene("Editor");
-                    FindObjectOfType<LoadScenes>().setLevelTested(true);
+                    LoadScenes.Instance.setLevelTested(true);
                 } 
                 
             }
