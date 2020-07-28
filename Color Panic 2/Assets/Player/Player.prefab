@@ -5015,7 +5015,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1032909977
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 4723107735738678597, guid: 6cc461ed07af94a4799bdb305a10f8e4,
     type: 3}
@@ -5084,9 +5084,9 @@ MonoBehaviour:
   m_MaxSpeed: 10
   m_JumpForce: 1500
   WallJumpPushForce: 400
-  FlyForce: 200
+  FlyForce: 100
   FlySpeedCap: 25
-  FlyFuel: 30
+  FlyFuel: 40
   DashTime: 0.2
   DashSpeed: 30
   GrabUpFactor: 1
@@ -5104,6 +5104,7 @@ MonoBehaviour:
   Purple: {r: 0.6585065, g: 0.380429, b: 0.7830189, a: 1}
   Yellow: {r: 0.9245283, g: 0.8848282, b: 0.14391243, a: 1}
   Blue: {r: 0.09158063, g: 0.38039216, b: 0.9245283, a: 1}
+  Grey: {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 0}
   SpawnParticle: {fileID: 2687266948236445254}
   DeadParticle: {fileID: 2687266948236445273}
   FacingRight: 1

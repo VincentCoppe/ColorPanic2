@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color Purple;   
     [SerializeField] private Color Yellow; 
     [SerializeField] private Color Blue;
+    [SerializeField] private Color Grey;
     
     [SerializeField] private ParticleSystem SpawnParticle;
     [SerializeField] private ParticleSystem DeadParticle;
@@ -308,6 +309,7 @@ public class PlayerController : MonoBehaviour
             case "Purple" : rend.material.color = Purple; break;
             case "Yellow" : rend.material.color = Yellow; break;
             case "Blue" : rend.material.color = Blue; break;
+            default : rend.material.color = Grey; break;
         }
     }
 

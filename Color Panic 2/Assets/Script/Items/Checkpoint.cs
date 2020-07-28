@@ -42,6 +42,7 @@ public class Checkpoint : MonoBehaviour
             case "Purple" : rend.material.color = Purple; break;
             case "Yellow" : rend.material.color = Yellow; break;
             case "Blue" : rend.material.color = Blue; break;
+            default : rend.material.color = Color.white; break;
         }
     }
 
