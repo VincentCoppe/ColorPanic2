@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum PowerupEnum
 {
-    Blue,
+    Orange,
     Red,
     Yellow,
     Green,
     Viridian,
-    Pink,
+    Grey,
     Purple
 }
 

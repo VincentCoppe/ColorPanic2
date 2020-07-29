@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadListMenu : MonoBehaviour
@@ -20,7 +21,8 @@ public class LoadListMenu : MonoBehaviour
             item.SetBgColor(new Color(1,1,1));
         }
         selectedFile = null;
-        foreach (string path in System.IO.Directory.GetFiles(Application.streamingAssetsPath + "/levels/PlayerLevelsEditor/")){
+        string patha = (SceneManager.GetActiveScene().name == "Menu") ? "/levels/PlayerLevels/" : "/levels/PlayerLevelsEditor/";
+        foreach (string path in (System.IO.Directory.GetFiles(Application.streamingAssetsPath + patha))){
             string[] tmp = path.Split('/');
             string file = tmp[tmp.Length-1];
             if(!file.EndsWith("meta") && !ListFiles.ContainsKey(file)) {

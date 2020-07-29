@@ -8,9 +8,9 @@ public class LoadScenes : MonoBehaviour
 {
     public string levelName;
     public string folder = "GameLevels";
-    private static LoadScenes _instance;
     private bool TestedLevel = false;
     public bool TestingLevel = false;
+    private static LoadScenes _instance;
     public static LoadScenes Instance {  get { return _instance; } }
 
     public void Awake()
@@ -30,21 +30,25 @@ public class LoadScenes : MonoBehaviour
     public void LoadLevel(){
 
         SceneManager.LoadScene("Level");
-    }
 
-    public void LoadLevelTest()
-    {
-        SceneManager.LoadScene("TestLevel");
     }
 
     public void LoadLevelSelection()
     {
         SceneManager.LoadScene("LevelSelection");
+        AudioScript.Instance.ChangeAudioClip(7);
     }
 
     public void LoadEditor()
     {
         SceneManager.LoadScene("Editor");
+        AudioScript.Instance.ChangeAudioClip(1);
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        AudioScript.Instance.ChangeAudioClip(0);
     }
 
     public void setLevelTested(bool value)

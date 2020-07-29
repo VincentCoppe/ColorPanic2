@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 3105630702609896183}
   - component: {fileID: 3821386455287799625}
   - component: {fileID: -7284263152910713856}
+  - component: {fileID: 5954443641197613147}
+  - component: {fileID: 6814162394060187831}
   m_Layer: 13
   m_Name: Eagle
   m_TagString: Monster
@@ -58,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3105630702609896187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.17, y: -8.0131, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 3105630702336053881}
@@ -173,6 +175,34 @@ MonoBehaviour:
     m_Bits: 512
   speedX: 0.1
   speedY: 0.1
+--- !u!114 &5954443641197613147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105630702609896187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Block: 9
+  data: {fileID: 6814162394060187831}
+--- !u!114 &6814162394060187831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105630702609896187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e78134f2efe9b4aa020e15437e21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 6
+  _monsterEnum: 4
 --- !u!1 &3105630702610544724
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,14 +5,15 @@ using UnityEngine.UI;
 
 public class MasterPalette : MonoBehaviour
 {
-    [SerializeField] private List<Image> ListPalette = new List<Image>();
+    
+    [SerializeField] private Image Selected;
     // Start is called before the first frame update
     public void updateActivePalette(Image image)
     {
-        foreach(Image img in ListPalette)
-        {
-            img.color = Color.white;
-        }
+        Selected.color = Color.white;
+        
+        
         image.color = Color.green;
+        Selected = image;
     }
 }

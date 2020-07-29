@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GridManager : MonoBehaviour
 {
@@ -71,12 +72,14 @@ public class GridManager : MonoBehaviour
 
         Grid = new BlockEnum[50, 30];
         GridObject = new BlockBase[50, 30];
-        LineRenderer = GetComponent<LineRenderer>();
-
-        LineRenderer.SetPosition(0, GridToPosition2(0, 0));
-        LineRenderer.SetPosition(1, GridToPosition2(0, Grid.GetLength(1)));
-        LineRenderer.SetPosition(2, GridToPosition2(Grid.GetLength(0), Grid.GetLength(1)));
-        LineRenderer.SetPosition(3, GridToPosition2(Grid.GetLength(0), 0));
+        if(SceneManager.GetActiveScene().name == "Editor")
+        {
+            LineRenderer = GetComponent<LineRenderer>();
+            LineRenderer.SetPosition(0, GridToPosition2(0, 0));
+            LineRenderer.SetPosition(1, GridToPosition2(0, Grid.GetLength(1)));
+            LineRenderer.SetPosition(2, GridToPosition2(Grid.GetLength(0), Grid.GetLength(1)));
+            LineRenderer.SetPosition(3, GridToPosition2(Grid.GetLength(0), 0));
+        }
     }
 
 

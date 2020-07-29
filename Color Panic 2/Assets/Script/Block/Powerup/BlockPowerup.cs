@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlockPowerup : BlockBase
 {
-    private PowerupEnum _color = PowerupEnum.Blue;
+    private PowerupEnum _color = PowerupEnum.Orange;
     private CBD_Powerup _data;
     public PowerupEnum Color { get { return _color; } }
 

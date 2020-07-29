@@ -33,4 +33,11 @@ public class LoaderMenu : MonoBehaviour
         LoadScenes.Instance.SetupLevelName(name);
         LoadScenes.Instance.LoadLevel();
     }
+
+    public void LoadLevel(LoadListMenu loadListMenu)
+    {
+        LoadScenes.Instance.SetFolder("PlayerLevels");
+        LoadScenes.Instance.SetupLevelName(loadListMenu.selectedFile);
+        LoadScenes.Instance.LoadLevel();
+    }
 }

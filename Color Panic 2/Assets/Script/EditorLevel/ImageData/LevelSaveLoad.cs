@@ -10,6 +10,7 @@ public class LevelSaveLoad : MonoBehaviour {
     [SerializeField] private TileGameObject[] Block;
     [SerializeField] private TileGameObject[] Powerup;
     [SerializeField] private TileGameObject[] Tapis;
+    [SerializeField] private TileGameObject[] Monsters;
     [SerializeField] private TileGameObject[] Object;
     [SerializeField] private TileGameObject[] Bumper;
     [SerializeField] private TileGameObject[] KeyBlock;
@@ -116,11 +117,9 @@ public class LevelSaveLoad : MonoBehaviour {
             case (BlockEnum.Air):
                 if (!themeBool)
                 {
-                    if (pixel.r == 0 && SceneManager.GetActiveScene().name == "Level")
-                    {
-                       // levelNotTested
-                    }
                     _level.ChangeThemeint((pixel.g / 10));
+                    if(!(SceneManager.GetActiveScene().name == "Editor"))
+                        AudioScript.Instance.ChangeAudioClip((pixel.g/10) + 2);
                     themeBool = true;
                 }
                 return themeBool;
@@ -137,7 +136,9 @@ public class LevelSaveLoad : MonoBehaviour {
                     case (ObjectEnum.Jumper):
                         block.NewBlock(Bumper[((pixel.b == 180) ? 0 : 1)]).SpawnTiles(x % 50, y % 30, _level.GridManagers[Mathf.FloorToInt(x / 50), Mathf.FloorToInt(y / 30)], ColorPicker.neutral);
                         return themeBool;
-
+                    case (ObjectEnum.Monsters):
+                        block.NewBlock(Monsters[pixel.b]).SpawnTiles(x % 50, y % 30, _level.GridManagers[Mathf.FloorToInt(x / 50), Mathf.FloorToInt(y / 30)], ColorPicker.neutral);
+                        return themeBool;
                     case (ObjectEnum.KeyBlock):
                         block.NewBlock(KeyBlock[((pixel.b == 100) ? 1 : 0)]).SpawnTiles(x % 50, y % 30, _level.GridManagers[Mathf.FloorToInt(x / 50), Mathf.FloorToInt(y / 30)], ColorPicker.neutral);
                         return themeBool;

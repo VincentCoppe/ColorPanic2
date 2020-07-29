@@ -163,16 +163,19 @@ public class GameManagement : MonoBehaviour
                 int num = int.Parse(nameParse[1]);
                 int world = int.Parse(nameParse[0]);
                 Save(num,world);
-                SceneManager.LoadScene("LevelSelection");
+                LoadScenes.Instance.LoadLevelSelection();
                 
             } else
             {
                 LoadScenes a = LoadScenes.Instance;
                 if (a.TestingLevel){
-                    SceneManager.LoadScene("Editor");
-                    LoadScenes.Instance.setLevelTested(true);
-                } 
-                
+                    a.LoadEditor();
+                    a.setLevelTested(true);
+                } else
+                {
+                    a.LoadMenu();
+
+                }
             }
     }
 

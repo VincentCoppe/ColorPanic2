@@ -12,16 +12,16 @@ public class Leave : MonoBehaviour
     public void LoadMenu(){
         LoadScenes LoadScenes = LoadScenes.Instance;
         if (LoadScenes.folder == "GameLevels")
-            SceneManager.LoadScene("LevelSelection");
-        
+            LoadScenes.LoadLevelSelection();
+
         else if (LoadScenes.TestingLevel)
         {
             LoadScenes.setLevelTested(false);
             LoadScenes.LoadEditor();
         }
-         else
+        else
         {
-            SceneManager.LoadScene("Menu");
+            LoadScenes.LoadMenu();
 
         }
     }

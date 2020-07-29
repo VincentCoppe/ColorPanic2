@@ -12,7 +12,8 @@ public enum ObjectEnum
     SandBlock,
     Key,
     KeyBlock,
-    Platform
+    Platform,
+    Monsters
     
 
 
