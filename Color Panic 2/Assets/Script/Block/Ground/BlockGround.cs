@@ -190,7 +190,7 @@ public class BlockGround : BlockBase
             case ThemeEnum.Space:
                 foreach (var cor in data.Corners)
                 {
-                    cor.color = Colors[2];
+                    cor.color = Colors[0];
                 }
                 return;
             case ThemeEnum.Station:
