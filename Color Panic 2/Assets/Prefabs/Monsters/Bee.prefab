@@ -170,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 8704
   speed: 0.1
 --- !u!114 &-3188822561561248473
 MonoBehaviour:
