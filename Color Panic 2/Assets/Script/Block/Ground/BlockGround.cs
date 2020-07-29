@@ -131,6 +131,23 @@ public class BlockGround : BlockBase
                     }
                 }
                 return;
+            case ThemeEnum.Space:
+                for (int i = 0; i < data.Corners.Length; i++)
+                {
+                    if (i == 0 || i == 2 || i == 5 || i == 7)
+                    {
+                        data.Corners[i].sprite = data.StationCorner[0];
+                    }
+                    else
+                    {
+                        data.Corners[i].sprite = data.StationCorner[1];
+                    }
+                    data.Corners[i].color = Colors[2];
+                }
+                data.Center[0].sprite = null;
+                data.Center[1].sprite = null;
+                data.Center[2].sprite = null;
+                return;
             case ThemeEnum.Station:
                 for (int i = 0; i < data.Corners.Length; i++)
                 {
@@ -168,6 +185,12 @@ public class BlockGround : BlockBase
                 foreach(var cor in data.Corners)
                 {
                     cor.color = Color.black;
+                }
+                return;
+            case ThemeEnum.Space:
+                foreach (var cor in data.Corners)
+                {
+                    cor.color = Colors[2];
                 }
                 return;
             case ThemeEnum.Station:

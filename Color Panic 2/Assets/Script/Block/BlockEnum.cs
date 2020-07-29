@@ -37,6 +37,8 @@ public static class BlockEnumExt {
                     case ObjectEnum.KeyBlock: return new KeyblockBlock(prefab);
                     case ObjectEnum.Platform: return new PlatformBlock(prefab);
                     case ObjectEnum.Monsters: return new BlockMonster(prefab);
+                    case ObjectEnum.PlatformX: return new PlatformXYBlock(prefab);
+                    case ObjectEnum.PlatformY: return new PlatformXYBlock(prefab);
                     default: return null;
                 }
                

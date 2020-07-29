@@ -13,7 +13,9 @@ public enum ObjectEnum
     Key,
     KeyBlock,
     Platform,
-    Monsters
+    Monsters,
+    PlatformX,
+    PlatformY
     
 
 

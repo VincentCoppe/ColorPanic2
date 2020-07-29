@@ -48,7 +48,7 @@ MonoBehaviour:
   Background:
   - {fileID: 21300000, guid: 6d36e71d1a908ba4ab7f2c0cfa2ce9ba, type: 3}
   - {fileID: 21300000, guid: c504578ee436e2d4897387ec957c78d9, type: 3}
-  - {fileID: 21300000, guid: c504578ee436e2d4897387ec957c78d9, type: 3}
+  - {fileID: 21300000, guid: f08ce446cf5abfc4095214fa0a6d1a63, type: 3}
   BackgroundImage: {fileID: 1293292743272190528}
   Theme: 0
   Colors: {fileID: 0}

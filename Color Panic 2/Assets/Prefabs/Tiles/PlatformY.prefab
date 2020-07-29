@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: -1056935102921324861}
   - component: {fileID: 1882414298949868838}
   - component: {fileID: -7627371984814439747}
+  - component: {fileID: 2690118502825760385}
+  - component: {fileID: 5144759725297124629}
   m_Layer: 9
   m_Name: PlatformY
   m_TagString: Untagged
@@ -66,18 +68,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 3, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 3, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1882414298949868838
 SpriteRenderer:
@@ -119,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4064592478174706425, guid: 8158555a99f5f4040a738e792e2315ff,
+  m_Sprite: {fileID: 1144541302519376735, guid: 53913e23b5883314fb38e89378bf537e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,3 +147,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.1
   distance: 5
+--- !u!114 &2690118502825760385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c0ca461894ffc4ab77fb7eb37cfd30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Block: 9
+  data: {fileID: 5144759725297124629}
+--- !u!114 &5144759725297124629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904262535096694649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c183ebb4f01655c43b8b556d19fa6852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 8
