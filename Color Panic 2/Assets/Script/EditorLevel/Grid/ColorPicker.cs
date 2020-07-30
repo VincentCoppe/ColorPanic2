@@ -6,7 +6,7 @@ public class ColorPicker : MonoBehaviour
 {
 
     public Color[] Viridian = null;
-    public Color[] Blue = null;
+    public Color[] Orange = null;
     public Color[] Red = null;
     public Color[] Yellow = null;
     public Color[] Green = null;

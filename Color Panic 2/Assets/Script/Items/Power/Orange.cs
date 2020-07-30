@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blue : Power
+public class Orange : Power
 {
     LevelManager levelManager;
     public override void ApplyEffect(Collider2D other){
@@ -12,6 +12,6 @@ public class Blue : Power
             levelManager = LevelManager.Instance;
 
         }
-        levelManager.ChangeColor(ColorPicker.Instance.Blue);
+        levelManager.ChangeColor(ColorPicker.Instance.Orange);
     }
 }

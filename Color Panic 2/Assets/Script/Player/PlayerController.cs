@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Color Green;       
     [SerializeField] private Color Purple;   
     [SerializeField] private Color Yellow; 
-    [SerializeField] private Color Blue;
+    [SerializeField] private Color Orange;
     [SerializeField] private Color Grey;
     
     [SerializeField] private ParticleSystem SpawnParticle;
@@ -291,7 +291,7 @@ public class PlayerController : MonoBehaviour
             case "Red" : dash = true; break;
             case "Viridian" : gravityReverse = true; break;
             case "Purple" : teleport = true; break;
-            case "Blue" : CurrentFlyFuel = FlyFuel ; break;
+            case "Orange" : CurrentFlyFuel = FlyFuel ; break;
             //others powers
         }
     }
@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
             case "Viridian" : rend.material.color = Viridian; break;
             case "Purple" : rend.material.color = Purple; break;
             case "Yellow" : rend.material.color = Yellow; break;
-            case "Blue" : rend.material.color = Blue; break;
+            case "Orange" : rend.material.color = Orange; break;
             default : rend.material.color = Grey; break;
         }
     }
@@ -490,7 +490,7 @@ public class PlayerController : MonoBehaviour
                     Teleport();
                 }
                 break;
-            case "Blue" : 
+            case "Orange" : 
                 //Teleport
                 if (!Grounded && m_Rigidbody2D.velocity.y < FlySpeedCap && CurrentFlyFuel > 0){
                     if(m_Rigidbody2D.velocity.y <= 0) ResetMovement();
