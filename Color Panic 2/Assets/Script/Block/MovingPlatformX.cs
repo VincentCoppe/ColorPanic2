@@ -10,11 +10,13 @@ public class MovingPlatformX : MonoBehaviour
     private bool left = false;
     const float k_GroundedRadius = 0.2f;
     [SerializeField] private LayerMask m_WhatIsGround; 
+    private GameObject target;
 
     void Start()
     {
         m_LeftCheck = transform.Find("LeftWallCheck");
         m_RightCheck = transform.Find("RightWallCheck");
+        target = null;
     }
 
     private void FixedUpdate() {
@@ -22,8 +24,10 @@ public class MovingPlatformX : MonoBehaviour
         HandleLeftCheck();
         if (left){
             this.transform.localPosition = new Vector3(this.transform.localPosition.x+speed, this.transform.localPosition.y, this.transform.localPosition.z);
+            if (target != null) target.transform.localPosition = new Vector3(target.transform.localPosition.x+speed, target.transform.localPosition.y, target.transform.localPosition.z);
         } else {
             this.transform.localPosition = new Vector3(this.transform.localPosition.x-speed, this.transform.localPosition.y, this.transform.localPosition.z);
+            if (target != null) target.transform.localPosition = new Vector3(target.transform.localPosition.x-speed, target.transform.localPosition.y, target.transform.localPosition.z);
         }
     }
 
@@ -48,5 +52,17 @@ public class MovingPlatformX : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && ((other.gameObject.transform.localPosition.y - this.gameObject.transform.localPosition.y) > 1.1f)){
+            target = other.gameObject;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
+            target = null;
+        }
+    }
+
 
 }

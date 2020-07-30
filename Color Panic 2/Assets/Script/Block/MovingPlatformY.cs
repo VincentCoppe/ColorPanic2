@@ -10,6 +10,7 @@ public class MovingPlatformY : MonoBehaviour
     const float k_Radius = 0.4f;
     [SerializeField] private LayerMask m_WhatIsGround; 
     [SerializeField] private float speed = 0.25f; 
+    private GameObject target;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class MovingPlatformY : MonoBehaviour
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+speed, this.transform.localPosition.z);
         } else {
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-speed, this.transform.localPosition.z);
+            if (target != null) target.transform.localPosition = new Vector3(target.transform.localPosition.x, target.transform.localPosition.y-speed, target.transform.localPosition.z);
         }
     }
 
@@ -46,6 +48,17 @@ public class MovingPlatformY : MonoBehaviour
             {
                 top = true;
             }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && ((other.gameObject.transform.localPosition.y - this.gameObject.transform.localPosition.y) > 1.1f)){
+            target = other.gameObject;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")){
+            target = null;
         }
     }
 
