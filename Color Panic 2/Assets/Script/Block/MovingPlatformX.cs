@@ -4,27 +4,48 @@ using UnityEngine;
 
 public class MovingPlatformX : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.1f;
-    [SerializeField] private float distance = 5;
-    private Vector3 InitialPosition;
-    private bool left = true;
+    [SerializeField] private float speed = 0.25f;
+    private Transform m_RightCheck;
+    private Transform m_LeftCheck; 
+    private bool left = false;
+    const float k_GroundedRadius = 0.2f;
+    [SerializeField] private LayerMask m_WhatIsGround; 
 
     void Start()
     {
-        InitialPosition = this.transform.position;
+        m_LeftCheck = transform.Find("LeftWallCheck");
+        m_RightCheck = transform.Find("RightWallCheck");
     }
 
     private void FixedUpdate() {
+        HandleRightCheck();
+        HandleLeftCheck();
         if (left){
-            this.transform.position = new Vector3(this.transform.position.x+speed, InitialPosition.y, InitialPosition.z);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x+speed, this.transform.localPosition.y, this.transform.localPosition.z);
         } else {
-            this.transform.position = new Vector3(this.transform.position.x-speed, InitialPosition.y, InitialPosition.z);
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x-speed, this.transform.localPosition.y, this.transform.localPosition.z);
         }
-        
-        if (this.transform.position.x - InitialPosition.x > 5){
-            left = false;
-        } else if (this.transform.position.x - InitialPosition.x < -5){
-            left = true;
+    }
+
+    private void HandleRightCheck(){    
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(m_RightCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < collidersR.Length; i++)
+        {
+            if (collidersR[i].gameObject != gameObject)
+            {   
+                left = false;
+            }
+        }
+    }
+
+    private void HandleLeftCheck(){
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(m_LeftCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < collidersL.Length; i++)
+        {
+            if (collidersL[i].gameObject != gameObject)
+            {
+                left = true;
+            }
         }
     }
 
