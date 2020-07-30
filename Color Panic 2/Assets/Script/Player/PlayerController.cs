@@ -274,6 +274,7 @@ public class PlayerController : MonoBehaviour
 
     public void Win(){
         win = true;
+        m_Anim.SetFloat("AbsSpeed", 0);
     }
 
     //When the player pick up a power
