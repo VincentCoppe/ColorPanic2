@@ -191,7 +191,7 @@ public class GameManagement : MonoBehaviour
             int oldDeath = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[0]);
             result += Mathf.Min(Player.death, oldDeath) + "-";
             int oldCoin = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[1]);
-            result += Mathf.Min(Player.coin, oldCoin) + "-";
+            result += Mathf.Max(Player.coin, oldCoin) + "-";
             int oldMin = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[2].Split(':')[0]);
             int oldSec = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[2].Split(':')[1]);
             int oldMillis = int.Parse(ProgressionManagement.progression[world + "-" + num].Split('-')[2].Split(':')[2]);

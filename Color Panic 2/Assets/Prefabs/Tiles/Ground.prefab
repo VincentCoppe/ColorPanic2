@@ -1026,6 +1026,12 @@ MonoBehaviour:
   StationCorner:
   - {fileID: 21300000, guid: 1183c64d20cb2b543a060d9741c44526, type: 3}
   - {fileID: 21300000, guid: 33c20bbec5eb5144082a6b4b9216e738, type: 3}
+  Grass:
+  - {fileID: -4614681554025679101, guid: 363b0be47c69d414c8ef6311b96ae771, type: 3}
+  - {fileID: 21300000, guid: 35738dd0c63e88e44bd4ebfc457c1da8, type: 3}
+  GrassCorner:
+  - {fileID: 21300000, guid: 07f5e8ae10c9f944ca7ffca04743de2b, type: 3}
+  - {fileID: 21300000, guid: d458eb1915b98bf458f0b5c513446684, type: 3}
 --- !u!61 &2394031041921686550
 BoxCollider2D:
   m_ObjectHideFlags: 0

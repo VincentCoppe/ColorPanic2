@@ -169,6 +169,26 @@ public class BlockGround : BlockBase
                 data.Center[2].sprite = data.Station[1];
 
                 return;
+            case ThemeEnum.Grass:
+                for (int i = 0; i < data.Corners.Length; i++)
+                {
+                    if (i == 0 || i == 2 || i == 5 || i == 7)
+                    {
+                        data.Corners[i].sprite = data.GrassCorner[0];
+                    }
+                    else
+                    {
+                        data.Corners[i].sprite = data.GrassCorner[1];
+                    }
+                    data.Corners[i].color = Colors[2];
+                }
+
+
+
+                data.Center[0].sprite = data.Grass[0];
+                data.Center[1].sprite = data.Grass[1];
+                data.Center[2].sprite = data.Grass[1];
+                return;
         }
     }
 
@@ -201,6 +221,11 @@ public class BlockGround : BlockBase
                 {
                     cor.color = Colors[2];
                 }
+                return;
+            case ThemeEnum.Grass:
+                data.Center[0].color = Colors[1];
+                data.Center[1].color = Colors[0];
+                data.Center[2].color = Colors[0];
                 return;
 
         }

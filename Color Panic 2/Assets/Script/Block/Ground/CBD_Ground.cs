@@ -14,4 +14,7 @@ public class CBD_Ground : CustomBlockData {
     public Sprite[] Station = new Sprite[2];
     public Sprite[] StationCorner = new Sprite[2];
 
+    public Sprite[] Grass = new Sprite[2];
+    public Sprite[] GrassCorner = new Sprite[2];
+
 }

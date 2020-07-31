@@ -46,6 +46,10 @@ public class LevelWorld : MonoBehaviour
         {
             infoLevelWindow.UpdateInfoLevel(this);
             infoLevelWindow.gameObject.SetActive(true);
+        } else if(secret)
+        {
+            infoLevelWindow.UpdateInfoLevelSecret(this);
+            infoLevelWindow.gameObject.SetActive(true);
         }
     }
 }

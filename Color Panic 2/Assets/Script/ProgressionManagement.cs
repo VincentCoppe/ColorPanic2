@@ -16,19 +16,35 @@ public class ProgressionManagement : MonoBehaviour
     
     int TotalCoins;
     int TotalCoinsGot;
-    int[] TotalCoinsWorld = new int[8];
-    int[] TotalCoinsWorldGot= new int[8];
+    public int[] TotalCoinsWorld = new int[8];
+    public int[] TotalCoinsWorldGot= new int[8];
     public int ActiveWorld = 0;
      
     public static Dictionary<string,string> progression;
+    private static ProgressionManagement _instance;
+    public static ProgressionManagement Instance { get { return _instance; } }
 
-    private void Awake() {
-        progression = SaveProgression.LoadProgression();
-        SetupLevels();
-        UpdateLevelsInfo();
-        SetTotalCoins();
-        EnableLevels();
+    public void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+
+        }
+        else
+        {
+            _instance = this;
+            progression = SaveProgression.LoadProgression();
+            SetupLevels();
+            UpdateLevelsInfo();
+            SetTotalCoins();
+            EnableLevels();
+            return;
+
+        }
     }
+
+    
 
     private void Start() {
         //UpdateText();
@@ -96,7 +112,7 @@ public class ProgressionManagement : MonoBehaviour
         foreach(KeyValuePair<string, LevelWorld> level in Levels){
             TotalCoins += level.Value.CoinTotal;
             TotalCoinsGot += level.Value.CoinPlayer;
-            TotalCoinsWorld[level.Value.levelWorld] += level.Value.CoinTotal;
+            TotalCoinsWorld[level.Value.levelWorld] += (!level.Value.secret)? level.Value.CoinTotal : 0;
             TotalCoinsWorldGot[level.Value.levelWorld] += level.Value.CoinPlayer;
         }
         
