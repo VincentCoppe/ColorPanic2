@@ -76,10 +76,13 @@ public class MagicWand : ToolManager, ITool
         else if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.X) && selectedBlocks.Count != 0) {
             //lineRenderer.positionCount = 0;
             (int, int) mid = ((rect[1].Item1-rect[0].Item1)/2, (rect[1].Item2-rect[0].Item2)/2);
+            Dictionary<BlockBase, (int,int)> action = new Dictionary<BlockBase, (int, int)>();
             foreach ((int, int) blockToErase in selectedBlocks.Keys) {
                 BlockBase blockErase = gridManager.GridObject[blockToErase.Item1-mid.Item1+rect[1].Item1, blockToErase.Item2-mid.Item2+rect[1].Item2];
                 blockErase?.DestroyTiles(blockToErase.Item1-mid.Item1+rect[1].Item1, blockToErase.Item2-mid.Item2+rect[1].Item2);
+                action[blockErase] = (blockToErase.Item1-mid.Item1+rect[1].Item1, blockToErase.Item2-mid.Item2+rect[1].Item2);
             }
+            toolsHistory.AddToUndoErase(action);
         }
         else if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V) && selectedBlocks.Count != 0) {
             HashSet<(int, int)> res = new HashSet<(int, int)>();

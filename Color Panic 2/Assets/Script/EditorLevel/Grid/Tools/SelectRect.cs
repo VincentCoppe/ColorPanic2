@@ -75,10 +75,13 @@ public class SelectRect : ToolManager, ITool
             }
             if(Input.GetKeyDown(KeyCode.X)) {
                 lineRenderer.positionCount = 0;
+                Dictionary<BlockBase, (int,int)> action = new Dictionary<BlockBase, (int, int)>();
                 foreach ((int, int) blockToErase in selectedBlocks.Keys) {
                     BlockBase blockErase = gridManager.GridObject[blockToErase.Item1-mid.Item1+rect[1].Item1, blockToErase.Item2-mid.Item2+rect[1].Item2];
                     blockErase?.DestroyTiles(blockToErase.Item1-mid.Item1+rect[1].Item1, blockToErase.Item2-mid.Item2+rect[1].Item2);
+                    action[blockErase] = (blockToErase.Item1-mid.Item1+rect[1].Item1, blockToErase.Item2-mid.Item2+rect[1].Item2);
                 }
+                toolsHistory.AddToUndoErase(action);
             }
         }
         else if(Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V) && selectedBlocks.Count != 0) {
