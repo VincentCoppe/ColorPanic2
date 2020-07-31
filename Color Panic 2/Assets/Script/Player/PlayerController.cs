@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     public bool win = false;
     public bool pause = false;
     public bool respawning = false;
+    public bool Flying = false;
     public bool teleport;
     public int keys = 0;
 
@@ -428,6 +429,7 @@ public class PlayerController : MonoBehaviour
                 Hjump = true;
                 gravityReverse = true;
                 dash = true;
+                Flying = false;
             }
         }
         m_Anim.SetBool("Grounded",Grounded);
@@ -514,7 +516,8 @@ public class PlayerController : MonoBehaviour
             case "Orange" : 
                 //Teleport
                 if (!Grounded && m_Rigidbody2D.velocity.y < FlySpeedCap && CurrentFlyFuel > 0){
-                    ResetMovement();
+                    if (!Flying) ResetMovement();
+                    Flying = true;
                     Fly(FlyForce);
                 }
                 break;
