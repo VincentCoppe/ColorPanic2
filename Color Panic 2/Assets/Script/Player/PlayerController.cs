@@ -276,7 +276,7 @@ public class PlayerController : MonoBehaviour
         }
         transform.localPosition = respawn;
         SpawnParticle.Play();
-        ChangeColorsBlocks();
+        if(CurrentCheckpoint != null) ChangeColorsBlocks();
         yield return new WaitForSecondsRealtime(0.5f);
         GetComponent<SpriteRenderer>().enabled = true;
         respawning = false;
