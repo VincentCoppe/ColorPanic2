@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: -2816583896113937249}
   - component: {fileID: 2112233672703327397}
   m_Layer: 13
-  m_Name: Eel
+  m_Name: FlyingFish
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectType: 6
-  _monsterEnum: 2
+  _monsterEnum: 6
 --- !u!114 &2112233672703327397
 MonoBehaviour:
   m_ObjectHideFlags: 0

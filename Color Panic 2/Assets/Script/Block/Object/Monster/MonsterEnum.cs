@@ -8,5 +8,6 @@ public enum MonsterEnum
     Crab,
     BigCrab,
     Eagle,
-    SmallEagle
+    SmallEagle,
+    Fish
 }

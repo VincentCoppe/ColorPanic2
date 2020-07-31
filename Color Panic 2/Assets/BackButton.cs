@@ -8,7 +8,6 @@ public class BackButton : MonoBehaviour
     [SerializeField] LoaderMenu LoaderMenu;
     public void OnMouseDown()
     {
-        SceneManager.LoadScene("Menu");
-        AudioScript.Instance.ChangeAudioClip(0);
+        LoadScenes.Instance.LoadMenu();
     }
 }

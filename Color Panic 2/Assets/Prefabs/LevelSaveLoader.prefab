@@ -70,6 +70,7 @@ MonoBehaviour:
   - {fileID: -249614815034775181, guid: 17109f19147f70c4d9db15dc1223e4e5, type: 3}
   - {fileID: 5954443641197613147, guid: 8bd3131530c3b1a459adefb44ffe7c37, type: 3}
   - {fileID: 6756747661036100740, guid: b5492f1a0ecd7be49b5c46a5a64be2d6, type: 3}
+  - {fileID: 2112233672703327397, guid: 5fa1d39e86534ac4b9ad7350a60709f3, type: 3}
   Object:
   - {fileID: 7049598413848409163, guid: e65d42aff62132543b7a850936837283, type: 3}
   - {fileID: 9184231245416354790, guid: 266b4ac92ab8a4e489ec27754afbe743, type: 3}
