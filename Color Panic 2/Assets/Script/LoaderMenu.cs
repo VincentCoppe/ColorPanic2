@@ -10,6 +10,12 @@ public class LoaderMenu : MonoBehaviour
         LoadScenes.Instance.LoadEditor();
     }
 
+    public void LoadMenu()
+    {
+        LoadScenes.Instance.LoadMenu();
+    }
+
+
     public void Exit()
     {
         LoadScenes.Instance.Exit();
