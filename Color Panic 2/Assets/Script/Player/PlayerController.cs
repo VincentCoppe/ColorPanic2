@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     public bool OnLeftWall { get; private set; }
     public bool OnRightWall { get; private set; }
     public bool FacingRight = true; 
-    public Vector3 respawn = new Vector3(0,0,0); //Saved respawn location of the player
+    public Vector3 respawn;
     private Checkpoint CurrentCheckpoint = null; //Current saved checkpoint of the user
     public MyPower power;
     public bool Djump; //Can the player do a double jump ?
@@ -90,6 +90,9 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         gravity = m_Rigidbody2D.gravityScale;
         power = new MyPower();
+    }
+
+    private void Start(){
         respawn = transform.localPosition;
     }
 

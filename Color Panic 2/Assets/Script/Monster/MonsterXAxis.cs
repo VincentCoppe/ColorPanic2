@@ -13,6 +13,7 @@ public class MonsterXAxis : MonoBehaviour
     const float k_GroundedRadius = 0.2f;
     [SerializeField] private LayerMask m_WhatIsGround; 
     [SerializeField] private float speed = 0.1f; 
+    [SerializeField] private bool gravity = true;
     
     
     private Rigidbody2D m_Rigidbody2D;
@@ -24,6 +25,7 @@ public class MonsterXAxis : MonoBehaviour
         m_RightCheck = transform.Find("RightWallCheck");
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        if (gravity == false) m_Rigidbody2D.gravityScale = 0;
     }
 
     private void FixedUpdate()
@@ -35,7 +37,7 @@ public class MonsterXAxis : MonoBehaviour
         } else {
             this.transform.localPosition = new Vector3(this.transform.localPosition.x-speed, this.transform.localPosition.y, this.transform.localPosition.z);
         }
-        sr.flipX = !left;
+        sr.flipX = left;
     }
 
     private void HandleRightCheck(){
