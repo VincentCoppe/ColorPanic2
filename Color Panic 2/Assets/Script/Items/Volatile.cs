@@ -10,11 +10,21 @@ public class Volatile : MonoBehaviour
     private SpriteRenderer rend;
     private Animator anim;
     [SerializeField] private BoxCollider2D collid;
+    private PlayerController player;
 
     private void Start() {
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        player = FindObjectOfType<PlayerController>();
         started = false;
+    }
+
+    private void Update() {
+        if (player.respawning){
+            rend.enabled = true;
+            collid.enabled = true;
+            started = false;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other) {

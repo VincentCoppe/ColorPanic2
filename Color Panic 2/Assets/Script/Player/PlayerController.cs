@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private bool gravityReverse; //Can the player reverse the gravity ?
     public bool win = false;
     public bool pause = false;
-    private bool respawning = false;
+    public bool respawning = false;
     public bool teleport;
     public int keys = 0;
 
@@ -514,7 +514,7 @@ public class PlayerController : MonoBehaviour
             case "Orange" : 
                 //Teleport
                 if (!Grounded && m_Rigidbody2D.velocity.y < FlySpeedCap && CurrentFlyFuel > 0){
-                    if(m_Rigidbody2D.velocity.y <= 0) ResetMovement();
+                    ResetMovement();
                     Fly(FlyForce);
                 }
                 break;
