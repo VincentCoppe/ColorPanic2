@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private Transform m_LeftCheckLow;
 
     private Animator m_Anim;       
+    LevelManager levelManager;
     
     private Rigidbody2D m_Rigidbody2D;
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -182,6 +183,22 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
+    public void ChangeColorsBlocks(){
+        if (!levelManager){
+            levelManager = LevelManager.Instance;
+        }
+        switch(CurrentCheckpoint.SavedPowers){
+            case "Green" : levelManager.ChangeColor(ColorPicker.Instance.Green); break;
+            case "Red" : levelManager.ChangeColor(ColorPicker.Instance.Red); break;
+            case "Viridian" : levelManager.ChangeColor(ColorPicker.Instance.Viridian); break;
+            case "Purple" : levelManager.ChangeColor(ColorPicker.Instance.Purple); break;
+            case "Yellow" : levelManager.ChangeColor(ColorPicker.Instance.Yellow); break;
+            case "Orange" : levelManager.ChangeColor(ColorPicker.Instance.Orange); break;
+            default : levelManager.ChangeColor(ColorPicker.Instance.neutral); break;
+        }
+
+    }
+
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnRightWall && OnLeftWall && Grounded && Ceiling && this.power.LastPower == "Purple" ){
             Debug.Log("In the wall after a teleport ?");
@@ -259,6 +276,7 @@ public class PlayerController : MonoBehaviour
         }
         transform.localPosition = respawn;
         SpawnParticle.Play();
+        ChangeColorsBlocks();
         yield return new WaitForSecondsRealtime(0.5f);
         GetComponent<SpriteRenderer>().enabled = true;
         respawning = false;
