@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9287dd5f737f74bbabe1072f20c861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveVector: -0.07
+  MoveVector: -0.18
 --- !u!61 &3944016517011487252
 BoxCollider2D:
   m_ObjectHideFlags: 0

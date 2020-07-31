@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 2206897367603753419, guid: 005c149704765b5489fcc92a8320b254,
         type: 3}
       propertyPath: MoveVector
-      value: 0.07
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 2519978152404126094, guid: 005c149704765b5489fcc92a8320b254,
         type: 3}
