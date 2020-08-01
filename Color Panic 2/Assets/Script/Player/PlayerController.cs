@@ -205,7 +205,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && OnRightWall && OnLeftWall && Grounded && Ceiling && this.power.LastPower == "Purple" ){
-            Debug.Log("In the wall after a teleport ?");
             Vector3 pos = transform.localPosition;
             Vector3 newPos = new Vector3();
             if (FacingRight){

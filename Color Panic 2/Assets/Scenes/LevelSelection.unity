@@ -3788,7 +3788,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -3798,7 +3798,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: CoinTotal
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451607, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -4542,7 +4542,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -4637,7 +4637,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -4767,7 +4767,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -4851,7 +4851,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -4947,7 +4947,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -5036,12 +5036,17 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: levelNum
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
+        type: 3}
+      propertyPath: CoinTotal
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451607, guid: 590c439e916462b4385660952f89692b,
         type: 3}
@@ -5327,7 +5332,7 @@ PrefabInstance:
     - target: {fileID: 4775363542395451601, guid: 590c439e916462b4385660952f89692b,
         type: 3}
       propertyPath: referenceTime
-      value: 30000
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 4775363542395451607, guid: 590c439e916462b4385660952f89692b,
         type: 3}
