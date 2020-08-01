@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You can now reverse the gravity
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc9016c150bd4af46861c35cdc033476, type: 2}
   m_sharedMaterial: {fileID: -4180309732779958049, guid: cc9016c150bd4af46861c35cdc033476,
