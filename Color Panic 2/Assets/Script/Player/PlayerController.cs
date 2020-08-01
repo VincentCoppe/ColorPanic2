@@ -457,7 +457,7 @@ public class PlayerController : MonoBehaviour
                 grabbing = true;
                 return;
             }
-            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) ) && ((Djump && power.HavePower("Green")) || power.HavePower("Yellow")) && grabbing  ){
+            if ( (jump || (((FacingRight && move < 0) || (!FacingRight && move > 0)) && !reverse) || Input.GetKey("space") ) && ((Djump && power.HavePower("Green")) || power.HavePower("Yellow")) && grabbing  ){
                 Grounded = false;
                 Djump = false;
                 grabbing = false;
