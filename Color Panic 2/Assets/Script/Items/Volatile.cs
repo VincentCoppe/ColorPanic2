@@ -20,7 +20,7 @@ public class Volatile : MonoBehaviour
     }
 
     private void Update() {
-        if (player.respawning){
+        if (player != null && player.respawning){
             rend.enabled = true;
             collid.enabled = true;
             started = false;
