@@ -64,6 +64,18 @@ public class ProgressionManagement : MonoBehaviour
         
     }
 
+    public void UpdateCurrentWorld()
+    {
+        Worlds[ActiveWorld].SetActive(false);
+        ActiveWorld = (ActiveWorld == 0) ? 1 : 0;
+        Worlds[ActiveWorld].SetActive(true);
+        SetupLevels();
+        UpdateLevelsInfo();
+        SetTotalCoins();
+        EnableLevels();
+    }
+
+
     private void UpdateLevelsInfo()
     {
         
