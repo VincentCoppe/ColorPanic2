@@ -81,7 +81,7 @@ public class ProgressionManagement : MonoBehaviour
         
         foreach (KeyValuePair<string, string> level in progression)
         {
-            
+            if (ActiveWorld == int.Parse(level.Key.Split('-')[0])) {
             Levels[level.Key].levelWorld = int.Parse(level.Key.Split('-')[0]);
             Levels[level.Key].levelNum = int.Parse(level.Key.Split('-')[1]);
             Levels[level.Key].Death = int.Parse(level.Value.Split('-')[0]);   
@@ -90,6 +90,7 @@ public class ProgressionManagement : MonoBehaviour
             Levels[level.Key].Timer = int.Parse(time[2]) + int.Parse(time[1]) * 100 + int.Parse(time[0]) * 60 * 100;
             Levels[level.Key].levelcomplete = true;
             Levels[level.Key].SetScore();
+            }
         }
     }
 
