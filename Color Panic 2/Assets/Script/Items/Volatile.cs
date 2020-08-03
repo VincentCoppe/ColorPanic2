@@ -27,6 +27,12 @@ public class Volatile : MonoBehaviour
         }
     }
 
+    private void OnEnable() {
+        rend.enabled = true;
+        collid.enabled = true;
+        started = false;
+    }
+
     private void OnCollisionStay2D(Collision2D other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && !started){
             started = true;
