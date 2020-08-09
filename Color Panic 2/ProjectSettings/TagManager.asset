@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -13,12 +14,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - Menu
+  - Object
+  - Insivible
+  - Monster
   - 
   - 
   - 
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monster
+    uniqueID: 3197962023
+    locked: 0
+  - name: Player
+    uniqueID: 1032909977
+    locked: 0
+  - name: Background
+    uniqueID: 1654342047
+    locked: 0
+  - name: Forground
+    uniqueID: 2758388983
+    locked: 0
+  - name: UI
+    uniqueID: 2469911479
+    locked: 0
+  - name: Menu
+    uniqueID: 4204273573
     locked: 0

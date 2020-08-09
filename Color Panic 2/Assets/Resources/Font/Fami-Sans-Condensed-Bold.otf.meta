@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a3fc37ace87bbb44dad7fa5505cf39e3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Fami Sans Condensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 20b036bc06439a74b9147d927da67759, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
